@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>872185008422-8utcrmvpj0u54lq5h0pdug9e7pb5sqtg.apps.googleusercontent.com</string>
+	<string>769166416260-634q48k64t19c1pbmpspqlf4vevq1gsc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.872185008422-8utcrmvpj0u54lq5h0pdug9e7pb5sqtg</string>
+	<string>com.googleusercontent.apps.769166416260-634q48k64t19c1pbmpspqlf4vevq1gsc</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAAfc00h973uojJ2PoRUj-P3Jb6YP2tKr4</string>
+	<string>AIzaSyCBIcX9TlsczWFMmZzDI7-5OL1ZY3Rlsgs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>872185008422</string>
+	<string>769166416260</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.Wiggle2</string>
 	<key>PROJECT_ID</key>
-	<string>wiggle2-e7c52</string>
+	<string>wiggle2-1d590</string>
 	<key>STORAGE_BUCKET</key>
-	<string>wiggle2-e7c52.appspot.com</string>
+	<string>wiggle2-1d590.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:872185008422:ios:4d20bce615893532f9f1e7</string>
+	<string>1:769166416260:ios:6cc71c49db5732e94725d1</string>
 	<key>DATABASE_URL</key>
-	<string>https://wiggle2-e7c52.firebaseio.com</string>
+	<string>https://wiggle2-1d590.firebaseio.com</string>
 </dict>
 </plist>
