@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "872185008422",
-    "firebase_url": "https://wiggle2-e7c52.firebaseio.com",
-    "project_id": "wiggle2-e7c52",
-    "storage_bucket": "wiggle2-e7c52.appspot.com"
+    "project_number": "769166416260",
+    "firebase_url": "https://wiggle2-1d590.firebaseio.com",
+    "project_id": "wiggle2-1d590",
+    "storage_bucket": "wiggle2-1d590.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:872185008422:android:8675e3d23c5afc41f9f1e7",
+        "mobilesdk_app_id": "1:769166416260:android:b77d052bdc83e72f4725d1",
         "android_client_info": {
           "package_name": "com.example.Wiggle2"
         }
       },
       "oauth_client": [
         {
-          "client_id": "872185008422-6ogtmenj9bu3mffirggopncu88538mga.apps.googleusercontent.com",
+          "client_id": "769166416260-tlm5t0it68iao05ipsdni34p9oq5dc3s.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC_H9V_mm8-cfJ7sjDQe6XCJ6PGjIUhCwk"
+          "current_key": "AIzaSyCl3hW0kYNDCYU7E4Flu9fPfjxYWDKgiL0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "872185008422-6ogtmenj9bu3mffirggopncu88538mga.apps.googleusercontent.com",
+              "client_id": "769166416260-tlm5t0it68iao05ipsdni34p9oq5dc3s.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

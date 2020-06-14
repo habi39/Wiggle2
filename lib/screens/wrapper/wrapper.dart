@@ -20,6 +20,7 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
     final wiggles = Provider.of<List<Wiggle>>(context) ?? [];
+    
     _saveDeviceToken() async {
       String fcmToken = await fcm.getToken();
       if (fcmToken != null) {
@@ -37,23 +38,12 @@ class Wrapper extends StatelessWidget {
       }
     }
 
-    _saveDeviceToken();
+    // _saveDeviceToken();
 
     if (user == null) {
       return Authenticate();
     } else {
-      // return IntroPage1()
       return Home();
-      // return StreamBuilder<UserData>(
-      //     stream: DatabaseService(uid: user.uid).userData,
-      //     builder: (context, snapshot) {
-      //       UserData userData = snapshot.data;
-      //       if (firstlog) {
-      //         return IntroPage1(userData: userData, wiggles: wiggles);
-      //       } else {
-      //         return Home(userData, wiggles);
-      //       }
-      //     });
     }
   }
 }
