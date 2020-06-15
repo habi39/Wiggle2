@@ -236,14 +236,14 @@ class ChatScreenTile extends StatelessWidget {
             friendAnon = snapshot.data['${currentWiggle.name} Anon'];
             myAnon = snapshot.data['${Constants.myName} Anon'];
             return Text(
-              friendAnon
-                  ? '${currentWiggle.nickname} *'
-                  : '${currentWiggle.name}',
               // friendAnon
-              //     ? myAnon
-              //         ? '${currentWiggle.nickname} **'
-              //         : '${currentWiggle.nickname} *'
-              //     : currentWiggle.name,
+              //     ? '${currentWiggle.nickname} *'
+              //     : '${currentWiggle.name}',
+              friendAnon
+                  ? myAnon
+                      ? '${currentWiggle.nickname} **'
+                      : '${currentWiggle.nickname} *'
+                  : currentWiggle.name,
               style: TextStyle(color: Colors.black),
             );
           } else {
