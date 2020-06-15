@@ -70,7 +70,7 @@ class _RegisterState extends State<Register> {
                 selectedGenderType,
                 selectedBlockType,
                 bio,
-                'https://firebasestorage.googleapis.com/v0/b/wiggle-87765.appspot.com/o/photo-512.png?alt=media&token=7eb1ffc1-4451-4a27-8c02-9f43ee7799f1',
+                'https://firebasestorage.googleapis.com/v0/b/wiggle2-1d590.appspot.com/o/data%2Fuser%2F0%2Fcom.example.Wiggle2%2Fcache%2Fimage_picker8049276365349124154.png?alt=media&token=e2066efa-287f-45e9-9df6-6604a1838567',
                 false)
             .then((value) => setState(() {
                   loading = false;

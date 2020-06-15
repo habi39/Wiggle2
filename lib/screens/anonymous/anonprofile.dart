@@ -57,14 +57,16 @@ class _MyanonprofileState extends State<Myanonprofile> {
                                   CircleAvatar(
                                     radius: kSpacingUnit.w * 5,
                                     child: ClipOval(
-                                      child: new SizedBox(
+                                      child: Container(
+                                        color: Colors.white,
                                         width: 180,
                                         height: 180,
-                                        child: Image.network(
-                                              userData.anonDp,
-                                              fit: BoxFit.cover,
-                                            ) ??
-                                            Image.asset(
+                                        child: userData.anonDp != ""
+                                            ? Image.network(
+                                                userData.anonDp,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : Image.asset(
                                                 'assets/images/profile1.png',
                                                 fit: BoxFit.cover),
                                       ),
@@ -156,17 +158,19 @@ class _MyanonprofileState extends State<Myanonprofile> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        SizedBox(
+                                        Container(
+                                          color: Colors.white,
                                           height: 70,
                                           width: 70,
                                           child: ClipOval(
-                                            child: Image.network(
-                                                  userData.anonDp,
-                                                  fit: BoxFit.fill,
-                                                ) ??
-                                                Image.asset(
+                                            child: userData.anonDp != ""
+                                                ? Image.network(
+                                                    userData.anonDp,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : Image.asset(
                                                     'assets/images/profile1.png',
-                                                    fit: BoxFit.fill),
+                                                    fit: BoxFit.cover),
                                           ),
                                         ),
                                         SizedBox(

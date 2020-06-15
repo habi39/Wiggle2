@@ -57,7 +57,7 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
   }
 
   createChatRoomAndStartConversation(UserData userData, Wiggle wiggle) {
-    String chatRoomID = getChatRoomID(userData.email, wiggle.nickname);
+    String chatRoomID = getChatRoomID(userData.email, wiggle.email);
     List<String> users = [userData.email, wiggle.email];
 
     Map<String, dynamic> chatRoomMap = {

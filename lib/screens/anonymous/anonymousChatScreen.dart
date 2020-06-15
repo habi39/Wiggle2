@@ -38,15 +38,15 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
                   itemCount: snapshot.data.documents.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    nickname = snapshot.data.documents[index].data["chatRoomId"]
+                    email = snapshot.data.documents[index].data["chatRoomId"]
                         .toString()
                         .replaceAll("_", "")
-                        .replaceFirst(mynickname, "");
+                        .replaceFirst(Constants.myEmail, "");
 
                     roomid = snapshot.data.documents[index].data["chatRoomId"];
 
                     for (int i = 0; i < wiggles.length; i++) {
-                      if (wiggles[i].nickname == nickname) {
+                      if (wiggles[i].email == email) {
                         currentwiggle = wiggles[i];
                       }
                     }
@@ -214,19 +214,20 @@ class ChatScreenTile extends StatelessWidget {
     return StreamBuilder(
       stream: chatName,
       builder: (context, snapshot) {
+        print(currentWiggle.name);
         if (snapshot.hasData) {
           if (currentWiggle != null) {
             friendAnon = snapshot.data['${currentWiggle.name} Anon'];
             myAnon = snapshot.data['${Constants.myName} Anon'];
             return Text(
-              // friendAnon
-              //     ? '${currentWiggle.nickname} *'
-              //     : '${currentWiggle.name}',
               friendAnon
-                  ? myAnon
-                      ? '${currentWiggle.nickname} **'
-                      : '${currentWiggle.nickname} *'
-                  : currentWiggle.name,
+                  ? '${currentWiggle.nickname} *'
+                  : '${currentWiggle.name}',
+              // friendAnon
+              //     ? myAnon
+              //         ? '${currentWiggle.nickname} **'
+              //         : '${currentWiggle.nickname} *'
+              //     : currentWiggle.name,
               style: TextStyle(color: Colors.black),
             );
           } else {
@@ -246,8 +247,6 @@ class ChatScreenTile extends StatelessWidget {
     return StreamBuilder(
       stream: chatName,
       builder: (context, snapshot) {
-        // print(snapshot.hasData);
-        // print(snapshot.data['${Constants.myName} Email']);
         if (snapshot.hasData) {
           friendAnon = snapshot.data['${currentWiggle.name} Anon'];
           myAnon = snapshot.data['${Constants.myName} Anon'];
@@ -265,11 +264,9 @@ class ChatScreenTile extends StatelessWidget {
                     ? Image.asset('assets/images/profile1.png',
                         fit: BoxFit.fill)
                     : Image.network(
-                          currentWiggle.dp,
-                          fit: BoxFit.fill,
-                        ) ??
-                        Image.asset('assets/images/profile1.png',
-                            fit: BoxFit.fill),
+                        currentWiggle.dp,
+                        fit: BoxFit.fill,
+                      ),
               ),
             ),
           );

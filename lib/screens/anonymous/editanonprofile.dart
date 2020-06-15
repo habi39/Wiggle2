@@ -129,12 +129,15 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
                                                               _image,
                                                               fit: BoxFit.fill,
                                                             )
-                                                          : Image.network(
-                                                                userData.anonDp,
-                                                                fit:
-                                                                    BoxFit.fill,
-                                                              ) ??
-                                                              Image.asset(
+                                                          : userData.anonDp !=
+                                                                  ""
+                                                              ? Image.network(
+                                                                  userData
+                                                                      .anonDp,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                )
+                                                              : Image.asset(
                                                                   'assets/images/profile1.png',
                                                                   fit: BoxFit
                                                                       .cover),
