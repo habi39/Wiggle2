@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
   _saveDeviceToken() async {
       String fcmToken = await _fcm.getToken();
       
-
+        if(Platform.operatingSystem == 'android'){
         await Firestore.instance
             .collection('users')
             .document(Constants.myEmail)
@@ -61,6 +61,9 @@ class _HomeState extends State<Home> {
           'createdAt': FieldValue.serverTimestamp(),
           'platform': Platform.operatingSystem
         });
+        } else if(Platform.operatingSystem == 'ios'){
+          print('hehe ios'+fcmToken);
+        }
     }
 
   createAlertDialog() {
