@@ -11,7 +11,7 @@ import 'package:Wiggle2/screens/home/notificationsPage.dart';
 import 'package:Wiggle2/screens/home/profile.dart';
 import 'package:Wiggle2/screens/home/chatScreen.dart';
 import 'package:Wiggle2/screens/authenticate/intro/introPage1.dart';
-
+import 'package:Wiggle2/shared/constants.dart';
 import 'package:Wiggle2/shared/loading.dart';
 import '../../models/user.dart';
 import '../../models/wiggle.dart';
@@ -20,7 +20,7 @@ import 'package:Wiggle2/services/database.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-
+import 'dart:io';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -47,6 +47,21 @@ class _HomeState extends State<Home> {
 
   final Firestore _db = Firestore.instance;
   final FirebaseMessaging _fcm = FirebaseMessaging();
+
+  _saveDeviceToken() async {
+      String fcmToken = await _fcm.getToken();
+      
+
+        await Firestore.instance
+            .collection('users')
+            .document(Constants.myEmail)
+            .collection('tokens')
+            .document(Constants.myEmail).setData({
+          'token': fcmToken,
+          'createdAt': FieldValue.serverTimestamp(),
+          'platform': Platform.operatingSystem
+        });
+    }
 
   createAlertDialog() {
     final user = Provider.of<User>(context);
@@ -174,6 +189,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    _saveDeviceToken();
     _fcm.configure(
       onMessage: (Map<String, dynamic> message) async {
         showSnackBar() {
