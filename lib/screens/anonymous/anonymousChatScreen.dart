@@ -23,13 +23,19 @@ class AnonymousChatScreen extends StatefulWidget {
 final f = new DateFormat('h:mm a');
 Wiggle currentwiggle;
 String roomid;
+String email1;
+String email2;
 String email;
 String nickname;
 
 class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
   Stream chatsScreenStream;
 
-  Widget chatRoomList(List<Wiggle> wiggles, String mynickname) {
+  Widget chatRoomList(
+    List<Wiggle> wiggles,
+  )
+  //  String mynickname)
+  {
     return StreamBuilder(
         stream: chatsScreenStream,
         builder: (context, snapshot) {
@@ -38,10 +44,16 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
                   itemCount: snapshot.data.documents.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    email = snapshot.data.documents[index].data["chatRoomId"]
-                        .toString()
-                        .replaceAll("_", "")
-                        .replaceFirst(Constants.myEmail, "");
+                    email1 = snapshot.data.documents[index].data["users"][0];
+                    email2 = snapshot.data.documents[index].data["users"][1];
+                    if (email1 == Constants.myEmail) {
+                      email = email2;
+                    } else {
+                      email = email1;
+                    }
+                    // .toString()
+                    // .replaceAll("_", "")
+                    // .replaceFirst(Constants.myEmail, "");
 
                     roomid = snapshot.data.documents[index].data["chatRoomId"];
 
@@ -51,9 +63,10 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
                       }
                     }
 
+                    print(email);
+
                     return ChatScreenTile(
                       wiggles: wiggles,
-                      email: email,
                       chatRoomId: roomid,
                       currentWiggle: currentwiggle,
                     );
@@ -77,7 +90,7 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
     DatabaseService().getAnonymousChatRooms(Constants.myEmail).then((val) {
       setState(() {
         chatsScreenStream = val;
-        print(val);
+        // print(val);
       });
     });
   }
@@ -127,7 +140,10 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
                   ),
                 ],
               ),
-              body: chatRoomList(wiggles, userData.nickname),
+              body: chatRoomList(
+                wiggles,
+                //  userData.nickname
+              ),
             );
           } else {
             return Loading();
@@ -137,7 +153,7 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
 }
 
 class ChatScreenTile extends StatelessWidget {
-  final String email;
+  // final String email;
   final String chatRoomId;
   final Wiggle currentWiggle;
   final List<Wiggle> wiggles;
@@ -150,7 +166,7 @@ class ChatScreenTile extends StatelessWidget {
 
   ChatScreenTile({
     this.wiggles,
-    this.email,
+    // this.email,
     this.chatRoomId,
     this.currentWiggle,
   });
@@ -214,7 +230,7 @@ class ChatScreenTile extends StatelessWidget {
     return StreamBuilder(
       stream: chatName,
       builder: (context, snapshot) {
-        print(currentWiggle.name);
+        // print(snapshot.data);
         if (snapshot.hasData) {
           if (currentWiggle != null) {
             friendAnon = snapshot.data['${currentWiggle.name} Anon'];
@@ -248,6 +264,7 @@ class ChatScreenTile extends StatelessWidget {
       stream: chatName,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          // print(chatRoomId);
           friendAnon = snapshot.data['${currentWiggle.name} Anon'];
           myAnon = snapshot.data['${Constants.myName} Anon'];
           return Container(
