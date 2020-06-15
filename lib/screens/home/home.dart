@@ -208,6 +208,7 @@ class _HomeState extends State<Home> {
         print('onLaunch: $message');
       },
     );
+    _fcm.requestNotificationPermissions(const IosNotificationSettings(sound: true,badge:true,alert:true));
     initializing();
   }
 
