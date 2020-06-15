@@ -64,7 +64,8 @@ class _HomeState extends State<Home> {
         } else if(Platform.operatingSystem == 'ios'){
           print('hehe ios'+fcmToken);
           //becuase tokens is only used for push notification, it cant be used for 
-          //ios, hence theres always error with this
+          //ios, hence theres always error with this, can be seen when u close app without loggin out,
+          //and then going back to the app again
         }
     }
 
