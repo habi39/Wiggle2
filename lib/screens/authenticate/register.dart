@@ -18,6 +18,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  final picker = ImagePicker();
   bool loading = false;
   var selectedGenderType, selectedBlockType;
   File _image;
@@ -27,9 +28,9 @@ class _RegisterState extends State<Register> {
     'Female',
   ];
   Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var image = await picker.getImage(source: ImageSource.gallery);
     setState(() {
-      _image = image;
+      _image = File(image.path);
     });
   }
 
