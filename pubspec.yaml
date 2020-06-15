@@ -83,7 +83,7 @@ flutter:
     - assets/images/search_white.png
     - assets/images/profile1.png
     # - assets/images/one.png
-  #   - images/a_dot_ham.jpeg
+    #- images/a_dot_ham.jpeg
     - assets/images/bg.png
     - assets/images/bg1.png
     - assets/images/bg2.png
