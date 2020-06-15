@@ -220,7 +220,7 @@ class _MyprofileState extends State<Myprofile> {
                   DraggableScrollableSheet(
                       minChildSize: 0.1,
                       initialChildSize: 0.65,
-                      maxChildSize: 0.75,
+                      maxChildSize: 0.70,
                       builder: (context, scrollController) {
                         return SingleChildScrollView(
                             controller: scrollController,

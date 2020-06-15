@@ -204,7 +204,7 @@ class _NotificationsItemState extends State<NotificationsItem> {
     return Padding(
       padding: EdgeInsets.only(bottom: 1.0),
       child: Container(
-        color: Colors.white54,
+        color: Color(0xFF212121),
         child: ListTile(
           title: GestureDetector(
             child: Row(
@@ -216,8 +216,8 @@ class _NotificationsItemState extends State<NotificationsItem> {
                     children: [
                       TextSpan(
                           text: widget.userID,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: ' $notificationItemText'),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11,color: Colors.white)),
+                      TextSpan(text: ' $notificationItemText', style:(TextStyle(color: Colors.white))),
                     ],
                   ),
                 ),
@@ -227,19 +227,19 @@ class _NotificationsItemState extends State<NotificationsItem> {
                         ? accepted
                             ? FlatButton(
                                 child: Container(
-                                    height: 10.0,
-                                    width: 50.0,
+                                    height: 13.0,
+                                      width: 37.0,
                                     child: Text('Accepted',
-                                        style: TextStyle(fontSize: 10.0))),
+                                        style: TextStyle(fontSize: 8.0))),
                                 onPressed: () {
                                   print('pressed');
                                 })
                             : FlatButton(
                                 child: Container(
-                                    height: 10.0,
-                                    width: 50.0,
+                                    height: 12.0,
+                                    width: 37.0,
                                     child: Text('Declined',
-                                        style: TextStyle(fontSize: 10.0))),
+                                        style: TextStyle(fontSize: 8.0))),
                                 onPressed: () {
                                   print('pressed');
                                 })
@@ -247,10 +247,12 @@ class _NotificationsItemState extends State<NotificationsItem> {
                             children: <Widget>[
                               FlatButton(
                                   child: Container(
-                                      height: 10.0,
-                                      width: 32.0,
+                                    padding: EdgeInsets.only(
+                                        left: 0, right: 0, top: 0,bottom: 0),
+                                      height: 13.0,
+                                      width: 35.0,
                                       child: Text('Accept',
-                                          style: TextStyle(fontSize: 10.0))),
+                                          style: TextStyle(fontSize: 8.0))),
                                   onPressed: () {
                                     if (this.mounted) {
                                       setState(() {
@@ -268,10 +270,11 @@ class _NotificationsItemState extends State<NotificationsItem> {
                                   }),
                               FlatButton(
                                 child: Container(
-                                    height: 10.0,
-                                    width: 35.0,
+      
+                                    height: 12.0,
+                                    width: 37.0,
                                     child: Text('Decline',
-                                        style: TextStyle(fontSize: 10.0))),
+                                        style: TextStyle(fontSize: 8.0))),
                                 onPressed: () {
                                   widget.databaseService.feedReference
                                       .document(widget.ownerID)
@@ -316,6 +319,7 @@ class _NotificationsItemState extends State<NotificationsItem> {
                             : Column(
                                 children: <Widget>[
                                   FlatButton(
+                                    color: Colors.red,
                                       child: Container(
                                           height: 10.0,
                                           width: 32.0,
@@ -403,6 +407,7 @@ class _NotificationsItemState extends State<NotificationsItem> {
           subtitle: Text(
             tAgo.format(widget.timestamp.toDate()),
             overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 12)
           ),
           trailing: mediaPreview,
         ),

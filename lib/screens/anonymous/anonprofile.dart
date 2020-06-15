@@ -109,7 +109,7 @@ class _MyanonprofileState extends State<Myanonprofile> {
                                       Text(
                                         'Edit Anonymous Profile',
                                         style: kTitleTextStyle.copyWith(
-                                            fontSize: 14,
+                                            fontSize: 11,
                                             fontWeight: FontWeight.w500),
                                       )
                                     ],
@@ -133,7 +133,7 @@ class _MyanonprofileState extends State<Myanonprofile> {
               DraggableScrollableSheet(
                   minChildSize: 0.1,
                   initialChildSize: 0.47,
-                  maxChildSize: 0.65,
+                  maxChildSize: 0.60,
                   builder: (context, scrollController) {
                     return SingleChildScrollView(
                         controller: scrollController,
@@ -158,21 +158,24 @@ class _MyanonprofileState extends State<Myanonprofile> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        Container(
-                                          color: Colors.white,
-                                          height: 70,
-                                          width: 70,
-                                          child: ClipOval(
-                                            child: userData.anonDp != ""
-                                                ? Image.network(
-                                                    userData.anonDp,
-                                                    fit: BoxFit.cover,
-                                                  )
-                                                : Image.asset(
-                                                    'assets/images/profile1.png',
-                                                    fit: BoxFit.cover),
-                                          ),
-                                        ),
+                                        CircleAvatar(
+                                    radius: kSpacingUnit.w * 3.9,
+                                    child: ClipOval(
+                                      child: Container(
+                                        color: Colors.white,
+                                        width: 70,
+                                        height: 70,
+                                        child: userData.anonDp != ""
+                                            ? Image.network(
+                                                userData.anonDp,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : Image.asset(
+                                                'assets/images/profile1.png',
+                                                fit: BoxFit.cover),
+                                      ),
+                                    ),
+                                  ),
                                         SizedBox(
                                           width: 16,
                                         ),
