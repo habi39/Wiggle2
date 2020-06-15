@@ -23,26 +23,26 @@ class Wrapper extends StatelessWidget {
     
     _saveDeviceToken() async {
       String fcmToken = await fcm.getToken();
-      if (fcmToken != null) {
-        var tokenRef = Firestore.instance
+      
+
+        await Firestore.instance
             .collection('users')
             .document(Constants.myEmail)
             .collection('tokens')
-            .document(Constants.myEmail);
-
-        await tokenRef.setData({
+            .document(Constants.myEmail).setData({
           'token': fcmToken,
           'createdAt': FieldValue.serverTimestamp(),
           'platform': Platform.operatingSystem
         });
-      }
     }
 
-    // _saveDeviceToken();
+    
+     
 
     if (user == null) {
       return Authenticate();
     } else {
+      _saveDeviceToken();
       return Home();
     }
   }
