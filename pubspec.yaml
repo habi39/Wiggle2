@@ -60,6 +60,7 @@ dependencies:
   line_awesome_flutter: ^1.0.1
   flutter_screenutil: ^1.0.2
   animated_theme_switcher: ^1.0.5
+  introduction_screen: ^1.0.8
 
 dev_dependencies:
   flutter_test:
@@ -77,9 +78,42 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/send.png
+    - assets/images/search_white.png
+    - assets/images/profile1.png
+    # - assets/images/one.png
   #   - images/a_dot_ham.jpeg
+    - assets/images/bg.png
+    - assets/images/bg1.png
+    - assets/images/bg2.png
+    - assets/images/bird.png
+    - assets/images/go.png
+    - assets/images/start.png
+    - assets/images/retry.png
+    - assets/images/menus/
+    - assets/images/arenas/debug/
+    - assets/images/arenas/map1/
+    - assets/images/arenas/map2/
+    - assets/images/fighters/red_santaclaus/
+    - assets/images/fighters/green_santaclaus/
+    - assets/images/buttons/
+    - assets/images/ghost.png
+    - assets/images/ghosty.png
+    - assets/images/text.png
+    - assets/images/gamer.png
+  fonts:
+    - family: SFProText
+      fonts:
+        - asset: assets/fonts/SF-Pro-Text-Thin.otf
+          weight: 100
+        - asset: assets/fonts/SF-Pro-Text-Regular.otf
+          weight: 400
+        - asset: assets/fonts/SF-Pro-Text-Medium.otf
+          weight: 500
+        - asset: assets/fonts/SF-Pro-Text-Bold.otf
+          weight: 700
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

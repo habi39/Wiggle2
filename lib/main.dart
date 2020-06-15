@@ -3,10 +3,11 @@ import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:Wiggle2/services/auth.dart';
 import 'package:Wiggle2/models/user.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/shared/constants.dart';
+
+import 'onBoarding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
           //         TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
           //   ),
           // ),
-          home: Wrapper(),
+          home: Onboarding(),
+          // Wrapper(),
         ),
       ),
     );
