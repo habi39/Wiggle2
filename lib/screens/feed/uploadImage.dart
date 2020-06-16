@@ -94,7 +94,7 @@ class _UploadImageState extends State<UploadImage>
   }
 
   savePostInfoToFirestore(String url, String description) {
-    postReference.document(widget.userData.name).setData({
+    postReference.document(postId).setData({
       "postId": postId,
       "name": widget.userData.name,
       "timestamp": Timestamp.now(),
@@ -128,7 +128,7 @@ class _UploadImageState extends State<UploadImage>
               color: Colors.red, fontSize: 24, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[
-          uploading ? linearProgress() : Text(''),
+          uploading ? LinearProgressIndicator() : Text(''),
           FlatButton(
             onPressed: uploading ? null : () => controlUploadAndSave(),
             child: Text(

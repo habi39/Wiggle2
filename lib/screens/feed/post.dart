@@ -19,62 +19,62 @@ class Post extends StatefulWidget {
       this.email,
       this.likes});
 
-  factory Post.fromDocument(DocumentSnapshot documentSnapshot) {
-    return Post(
-        postId: documentSnapshot['postId'],
-        url: documentSnapshot['url'],
-        description: documentSnapshot['description'],
-        timestamp: documentSnapshot['timestamp'],
-        likes: documentSnapshot['likes'],
-        name: documentSnapshot['name'],
-        email: documentSnapshot['email']);
-  }
-  int getTotalNoOfLikes(likes) {
-    if (likes == null) {
-      return 0;
-    }
+  // factory Post.fromDocument(DocumentSnapshot documentSnapshot) {
+  //   return Post(
+  //       postId: documentSnapshot['postId'],
+  //       url: documentSnapshot['url'],
+  //       description: documentSnapshot['description'],
+  //       timestamp: documentSnapshot['timestamp'],
+  //       likes: documentSnapshot['likes'],
+  //       name: documentSnapshot['name'],
+  //       email: documentSnapshot['email']);
+  // }
+  // int getTotalNoOfLikes(likes) {
+  //   if (likes == null) {
+  //     return 0;
+  //   }
 
-    int counter = 0;
-    likes.values.forEach((eachValue) {
-      if (eachValue) {
-        counter++;
-      }
-    });
-    return counter;
-  }
+  //   int counter = 0;
+  //   likes.values.forEach((eachValue) {
+  //     if (eachValue) {
+  //       counter++;
+  //     }
+  //   });
+  //   return counter;
+  // }
 
   @override
   _PostState createState() => _PostState(
-        postId: postId,
-        url: url,
-        description: description,
-        timestamp: timestamp,
-        likes: getTotalNoOfLikes(likes),
-        name: name,
-        email: email,
+      // postId: postId,
+      // url: url,
+      // description: description,
+      // timestamp: timestamp,
+      // likes: getTotalNoOfLikes(likes),
+      // name: name,
+      // email: email,
       );
 }
 
 class _PostState extends State<Post> {
-  final String postId;
-  final String name;
-  final String timestamp;
-  final String email;
-  final String description;
-  final dynamic likes;
-  final String url;
+  // final String postId;
+  // final String name;
+  // final String timestamp;
+  // final String email;
+  // final String description;
+  // final dynamic likes;
+  // final String url;
 
-  _PostState(
-      {this.postId,
-      this.url,
-      this.description,
-      this.name,
-      this.timestamp,
-      this.email,
-      this.likes});
+  // _PostState(
+  //     {this.postId,
+  //     this.url,
+  //     this.description,
+  //     this.name,
+  //     this.timestamp,
+  //     this.email,
+  //     this.likes});
 
   createPostHead() {
-    return Text(name);
+    // return Text(name);
   }
 
   createPostPicture() {
@@ -82,7 +82,7 @@ class _PostState extends State<Post> {
       onDoubleTap: () => print('like'),
       child: Stack(
         alignment: Alignment.center,
-        children: <Widget>[Image.network(url)],
+        // children: <Widget>[Image.network(url)],
       ),
     );
   }
@@ -96,8 +96,8 @@ class _PostState extends State<Post> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            createPostHead(),
-            createPostPicture(),
+            // createPostHead(),
+            // createPostPicture(),
             // createPostFooter(),
           ],
         ));

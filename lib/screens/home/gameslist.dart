@@ -26,7 +26,6 @@ class _GameslistState extends State<Gameslist> {
   Widget build(BuildContext context) {
     final wiggles = Provider.of<List<Wiggle>>(context) ?? [];
     final user = Provider.of<User>(context);
-
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
@@ -86,8 +85,9 @@ class _GameslistState extends State<Gameslist> {
                                   onPressed: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            Feed(userData: userData),
+                                        builder: (context) => Feed(
+                                            userData: userData,
+                                            wiggles: wiggles),
                                       ),
                                     );
                                   },

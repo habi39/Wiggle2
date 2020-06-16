@@ -405,6 +405,13 @@ class DatabaseService {
         .snapshots();
   }
 
+  getPosts() async {
+    return Firestore.instance
+        .collection("posts")
+        .orderBy("timestamp", descending: false)
+        .snapshots();
+  }
+
   getMyCompatibilityResults(wiggle, userData, compatibilityRoomID) async {
     return await Firestore.instance
         .collection("compatibility")

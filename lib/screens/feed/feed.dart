@@ -1,33 +1,73 @@
 import 'package:Wiggle2/models/user.dart';
+import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/screens/feed/post.dart';
 import 'package:Wiggle2/screens/feed/uploadImage.dart';
+import 'package:Wiggle2/screens/home/conversationScreen.dart';
+import 'package:Wiggle2/services/database.dart';
+import 'package:Wiggle2/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class Feed extends StatefulWidget {
   final UserData userData;
-  Feed({this.userData});
+  final List<Wiggle> wiggles;
+
+  Feed({this.userData, this.wiggles});
 
   @override
   _FeedState createState() => _FeedState();
 }
 
 class _FeedState extends State<Feed> {
-  List<Post> posts;
+  Stream<QuerySnapshot> postsStream;
   final timelineReference = Firestore.instance.collection('posts');
+  ScrollController scrollController = new ScrollController();
+  Wiggle currentWiggle;
 
   retrieveTimeline() async {
-    QuerySnapshot querySnapshot = await timelineReference
-        .orderBy("timestamp", descending: true)
-        .getDocuments();
-
-    List<Post> allPosts = querySnapshot.documents
-        .map((document) => Post.fromDocument(document))
-        .toList();
-
-    setState(() {
-      posts = allPosts;
+    DatabaseService().getPosts().then((val) {
+      setState(() {
+        postsStream = val;
+      });
     });
+  }
+
+  Widget feedList() {
+    return StreamBuilder(
+      stream: postsStream,
+      builder: (context, snapshot) {
+        return snapshot.hasData
+            ? ListView.builder(
+                controller: scrollController,
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (context, index) {
+                  String email = snapshot.data.documents[index]['email'];
+                  String description =
+                      snapshot.data.documents[index]['description'];
+                  Timestamp timestamp =
+                      snapshot.data.documents[index]['timestamp'];
+                  String url = snapshot.data.documents[index]['url'];
+
+                  print(email);
+                  for (int i = 0; i < widget.wiggles.length; i++) {
+                    if (widget.wiggles[i].email == email) {
+                      currentWiggle = widget.wiggles[i];
+                    }
+                  }
+
+                  return FeedTile(
+                    wiggle: currentWiggle,
+                    wiggles: widget.wiggles,
+                    description: description,
+                    timestamp: timestamp,
+                    url: url,
+                  );
+                })
+            : Container();
+      },
+    );
   }
 
   @override
@@ -46,14 +86,14 @@ class _FeedState extends State<Feed> {
     );
   }
 
-  createTimeLine() {
-    print(posts);
-    if (posts == null) {
-      return circularProgress();
-    } else {
-      return ListView(children: posts);
-    }
-  }
+  // createTimeLine() {
+  //   // print(posts);
+  //   if (posts == null) {
+  //     return circularProgress();
+  //   } else {
+  //     return posts.forEach((element) {});
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +117,148 @@ class _FeedState extends State<Feed> {
               }),
         ],
       ),
-      body: createTimeLine(),
+      body: feedList(),
     );
+    // RefreshIndicator(
+    //     child: createTimeLine(), onRefresh: () => retrieveTimeline()));
+  }
+}
+
+class FeedTile extends StatelessWidget {
+  final Wiggle wiggle;
+  final List<Wiggle> wiggles;
+  final f = new DateFormat('h:mm a');
+  final Timestamp timestamp;
+  final String description;
+  final String url;
+
+  FeedTile({
+    this.wiggles,
+    this.wiggle,
+    this.timestamp,
+    this.description,
+    this.url,
+  });
+
+  // Widget getLatestTime() {
+  //   DatabaseService().getConversationMessages(chatRoomId).then((val) {
+  //     chatMessagesStream = val;
+  //   });
+  //   return StreamBuilder(
+  //     stream: chatMessagesStream,
+  //     builder: (context, snapshot) {
+  //       if (snapshot.hasData) {
+  //         if (snapshot.data.documents.length - 1 < 0) {
+  //           return Text('');
+  //         } else {
+  //           return Text(f
+  //               .format(snapshot.data
+  //                   .documents[snapshot.data.documents.length - 1].data["time"]
+  //                   .toDate())
+  //               .toString());
+  //         }
+  //       } else {
+  //         return Container();
+  //       }
+  //     },
+  //   );
+  // }
+  createPostHead() {
+    return Text('${wiggle.name}');
+  }
+
+  createPostPicture() {
+    return GestureDetector(
+      onDoubleTap: () => print('like'),
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[Image.network(url)],
+      ),
+    );
+  }
+
+  createPostFooter() {
+    return Text('$description');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: user.uid).userData,
+        builder: (context, snapshot) {
+          UserData userData = snapshot.data;
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConversationScreen(
+                      wiggles: wiggles,
+                      wiggle: wiggle,
+                      userData: userData,
+                    ),
+                  ));
+            },
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 12),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  createPostHead(),
+                  createPostPicture(),
+                  // createPostFooter(),
+                ],
+              ),
+            ),
+          );
+
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: <Widget>[
+          //         Row(
+          //           children: <Widget>[
+          //             Container(
+          //               height: 40,
+          //               width: 40,
+          //               alignment: Alignment.center,
+          //               decoration: BoxDecoration(
+          //                   color: Colors.blue,
+          //                   borderRadius: BorderRadius.circular(30)),
+          //               child: ClipOval(
+          //                 child: SizedBox(
+          //                   width: 180,
+          //                   height: 180,
+          //                   child: Image.network(
+          //                         wiggle.dp,
+          //                         fit: BoxFit.fill,
+          //                       ) ??
+          //                       Image.asset('assets/images/profile1.png',
+          //                           fit: BoxFit.fill),
+          //                 ),
+          //               ),
+          //             ),
+          //             SizedBox(width: 8),
+          //             Column(
+          //               crossAxisAlignment: CrossAxisAlignment.start,
+          //               children: <Widget>[
+          //                 Text(
+          //                   wiggle.name,
+          //                   style: TextStyle(color: Colors.black),
+          //                 ),
+          //               ],
+          //             )
+          //           ],
+          //         ),
+          //         Row(
+          //           children: <Widget>[
+          //             // getLatestTime(),
+          //           ],
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // );
+        });
   }
 }
