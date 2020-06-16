@@ -104,6 +104,8 @@ flutter:
     - assets/images/ghosty.png
     - assets/images/text.png
     - assets/images/gamer.png
+    - assets/images/quit.png
+    
   fonts:
     - family: SFProText
       fonts:
