@@ -163,8 +163,14 @@ class FeedTile extends StatelessWidget {
   //     },
   //   );
   // }
-  createPostHead() {
-    return Text('${wiggle.name}');
+  createPostHead(context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      color: Colors.pinkAccent,
+      child: Center(
+        child: Text('${wiggle.name}'),
+      ),
+    );
   }
 
   createPostPicture() {
@@ -178,7 +184,16 @@ class FeedTile extends StatelessWidget {
   }
 
   createPostFooter() {
-    return Text('$description');
+    return Row(
+      children: <Widget>[
+        Text(
+          '${wiggle.name}',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(width: 2),
+        Text('$description')
+      ],
+    );
   }
 
   @override
@@ -205,9 +220,9 @@ class FeedTile extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  createPostHead(),
+                  createPostHead(context),
                   createPostPicture(),
-                  // createPostFooter(),
+                  createPostFooter(),
                 ],
               ),
             ),
