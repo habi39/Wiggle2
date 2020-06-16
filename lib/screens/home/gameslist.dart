@@ -1,12 +1,10 @@
+import 'package:Wiggle2/screens/feed/feed.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:Wiggle2/games/compatibility.dart/compatibility.dart';
-import 'package:Wiggle2/games/flame/langwGame.dart';
 import 'package:Wiggle2/games/flappybird/components/game.dart';
 import 'package:Wiggle2/games/smashbros/main.dart';
 
 import 'package:Wiggle2/games/tictactoe/tictactoehome.dart';
-import 'package:Wiggle2/games/trivia/trivia.dart';
 import 'package:Wiggle2/games/who/whoWiggle.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
@@ -83,12 +81,14 @@ class _GameslistState extends State<Gameslist> {
                             Expanded(
                               child: Container(
                                 child: RaisedButton(
-                                  child: Text('test anon-anon chat'),
+                                  child: Text('Feed'),
                                   color: Colors.purple,
                                   onPressed: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                          builder: (context) => SusChat()),
+                                        builder: (context) =>
+                                            Feed(userData: userData),
+                                      ),
                                     );
                                   },
                                 ),

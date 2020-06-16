@@ -61,6 +61,8 @@ dependencies:
   flutter_screenutil: ^1.0.2
   animated_theme_switcher: ^1.0.5
   introduction_screen: ^1.0.8
+  uuid: ^2.1.0
+  path_provider: ^1.6.10
 
 dev_dependencies:
   flutter_test:

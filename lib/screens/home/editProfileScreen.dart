@@ -177,21 +177,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               SizedBox(width: 3),
                                               Expanded(
                                                 child: TextFormField(
-                                                    initialValue: userData.name,
-                                                    validator: (val) {
-                                                      return val.isEmpty
-                                                          ? 'Please provide your name'
-                                                          : null;
-                                                    },
-                                                    onChanged: (val) {
-                                                      setState(
-                                                          () => name = val);
-                                                    },
-                                                    style: TextStyle(
-                                                        color: Colors.cyan),
-                                                    decoration:
-                                                        textFieldInputDecoration(
-                                                            ' Name')),
+                                                  initialValue: userData.name,
+                                                  validator: (val) {
+                                                    return val.isEmpty
+                                                        ? 'Please provide your name'
+                                                        : null;
+                                                  },
+                                                  onChanged: (val) {
+                                                    setState(() => name = val);
+                                                  },
+                                                  style: TextStyle(
+                                                      color: Colors.cyan),
+                                                  decoration:
+                                                      textFieldInputDecoration(
+                                                          ' Name'),
+                                                ),
                                               ),
                                             ],
                                           ),
