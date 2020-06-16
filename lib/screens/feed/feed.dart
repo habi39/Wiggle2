@@ -167,8 +167,24 @@ class FeedTile extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       color: Colors.pinkAccent,
-      child: Center(
-        child: Text('${wiggle.name}'),
+      child: Row(
+        children: <Widget>[
+          CircleAvatar(
+            radius: 18,
+            child: ClipOval(
+              child: SizedBox(
+                width: 180,
+                height: 180,
+                child: Image.network(
+                  wiggle.dp,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(width: 2),
+          Text('${wiggle.name}')
+        ],
       ),
     );
   }
@@ -186,6 +202,20 @@ class FeedTile extends StatelessWidget {
   createPostFooter() {
     return Row(
       children: <Widget>[
+        CircleAvatar(
+          radius: 18,
+          child: ClipOval(
+            child: SizedBox(
+              width: 180,
+              height: 180,
+              child: Image.network(
+                wiggle.dp,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(width: 2),
         Text(
           '${wiggle.name}',
           style: TextStyle(fontWeight: FontWeight.bold),
