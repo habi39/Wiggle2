@@ -236,39 +236,28 @@ class _NotificationsItemState extends State<NotificationsItem> {
                     ],
                   ),
                 ),
-                SizedBox(width: 0),
+                SizedBox(width: 60),
                 widget.type == 'request'
                     ? accepted || declined
                         ? accepted
-                            ? FlatButton(
-                                child: Container(
-                                    height: 13.0,
-                                    width: 37.0,
-                                    child: Text('Accepted',
-                                        style: TextStyle(fontSize: 8.0))),
-                                onPressed: () {
+                            ? InkWell(
+                                child: Text('Accepted',
+                                    style: TextStyle(fontSize: 10)),
+                                onTap: () {
                                   print('pressed');
                                 })
-                            : FlatButton(
-                                child: Container(
-                                    height: 12.0,
-                                    width: 37.0,
-                                    child: Text('Declined',
-                                        style: TextStyle(fontSize: 8.0))),
-                                onPressed: () {
+                            : InkWell(
+                                child: Text('Declined',
+                                    style: TextStyle(fontSize: 10.0)),
+                                onTap: () {
                                   print('pressed');
                                 })
                         : Column(
                             children: <Widget>[
-                              FlatButton(
-                                  child: Container(
-                                      padding: EdgeInsets.only(
-                                          left: 0, right: 0, top: 0, bottom: 0),
-                                      height: 13.0,
-                                      width: 35.0,
-                                      child: Text('Accept',
-                                          style: TextStyle(fontSize: 8.0))),
-                                  onPressed: () {
+                              InkWell(
+                                  child: Text('Accept',
+                                      style: TextStyle(fontSize: 10.0)),
+                                  onTap: () {
                                     if (this.mounted) {
                                       setState(() {
                                         accepted = true;
@@ -283,13 +272,11 @@ class _NotificationsItemState extends State<NotificationsItem> {
                                         widget.userID,
                                         widget.senderEmail);
                                   }),
-                              FlatButton(
-                                child: Container(
-                                    height: 12.0,
-                                    width: 37.0,
-                                    child: Text('Decline',
-                                        style: TextStyle(fontSize: 8.0))),
-                                onPressed: () {
+                                  SizedBox(height: 10,),
+                              InkWell(
+                                  child: Text('Decline',
+                                      style: TextStyle(fontSize: 10)),
+                                onTap: () {
                                   widget.databaseService.feedReference
                                       .document(widget.ownerID)
                                       .collection('feed')
