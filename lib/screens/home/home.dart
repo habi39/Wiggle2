@@ -283,7 +283,11 @@ class _HomeState extends State<Home> {
                               _currentIndex = 0;
                             });
                           },
-                          child: Icon(Icons.menu, color: Colors.white),
+                          child: Icon(
+                            Icons.menu,
+                            color:
+                                _currentIndex == 0 ? Colors.white : Colors.grey,
+                          ),
                         ),
                         MaterialButton(
                           minWidth: 40,
@@ -292,7 +296,11 @@ class _HomeState extends State<Home> {
                               _currentIndex = 1;
                             });
                           },
-                          child: Icon(Icons.chat, color: Colors.white),
+                          child: Icon(
+                            Icons.chat,
+                            color:
+                                _currentIndex == 1 ? Colors.white : Colors.grey,
+                          ),
                         )
                       ],
                     ),
@@ -307,7 +315,11 @@ class _HomeState extends State<Home> {
                               _currentIndex = 2;
                             });
                           },
-                          child: Icon(Icons.new_releases, color: Colors.white),
+                          child: Icon(
+                            Icons.new_releases,
+                            color:
+                                _currentIndex == 2 ? Colors.white : Colors.grey,
+                          ),
                         ),
                         MaterialButton(
                           // minWidth: 40,
@@ -316,11 +328,11 @@ class _HomeState extends State<Home> {
                               _currentIndex = 3;
                             });
                           },
-                          child: Icon(Icons.chat, color: Colors.white
-                              // _currentIndex == 3
-                              //     ? Colors.white
-                              //     : Colors.grey,
-                              ),
+                          child: Icon(
+                            Icons.chat,
+                            color:
+                                _currentIndex == 3 ? Colors.white : Colors.grey,
+                          ),
                         )
                       ],
                     )
@@ -336,9 +348,8 @@ class _HomeState extends State<Home> {
               backgroundColor: Colors.white,
               child: ClipOval(
                 child: Image.asset(
-                  'assets/images/ghosty2.png',
+                  'assets/images/ghost.png',
                   fit: BoxFit.fill,
-                  // color: Colors.white,
                 ),
               ),
               onPressed: () {
@@ -369,7 +380,11 @@ class _HomeState extends State<Home> {
                               _currentIndex = 0;
                             });
                           },
-                          child: Icon(Icons.menu, color: Colors.white),
+                          child: Icon(
+                            Icons.menu,
+                            color:
+                                _currentIndex == 0 ? Colors.white : Colors.grey,
+                          ),
                         ),
                         MaterialButton(
                           minWidth: 40,
@@ -378,7 +393,11 @@ class _HomeState extends State<Home> {
                               _currentIndex = 1;
                             });
                           },
-                          child: Icon(Icons.chat, color: Colors.white),
+                          child: Icon(
+                            Icons.chat,
+                            color:
+                                _currentIndex == 1 ? Colors.white : Colors.grey,
+                          ),
                         )
                       ],
                     ),
@@ -393,7 +412,11 @@ class _HomeState extends State<Home> {
                               _currentIndex = 2;
                             });
                           },
-                          child: Icon(Icons.new_releases, color: Colors.white),
+                          child: Icon(
+                            Icons.new_releases,
+                            color:
+                                _currentIndex == 2 ? Colors.white : Colors.grey,
+                          ),
                         ),
                         MaterialButton(
                           // minWidth: 40,
@@ -402,11 +425,11 @@ class _HomeState extends State<Home> {
                               _currentIndex = 3;
                             });
                           },
-                          child: Icon(Icons.chat, color: Colors.white
-                              // _currentIndex == 3
-                              //     ? Colors.white
-                              //     : Colors.grey,
-                              ),
+                          child: Icon(
+                            Icons.chat,
+                            color:
+                                _currentIndex == 3 ? Colors.white : Colors.grey,
+                          ),
                         )
                       ],
                     )
