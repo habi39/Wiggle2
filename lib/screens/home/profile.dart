@@ -60,8 +60,8 @@ class _MyprofileState extends State<Myprofile> {
           count.toString(),
           style: TextStyle(
               fontSize: 20.0,
-              color: Colors.blueGrey,
-              fontWeight: FontWeight.bold),
+              
+              fontWeight: FontWeight.w200),
         ),
         Container(
           margin: EdgeInsets.only(top: 5.0),
@@ -69,8 +69,7 @@ class _MyprofileState extends State<Myprofile> {
             title,
             style: TextStyle(
                 fontSize: 20.0,
-                color: Colors.blueGrey,
-                fontWeight: FontWeight.w400),
+                fontWeight: FontWeight.w200),
           ),
         )
       ],
@@ -240,7 +239,7 @@ class _MyprofileState extends State<Myprofile> {
                                     children: <Widget>[
                                       Container(
                                         padding: EdgeInsets.all(15),
-                                        color: Colors.black45,
+                                        color: Color(0xFF373737),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
