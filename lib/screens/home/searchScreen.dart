@@ -45,13 +45,24 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   getChatRoomID(String a, String b) {
-    print(a);
-    print(b);
-    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
-      return "$b\_$a";
-    } else {
-      return "$a\_$b";
+    codeUnit(String a) {
+      int count = 0;
+      for (int i = 0; i < a.length; i++) {
+        count += a.codeUnitAt(i);
+      }
+      return count;
     }
+
+    print(codeUnit(a) + codeUnit(b));
+    return (codeUnit(a) + codeUnit(b)).toString();
+    // print(a.substring(0, 1));
+    // print(a);
+    // print(b);
+    // if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+    //   return "$b\_$a";
+    // } else {
+    //   return "$a\_$b";
+    // }
   }
 
   createChatRoomAndStartConversation(UserData userData, Wiggle wiggle) {

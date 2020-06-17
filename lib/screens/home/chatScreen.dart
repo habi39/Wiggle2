@@ -19,6 +19,8 @@ final f = new DateFormat('h:mm a');
 String email;
 Wiggle currentwiggle;
 String roomid;
+String email1;
+String email2;
 
 class _ChatsScreenState extends State<ChatScreen> {
   //snapshots returns a stream
@@ -33,11 +35,13 @@ class _ChatsScreenState extends State<ChatScreen> {
                   itemCount: snapshot.data.documents.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    email = snapshot.data.documents[index].data["chatRoomId"]
-                        .toString()
-                        .replaceAll("_", "")
-                        .replaceFirst(Constants.myEmail, "");
-
+                    email1 = snapshot.data.documents[index].data["users"][0];
+                    email2 = snapshot.data.documents[index].data["users"][1];
+                    if (email1 == Constants.myEmail) {
+                      email = email2;
+                    } else {
+                      email = email1;
+                    }
                     roomid = snapshot.data.documents[index].data["chatRoomId"];
 
                     for (int i = 0; i < wiggles.length; i++) {

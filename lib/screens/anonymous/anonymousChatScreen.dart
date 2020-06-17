@@ -51,10 +51,6 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
                     } else {
                       email = email1;
                     }
-                    // .toString()
-                    // .replaceAll("_", "")
-                    // .replaceFirst(Constants.myEmail, "");
-
                     roomid = snapshot.data.documents[index].data["chatRoomId"];
 
                     for (int i = 0; i < wiggles.length; i++) {
