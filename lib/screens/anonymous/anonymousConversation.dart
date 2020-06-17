@@ -142,7 +142,6 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
               backgroundColor: Color.fromRGBO(3, 9, 23, 1),
               appBar: AppBar(
                 leading: IconButton(
-                    alignment: Alignment.topCenter,
                     icon: Icon(LineAwesomeIcons.home),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(

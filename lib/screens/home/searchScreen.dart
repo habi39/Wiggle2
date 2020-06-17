@@ -212,7 +212,6 @@ class _SearchScreenState extends State<SearchScreen> {
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(
-              alignment: Alignment.topCenter,
               icon: Icon(LineAwesomeIcons.home),
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(

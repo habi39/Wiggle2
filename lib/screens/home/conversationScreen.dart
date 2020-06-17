@@ -137,7 +137,6 @@ class _ConversationScreenState extends State<ConversationScreen> {
               appBar: AppBar(
                 titleSpacing: 50,
                 leading: IconButton(
-                    alignment: Alignment.topCenter,
                     icon: Icon(LineAwesomeIcons.home),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
