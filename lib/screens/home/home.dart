@@ -192,15 +192,9 @@ class _HomeState extends State<Home> {
     );
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _saveDeviceToken();
-    _fcm.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        showSnackBar() {
+showSnackBar(Map<String, dynamic> message) {
           final snackBar = SnackBar(
-            behavior: SnackBarBehavior.floating,
+            behavior: SnackBarBehavior.fixed,
             content: Text(message['notification']['body']),
             action: SnackBarAction(
               label: message['notification']['body'],
@@ -214,11 +208,16 @@ class _HomeState extends State<Home> {
             duration: Duration(seconds: 3),
             backgroundColor: Colors.blue,
           );
-
           _scaffoldkey.currentState.showSnackBar(snackBar);
         }
 
-        showSnackBar();
+  @override
+  void initState() {
+    super.initState();
+    _saveDeviceToken();
+    _fcm.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        showSnackBar(message);
         print('onMessage: $message');
       },
       onResume: (Map<String, dynamic> message) async {
