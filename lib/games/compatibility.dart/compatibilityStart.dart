@@ -4,9 +4,11 @@ import 'package:random_string/random_string.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/services/database.dart';
-
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:Wiggle2/screens/home/home.dart';
 import 'compatibilityIntroPage.dart';
 import 'compatibilityStatus.dart';
+import 'package:Wiggle2/shared/constants.dart';
 
 class CompatibilityStart extends StatefulWidget {
   final friendAnon;
@@ -68,9 +70,15 @@ class _CompatibilityStartState extends State<CompatibilityStart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        title: Text("Games",
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+        leading: IconButton(
+              alignment: Alignment.topCenter,
+              icon: Icon(LineAwesomeIcons.home),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Home()), ModalRoute.withName('Home'));
+              }),
+        title: Text("C O M P A T I B I L I T Y",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

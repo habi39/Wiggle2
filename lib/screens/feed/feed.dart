@@ -1,6 +1,5 @@
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
-import 'package:Wiggle2/screens/feed/post.dart';
 import 'package:Wiggle2/screens/feed/uploadImage.dart';
 import 'package:Wiggle2/screens/home/conversationScreen.dart';
 import 'package:Wiggle2/services/database.dart';
@@ -9,6 +8,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:Wiggle2/screens/home/home.dart';
 
 class Feed extends StatefulWidget {
   final UserData userData;
@@ -99,10 +100,16 @@ class _FeedState extends State<Feed> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: Text("Feed",
+        leading: IconButton(
+              alignment: Alignment.topCenter,
+              icon: Icon(LineAwesomeIcons.home),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Home()), ModalRoute.withName('Home'));
+              }),
+        title: Text("F E E D",
             textAlign: TextAlign.right,
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.image),
@@ -165,10 +172,13 @@ class FeedTile extends StatelessWidget {
   // }
   createPostHead(context) {
     return Container(
+      height: 50,
       width: MediaQuery.of(context).size.width,
-      color: Colors.pinkAccent,
+      
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
+          SizedBox(width: 10,),
           CircleAvatar(
             radius: 18,
             child: ClipOval(
@@ -182,8 +192,8 @@ class FeedTile extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 2),
-          Text('${wiggle.name}')
+          SizedBox(width: 5),
+          Text('${wiggle.name}',style: kTitleTextStyle,)
         ],
       ),
     );
@@ -202,6 +212,7 @@ class FeedTile extends StatelessWidget {
   createPostFooter() {
     return Row(
       children: <Widget>[
+        SizedBox(width: 10,),
         CircleAvatar(
           radius: 18,
           child: ClipOval(
@@ -218,9 +229,9 @@ class FeedTile extends StatelessWidget {
         SizedBox(width: 2),
         Text(
           '${wiggle.name}',
-          style: TextStyle(fontWeight: FontWeight.bold),
+         style: kTitleTextStyle,
         ),
-        SizedBox(width: 2),
+        SizedBox(width: 5),
         Text('$description')
       ],
     );
@@ -252,6 +263,7 @@ class FeedTile extends StatelessWidget {
                 children: <Widget>[
                   createPostHead(context),
                   createPostPicture(),
+                  SizedBox(height: 10,),
                   createPostFooter(),
                 ],
               ),

@@ -9,7 +9,7 @@ import 'followersList.dart';
 import 'followingList.dart';
 import '../../shared/constants.dart';
 import '../../models/user.dart';
-
+import 'package:Wiggle2/screens/home/home.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -421,69 +421,92 @@ class _OthersProfileState extends State<OthersProfile> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context, height: 869, width: 414, allowFontScaling: true);
     return Scaffold(
-      backgroundColor: Color.fromRGBO(3, 9, 23, 1),
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        elevation: 0.0,
-      ),
+      
       body: Stack(
         children: <Widget>[
-          Column(children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.blueGrey, Color.fromRGBO(3, 9, 23, 1)],
-                ),
-              ),
-              child: Container(
-                child: Column(
-                  children: <Widget>[
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 50,
-                      child: ClipOval(
-                        child: new SizedBox(
-                          width: 180,
-                          height: 180,
-                          child: Image.network(
-                                widget.wiggle.dp,
-                                fit: BoxFit.fill,
-                              ) ??
-                              Image.asset('assets/images/profile1.png',
-                                  fit: BoxFit.fill),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      widget.wiggle.name,
-                      style: kTitleTextStyle.copyWith(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.grey[300]),
-                    ),
-                    SizedBox(height: 20),
-                    Container(
-                        child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              createButton(widget.userData),
-                            ],
+          Column(
+            children: <Widget>[
+              Container(
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(height: kSpacingUnit.w * 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(height: kSpacingUnit.w * 5),
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  FadeRoute(page: Home()),
+                                  ModalRoute.withName('Home'));
+                            },
+                            child: Icon(
+                              LineAwesomeIcons.home,
+                              size: ScreenUtil().setSp(kSpacingUnit.w * 2.5),
+                            ),
                           ),
-                        )
-                      ],
-                    )),
-                    SizedBox(height: 20),
-                  ],
+                          Expanded(
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(height: kSpacingUnit.w * 3),
+                                CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 50,
+                                  child: ClipOval(
+                                    child: new SizedBox(
+                                      width: 180,
+                                      height: 180,
+                                      child: Image.network(
+                                            widget.wiggle.dp,
+                                            fit: BoxFit.fill,
+                                          ) ??
+                                          Image.asset(
+                                              'assets/images/profile1.png',
+                                              fit: BoxFit.fill),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  widget.wiggle.name,
+                                  style: kTitleTextStyle.copyWith(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.grey[300]),
+                                ),
+                              ],
+                            ),
+                          ),
+                          FlatButton(
+                            onPressed: () async {},
+                            child: Icon(
+                              LineAwesomeIcons.alternate_sign_out,
+                              size: ScreenUtil().setSp(kSpacingUnit.w * 2.5),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                          child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                createButton(widget.userData),
+                              ],
+                            ),
+                          )
+                        ],
+                      )),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ]),
+            ],
+          ),
           (widget.userData.email == widget.wiggle.email || following)
               ? DraggableScrollableSheet(
                   minChildSize: 0.1,
@@ -493,7 +516,7 @@ class _OthersProfileState extends State<OthersProfile> {
                     return SingleChildScrollView(
                         controller: scrollController,
                         child: Container(
-                            color: Color.fromRGBO(3, 9, 23, 4),
+                            color: Color(0xFF212121),
                             constraints: BoxConstraints(
                                 minHeight: MediaQuery.of(context).size.height),
                             child: Column(
@@ -503,7 +526,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                   Container(
                                     margin: EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 20),
-                                    color: Colors.black45,
+                                    color: Color(0xff3d3f50),
                                     child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 10, horizontal: 8),
@@ -661,7 +684,7 @@ class _OthersProfileState extends State<OthersProfile> {
                     return SingleChildScrollView(
                         controller: scrollController,
                         child: Container(
-                            color: Color.fromRGBO(3, 9, 23, 4),
+                            color: Color(0xFF212121),
                             constraints: BoxConstraints(
                                 minHeight: MediaQuery.of(context).size.height),
                             child: Column(

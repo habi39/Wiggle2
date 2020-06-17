@@ -31,6 +31,7 @@ class _GameslistState extends State<Gameslist> {
           UserData userData = snapshot.data;
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               elevation: 0,
               title: Text("G A M E S",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
@@ -82,12 +83,13 @@ class _GameslistState extends State<Gameslist> {
                                   child: Text('Feed'),
                                   color: Colors.purple,
                                   onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => Feed(
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                      FadeRoute(
+                                        page: Feed(
                                             userData: userData,
                                             wiggles: wiggles),
                                       ),
+                                      ModalRoute.withName('Feed'),
                                     );
                                   },
                                 ),
@@ -103,9 +105,7 @@ class _GameslistState extends State<Gameslist> {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder:
-                                            (context) => //Flappybird().widget,
-                                                //LangawGame().widget,
-                                                //GameController().widget,
+                                            (context) => 
                                                 BirdGame().widget,
                                       ),
                                     );

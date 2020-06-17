@@ -11,6 +11,8 @@ import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/shared/loading.dart';
 import '../authenticate/helper.dart';
 import 'anonymousConversation.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:Wiggle2/screens/home/home.dart';
 
 class AnonymousSearch extends StatefulWidget {
   List<Wiggle> wiggles;
@@ -80,10 +82,9 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
         friendAnon: false,
         chatRoomID: chatRoomID);
     DatabaseService().createAnonymousChatRoom(chatRoomID, chatRoomMap);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AnonymousConversation(
+     Navigator.of(context).pushAndRemoveUntil(
+      FadeRoute(
+        page:  AnonymousConversation(
           friendAnon: false,
           wiggles: widget.wiggles,
           wiggle: wiggle,
@@ -91,6 +92,7 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
           userData: userData,
         ),
       ),
+      ModalRoute.withName('AnonymousConversation'),
     );
   }
 
@@ -98,17 +100,19 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
     if (wiggle.email != userData.email) {
       return RaisedButton(
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) => OthersProfile(
-                      wiggles: widget.wiggles,
-                      userData: userData,
-                      wiggle: wiggle,
-                    )),
-          );
+          Navigator.of(context).pushAndRemoveUntil(
+          FadeRoute(
+            page: OthersProfile(
+              wiggles: widget.wiggles,
+              wiggle: wiggle,
+              userData: userData,
+            ),
+          ),
+          ModalRoute.withName('OthersProfile'),
+        );
         },
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        color: Colors.blue,
+        color: Color(0xFF555555),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -148,7 +152,7 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.blueGrey,
+                    color: Colors.grey,
                     borderRadius: BorderRadius.circular(30)),
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 9),
                 child: Text('Text'),
@@ -218,10 +222,17 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue[900],
-          title: Text("Search",
+          leading: IconButton(
+              alignment: Alignment.topCenter,
+              icon: Icon(LineAwesomeIcons.home),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Home()), ModalRoute.withName('Home'));
+              }),
+          centerTitle: true,
+           title: Text("S E A R C H",
               textAlign: TextAlign.right,
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
         ),
         body: isLoading
             ? Container(child: Center(child: CircularProgressIndicator()))
@@ -229,7 +240,7 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      color: Colors.blueGrey,
+                      color: Color(0xFF373737),
                       padding:
                           EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                       child: Row(

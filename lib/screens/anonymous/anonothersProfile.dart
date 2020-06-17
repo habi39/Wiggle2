@@ -1,3 +1,4 @@
+import 'package:Wiggle2/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -293,10 +294,15 @@ class _OthersProfileState extends State<AnonOthersProfile> {
                             SizedBox(height: kSpacingUnit.w * 3),
                             FlatButton(
                               onPressed: () {
-                                Navigator.pop(context);
+                                Navigator.of(context).pushAndRemoveUntil(
+                            FadeRoute(
+                              page: Home()
+                            ),
+                            ModalRoute.withName('Home'));
+                      
                               },
                               child: Icon(
-                                LineAwesomeIcons.arrow_left,
+                                LineAwesomeIcons.home,
                                 size: ScreenUtil().setSp(kSpacingUnit.w * 2.5),
                               ),
                             ),

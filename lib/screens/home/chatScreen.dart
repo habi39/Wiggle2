@@ -85,6 +85,7 @@ class _ChatsScreenState extends State<ChatScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         title: Text("C H A T",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
@@ -93,10 +94,9 @@ class _ChatsScreenState extends State<ChatScreen> {
             icon: Icon(Icons.add),
             onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(
-                              FadeRoute(page: SearchScreen(wiggles: wiggles)),
-                              ModalRoute.withName('SearchScreen'),
-                            );
-          
+                FadeRoute(page: SearchScreen(wiggles: wiggles)),
+                ModalRoute.withName('SearchScreen'),
+              );
             },
           ),
         ],
@@ -183,16 +183,17 @@ class chatScreenTile extends StatelessWidget {
           UserData userData = snapshot.data;
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ConversationScreen(
-                      wiggles: wiggles,
-                      wiggle: currentWiggle,
-                      chatRoomId: chatRoomId,
-                      userData: userData,
-                    ),
-                  ));
+              Navigator.of(context).pushAndRemoveUntil(
+                FadeRoute(
+                  page: ConversationScreen(
+                    wiggles: wiggles,
+                    wiggle: currentWiggle,
+                    chatRoomId: chatRoomId,
+                    userData: userData,
+                  ),
+                ),
+                ModalRoute.withName('ConversationScreen'),
+              );
             },
             child: Container(
               margin: EdgeInsets.only(top: 5, bottom: 5, right: 20),

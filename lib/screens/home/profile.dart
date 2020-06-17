@@ -99,14 +99,10 @@ class _MyprofileState extends State<Myprofile> {
         child: Container(
           width: 170.0,
           height: 26.0,
-          child: Text(
-            title,
-            style: kCaptionTextStyle
-          ),
+          child: Text(title, style: kCaptionTextStyle),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: Color(0xFF373737),
-           
             borderRadius: BorderRadius.circular(4.0),
           ),
         ),
@@ -140,13 +136,11 @@ class _MyprofileState extends State<Myprofile> {
           if (userData != null) {
             personalEmail = userData.email;
             return Scaffold(
-              backgroundColor: Color(0xff272936) ,
               body: Stack(
                 children: <Widget>[
                   Column(
                     children: <Widget>[
                       Container(
-                       
                         child: Container(
                           child: Column(
                             children: <Widget>[
@@ -169,7 +163,6 @@ class _MyprofileState extends State<Myprofile> {
                                     child: Column(
                                       children: <Widget>[
                                         SizedBox(height: kSpacingUnit.w * 3),
-                                    
                                         CircleAvatar(
                                           backgroundColor: Colors.white,
                                           radius: 50,
@@ -189,7 +182,6 @@ class _MyprofileState extends State<Myprofile> {
                                         ),
                                         SizedBox(height: 10),
                                         Text(userData.name,
-                              
                                             style: kTitleTextStyle.copyWith(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500,
@@ -235,10 +227,9 @@ class _MyprofileState extends State<Myprofile> {
                       maxChildSize: 0.70,
                       builder: (context, scrollController) {
                         return SingleChildScrollView(
-                        
                             controller: scrollController,
                             child: Container(
-                                color:  Color(0xff3d3f50) ,
+                                color: Color(0xFF212121),
                                 constraints: BoxConstraints(
                                     minHeight:
                                         MediaQuery.of(context).size.height),
@@ -248,9 +239,8 @@ class _MyprofileState extends State<Myprofile> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: <Widget>[
                                       Container(
-                                        
                                         padding: EdgeInsets.all(15),
-                                        color: Color(0xFF212121),
+                                        color: Colors.black45,
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
