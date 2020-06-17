@@ -196,7 +196,7 @@ class chatScreenTile extends StatelessWidget {
               );
             },
             child: Container(
-              margin: EdgeInsets.only(top: 5, bottom: 5, right: 20),
+              margin: EdgeInsets.only(top: 5, bottom: 5, right: 10, left:10),
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               decoration: BoxDecoration(
                 color: Colors.white,
