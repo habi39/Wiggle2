@@ -229,7 +229,7 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
                 Navigator.of(context).pushAndRemoveUntil(
                     FadeRoute(page: Home()), ModalRoute.withName('Home'));
               }),
-          
+          centerTitle: true,
            title: Text("S E A R C H",
               textAlign: TextAlign.right,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),

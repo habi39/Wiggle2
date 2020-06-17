@@ -32,6 +32,7 @@ class _GameslistState extends State<Gameslist> {
           UserData userData = snapshot.data;
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               elevation: 0,
               title: Text("G A M E S",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),

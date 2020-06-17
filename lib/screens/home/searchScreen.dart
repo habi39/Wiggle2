@@ -210,6 +210,7 @@ class _SearchScreenState extends State<SearchScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           leading: IconButton(
               alignment: Alignment.topCenter,
               icon: Icon(LineAwesomeIcons.home),

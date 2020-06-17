@@ -42,6 +42,7 @@ class _NotificationPageState extends State<NotificationPage> {
           if (userData != null) {
             return Scaffold(
               appBar: AppBar(
+                centerTitle: true,
                 elevation: 0,
                 title: Text("N O T I F I C A T I O N S",
                     style:
