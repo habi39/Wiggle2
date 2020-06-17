@@ -8,7 +8,6 @@ import 'package:Wiggle2/games/tictactoe/tictactoehome.dart';
 import 'package:Wiggle2/games/who/whoWiggle.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
-import 'package:Wiggle2/screens/home/secretAnonChat.dart/susChat.dart';
 import 'package:Wiggle2/services/database.dart';
 
 class Gameslist extends StatefulWidget {

@@ -64,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.6"
+  bubble_bottom_bar:
+    dependency: "direct main"
+    description:
+      name: bubble_bottom_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   charcode:
     dependency: transitive
     description:

@@ -1,6 +1,6 @@
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:Wiggle2/games/smashbros/smash_engine/screen_util.dart';
 import 'package:Wiggle2/screens/anonymous/anonprofile.dart';
@@ -21,6 +21,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'dart:io';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -49,25 +50,26 @@ class _HomeState extends State<Home> {
   final FirebaseMessaging _fcm = FirebaseMessaging();
 
   _saveDeviceToken() async {
-      String fcmToken = await _fcm.getToken();
-      
-        if(Platform.operatingSystem == 'android'){
-        await Firestore.instance
-            .collection('users')
-            .document(Constants.myEmail)
-            .collection('tokens')
-            .document(Constants.myEmail).setData({
-          'token': fcmToken,
-          'createdAt': FieldValue.serverTimestamp(),
-          'platform': Platform.operatingSystem
-        });
-        } else if(Platform.operatingSystem == 'ios'){
-          print('hehe ios'+fcmToken);
-          //becuase tokens is only used for push notification, it cant be used for 
-          //ios, hence theres always error with this, can be seen when u close app without loggin out,
-          //and then going back to the app again
-        }
+    String fcmToken = await _fcm.getToken();
+
+    if (Platform.operatingSystem == 'android') {
+      await Firestore.instance
+          .collection('users')
+          .document(Constants.myEmail)
+          .collection('tokens')
+          .document(Constants.myEmail)
+          .setData({
+        'token': fcmToken,
+        'createdAt': FieldValue.serverTimestamp(),
+        'platform': Platform.operatingSystem
+      });
+    } else if (Platform.operatingSystem == 'ios') {
+      print('hehe ios' + fcmToken);
+      //becuase tokens is only used for push notification, it cant be used for
+      //ios, hence theres always error with this, can be seen when u close app without loggin out,
+      //and then going back to the app again
     }
+  }
 
   createAlertDialog() {
     final user = Provider.of<User>(context);
@@ -192,24 +194,24 @@ class _HomeState extends State<Home> {
     );
   }
 
-showSnackBar(Map<String, dynamic> message) {
-          final snackBar = SnackBar(
-            behavior: SnackBarBehavior.fixed,
-            content: Text(message['notification']['body']),
-            action: SnackBarAction(
-              label: message['notification']['body'],
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NotificationPage(),
-                ),
-              ),
-            ),
-            duration: Duration(seconds: 3),
-            backgroundColor: Colors.blue,
-          );
-          _scaffoldkey.currentState.showSnackBar(snackBar);
-        }
+  showSnackBar(Map<String, dynamic> message) {
+    final snackBar = SnackBar(
+      behavior: SnackBarBehavior.fixed,
+      content: Text(message['notification']['body']),
+      action: SnackBarAction(
+        label: message['notification']['body'],
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NotificationPage(),
+          ),
+        ),
+      ),
+      duration: Duration(seconds: 3),
+      backgroundColor: Colors.blue,
+    );
+    _scaffoldkey.currentState.showSnackBar(snackBar);
+  }
 
   @override
   void initState() {
@@ -229,8 +231,15 @@ showSnackBar(Map<String, dynamic> message) {
         print('onLaunch: $message');
       },
     );
-    _fcm.requestNotificationPermissions(const IosNotificationSettings(sound: true,badge:true,alert:true));
+    _fcm.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, badge: true, alert: true));
     initializing();
+  }
+
+  changePage(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
   @override
@@ -243,127 +252,167 @@ showSnackBar(Map<String, dynamic> message) {
             key: _scaffoldkey,
             body: anonymoustabs[_currentIndex],
             //floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-            floatingActionButton: SpeedDial(
-              backgroundColor: Colors.grey,
-              animatedIcon: AnimatedIcons.menu_close,
-              overlayOpacity: 0,
-              children: [
-                SpeedDialChild(
-                  child: Icon(Icons.find_in_page),
-                  backgroundColor: Colors.grey,
-                  elevation: 10.0,
-                  onTap: _showNotificationsAfterSecond,
-                ),
-                SpeedDialChild(
-                  child: Icon(Icons.portrait),
-                  backgroundColor: Colors.blueGrey,
-                  elevation: 10.0,
-                  onTap: () {
-                    DatabaseService(uid: user.uid).updateAnonymous(false);
-                    setState(() {
-                      anonymous = false;
-                    });
-                  },
-                ),
-              ],
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _currentIndex,
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.games),
-                  title: Text('Games'),
-                  backgroundColor: Colors.grey,
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.chat),
-                  title: Text('Chats'),
-                  backgroundColor: Colors.grey,
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.new_releases),
-                  title: Text('Notification'),
-                  backgroundColor: Colors.grey,
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.account_circle),
-                  title: Text('Unknown Profile'),
-                  backgroundColor: Colors.grey,
-                ),
-              ],
-              onTap: (index) {
+
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.portrait),
+              onPressed: () {
+                DatabaseService(uid: user.uid).updateAnonymous(false);
                 setState(() {
-                  _currentIndex = index;
+                  anonymous = false;
                 });
               },
-              selectedItemColor: Colors.black,
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            bottomNavigationBar: BottomAppBar(
+              color: Colors.black12,
+              shape: CircularNotchedRectangle(),
+              notchMargin: 10,
+              child: Container(
+                height: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        MaterialButton(
+                          // minWidth: 40,
+                          onPressed: () {
+                            setState(() {
+                              _currentIndex = 0;
+                            });
+                          },
+                          child: Icon(Icons.menu, color: Colors.white),
+                        ),
+                        MaterialButton(
+                          minWidth: 40,
+                          onPressed: () {
+                            setState(() {
+                              _currentIndex = 1;
+                            });
+                          },
+                          child: Icon(Icons.chat, color: Colors.white),
+                        )
+                      ],
+                    ),
+                    // Right Tab bar icons
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        MaterialButton(
+                          minWidth: 40,
+                          onPressed: () {
+                            setState(() {
+                              _currentIndex = 2;
+                            });
+                          },
+                          child: Icon(Icons.new_releases, color: Colors.white),
+                        ),
+                        MaterialButton(
+                          // minWidth: 40,
+                          onPressed: () {
+                            setState(() {
+                              _currentIndex = 3;
+                            });
+                          },
+                          child: Icon(Icons.chat, color: Colors.white
+                              // _currentIndex == 3
+                              //     ? Colors.white
+                              //     : Colors.grey,
+                              ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
             ),
           )
         : Scaffold(
             key: _scaffoldkey,
             body: tabs[_currentIndex],
-            floatingActionButton: SpeedDial(
-              animatedIcon: AnimatedIcons.menu_close,
-              backgroundColor: Colors.blueGrey,
-              overlayOpacity: 0,
-              children: [
-                SpeedDialChild(
-                  child: Icon(Icons.find_in_page),
-                  backgroundColor: Colors.blueGrey,
-                  elevation: 10.0,
-                  onTap: _showNotifications,
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.white,
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/images/ghosty2.png',
+                  fit: BoxFit.fill,
+                  // color: Colors.white,
                 ),
-                SpeedDialChild(
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    alignment: Alignment.center,
-                    child: ClipOval(
-                      child: Image.asset('assets/images/ghost.png',
-                          fit: BoxFit.fill),
-                    ),
-                  ),
-                  backgroundColor: Colors.grey,
-                  elevation: 10.0,
-                  onTap: () {
-                    DatabaseService(uid: user.uid).updateAnonymous(true);
-                    setState(() {
-                      anonymous = true;
-                    });
-                  },
-                ),
-              ],
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _currentIndex,
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.games),
-                  title: Text('Games'),
-                  backgroundColor: Color(0xff272936),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.chat),
-                  title: Text('Chats'),
-                  backgroundColor: Color(0xff272936),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.new_releases),
-                  title: Text('Notification'),
-                  backgroundColor: Color(0xff272936),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.portrait),
-                  title: Text('Profile'),
-                  backgroundColor: Color(0xff272936),
-                ),
-              ],
-              onTap: (index) {
+              ),
+              onPressed: () {
+                DatabaseService(uid: user.uid).updateAnonymous(true);
                 setState(() {
-                  _currentIndex = index;
+                  anonymous = true;
                 });
               },
-              selectedItemColor: Colors.grey
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            bottomNavigationBar: BottomAppBar(
+              color: Colors.black12,
+              shape: CircularNotchedRectangle(),
+              notchMargin: 10,
+              child: Container(
+                height: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        MaterialButton(
+                          // minWidth: 40,
+                          onPressed: () {
+                            setState(() {
+                              _currentIndex = 0;
+                            });
+                          },
+                          child: Icon(Icons.menu, color: Colors.white),
+                        ),
+                        MaterialButton(
+                          minWidth: 40,
+                          onPressed: () {
+                            setState(() {
+                              _currentIndex = 1;
+                            });
+                          },
+                          child: Icon(Icons.chat, color: Colors.white),
+                        )
+                      ],
+                    ),
+                    // Right Tab bar icons
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        MaterialButton(
+                          minWidth: 40,
+                          onPressed: () {
+                            setState(() {
+                              _currentIndex = 2;
+                            });
+                          },
+                          child: Icon(Icons.new_releases, color: Colors.white),
+                        ),
+                        MaterialButton(
+                          // minWidth: 40,
+                          onPressed: () {
+                            setState(() {
+                              _currentIndex = 3;
+                            });
+                          },
+                          child: Icon(Icons.chat, color: Colors.white
+                              // _currentIndex == 3
+                              //     ? Colors.white
+                              //     : Colors.grey,
+                              ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
             ),
           );
   }
