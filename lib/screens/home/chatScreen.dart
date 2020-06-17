@@ -92,10 +92,11 @@ class _ChatsScreenState extends State<ChatScreen> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SearchScreen(wiggles: wiggles)));
+              Navigator.of(context).pushAndRemoveUntil(
+                              FadeRoute(page: SearchScreen(wiggles: wiggles)),
+                              ModalRoute.withName('SearchScreen'),
+                            );
+          
             },
           ),
         ],

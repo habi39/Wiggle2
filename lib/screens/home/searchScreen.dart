@@ -72,31 +72,29 @@ class _SearchScreenState extends State<SearchScreen> {
       "chatRoomId": chatRoomID
     };
     DatabaseService().createChatRoom(chatRoomID, chatRoomMap);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ConversationScreen(
+    Navigator.of(context).pushAndRemoveUntil(
+                              FadeRoute(page: ConversationScreen(
           wiggles: widget.wiggles,
           wiggle: wiggle,
           chatRoomId: chatRoomID,
           userData: userData,
-        ),
-      ),
-    );
+        ),),
+                              ModalRoute.withName('ConversationScreen'),
+                            );
   }
 
   Widget searchTile({String myEmail, Wiggle wiggle, UserData userData}) {
     return RaisedButton(
       onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => OthersProfile(
+        Navigator.of(context).pushAndRemoveUntil(
+                              FadeRoute(page: OthersProfile(
               wiggles: widget.wiggles,
               wiggle: wiggle,
               userData: userData,
-            ),
-          ),
-        );
+            ),),
+                              ModalRoute.withName('OthersProfile'),
+                            );
+        
       },
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       color: Colors.blue,
@@ -208,10 +206,10 @@ class _SearchScreenState extends State<SearchScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue[900],
-          title: Text("Search",
+  
+          title: Text("S E A R C H",
               textAlign: TextAlign.right,
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
         ),
         body: isLoading
             ? Container(child: Center(child: CircularProgressIndicator()))
@@ -219,7 +217,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      color: Colors.blueGrey,
+                      color: Color(0xFF373737),
                       padding:
                           EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                       child: Row(
