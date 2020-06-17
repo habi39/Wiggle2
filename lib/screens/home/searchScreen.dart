@@ -53,16 +53,14 @@ class _SearchScreenState extends State<SearchScreen> {
       return count;
     }
 
-    print(codeUnit(a) + codeUnit(b));
-    return (codeUnit(a) + codeUnit(b)).toString();
-    // print(a.substring(0, 1));
-    // print(a);
-    // print(b);
-    // if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
-    //   return "$b\_$a";
-    // } else {
-    //   return "$a\_$b";
-    // }
+    if (a.length < b.length) {
+      return "$a\_$b";
+    } else if (a.length > b.length) {
+      return "$b\_$a";
+    } else {
+      print(codeUnit(a) + codeUnit(b));
+      return (codeUnit(a) + codeUnit(b)).toString();
+    }
   }
 
   createChatRoomAndStartConversation(UserData userData, Wiggle wiggle) {
