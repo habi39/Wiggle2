@@ -6,7 +6,7 @@ import 'screens/wrapper/wrapper.dart';
 
 class Onboarding extends StatelessWidget {
   final pageDecoration = PageDecoration(
-    pageColor: Colors.blue,
+    
     titleTextStyle:
         PageDecoration().titleTextStyle.copyWith(color: Colors.white),
     bodyTextStyle: PageDecoration().bodyTextStyle.copyWith(color: Colors.white),
@@ -16,7 +16,7 @@ class Onboarding extends StatelessWidget {
   List<PageViewModel> getPages() {
     return [
       PageViewModel(
-        image: Image.asset("assets/images/ghost.png"),
+        image: Image.asset("assets/images/community.png"),
         title: "Welcome to Wiggle",
         body: "Meet all your friends in your community",
         // footer: Text(
@@ -25,7 +25,7 @@ class Onboarding extends StatelessWidget {
         // ),
 
         decoration: PageDecoration(
-          pageColor: Colors.pink[200],
+          
           titleTextStyle:
               PageDecoration().titleTextStyle.copyWith(color: Colors.white),
           bodyTextStyle:
@@ -34,7 +34,7 @@ class Onboarding extends StatelessWidget {
         ),
       ),
       PageViewModel(
-        image: Image.asset("assets/images/ghosty.png"),
+        image: Image.asset("assets/images/cuteghost.png"),
         title: "Stay Anonymous",
         body: "Make friends daily and start a conversation with Trivia",
         // footer: Container(
@@ -48,7 +48,7 @@ class Onboarding extends StatelessWidget {
         //   ),
         // ),
         decoration: PageDecoration(
-          pageColor: Colors.deepPurple[900],
+         
           titleTextStyle:
               PageDecoration().titleTextStyle.copyWith(color: Colors.white),
           bodyTextStyle:
@@ -57,7 +57,7 @@ class Onboarding extends StatelessWidget {
         ),
       ),
       PageViewModel(
-        image: Image.asset("assets/images/text.png"),
+        image: Image.asset("assets/images/converse.png"),
         title: "Send Messages",
         body: "Connect with friends & exchange stories",
         // footer: Text(
@@ -65,7 +65,7 @@ class Onboarding extends StatelessWidget {
         //   style: TextStyle(color: Colors.black),
         // ),
         decoration: PageDecoration(
-          pageColor: Colors.yellow[900],
+         
           titleTextStyle:
               PageDecoration().titleTextStyle.copyWith(color: Colors.white),
           bodyTextStyle:
@@ -74,7 +74,7 @@ class Onboarding extends StatelessWidget {
         ),
       ),
       PageViewModel(
-          image: Image.asset("assets/images/gamer.png"),
+          image: Image.asset("assets/images/gaming.png"),
           title: "Play Games",
           body: "What better way to know your friends than through games",
           // footer: Text(
@@ -88,7 +88,12 @@ class Onboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IntroductionScreen(
+      appBar: AppBar(
+        elevation: 0,
+      ),
+      body: 
+      
+      IntroductionScreen(
         // globalBackgroundColor: Colors.white,
 
         pages: getPages(),

@@ -105,6 +105,10 @@ flutter:
     - assets/images/text.png
     - assets/images/gamer.png
     - assets/images/quit.png
+    - assets/images/community.png
+    - assets/images/cuteghost.png
+    - assets/images/converse.png
+    - assets/images/gaming.png
     
   fonts:
     - family: SFProText
