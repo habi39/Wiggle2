@@ -265,7 +265,7 @@ class _HomeState extends State<Home> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: BottomAppBar(
-              color: Colors.black12,
+              color:  Color(0xFF373737),
               shape: CircularNotchedRectangle(),
               notchMargin: 10,
               child: Container(
@@ -345,10 +345,10 @@ class _HomeState extends State<Home> {
             key: _scaffoldkey,
             body: tabs[_currentIndex],
             floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.blueGrey,
               child: ClipOval(
                 child: Image.asset(
-                  'assets/images/ghost.png',
+                  'assets/images/ghosty2.png',
                   fit: BoxFit.fill,
                 ),
               ),
@@ -362,7 +362,7 @@ class _HomeState extends State<Home> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: BottomAppBar(
-              color: Colors.black12,
+              color: Color(0xFF373737),
               shape: CircularNotchedRectangle(),
               notchMargin: 10,
               child: Container(
