@@ -1,12 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/screens/authenticate/helper.dart';
-import 'package:Wiggle2/screens/home/conversationScreen.dart';
-import 'package:Wiggle2/screens/home/searchScreen.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/shared/constants.dart';
 import 'package:Wiggle2/shared/loading.dart';
@@ -113,16 +110,6 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
                       style:
                           TextStyle(fontSize: 17, fontWeight: FontWeight.w100),
                     ),
-                    SizedBox(width: 7),
-                    Container(
-                      height: 40,
-                      width: 40,
-                      alignment: Alignment.center,
-                      child: ClipOval(
-                        child: Image.asset('assets/images/ghost.png',
-                            fit: BoxFit.fill),
-                      ),
-                    )
                   ],
                 ),
                 actions: <Widget>[
@@ -130,10 +117,9 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
                     icon: Icon(Icons.add),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page:AnonymousSearch(wiggles: wiggles)),
-                    ModalRoute.withName('AnonymousSearch'),
-                  );
-                
+                        FadeRoute(page: AnonymousSearch(wiggles: wiggles)),
+                        ModalRoute.withName('AnonymousSearch'),
+                      );
                     },
                   ),
                 ],
@@ -303,15 +289,17 @@ class ChatScreenTile extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page:AnonymousConversation(
-                      friendAnon: friendAnon,
-                      wiggles: wiggles,
-                      wiggle: currentWiggle,
-                      chatRoomId: chatRoomId,
-                      userData: userData,
-                    ),),
-                    ModalRoute.withName('AnonymousConversation'),);
-            
+                FadeRoute(
+                  page: AnonymousConversation(
+                    friendAnon: friendAnon,
+                    wiggles: wiggles,
+                    wiggle: currentWiggle,
+                    chatRoomId: chatRoomId,
+                    userData: userData,
+                  ),
+                ),
+                ModalRoute.withName('AnonymousConversation'),
+              );
             },
             child: Container(
               margin: EdgeInsets.only(top: 5, bottom: 5, right: 20),
