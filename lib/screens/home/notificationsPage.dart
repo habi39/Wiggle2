@@ -216,8 +216,13 @@ class _NotificationsItemState extends State<NotificationsItem> {
                     children: [
                       TextSpan(
                           text: widget.userID,
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11,color: Colors.white)),
-                      TextSpan(text: ' $notificationItemText', style:(TextStyle(color: Colors.white))),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                              color: Colors.white)),
+                      TextSpan(
+                          text: ' $notificationItemText',
+                          style: (TextStyle(color: Colors.white))),
                     ],
                   ),
                 ),
@@ -228,7 +233,7 @@ class _NotificationsItemState extends State<NotificationsItem> {
                             ? FlatButton(
                                 child: Container(
                                     height: 13.0,
-                                      width: 37.0,
+                                    width: 37.0,
                                     child: Text('Accepted',
                                         style: TextStyle(fontSize: 8.0))),
                                 onPressed: () {
@@ -247,8 +252,8 @@ class _NotificationsItemState extends State<NotificationsItem> {
                             children: <Widget>[
                               FlatButton(
                                   child: Container(
-                                    padding: EdgeInsets.only(
-                                        left: 0, right: 0, top: 0,bottom: 0),
+                                      padding: EdgeInsets.only(
+                                          left: 0, right: 0, top: 0, bottom: 0),
                                       height: 13.0,
                                       width: 35.0,
                                       child: Text('Accept',
@@ -270,7 +275,6 @@ class _NotificationsItemState extends State<NotificationsItem> {
                                   }),
                               FlatButton(
                                 child: Container(
-      
                                     height: 12.0,
                                     width: 37.0,
                                     child: Text('Decline',
@@ -319,7 +323,7 @@ class _NotificationsItemState extends State<NotificationsItem> {
                             : Column(
                                 children: <Widget>[
                                   FlatButton(
-                                    color: Colors.red,
+                                      color: Colors.red,
                                       child: Container(
                                           height: 10.0,
                                           width: 32.0,
@@ -396,19 +400,24 @@ class _NotificationsItemState extends State<NotificationsItem> {
               child: new SizedBox(
                 width: 56,
                 height: 56,
-                child: Image.network(
-                      widget.userDp,
-                      fit: BoxFit.fill,
-                    ) ??
-                    Image.asset('assets/images/profile1.png', fit: BoxFit.fill),
+                child: widget.userDp != ""
+                    ? Image.network(
+                        widget.userDp,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset('assets/images/profile1.png',
+                        fit: BoxFit.cover),
+
+                // Image.network(
+                //       widget.userDp,
+                //       fit: BoxFit.fill,
+                //     ) ??
+                //     Image.asset('assets/images/profile1.png', fit: BoxFit.fill),
               ),
             ),
           ),
-          subtitle: Text(
-            tAgo.format(widget.timestamp.toDate()),
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 12)
-          ),
+          subtitle: Text(tAgo.format(widget.timestamp.toDate()),
+              overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 12)),
           trailing: mediaPreview,
         ),
       ),
