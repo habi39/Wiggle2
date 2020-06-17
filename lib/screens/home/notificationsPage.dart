@@ -218,6 +218,7 @@ class _NotificationsItemState extends State<NotificationsItem> {
         child: ListTile(
           title: GestureDetector(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 RichText(
                   overflow: TextOverflow.ellipsis,
@@ -236,7 +237,7 @@ class _NotificationsItemState extends State<NotificationsItem> {
                     ],
                   ),
                 ),
-                SizedBox(width: 60),
+               
                 widget.type == 'request'
                     ? accepted || declined
                         ? accepted
