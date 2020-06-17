@@ -24,10 +24,21 @@ class _CompatibilityStatusState extends State<CompatibilityStatus> {
   List<String> answer2 = [];
 
   getCompatibilityRoomID(String a, String b) {
-    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+    codeUnit(String a) {
+      int count = 0;
+      for (int i = 0; i < a.length; i++) {
+        count += a.codeUnitAt(i);
+      }
+      return count;
+    }
+
+    if (a.length < b.length) {
+      return "$a\_$b";
+    } else if (a.length > b.length) {
       return "$b\_$a";
     } else {
-      return "$a\_$b";
+      print(codeUnit(a) + codeUnit(b));
+      return (codeUnit(a) + codeUnit(b)).toString();
     }
   }
 
