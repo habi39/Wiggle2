@@ -97,7 +97,7 @@ class _MyprofileState extends State<Myprofile> {
       child: FlatButton(
         onPressed: performFunction,
         child: Container(
-          width: 170.0,
+          width: MediaQuery.of(context).size.width/2.5,
           height: 26.0,
           child: Text(title, style: kCaptionTextStyle),
           alignment: Alignment.center,
@@ -184,7 +184,7 @@ class _MyprofileState extends State<Myprofile> {
                                         Text(userData.name,
                                             style: kTitleTextStyle.copyWith(
                                                 fontSize: 20,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight: FontWeight.w100,
                                                 color: Colors.grey[300])),
                                       ],
                                     ),

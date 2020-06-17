@@ -29,9 +29,9 @@ class _AnonymousGamesState extends State<AnonymousGames> {
           UserData userData = snapshot.data;
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.grey,
-              title: Text("Anonymous Games",
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+             
+              title: Text("A N O N Y M O U S   G A M E S",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100)),
               actions: <Widget>[
                 IconButton(
                   icon: Icon(Icons.add),
