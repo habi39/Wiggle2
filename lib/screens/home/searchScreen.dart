@@ -9,6 +9,8 @@ import 'package:Wiggle2/screens/home/conversationScreen.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/shared/loading.dart';
 import '../authenticate/helper.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:Wiggle2/screens/home/home.dart';
 
 class SearchScreen extends StatefulWidget {
   List<Wiggle> wiggles;
@@ -97,7 +99,7 @@ class _SearchScreenState extends State<SearchScreen> {
         
       },
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      color: Colors.blue,
+      color: Color(0xFF555555),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -137,7 +139,7 @@ class _SearchScreenState extends State<SearchScreen> {
             },
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.blueGrey,
+                  color: Colors.grey,
                   borderRadius: BorderRadius.circular(30)),
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 9),
               child: Text('Text'),
@@ -162,6 +164,7 @@ class _SearchScreenState extends State<SearchScreen> {
           if (userData != null) {
             return searchSnapshot != null
                 ? ListView.builder(
+
                     itemCount: searchSnapshot.documents.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
@@ -206,11 +209,20 @@ class _SearchScreenState extends State<SearchScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-  
-          title: Text("S E A R C H",
+          leading: IconButton(alignment: Alignment.topCenter ,
+                    icon: Icon(LineAwesomeIcons.home),
+                    onPressed: (){
+                      Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Home()),
+                    ModalRoute.withName('Home'));}
+                  ),
+                  title: Text("S E A R C H",
               textAlign: TextAlign.right,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
-        ),
+        
+                  
+                  ),
+        
         body: isLoading
             ? Container(child: Center(child: CircularProgressIndicator()))
             : Container(

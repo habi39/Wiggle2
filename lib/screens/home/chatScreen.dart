@@ -183,16 +183,16 @@ class chatScreenTile extends StatelessWidget {
           UserData userData = snapshot.data;
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ConversationScreen(
-                      wiggles: wiggles,
+              Navigator.of(context).pushAndRemoveUntil(
+                              FadeRoute(page: ConversationScreen(
+          wiggles: wiggles,
                       wiggle: currentWiggle,
                       chatRoomId: chatRoomId,
                       userData: userData,
-                    ),
-                  ));
+        ),),
+                              ModalRoute.withName('ConversationScreen'),
+                            );
+              
             },
             child: Container(
               margin: EdgeInsets.only(top: 5, bottom: 5, right: 20),

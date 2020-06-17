@@ -12,6 +12,8 @@ import 'package:Wiggle2/shared/loading.dart';
 import '../../games/trivia/trivia.dart';
 import '../../models/user.dart';
 import 'wiggle_list.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:Wiggle2/screens/home/home.dart';
 
 class ConversationScreen extends StatefulWidget {
   final String chatRoomId;
@@ -135,7 +137,17 @@ class _ConversationScreenState extends State<ConversationScreen> {
               appBar: AppBar(
                 backgroundColor: Colors.blueGrey,
                 title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    IconButton(alignment: Alignment.topCenter ,
+                    icon: Icon(LineAwesomeIcons.home),
+                    onPressed: (){
+                      Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Home()),
+                    ModalRoute.withName('Home'));}
+                  ),
+                  SizedBox(width: 25,),
                     CircleAvatar(
                       backgroundColor: Colors.white,
                       radius: 23,
