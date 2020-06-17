@@ -156,11 +156,15 @@ class chatScreenTile extends StatelessWidget {
           if (snapshot.data.documents.length - 1 < 0) {
             return Text('');
           } else {
-            return Text(f
-                .format(snapshot.data
-                    .documents[snapshot.data.documents.length - 1].data["time"]
-                    .toDate())
-                .toString());
+            return Text(
+                f
+                    .format(snapshot
+                        .data
+                        .documents[snapshot.data.documents.length - 1]
+                        .data["time"]
+                        .toDate())
+                    .toString(),
+                style: TextStyle(color: Colors.black));
           }
         } else {
           return Container();
