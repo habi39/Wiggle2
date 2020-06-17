@@ -75,28 +75,31 @@ class _SearchScreenState extends State<SearchScreen> {
     };
     DatabaseService().createChatRoom(chatRoomID, chatRoomMap);
     Navigator.of(context).pushAndRemoveUntil(
-                              FadeRoute(page: ConversationScreen(
+      FadeRoute(
+        page: ConversationScreen(
           wiggles: widget.wiggles,
           wiggle: wiggle,
           chatRoomId: chatRoomID,
           userData: userData,
-        ),),
-                              ModalRoute.withName('ConversationScreen'),
-                            );
+        ),
+      ),
+      ModalRoute.withName('ConversationScreen'),
+    );
   }
 
   Widget searchTile({String myEmail, Wiggle wiggle, UserData userData}) {
     return RaisedButton(
       onPressed: () {
         Navigator.of(context).pushAndRemoveUntil(
-                              FadeRoute(page: OthersProfile(
+          FadeRoute(
+            page: OthersProfile(
               wiggles: widget.wiggles,
               wiggle: wiggle,
               userData: userData,
-            ),),
-                              ModalRoute.withName('OthersProfile'),
-                            );
-        
+            ),
+          ),
+          ModalRoute.withName('OthersProfile'),
+        );
       },
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       color: Color(0xFF555555),
@@ -139,8 +142,7 @@ class _SearchScreenState extends State<SearchScreen> {
             },
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(30)),
+                  color: Colors.grey, borderRadius: BorderRadius.circular(30)),
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 9),
               child: Text('Text'),
             ),
@@ -164,7 +166,6 @@ class _SearchScreenState extends State<SearchScreen> {
           if (userData != null) {
             return searchSnapshot != null
                 ? ListView.builder(
-
                     itemCount: searchSnapshot.documents.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
@@ -209,20 +210,17 @@ class _SearchScreenState extends State<SearchScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(alignment: Alignment.topCenter ,
-                    icon: Icon(LineAwesomeIcons.home),
-                    onPressed: (){
-                      Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: Home()),
-                    ModalRoute.withName('Home'));}
-                  ),
-                  title: Text("S E A R C H",
+          leading: IconButton(
+              alignment: Alignment.topCenter,
+              icon: Icon(LineAwesomeIcons.home),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Home()), ModalRoute.withName('Home'));
+              }),
+          title: Text("S E A R C H",
               textAlign: TextAlign.right,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
-        
-                  
-                  ),
-        
+        ),
         body: isLoading
             ? Container(child: Center(child: CircularProgressIndicator()))
             : Container(

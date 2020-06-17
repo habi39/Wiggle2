@@ -10,6 +10,8 @@ import 'package:Wiggle2/screens/home/othersProfile.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/shared/constants.dart';
 import 'package:Wiggle2/shared/loading.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:Wiggle2/screens/home/home.dart';
 
 class AnonymousConversation extends StatefulWidget {
   final bool friendAnon;
@@ -139,8 +141,16 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
               resizeToAvoidBottomPadding: true,
               backgroundColor: Color.fromRGBO(3, 9, 23, 1),
               appBar: AppBar(
-                backgroundColor: Colors.blueGrey,
+                leading: IconButton(
+                    alignment: Alignment.topCenter,
+                    icon: Icon(LineAwesomeIcons.home),
+                    onPressed: () {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          FadeRoute(page: Home()), ModalRoute.withName('Home'));
+                    }),
                 title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     CircleAvatar(
                       backgroundColor: Colors.white,
@@ -161,23 +171,35 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
                         ),
                       ),
                     ),
-                    FlatButton(
-                      color: Colors.blueGrey,
-                      child: Text(widget.friendAnon
-                          ? '${widget.wiggle.nickname} *'
-                          : widget.wiggle.name),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => widget.friendAnon
-                                ? AnonOthersProfile(wiggle: widget.wiggle)
-                                : OthersProfile(
-                                    userData: widget.userData,
-                                    wiggle: widget.wiggle,
-                                    wiggles: widget.wiggles,
-                                  ),
-                          ),
-                        );
+                    SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      child: Text(
+                        widget.friendAnon
+                            ? '${widget.wiggle.nickname} *'
+                            : widget.wiggle.name,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w100,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            FadeRoute(
+                              page: widget.friendAnon
+                                  ? AnonOthersProfile(wiggle: widget.wiggle)
+                                  : OthersProfile(
+                                      wiggles: widget.wiggles,
+                                      wiggle: widget.wiggle,
+                                      userData: userData,
+                                    ),
+                            ),
+                            ModalRoute.withName('void'));
+
+                        
+                          
+                        
                       },
                     ),
                   ],
@@ -186,16 +208,17 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
                   IconButton(
                     icon: Icon(Icons.gamepad),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CompatibilityStart(
-                              friendAnon: widget.friendAnon,
+                      Navigator.of(context).pushAndRemoveUntil(
+                            FadeRoute(
+                              page: CompatibilityStart(
+                                friendAnon: widget.friendAnon,
                               userData: widget.userData,
                               wiggle: widget.wiggle,
-                              wiggles: widget.wiggles),
-                        ),
-                      );
+                              wiggles: widget.wiggles
+                              ),
+                            ),
+                            ModalRoute.withName('CompatibilityStart'));
+                      
                     },
                   ),
                 ],

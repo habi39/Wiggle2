@@ -135,48 +135,54 @@ class _ConversationScreenState extends State<ConversationScreen> {
               resizeToAvoidBottomPadding: true,
               backgroundColor: Color.fromRGBO(3, 9, 23, 1),
               appBar: AppBar(
-                backgroundColor: Colors.blueGrey,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    IconButton(alignment: Alignment.topCenter ,
+                titleSpacing: 50,
+                leading: IconButton(
+                    alignment: Alignment.topCenter,
                     icon: Icon(LineAwesomeIcons.home),
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: Home()),
-                    ModalRoute.withName('Home'));}
-                  ),
-                  SizedBox(width: 25,),
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 23,
-                      child: ClipOval(
-                        child: SizedBox(
-                          width: 180,
-                          height: 180,
-                          child: Image.network(
-                                widget.wiggle.dp,
-                                fit: BoxFit.fill,
-                              ) ??
-                              Image.asset('assets/images/profile1.png',
-                                  fit: BoxFit.fill),
-                        ),
-                      ),
-                    ),
-                    FlatButton(
-                      color: Colors.blueGrey,
-                      child: Text(widget.wiggle.name),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => OthersProfile(
-                              wiggles: widget.wiggles,
-                              wiggle: widget.wiggle,
-                              userData: userData,
+                          FadeRoute(page: Home()), ModalRoute.withName('Home'));
+                    }),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 23,
+                          child: ClipOval(
+                            child: SizedBox(
+                              width: 180,
+                              height: 180,
+                              child: Image.network(
+                                    widget.wiggle.dp,
+                                    fit: BoxFit.fill,
+                                  ) ??
+                                  Image.asset('assets/images/profile1.png',
+                                      fit: BoxFit.fill),
                             ),
                           ),
-                        );
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      child: Text(widget.wiggle.name,
+                          style: kCaptionTextStyle.copyWith(fontSize: 20)),
+                      onTap: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            FadeRoute(
+                              page: OthersProfile(
+                                wiggles: widget.wiggles,
+                                wiggle: widget.wiggle,
+                                userData: userData,
+                              ),
+                            ),
+                            ModalRoute.withName('OthersProfile'));
                       },
                     ),
                   ],
@@ -185,16 +191,17 @@ class _ConversationScreenState extends State<ConversationScreen> {
                   IconButton(
                     icon: Icon(Icons.gamepad),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CompatibilityStart(
-                              friendAnon: false,
+                      Navigator.of(context).pushAndRemoveUntil(
+                            FadeRoute(
+                              page: CompatibilityStart(
+                                friendAnon: false,
                               userData: widget.userData,
                               wiggle: widget.wiggle,
-                              wiggles: widget.wiggles),
-                        ),
-                      );
+                              wiggles: widget.wiggles
+                              ),
+                            ),
+                            ModalRoute.withName('CompatibilityStart'));
+                      
                     },
                   ),
                 ],

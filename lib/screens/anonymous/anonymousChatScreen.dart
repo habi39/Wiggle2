@@ -103,15 +103,17 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
           if (userData != null) {
             return Scaffold(
               appBar: AppBar(
-                backgroundColor: Colors.grey,
+                elevation: 0,
+                centerTitle: true,
                 title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Anonymous Chat",
+                      "A N O N Y M O U S    C H A T",
                       style:
-                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w100),
                     ),
-                    SizedBox(width: 4),
+                    SizedBox(width: 7),
                     Container(
                       height: 40,
                       width: 40,
@@ -127,11 +129,11 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
                   IconButton(
                     icon: Icon(Icons.add),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  AnonymousSearch(wiggles: wiggles)));
+                      Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page:AnonymousSearch(wiggles: wiggles)),
+                    ModalRoute.withName('AnonymousSearch'),
+                  );
+                
                     },
                   ),
                 ],
@@ -300,17 +302,16 @@ class ChatScreenTile extends StatelessWidget {
 
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AnonymousConversation(
+              Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page:AnonymousConversation(
                       friendAnon: friendAnon,
                       wiggles: wiggles,
                       wiggle: currentWiggle,
                       chatRoomId: chatRoomId,
                       userData: userData,
-                    ),
-                  ));
+                    ),),
+                    ModalRoute.withName('AnonymousConversation'),);
+            
             },
             child: Container(
               margin: EdgeInsets.only(top: 5, bottom: 5, right: 20),
