@@ -1,7 +1,7 @@
+import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:Wiggle2/screens/home/profile.dart';
 import 'package:Wiggle2/services/auth.dart';
@@ -11,8 +11,11 @@ import 'package:Wiggle2/models/widget.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/shared/loading.dart';
 import 'package:provider/provider.dart';
-
+import 'package:Wiggle2/shared/constants.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../services/database.dart';
+import 'package:Wiggle2/screens/home/home.dart';
+
 
 class EditAnonProfile extends StatefulWidget {
   @override
@@ -66,8 +69,9 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
       dynamic result = DatabaseService(uid: user.uid)
           .updateAnonData(anonBio, anonInterest, y);
     }
-    Navigator.pop(
-        context, MaterialPageRoute(builder: (context) => Myprofile()));
+ Navigator.of(context).pushAndRemoveUntil(
+                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+   
 
     Helper.saveUserLoggedInSharedPreference(true);
   }
@@ -84,11 +88,14 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
               appBar: AppBar(
-                backgroundColor: Colors.blueGrey,
-                title: Text("Edit Anonymous Profile",
-                    style:
-                        TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-              ),
+                centerTitle: true,
+                elevation: 0,
+                leading: IconButton(
+              icon: Icon(LineAwesomeIcons.home),
+              onPressed: () {
+               Navigator.of(context).pushAndRemoveUntil(
+                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+              })),
               body: StreamBuilder<UserData>(
                   stream: DatabaseService(uid: user.uid).userData,
                   builder: (context, snapshot) {

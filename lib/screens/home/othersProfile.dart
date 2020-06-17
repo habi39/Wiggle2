@@ -1,3 +1,4 @@
+import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Wiggle2/models/wiggle.dart';
@@ -438,9 +439,8 @@ class _OthersProfileState extends State<OthersProfile> {
                           SizedBox(height: kSpacingUnit.w * 5),
                           FlatButton(
                             onPressed: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  FadeRoute(page: Home()),
-                                  ModalRoute.withName('Home'));
+                             Navigator.of(context).pushAndRemoveUntil(
+                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
                             },
                             child: Icon(
                               LineAwesomeIcons.home,

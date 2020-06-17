@@ -2,6 +2,7 @@ import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/screens/feed/uploadImage.dart';
 import 'package:Wiggle2/screens/home/conversationScreen.dart';
+import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -101,11 +102,10 @@ class _FeedState extends State<Feed> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-              alignment: Alignment.topCenter,
               icon: Icon(LineAwesomeIcons.home),
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: Home()), ModalRoute.withName('Home'));
+                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
               }),
         title: Text("F E E D",
             textAlign: TextAlign.right,
@@ -246,15 +246,13 @@ class FeedTile extends StatelessWidget {
           UserData userData = snapshot.data;
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ConversationScreen(
+              Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: ConversationScreen(
                       wiggles: wiggles,
                       wiggle: wiggle,
                       userData: userData,
-                    ),
-                  ));
+                    ),), ModalRoute.withName('ConversationScreen'));
+            
             },
             child: Padding(
               padding: EdgeInsets.only(bottom: 12),

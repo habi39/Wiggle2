@@ -5,7 +5,10 @@ import 'package:Wiggle2/models/widget.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/shared/loading.dart';
 import 'package:provider/provider.dart';
-
+import 'package:Wiggle2/shared/constants.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:Wiggle2/screens/home/home.dart';
+import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 class EditAccount extends StatefulWidget {
   @override
   _EditAccountState createState() => _EditAccountState();
@@ -30,10 +33,18 @@ class _EditAccountState extends State<EditAccount> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
               appBar: AppBar(
-                backgroundColor: Colors.blueGrey,
-                title: Text("Change Password",
+                centerTitle: true,
+                elevation: 0,
+                leading: IconButton(
+              icon: Icon(LineAwesomeIcons.home),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+              }),
+    
+                title: Text("C H A N G E     P A S S W O R D",
                     style:
-                        TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
               ),
               body: StreamBuilder<UserData>(
                   stream: DatabaseService(uid: user.uid).userData,
@@ -152,7 +163,8 @@ class _EditAccountState extends State<EditAccount> {
                                               });
                                               _auth.updatePassword(newpassword);
 
-                                              Navigator.pop(context);
+                                               Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
                                             }
                                           },
                                           child: Container(

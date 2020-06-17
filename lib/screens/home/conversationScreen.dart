@@ -1,3 +1,4 @@
+import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -140,7 +141,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                     icon: Icon(LineAwesomeIcons.home),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
-                          FadeRoute(page: Home()), ModalRoute.withName('Home'));
+                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
                     }),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

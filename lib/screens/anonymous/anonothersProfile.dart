@@ -1,4 +1,5 @@
 import 'package:Wiggle2/screens/home/home.dart';
+import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -102,11 +103,9 @@ class _OthersProfileState extends State<AnonOthersProfile> {
                                     ),
                                     child: FlatButton(
                                         onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      EditAnonProfile()));
+                                          Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: EditAnonProfile()), ModalRoute.withName('EditAnonProfile'));
+                                          
                                         },
                                         child: Row(
                                           children: <Widget>[
@@ -295,10 +294,7 @@ class _OthersProfileState extends State<AnonOthersProfile> {
                             FlatButton(
                               onPressed: () {
                                 Navigator.of(context).pushAndRemoveUntil(
-                            FadeRoute(
-                              page: Home()
-                            ),
-                            ModalRoute.withName('Home'));
+                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
                       
                               },
                               child: Icon(

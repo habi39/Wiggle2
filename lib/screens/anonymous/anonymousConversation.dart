@@ -1,3 +1,4 @@
+import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -144,8 +145,8 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
                 leading: IconButton(
                     icon: Icon(LineAwesomeIcons.home),
                     onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          FadeRoute(page: Home()), ModalRoute.withName('Home'));
+                     Navigator.of(context).pushAndRemoveUntil(
+                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
                     }),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

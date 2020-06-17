@@ -1,3 +1,4 @@
+import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,8 +12,10 @@ import 'package:Wiggle2/models/widget.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/shared/loading.dart';
 import 'package:provider/provider.dart';
-
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:Wiggle2/screens/home/home.dart';
 import '../../services/database.dart';
+import 'package:Wiggle2/shared/constants.dart';
 
 class EditProfileScreen extends StatefulWidget {
   @override
@@ -75,8 +78,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         loading = false;
       });
     }
-    Navigator.pop(
-        context, MaterialPageRoute(builder: (context) => Myprofile()));
+    Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+    
     Helper.saveUserEmailSharedPreference(email);
     Helper.saveUserNameSharedPreference(name);
 
@@ -101,10 +105,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
               appBar: AppBar(
-                backgroundColor: Colors.blueGrey,
-                title: Text("Edit Profile",
+              elevation: 0,
+              centerTitle: true,
+              leading: IconButton(
+              icon: Icon(LineAwesomeIcons.home),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+              }),
+                title: Text("E D I T   P R O F I L E",
                     style:
-                        TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
               ),
               body: StreamBuilder<UserData>(
                   stream: DatabaseService(uid: user.uid).userData,
@@ -121,7 +132,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               child: Container(
                                 padding: EdgeInsets.symmetric(horizontal: 25),
                                 child: Column(
-                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                   children: [
                                     Form(
                                       key: _formKey,

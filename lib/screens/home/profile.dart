@@ -110,13 +110,15 @@ class _MyprofileState extends State<Myprofile> {
   }
 
   editUserPassword() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => EditAccount()));
+     Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page:EditAccount() ), ModalRoute.withName('EditAccount'));
+  
   }
 
   editUserProfile() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => EditProfileScreen()));
+    Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page:EditProfileScreen() ), ModalRoute.withName('EditProfileScreen'));
+   
   }
 
   final AuthService _auth = AuthService();

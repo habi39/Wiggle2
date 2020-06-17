@@ -94,11 +94,9 @@ class _MyanonprofileState extends State<Myanonprofile> {
                               ),
                               child: FlatButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                EditAnonProfile()));
+                                    Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: EditAnonProfile()), ModalRoute.withName('EditAnonProfile'));
+                                    
                                   },
                                   child: Row(
                                     children: <Widget>[
