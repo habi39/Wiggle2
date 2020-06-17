@@ -30,7 +30,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   static bool anonymous = false;
 
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   final tabs = [

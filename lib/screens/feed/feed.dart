@@ -11,7 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:Wiggle2/screens/home/home.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Feed extends StatefulWidget {
   final UserData userData;
   final List<Wiggle> wiggles;
@@ -99,6 +99,7 @@ class _FeedState extends State<Feed> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, height: 869, width: 414, allowFontScaling: true);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

@@ -15,6 +15,7 @@ import '../../models/user.dart';
 import 'wiggle_list.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:Wiggle2/screens/home/home.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ConversationScreen extends StatefulWidget {
   final String chatRoomId;
@@ -125,6 +126,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+    ScreenUtil.init(context, height: 869, width: 414, allowFontScaling: true);
     return StreamBuilder<UserData>(
       stream: DatabaseService(uid: user.uid).userData,
       builder: (context, snapshot) {
