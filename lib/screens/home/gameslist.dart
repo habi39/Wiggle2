@@ -32,9 +32,9 @@ class _GameslistState extends State<Gameslist> {
           UserData userData = snapshot.data;
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.blueGrey,
-              title: Text("Games",
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+              elevation: 0,
+              title: Text("G A M E S",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
               actions: <Widget>[
                 IconButton(
                   icon: Icon(Icons.add),

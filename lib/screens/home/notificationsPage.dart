@@ -42,10 +42,10 @@ class _NotificationPageState extends State<NotificationPage> {
           if (userData != null) {
             return Scaffold(
               appBar: AppBar(
-                backgroundColor: Colors.blueGrey,
-                title: Text("Notification",
+                elevation: 0,
+                title: Text("N O T I F I C A T I O N S",
                     style:
-                        TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
               ),
               body: Container(
                 child: FutureBuilder(

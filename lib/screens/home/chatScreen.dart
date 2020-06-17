@@ -85,9 +85,9 @@ class _ChatsScreenState extends State<ChatScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        title: Text("Chat",
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+        elevation: 0,
+        title: Text("C H A T",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),

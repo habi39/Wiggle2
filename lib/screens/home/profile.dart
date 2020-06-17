@@ -93,21 +93,21 @@ class _MyprofileState extends State<Myprofile> {
   Container createButtonTitleAndFunction(
       {String title, Function performFunction}) {
     return Container(
-      padding: EdgeInsets.only(top: 1.0),
+      padding: EdgeInsets.only(top: 0.5),
       child: FlatButton(
         onPressed: performFunction,
         child: Container(
-          width: 150.0,
+          width: 170.0,
           height: 26.0,
           child: Text(
             title,
-            style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+            style: kCaptionTextStyle
           ),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: Colors.black,
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(6.0),
+            color: Color(0xFF373737),
+           
+            borderRadius: BorderRadius.circular(4.0),
           ),
         ),
       ),
@@ -140,63 +140,75 @@ class _MyprofileState extends State<Myprofile> {
           if (userData != null) {
             personalEmail = userData.email;
             return Scaffold(
-              backgroundColor: Color.fromRGBO(3, 9, 23, 1),
-              appBar: AppBar(
-                backgroundColor: Colors.blueGrey,
-                title: Text("Profile",
-                    style: kTitleTextStyle.copyWith(fontSize: 25)),
-                elevation: 0.0,
-                actions: <Widget>[
-                  FlatButton.icon(
-                    icon: Icon(Icons.person),
-                    label: Text('Logout'),
-                    onPressed: () async {
-                      await _auth.signOut();
-                    },
-                  ),
-                ],
-              ),
+              backgroundColor: Color(0xff272936) ,
               body: Stack(
                 children: <Widget>[
                   Column(
                     children: <Widget>[
                       Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.blueGrey,
-                              Color.fromRGBO(3, 9, 23, 1)
-                            ],
-                          ),
-                        ),
+                       
                         child: Container(
                           child: Column(
                             children: <Widget>[
-                              CircleAvatar(
-                                backgroundColor: Colors.white,
-                                radius: 50,
-                                child: ClipOval(
-                                  child: new SizedBox(
-                                    width: 180,
-                                    height: 180,
-                                    child: Image.network(
-                                          userData.dp,
-                                          fit: BoxFit.fill,
-                                        ) ??
-                                        Image.asset(
-                                            'assets/images/profile1.png',
-                                            fit: BoxFit.fill),
+                              SizedBox(height: kSpacingUnit.w * 5),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(height: kSpacingUnit.w * 5),
+                                  FlatButton(
+                                    onPressed: () {},
+                                    child: Icon(
+                                      LineAwesomeIcons.sun,
+                                      size: ScreenUtil()
+                                          .setSp(kSpacingUnit.w * 2.5),
+                                    ),
                                   ),
-                                ),
+                                  Expanded(
+                                    child: Column(
+                                      children: <Widget>[
+                                        SizedBox(height: kSpacingUnit.w * 3),
+                                    
+                                        CircleAvatar(
+                                          backgroundColor: Colors.white,
+                                          radius: 50,
+                                          child: ClipOval(
+                                            child: new SizedBox(
+                                              width: 180,
+                                              height: 180,
+                                              child: Image.network(
+                                                    userData.dp,
+                                                    fit: BoxFit.fill,
+                                                  ) ??
+                                                  Image.asset(
+                                                      'assets/images/profile1.png',
+                                                      fit: BoxFit.fill),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: 10),
+                                        Text(userData.name,
+                              
+                                            style: kTitleTextStyle.copyWith(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.grey[300])),
+                                      ],
+                                    ),
+                                  ),
+                                  FlatButton(
+                                    onPressed: () async {
+                                      await _auth.signOut();
+                                    },
+                                    child: Icon(
+                                      LineAwesomeIcons.alternate_sign_out,
+                                      size: ScreenUtil()
+                                          .setSp(kSpacingUnit.w * 2.5),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              SizedBox(height: 10),
-                              Text(userData.name,
-                                  style: kTitleTextStyle.copyWith(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.grey[300])),
                               Container(
                                   child: Row(
                                 children: <Widget>[
@@ -223,9 +235,10 @@ class _MyprofileState extends State<Myprofile> {
                       maxChildSize: 0.70,
                       builder: (context, scrollController) {
                         return SingleChildScrollView(
+                        
                             controller: scrollController,
                             child: Container(
-                                color: Color.fromRGBO(3, 9, 23, 4),
+                                color:  Color(0xff3d3f50) ,
                                 constraints: BoxConstraints(
                                     minHeight:
                                         MediaQuery.of(context).size.height),
@@ -235,8 +248,9 @@ class _MyprofileState extends State<Myprofile> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: <Widget>[
                                       Container(
+                                        
                                         padding: EdgeInsets.all(15),
-                                        color: Colors.black54,
+                                        color: Color(0xFF212121),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:

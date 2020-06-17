@@ -340,22 +340,22 @@ showSnackBar(Map<String, dynamic> message) {
                 BottomNavigationBarItem(
                   icon: Icon(Icons.games),
                   title: Text('Games'),
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: Color(0xff272936),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.chat),
                   title: Text('Chats'),
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: Color(0xff272936),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.new_releases),
                   title: Text('Notification'),
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: Color(0xff272936),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.portrait),
                   title: Text('Profile'),
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: Color(0xff272936),
                 ),
               ],
               onTap: (index) {
@@ -363,7 +363,7 @@ showSnackBar(Map<String, dynamic> message) {
                   _currentIndex = index;
                 });
               },
-              selectedItemColor: Colors.black,
+              selectedItemColor: Colors.grey
             ),
           );
   }
