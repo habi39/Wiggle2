@@ -346,12 +346,10 @@ class _HomeState extends State<Home> {
             key: _scaffoldkey,
             body: tabs[_currentIndex],
             floatingActionButton: FloatingActionButton(
-              // backgroundColor: Colors.pink[200],
+              backgroundColor: Colors.black,
               child: ClipOval(
-                child: Image.asset(
-                  'assets/images/ghosty2.png',
-                  fit: BoxFit.fill,
-                ),
+                child: Image.asset('assets/images/ghosty2.png',
+                    fit: BoxFit.fill, color: Colors.amber),
               ),
               onPressed: () {
                 DatabaseService(uid: user.uid).updateAnonymous(true);

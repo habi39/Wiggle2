@@ -111,7 +111,7 @@ class _RegisterState extends State<Register> {
                               Row(children: <Widget>[
                                 Icon(
                                   Icons.alternate_email,
-                                  color: Colors.cyan,
+                                  color: Colors.amber,
                                 ),
                                 SizedBox(width: 3),
                                 Expanded(
@@ -126,7 +126,7 @@ class _RegisterState extends State<Register> {
                                       onChanged: (val) {
                                         setState(() => email = val);
                                       },
-                                      style: TextStyle(color: Colors.cyan),
+                                      style: TextStyle(color: Colors.amber),
                                       decoration:
                                           textFieldInputDecoration(' Email')),
                                 ),
@@ -134,7 +134,7 @@ class _RegisterState extends State<Register> {
                               Row(children: <Widget>[
                                 Icon(
                                   Icons.lock,
-                                  color: Colors.cyan,
+                                  color: Colors.amber,
                                 ),
                                 SizedBox(width: 3),
                                 Expanded(
@@ -148,7 +148,7 @@ class _RegisterState extends State<Register> {
                                       onChanged: (val) {
                                         setState(() => password = val);
                                       },
-                                      style: TextStyle(color: Colors.cyan),
+                                      style: TextStyle(color: Colors.amber),
                                       decoration: textFieldInputDecoration(
                                           ' Password')),
                                 ),
@@ -183,7 +183,7 @@ class _RegisterState extends State<Register> {
                                   Padding(
                                     padding: EdgeInsets.only(top: 60),
                                     child: IconButton(
-                                      color: Colors.cyan,
+                                      color: Colors.amber,
                                       icon: Icon(Icons.camera_alt, size: 30),
                                       onPressed: () {
                                         getImage();
@@ -196,7 +196,7 @@ class _RegisterState extends State<Register> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.face,
-                                    color: Colors.cyan,
+                                    color: Colors.amber,
                                   ),
                                   SizedBox(width: 3),
                                   Expanded(
@@ -209,16 +209,23 @@ class _RegisterState extends State<Register> {
                                         onChanged: (val) {
                                           setState(() => name = val);
                                         },
-                                        style: TextStyle(color: Colors.cyan),
+                                        style: TextStyle(color: Colors.amber),
                                         decoration:
                                             textFieldInputDecoration(' Name')),
                                   ),
                                 ],
                               ),
                               Row(children: <Widget>[
-                                Icon(
-                                  Icons.face,
-                                  color: Colors.cyan,
+                                CircleAvatar(
+                                  backgroundColor: Colors.amber,
+                                  radius: 12.5,
+                                  child: ClipOval(
+                                    child: Image.asset(
+                                      'assets/images/ghosty2.png',
+                                      fit: BoxFit.fill,
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(width: 3),
                                 Expanded(
@@ -231,7 +238,7 @@ class _RegisterState extends State<Register> {
                                       onChanged: (val) {
                                         setState(() => nickname = val);
                                       },
-                                      style: TextStyle(color: Colors.cyan),
+                                      style: TextStyle(color: Colors.amber),
                                       decoration: textFieldInputDecoration(
                                           ' Nickname to be used when anonymous')),
                                 ),
@@ -242,12 +249,12 @@ class _RegisterState extends State<Register> {
                                   Icon(
                                     FontAwesomeIcons.male,
                                     size: 25.0,
-                                    color: Colors.cyan,
+                                    color: Colors.amber,
                                   ),
                                   Icon(
                                     FontAwesomeIcons.female,
                                     size: 25.0,
-                                    color: Colors.cyan,
+                                    color: Colors.amber,
                                   ),
                                   SizedBox(width: 20.0),
                                   Expanded(
@@ -262,7 +269,7 @@ class _RegisterState extends State<Register> {
                                               child: Text(
                                                 value,
                                                 style: TextStyle(
-                                                    color: Colors.cyan),
+                                                    color: Colors.amber),
                                               ),
                                               value: value,
                                             ))
@@ -287,14 +294,9 @@ class _RegisterState extends State<Register> {
                                   Icon(
                                     FontAwesomeIcons.home,
                                     size: 25.0,
-                                    color: Colors.cyan,
+                                    color: Colors.amber,
                                   ),
-                                  Icon(
-                                    FontAwesomeIcons.home,
-                                    size: 25.0,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(width: 20.0),
+                                  SizedBox(width: 45.0),
                                   Expanded(
                                     child: DropdownButtonFormField(
                                       validator: (val) {
@@ -307,7 +309,7 @@ class _RegisterState extends State<Register> {
                                                 child: Text(
                                                   value,
                                                   style: TextStyle(
-                                                      color: Colors.cyan),
+                                                      color: Colors.amber),
                                                 ),
                                                 value: value,
                                               ))
@@ -332,7 +334,7 @@ class _RegisterState extends State<Register> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.favorite,
-                                    color: Colors.cyan,
+                                    color: Colors.amber,
                                   ),
                                   SizedBox(width: 3),
                                   Expanded(
@@ -340,7 +342,7 @@ class _RegisterState extends State<Register> {
                                         onChanged: (val) {
                                           setState(() => bio = val);
                                         },
-                                        style: TextStyle(color: Colors.cyan),
+                                        style: TextStyle(color: Colors.amber),
                                         decoration:
                                             textFieldInputDecoration(' Bio')),
                                   ),

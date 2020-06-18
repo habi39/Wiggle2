@@ -63,7 +63,7 @@ class _SignInState extends State<SignIn> {
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
-              backgroundColor: Color.fromRGBO(3, 9, 23, 1),
+              // backgroundColor: Color.fromRGBO(3, 9, 23, 1),
               body: SingleChildScrollView(
                 child: Container(
                   height: MediaQuery.of(context).size.height - 50,
