@@ -517,7 +517,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                 SizedBox(height: 10),
                                 Container(
                                   padding: EdgeInsets.only(
-                                      top: 3, bottom: 3, left: 30, right: 30),
+                                      top: 3, bottom: 3, left: 28, right: 28),
                                   decoration: BoxDecoration(
                                       color: Color(0xFF373737),
                                       borderRadius: BorderRadius.all(
@@ -533,7 +533,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                         highlightColor: Colors.transparent,
                           splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
-                                              left: 25, right: 25),
+                                              left: 23, right: 23),
                                           child: createColumns(
                                               'Followers', countTotalFollowers),
                                           onPressed: (widget.userData.email ==
@@ -554,7 +554,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                         highlightColor: Colors.transparent,
                           splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
-                                              left: 25, right: 25),
+                                              left: 23, right: 23),
                                           child: createColumns('Following',
                                               countTotalFollowings),
                                           onPressed: (widget.userData.email ==
@@ -575,7 +575,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                         highlightColor: Colors.transparent,
                           splashColor: Colors.transparent,
                                         padding: EdgeInsets.only(
-                                            left: 25, right: 25),
+                                            left: 23, right: 23),
                                         child: createColumns('Gamescore', 0),
                                         onPressed: () {},
                                       ),
