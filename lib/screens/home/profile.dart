@@ -388,63 +388,62 @@ class _MyprofileState extends State<Myprofile> {
                                   child: Row(
                                     children: <Widget>[
                                       Container(
-                                        width: 150,
-                                        margin: EdgeInsets.only(right: 20),
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                    0.30 -
-                                                50,
-                                        decoration: BoxDecoration(
-                                            color: Colors.orange.shade400,
+                                          width: 150,
+                                          margin: EdgeInsets.only(right: 20),
+                                          height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.30 -
+                                              50,
+                                          child: ClipRRect(
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(20.0))),
-                                        child:  Image.network(
-                                                userData.dp,
-                                                fit: BoxFit.fill,
-                                              ) ??
-                                              Image.asset(
-                                                  'assets/images/profile1.png',
-                                                  fit: BoxFit.fill),
-                                        ),
-                                      
+                                                Radius.circular(20.0)),
+                                            child: Image.network(
+                                                  userData.dp,
+                                                  fit: BoxFit.fill,
+                                                ) ??
+                                                Image.asset(
+                                                    'assets/images/profile1.png',
+                                                    fit: BoxFit.fill),
+                                          )),
                                       Container(
-                                        width: 150,
-                                        margin: EdgeInsets.only(right: 20),
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                    0.30 -
-                                                50,
-                                        decoration: BoxDecoration(
-                                            color: Colors.orange.shade400,
+                                          width: 150,
+                                          margin: EdgeInsets.only(right: 20),
+                                          height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.30 -
+                                              50,
+                                          child: ClipRRect(
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(20.0))),
-                                        child:  Image.network(
-                                                userData.dp,
-                                                fit: BoxFit.fill,
-                                              ) ??
-                                              Image.asset(
-                                                  'assets/images/profile1.png',
-                                                  fit: BoxFit.fill),
-                                        ),
-                                     Container(
-                                        width: 150,
-                                        margin: EdgeInsets.only(right: 20),
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                    0.30 -
-                                                50,
-                                        decoration: BoxDecoration(
-                                            color: Colors.orange.shade400,
+                                                Radius.circular(20.0)),
+                                            child: Image.network(
+                                                  userData.dp,
+                                                  fit: BoxFit.fill,
+                                                ) ??
+                                                Image.asset(
+                                                    'assets/images/profile1.png',
+                                                    fit: BoxFit.fill),
+                                          )),
+                                      Container(
+                                          width: 150,
+                                          margin: EdgeInsets.only(right: 20),
+                                          height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.30 -
+                                              50,
+                                          child: ClipRRect(
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(20.0))),
-                                        child:  Image.network(
-                                                userData.dp,
-                                                fit: BoxFit.fill,
-                                              ) ??
-                                              Image.asset(
-                                                  'assets/images/profile1.png',
-                                                  fit: BoxFit.fill),
-                                        ),
+                                                Radius.circular(20.0)),
+                                            child: Image.network(
+                                                  userData.dp,
+                                                  fit: BoxFit.fill,
+                                                ) ??
+                                                Image.asset(
+                                                    'assets/images/profile1.png',
+                                                    fit: BoxFit.fill),
+                                          )),
                                     ],
                                   ),
                                 ),
