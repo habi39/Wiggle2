@@ -506,7 +506,7 @@ class DatabaseService {
   getReceivertoken(String email) async {
     return Firestore.instance
         .collection('users')
-        .document(email)
+        .document(uid)
         .collection('tokens')
         .getDocuments();
   }
