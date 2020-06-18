@@ -326,7 +326,7 @@ class FeedTile extends StatelessWidget {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           UserData userData = snapshot.data;
-          check = userData.email == wiggle.email;
+          check = Constants.myEmail == wiggle.email;
           return GestureDetector(
             onTap: () {
               // Navigator.of(context).pushAndRemoveUntil(
