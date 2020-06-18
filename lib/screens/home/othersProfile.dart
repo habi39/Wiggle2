@@ -525,39 +525,39 @@ class _OthersProfileState extends State<OthersProfile> {
                                               left: 25, right: 25),
                                           child: createColumns(
                                               'Followers', countTotalFollowers),
-                                          onPressed: (widget
-                                                                      .userData
-                                                                      .email ==
-                                                                  widget.wiggle
-                                                                      .email ||
-                                                              following)
-                                                          ? () => Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) => FollowersList(
-                                                                      wiggles: widget
-                                                                          .wiggles,
-                                                                      otherWiggle: widget.wiggle)))
-                                                          : () => print('tried pressing')),
+                                          onPressed: (widget.userData.email ==
+                                                      widget.wiggle.email ||
+                                                  following)
+                                              ? () => Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          FollowersList(
+                                                              wiggles: widget
+                                                                  .wiggles,
+                                                              otherWiggle:
+                                                                  widget
+                                                                      .wiggle)))
+                                              : () => print('tried pressing')),
                                       FlatButton(
                                           padding: EdgeInsets.only(
                                               left: 25, right: 25),
                                           child: createColumns('Following',
                                               countTotalFollowings),
-                                          onPressed: (widget
-                                                                      .userData
-                                                                      .email ==
-                                                                  widget.wiggle
-                                                                      .email ||
-                                                              following)
-                                                          ? () => Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) => FollowingList(
-                                                                      wiggles: widget
-                                                                          .wiggles,
-                                                                      otherWiggle: widget.wiggle)))
-                                                          : () => print('tried pressing')),
+                                          onPressed: (widget.userData.email ==
+                                                      widget.wiggle.email ||
+                                                  following)
+                                              ? () => Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          FollowingList(
+                                                              wiggles: widget
+                                                                  .wiggles,
+                                                              otherWiggle:
+                                                                  widget
+                                                                      .wiggle)))
+                                              : () => print('tried pressing')),
                                       FlatButton(
                                         padding: EdgeInsets.only(
                                             left: 25, right: 25),
@@ -583,160 +583,184 @@ class _OthersProfileState extends State<OthersProfile> {
                                 )),
                               ],
                             ),
-                            Container(
-                              padding: EdgeInsets.all(15),
-                              width: MediaQuery.of(context).size.width,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text('A B O U T    M E',
-                                      style: kTitleTextStyle.copyWith(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xFFFFC107))),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(widget.wiggle.bio,
-                                      //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
-                                      //"Greyscale, also known as, is a dreaded and usually fatal disease that can leave flesh stiff and dead, and the skin cracked and flaking, and stone-like to the touch. Those that manage to survive a bout with the illness will be immune from ever contracting it again, but the flesh damaged by the ravages of the disease will never heal, and they will be scarred for life. Princess Shireen Baratheon caught greyscale as an infant and survived, but the ordeal left half of her face disfigured by the disease.[2]",
-                                      style: kCaptionTextStyle.copyWith(
-                                        fontSize: 15,
-                                      )),
-                                  SizedBox(
-                                    height: kSpacingUnit.w,
-                                  ),
-                                  Text('C O M M U N I T Y',
-                                      style: kTitleTextStyle.copyWith(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xFFFFC107))),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                      "Kent Ridge Hall, " +
-                                          widget.wiggle.block +
-                                          " block",
-                                      style: kCaptionTextStyle.copyWith(
-                                        fontSize: 15,
-                                      )),
-                                  SizedBox(height: 15),
-                                  Text('S O C I A L   M E D I A ',
-                                      style: kTitleTextStyle.copyWith(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xFFFFC107))),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text("Instagram: @THETINYBIN ",
-                                      style: kCaptionTextStyle.copyWith(
-                                        fontSize: 15,
-                                      )),
-                                  SizedBox(
-                                    height: kSpacingUnit.w,
-                                  ),
-                                  Text('C O U R S E',
-                                      style: kTitleTextStyle.copyWith(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xFFFFC107))),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text("Computer Science ",
-                                      style: kCaptionTextStyle.copyWith(
-                                        fontSize: 15,
-                                      )),
-                                  SizedBox(
-                                    height: kSpacingUnit.w,
-                                  ),
-                                  Text('P L A Y L I S T',
-                                      style: kTitleTextStyle.copyWith(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xFFFFC107))),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text("Mac Ayres, Daniel Caesar",
-                                      style: kCaptionTextStyle.copyWith(
-                                        fontSize: 15,
-                                      )),
-                                  SizedBox(
-                                    height: kSpacingUnit.w,
-                                  ),
-                                  Text('L I V I N G   I N',
-                                      style: kTitleTextStyle.copyWith(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xFFFFC107))),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                      "Kent Ridge Hall, " +
-                                          widget.wiggle.block +
-                                          " block",
-                                      style: kCaptionTextStyle.copyWith(
-                                        fontSize: 15,
-                                      )),
-                                  SizedBox(
-                                    height: kSpacingUnit.w,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            StreamBuilder(
-                                stream:
-                                    DatabaseService(uid: widget.wiggle.id).getphotos(),
-                                builder: (context, snapshot) {
-                                  return snapshot.hasData
-                                      ? Container(
-                                          height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.30 -
-                                              50,
-                                          child: ListView.builder(
-                                              physics: ClampingScrollPhysics(),
-                                              shrinkWrap: true,
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: snapshot
-                                                  .data.documents.length,
-                                              itemBuilder: (context, index) {
-                                                return Container(
-                                                    width: 150,
-                                                    margin: EdgeInsets.only(
-                                                        right: 20),
-                                                    height:
-                                                        MediaQuery.of(context)
+                            (widget.userData.email == widget.wiggle.email ||
+                                    following)
+                                ? Container(
+                                    padding: EdgeInsets.all(15),
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text('A B O U T    M E',
+                                            style: kTitleTextStyle.copyWith(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w300,
+                                                color: Color(0xFFFFC107))),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(widget.wiggle.bio,
+                                            //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
+                                            //"Greyscale, also known as, is a dreaded and usually fatal disease that can leave flesh stiff and dead, and the skin cracked and flaking, and stone-like to the touch. Those that manage to survive a bout with the illness will be immune from ever contracting it again, but the flesh damaged by the ravages of the disease will never heal, and they will be scarred for life. Princess Shireen Baratheon caught greyscale as an infant and survived, but the ordeal left half of her face disfigured by the disease.[2]",
+                                            style: kCaptionTextStyle.copyWith(
+                                              fontSize: 15,
+                                            )),
+                                        SizedBox(
+                                          height: kSpacingUnit.w,
+                                        ),
+                                        Text('C O M M U N I T Y',
+                                            style: kTitleTextStyle.copyWith(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w300,
+                                                color: Color(0xFFFFC107))),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                            "Kent Ridge Hall, " +
+                                                widget.wiggle.block +
+                                                " block",
+                                            style: kCaptionTextStyle.copyWith(
+                                              fontSize: 15,
+                                            )),
+                                        SizedBox(
+                                          height: kSpacingUnit.w,
+                                        ),
+                                        Text('S O C I A L   M E D I A ',
+                                            style: kTitleTextStyle.copyWith(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w300,
+                                                color: Color(0xFFFFC107))),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text("Instagram: @THETINYBIN ",
+                                            style: kCaptionTextStyle.copyWith(
+                                              fontSize: 15,
+                                            )),
+                                        SizedBox(
+                                          height: kSpacingUnit.w,
+                                        ),
+                                        Text('C O U R S E',
+                                            style: kTitleTextStyle.copyWith(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w300,
+                                                color: Color(0xFFFFC107))),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text("Computer Science ",
+                                            style: kCaptionTextStyle.copyWith(
+                                              fontSize: 15,
+                                            )),
+                                        SizedBox(
+                                          height: kSpacingUnit.w,
+                                        ),
+                                        Text('P L A Y L I S T',
+                                            style: kTitleTextStyle.copyWith(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w300,
+                                                color: Color(0xFFFFC107))),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text("Mac Ayres, Daniel Caesar",
+                                            style: kCaptionTextStyle.copyWith(
+                                              fontSize: 15,
+                                            )),
+                                        SizedBox(
+                                          height: kSpacingUnit.w,
+                                        ),
+                                        Text('L I V I N G   I N',
+                                            style: kTitleTextStyle.copyWith(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w300,
+                                                color: Color(0xFFFFC107))),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                            "Kent Ridge Hall, " +
+                                                widget.wiggle.block +
+                                                " block",
+                                            style: kCaptionTextStyle.copyWith(
+                                              fontSize: 15,
+                                            )),
+                                        SizedBox(
+                                          height: kSpacingUnit.w,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Container(
+                                  padding: EdgeInsets.all(20),
+                                  child: Text('FOLLOW ' + widget.wiggle.name +' TO  VIEW THEIR PROFILE',
+                                            style: kTitleTextStyle.copyWith(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w300,
+                                                color: Color(0xFFFFC107))),
+                                ),
+                            (widget.userData.email == widget.wiggle.email ||
+                                    following)
+                                ? StreamBuilder(
+                                    stream:
+                                        DatabaseService(uid: widget.wiggle.id)
+                                            .getphotos(),
+                                    builder: (context, snapshot) {
+                                      return snapshot.hasData
+                                          ? Container(
+                                              height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.30 -
+                                                  50,
+                                              child: ListView.builder(
+                                                  physics:
+                                                      ClampingScrollPhysics(),
+                                                  shrinkWrap: true,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemCount: snapshot
+                                                      .data.documents.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return Container(
+                                                        width: 150,
+                                                        margin: EdgeInsets.only(
+                                                            right: 20),
+                                                        height: MediaQuery.of(
+                                                                        context)
                                                                     .size
                                                                     .height *
                                                                 0.30 -
                                                             50,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  20.0)),
-                                                      child: Image.network(
-                                                            snapshot
-                                                                .data
-                                                                .documents[
-                                                                    index]
-                                                                .data['photo'],
-                                                            fit: BoxFit.fill,
-                                                          ) ??
-                                                          Image.asset(
-                                                              'assets/images/profile1.png',
-                                                              fit: BoxFit.fill),
-                                                    ));
-                                              }))
-                                      : Loading();
-                                }),
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          20.0)),
+                                                          child: Image.network(
+                                                                snapshot
+                                                                    .data
+                                                                    .documents[
+                                                                        index]
+                                                                    .data['photo'],
+                                                                fit:
+                                                                    BoxFit.fill,
+                                                              ) ??
+                                                              Image.asset(
+                                                                  'assets/images/profile1.png',
+                                                                  fit: BoxFit
+                                                                      .fill),
+                                                        ));
+                                                  }))
+                                          : Loading();
+                                    })
+                                : Container()
                           ]))
                         ])))
               ]),
@@ -749,21 +773,21 @@ class _OthersProfileState extends State<OthersProfile> {
 }
 
 Column createColumns(String title, int count) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          count.toString(),
-          style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w600),
+  return Column(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Text(
+        count.toString(),
+        style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w600),
+      ),
+      Container(
+        margin: EdgeInsets.only(top: 5.0),
+        child: Text(
+          title,
+          style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w200),
         ),
-        Container(
-          margin: EdgeInsets.only(top: 5.0),
-          child: Text(
-            title,
-            style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w200),
-          ),
-        )
-      ],
-    );
-  }
+      )
+    ],
+  );
+}

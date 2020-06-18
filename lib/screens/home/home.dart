@@ -203,10 +203,18 @@ class _HomeState extends State<Home> {
                               _currentIndex = 3;
                             });
                           },
-                          child: Icon(
-                            Icons.chat,
-                            color:
-                                _currentIndex == 3 ? Colors.white : Colors.grey,
+                          child: CircleAvatar(
+                            radius: 19,
+                            backgroundColor: Colors.transparent,
+                            child: ClipOval(
+                              child: Image.asset(
+                                'assets/images/ghosty2.png',
+                                fit: BoxFit.fill,
+                                color: _currentIndex == 3
+                                    ? Colors.amber
+                                    : Colors.white,
+                              ),
+                            ),
                           ),
                         )
                       ],
