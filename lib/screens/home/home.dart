@@ -161,7 +161,7 @@ class _HomeState extends State<Home> {
                           child: Icon(
                             Icons.menu,
                             color:
-                                _currentIndex == 0 ? Colors.white : Colors.grey,
+                                _currentIndex == 0 ? Colors.amber : Colors.white,
                           ),
                         ),
                         MaterialButton(
@@ -174,7 +174,7 @@ class _HomeState extends State<Home> {
                           child: Icon(
                             Icons.chat,
                             color:
-                                _currentIndex == 1 ? Colors.white : Colors.grey,
+                                _currentIndex == 1 ? Colors.amber : Colors.white,
                           ),
                         )
                       ],
@@ -193,7 +193,7 @@ class _HomeState extends State<Home> {
                           child: Icon(
                             Icons.new_releases,
                             color:
-                                _currentIndex == 2 ? Colors.white : Colors.grey,
+                                _currentIndex == 2 ? Colors.amber : Colors.white,
                           ),
                         ),
                         MaterialButton(
