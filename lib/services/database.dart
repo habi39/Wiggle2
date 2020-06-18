@@ -234,7 +234,8 @@ class DatabaseService {
       "isAnonymous": isAnonymous,
       'anonBio': '',
       'anonInterest': '',
-      'anonDp': ''
+      'anonDp': '',
+      'id':uid
     });
   }
 
@@ -270,7 +271,8 @@ class DatabaseService {
       "isAnonymous": isAnonymous,
       'anonBio': '',
       'anonInterest': '',
-      'anonDp': ''
+      'anonDp': '',
+      'id': uid
     });
   }
 
@@ -278,7 +280,7 @@ class DatabaseService {
   List<Wiggle> _wiggleListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Wiggle(
-          id: this.uid,
+          id: doc.data['id']??'',
           email: doc.data['email'] ?? '',
           dp: doc.data['dp'] ?? '',
           name: doc.data['name'] ?? '',

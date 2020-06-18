@@ -150,7 +150,7 @@ class _OthersProfileState extends State<OthersProfile> {
   createButtonTitle(
       {String title, Function performFunction, UserData userData}) {
     return Container(
-      padding: EdgeInsets.only(top: 1.0),
+      padding: EdgeInsets.only(top: 0.5),
       child: FlatButton(
         onPressed: () => sentrequest
             ? acceptedrequest
@@ -158,17 +158,15 @@ class _OthersProfileState extends State<OthersProfile> {
                 : retractrequest(userData)
             : sendrequest(userData),
         child: Container(
-          width: 150.0,
+          width: MediaQuery.of(context).size.width / 2.5,
           height: 26.0,
-          child: Text(
-            title,
-            style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-          ),
+          child: Text(title,
+              style: kCaptionTextStyle.copyWith(
+                  fontWeight: FontWeight.w200, fontSize: 12)),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: Colors.black,
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(6.0),
+            color: Color(0xFF373737),
+            borderRadius: BorderRadius.circular(10.0),
           ),
         ),
       ),
@@ -387,21 +385,19 @@ class _OthersProfileState extends State<OthersProfile> {
   Container createButtonTitleAndFunction(
       {String title, Function performFunction, UserData userData}) {
     return Container(
-      padding: EdgeInsets.only(top: 1.0),
+      padding: EdgeInsets.only(top: 0.5),
       child: FlatButton(
         onPressed: performFunction,
         child: Container(
-          width: 150.0,
+          width: MediaQuery.of(context).size.width / 2.5,
           height: 26.0,
-          child: Text(
-            title,
-            style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-          ),
+          child: Text(title,
+              style: kCaptionTextStyle.copyWith(
+                  fontWeight: FontWeight.w200, fontSize: 12)),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: Colors.black,
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(6.0),
+            color: Color(0xFF373737),
+            borderRadius: BorderRadius.circular(10.0),
           ),
         ),
       ),
@@ -422,7 +418,6 @@ class _OthersProfileState extends State<OthersProfile> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context, height: 869, width: 414, allowFontScaling: true);
     return Scaffold(
-      
       body: Stack(
         children: <Widget>[
           Column(
@@ -439,8 +434,9 @@ class _OthersProfileState extends State<OthersProfile> {
                           SizedBox(height: kSpacingUnit.w * 5),
                           FlatButton(
                             onPressed: () {
-                             Navigator.of(context).pushAndRemoveUntil(
-                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  FadeRoute(page: Wrapper()),
+                                  ModalRoute.withName('Wrapper'));
                             },
                             child: Icon(
                               LineAwesomeIcons.home,
@@ -470,7 +466,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                 ),
                                 SizedBox(height: 10),
                                 Text(
-                                  widget.wiggle.name,
+                                  widget.wiggle.id,
                                   style: kTitleTextStyle.copyWith(
                                       fontSize: 25,
                                       fontWeight: FontWeight.w700,
