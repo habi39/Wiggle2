@@ -92,6 +92,8 @@ class _MyprofileState extends State<Myprofile> {
     return Container(
       padding: EdgeInsets.only(top: 0.5),
       child: FlatButton(
+        highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
         onPressed: performFunction,
         child: Container(
           width: MediaQuery.of(context).size.width / 2.5,
@@ -138,6 +140,8 @@ class _MyprofileState extends State<Myprofile> {
             return Scaffold(
               appBar: AppBar(
                 leading: IconButton(
+                  highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                   icon: Icon(LineAwesomeIcons.plus_circle),
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
@@ -149,6 +153,8 @@ class _MyprofileState extends State<Myprofile> {
                 elevation: 0,
                 actions: <Widget>[
                   IconButton(
+                    highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                     icon: Icon(
                       LineAwesomeIcons.alternate_sign_out,
                     ),
@@ -231,6 +237,8 @@ class _MyprofileState extends State<Myprofile> {
                                     //crossAxisAlignment: CrossAxisAlignment.baseline,
                                     children: <Widget>[
                                       FlatButton(
+                                        highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
                                               left: 25, right: 25),
                                           child: createColumns(
@@ -244,6 +252,8 @@ class _MyprofileState extends State<Myprofile> {
                                                           userData:
                                                               userData)))),
                                       FlatButton(
+                                        highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
                                               left: 25, right: 25),
                                           child: createColumns('Following',
@@ -257,6 +267,8 @@ class _MyprofileState extends State<Myprofile> {
                                                           userData:
                                                               userData)))),
                                       FlatButton(
+                                        highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                                         padding: EdgeInsets.only(
                                             left: 25, right: 25),
                                         child: createColumns('Gamescore', 0),

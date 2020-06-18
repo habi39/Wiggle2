@@ -100,6 +100,8 @@ class _ChatsScreenState extends State<ChatScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
         actions: <Widget>[
           IconButton(
+            highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
             icon: Icon(Icons.add),
             onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(

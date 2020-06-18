@@ -140,6 +140,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
               appBar: AppBar(
                 titleSpacing: 50,
                 leading: IconButton(
+                  highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                     icon: Icon(LineAwesomeIcons.home),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
@@ -174,6 +176,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
                       width: 10,
                     ),
                     InkWell(
+                      highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                       child: Text(widget.wiggle.name,
                           style: kCaptionTextStyle.copyWith(fontSize: 20)),
                       onTap: () {
@@ -192,6 +196,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 ),
                 actions: <Widget>[
                   IconButton(
+                    highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                     icon: Icon(Icons.gamepad),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(

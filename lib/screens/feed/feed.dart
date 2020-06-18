@@ -162,6 +162,8 @@ class _FeedState extends State<Feed> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
               actions: <Widget>[
                 IconButton(
+                  highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                     icon: Icon(Icons.image),
                     onPressed: () {
                       takeImage(context, userData);

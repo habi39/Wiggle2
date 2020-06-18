@@ -78,6 +78,8 @@ class _IntroPage1State extends State<IntroPage1> {
                   height: 30,
                 ),
                 FlatButton(
+                  highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                   child: Padding(
                     padding: EdgeInsets.all(10),
                     child: Container(

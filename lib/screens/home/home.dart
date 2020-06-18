@@ -129,6 +129,7 @@ class _HomeState extends State<Home> {
             body: anonymoustabs[_currentIndex],
             //floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
             floatingActionButton: FloatingActionButton(
+              splashColor: Colors.transparent,
               child: Icon(Icons.portrait),
               onPressed: () {
                 DatabaseService(uid: user.uid).updateAnonymous(false);
@@ -144,7 +145,7 @@ class _HomeState extends State<Home> {
               shape: CircularNotchedRectangle(),
               notchMargin: 10,
               child: Container(
-                height: 60,
+                height: 45,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -152,6 +153,8 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         MaterialButton(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           // minWidth: 40,
                           onPressed: () {
                             setState(() {
@@ -165,6 +168,8 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         MaterialButton(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           minWidth: 40,
                           onPressed: () {
                             setState(() {
@@ -184,6 +189,8 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         MaterialButton(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           minWidth: 40,
                           onPressed: () {
                             setState(() {
@@ -197,6 +204,8 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         MaterialButton(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           // minWidth: 40,
                           onPressed: () {
                             setState(() {
@@ -207,7 +216,6 @@ class _HomeState extends State<Home> {
                             radius: 19,
                             backgroundColor: Colors.transparent,
                             child: ClipOval(
-                            
                               child: Image.asset(
                                 'assets/images/ghosty2.png',
                                 fit: BoxFit.fill,
@@ -229,6 +237,8 @@ class _HomeState extends State<Home> {
             key: _scaffoldkey,
             body: tabs[_currentIndex],
             floatingActionButton: FloatingActionButton(
+              
+                          splashColor: Colors.transparent,
               backgroundColor: Colors.transparent,
               child: ClipOval(
                 child: Image.asset('assets/images/ghosty2.png',
@@ -248,7 +258,7 @@ class _HomeState extends State<Home> {
               shape: CircularNotchedRectangle(),
               notchMargin: 10,
               child: Container(
-                height: 60,
+                height: 45,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -256,6 +266,8 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         MaterialButton(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           // minWidth: 40,
                           onPressed: () {
                             setState(() {
@@ -269,6 +281,8 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         MaterialButton(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           minWidth: 40,
                           onPressed: () {
                             setState(() {
@@ -288,6 +302,8 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         MaterialButton(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           minWidth: 40,
                           onPressed: () {
                             setState(() {
@@ -301,6 +317,8 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         MaterialButton(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           // minWidth: 40,
                           onPressed: () {
                             setState(() {

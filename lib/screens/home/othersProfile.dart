@@ -155,6 +155,8 @@ class _OthersProfileState extends State<OthersProfile> {
     return Container(
       padding: EdgeInsets.only(top: 0.5),
       child: FlatButton(
+        highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
         onPressed: () => sentrequest
             ? acceptedrequest
                 ? controlUnfollowUser(userData)
@@ -390,6 +392,8 @@ class _OthersProfileState extends State<OthersProfile> {
     return Container(
       padding: EdgeInsets.only(top: 0.5),
       child: FlatButton(
+        highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
         onPressed: performFunction,
         child: Container(
           width: MediaQuery.of(context).size.width / 2.5,
@@ -430,6 +434,8 @@ class _OthersProfileState extends State<OthersProfile> {
             return Scaffold(
               appBar: AppBar(
                 leading: IconButton(
+                  highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                   icon: Icon(LineAwesomeIcons.home),
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
@@ -441,6 +447,9 @@ class _OthersProfileState extends State<OthersProfile> {
                 elevation: 0,
                 actions: <Widget>[
                   IconButton(
+                  
+                    highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                     icon: Icon(
                       LineAwesomeIcons.alternate_sign_out,
                     ),
@@ -521,6 +530,8 @@ class _OthersProfileState extends State<OthersProfile> {
                                     //crossAxisAlignment: CrossAxisAlignment.baseline,
                                     children: <Widget>[
                                       FlatButton(
+                                        highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
                                               left: 25, right: 25),
                                           child: createColumns(
@@ -540,6 +551,8 @@ class _OthersProfileState extends State<OthersProfile> {
                                                                       .wiggle)))
                                               : () => print('tried pressing')),
                                       FlatButton(
+                                        highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
                                               left: 25, right: 25),
                                           child: createColumns('Following',
@@ -559,6 +572,8 @@ class _OthersProfileState extends State<OthersProfile> {
                                                                       .wiggle)))
                                               : () => print('tried pressing')),
                                       FlatButton(
+                                        highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                                         padding: EdgeInsets.only(
                                             left: 25, right: 25),
                                         child: createColumns('Gamescore', 0),

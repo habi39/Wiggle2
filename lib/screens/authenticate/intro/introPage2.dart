@@ -125,6 +125,8 @@ class _IntroPage2State extends State<IntroPage2> {
             bottom: MediaQuery.of(context).size.height * 0.03,
             left: MediaQuery.of(context).size.width * 0.30,
             child: FloatingActionButton(
+              
+                          splashColor: Colors.transparent,
               heroTag: "cross",
               onPressed: () {
                 Navigator.of(context).pop(

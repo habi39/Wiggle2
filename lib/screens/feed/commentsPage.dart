@@ -24,6 +24,8 @@ class _CommentsPageState extends State<CommentsPage> {
             textAlign: TextAlign.right,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
         leading: IconButton(
+          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
             icon: Icon(LineAwesomeIcons.home),
             onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(

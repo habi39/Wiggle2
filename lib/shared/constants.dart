@@ -48,6 +48,8 @@ final kButtonTextStyle = TextStyle(
 );
 
 final kDarkTheme = ThemeData(
+  highlightColor: Colors.transparent,
+  splashColor: Colors.transparent,
   brightness: Brightness.dark,
   fontFamily: 'SFProText',
   primaryColor: kDarkPrimaryColor,

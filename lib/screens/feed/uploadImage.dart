@@ -112,6 +112,8 @@ class _UploadImageState extends State<UploadImage>
         actions: <Widget>[
           uploading ? linearProgress() : Text(''),
           FlatButton(
+            highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
             onPressed: uploading ? null : () => controlUploadAndSave(),
             child: Text(
               "Share",
