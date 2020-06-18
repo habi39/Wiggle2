@@ -41,7 +41,7 @@ bool loading = false;
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    return Scaffold(
+    return loading? Loading():Scaffold(
       appBar: AppBar(
         elevation: 0,
         titleSpacing: 50,
