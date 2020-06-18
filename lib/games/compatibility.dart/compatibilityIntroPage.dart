@@ -63,10 +63,9 @@ class _CompatibilityIntroPageState extends State<CompatibilityIntroPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
         title: Text(
           "Compatibility Intro Game",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100),
         ),
       ),
       body: Column(
@@ -78,12 +77,14 @@ class _CompatibilityIntroPageState extends State<CompatibilityIntroPage> {
             child: AutoSizeText(
               'When you click the \'begin\' button, you will have 10 seconds to answer 5 questions, the questions will be sent to your chosen partner and we will await his/her score. A compatibility score will then be calculated.',
               style: TextStyle(color: Colors.white, fontSize: 17),
+              textAlign: TextAlign.justify,
             ),
           ),
           SizedBox(height: 8),
           Container(
             alignment: Alignment.center,
             child: RaisedButton(
+              color: Colors.amber,
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
@@ -99,9 +100,8 @@ class _CompatibilityIntroPageState extends State<CompatibilityIntroPage> {
               },
               child: Text(
                 'Begin',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
               ),
             ),
           ),

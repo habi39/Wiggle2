@@ -71,12 +71,11 @@ class _CompatibilityStartState extends State<CompatibilityStart> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-              alignment: Alignment.topCenter,
-              icon: Icon(LineAwesomeIcons.home),
-              onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: Home()), ModalRoute.withName('Home'));
-              }),
+            icon: Icon(LineAwesomeIcons.home),
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                  FadeRoute(page: Home()), ModalRoute.withName('Home'));
+            }),
         title: Text("C O M P A T I B I L I T Y",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
       ),

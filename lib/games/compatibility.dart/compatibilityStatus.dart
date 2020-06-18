@@ -100,15 +100,15 @@ class _CompatibilityStatusState extends State<CompatibilityStatus> {
                                         : Container(
                                             child: Center(
                                               child: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 15),
+                                                padding: EdgeInsets.all(30),
                                                 child: AutoSizeText(
                                                   widget.friendAnon
                                                       ? "${widget.wiggle.nickname} has not done the quiz"
                                                       : "${widget.wiggle.name} has not done the quiz",
                                                   style: TextStyle(
                                                       fontSize: 40,
-                                                      color: Colors.white),
+                                                      fontWeight:
+                                                          FontWeight.w100),
                                                 ),
                                               ),
                                             ),
@@ -230,20 +230,23 @@ class _CompatibilityStatusState extends State<CompatibilityStatus> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
+        // backgroundColor: Colors.blueGrey,
         title: Text(
-          "Compatibility Status",
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          "R E S U L T S",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100),
         ),
       ),
       body: Stack(
         children: <Widget>[
-          Container(
-            alignment: Alignment.bottomCenter,
-            child: Text(
-              'Score: $score',
-              textAlign: TextAlign.end,
-              style: TextStyle(color: Colors.white, fontSize: 20),
+          Padding(
+            padding: EdgeInsets.all(15),
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                'Score: $score',
+                textAlign: TextAlign.end,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100),
+              ),
             ),
           ),
           compatibilityResultsList(),
@@ -285,7 +288,10 @@ class _CompatibilityStatusState extends State<CompatibilityStatus> {
 
                     print('pressed');
                   },
-                  child: Text('Reset Quiz'),
+                  child: Text(
+                    'Reset',
+                    style: TextStyle(fontWeight: FontWeight.w100),
+                  ),
                 ),
               ))
         ],
