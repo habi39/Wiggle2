@@ -1,3 +1,5 @@
+import 'package:Wiggle2/screens/home/addpicture.dart';
+import 'package:Wiggle2/screens/home/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Wiggle2/models/wiggle.dart';
@@ -376,6 +378,14 @@ class _MyprofileState extends State<Myprofile> {
                                 ],
                               ),
                             ),
+                            // StreamBuilder(
+                            //     stream: photoStream,
+                            //     builder: (context, snapshot) {
+                            //       return snapshot.hasData
+                            //           ? ListView.builder()
+                            //           : Container();
+                            //     }),
+
                             SingleChildScrollView(
                               physics: BouncingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
@@ -444,6 +454,16 @@ class _MyprofileState extends State<Myprofile> {
                                                     'assets/images/profile1.png',
                                                     fit: BoxFit.fill),
                                           )),
+                                      IconButton(
+                                        icon: Icon(Icons.add_circle),
+                                        onPressed: () {
+                                          Navigator.of(context)
+                                              .pushAndRemoveUntil(
+                                            FadeRoute(page: Addpicture()),
+                                            ModalRoute.withName('Addpicture'),
+                                          );
+                                        },
+                                      ),
                                     ],
                                   ),
                                 ),

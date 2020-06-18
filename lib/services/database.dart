@@ -197,6 +197,13 @@ class DatabaseService {
             "isAnonymous": isAnonymous
           });
   }
+  Future uploadPhotos(String photo)async {
+      return await wiggleCollection.document(uid).collection('photos').document().setData({
+       'photo':photo
+      });
+  }
+
+
 
   Future uploadUserData(
       String email,

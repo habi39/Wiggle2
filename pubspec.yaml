@@ -64,6 +64,7 @@ dependencies:
   uuid: ^2.1.0
   path_provider: ^1.6.10
   bubble_bottom_bar: ^1.2.0
+  image_cropper: ^1.2.3
 
 dev_dependencies:
   flutter_test:
@@ -111,6 +112,7 @@ flutter:
     - assets/images/converse.png
     - assets/images/gaming.png
     - assets/images/ghosty2.png
+    
     
   fonts:
     - family: SFProText
