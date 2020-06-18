@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/screens/feed/uploadImage.dart';
-import 'package:Wiggle2/screens/home/conversationScreen.dart';
-import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:Wiggle2/screens/home/home.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Feed extends StatefulWidget {

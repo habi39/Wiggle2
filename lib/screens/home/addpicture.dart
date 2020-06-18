@@ -56,34 +56,32 @@ class _AddpictureState extends State<Addpicture> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-             
               SizedBox(
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: MediaQuery.of(context).size.height / 2,
-                    child: (_image != null)
-                        ? Image.file(
-                            _image,
-                            fit: BoxFit.contain,
-                          )
-                        : Container(
-                            color: Colors.white70,
-                          )),
-              
-              
+                width: MediaQuery.of(context).size.width / 2,
+                height: MediaQuery.of(context).size.height / 2,
+                child: (_image != null)
+                    ? Image.file(
+                        _image,
+                        fit: BoxFit.contain,
+                      )
+                    : Container(
+                        color: Colors.white70,
+                      ),
+              ),
             ],
           ),
           IconButton(
-                color: Colors.cyan,
-                icon: Icon(Icons.camera_alt, size: 30),
-                onPressed: () {
-                  getImage();
-                },
-              ),
+            color: Colors.cyan,
+            icon: Icon(Icons.camera_alt, size: 30),
+            onPressed: () {
+              getImage();
+            },
+          ),
           GestureDetector(
             onTap: () async {},
             child: Container(
               alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width/2,
+              width: MediaQuery.of(context).size.width / 2,
               padding: EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
