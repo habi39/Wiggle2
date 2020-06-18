@@ -53,80 +53,74 @@ class _IntroPage1State extends State<IntroPage1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(color: Colors.white),
-        child: Stack(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.95,
-              margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.1,
-                  left: 30,
-                  right: 30),
-              decoration: BoxDecoration(color: Colors.white),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Who will you meet today?",
-                    style: TextStyle(
-                        fontFamily: "Proxima-Nova-Extrabold",
-                        fontSize: 24,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+      body: Stack(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.95,
+            margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.1,
+                left: 30,
+                right: 30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Who will you meet today?",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    fontSize: 24,
+                    color: Colors.white,
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  FlatButton(
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Container(
-                        height: 500,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Text(
-                          'Click to find out!',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                FlatButton(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Container(
+                      height: 500,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Text(
+                        'Click to find out!',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 24,
+                          color: Colors.black,
                         ),
                       ),
                     ),
-                    onPressed: () {
-                      DatabaseService().uploadBondData(
-                        userData: widget.userData,
-                        myAnon: true,
-                        wiggle: chosenWiggle,
-                        friendAnon: true,
-                        chatRoomID: getChatRoomID(
-                            widget.userData.nickname, chosenWiggle.nickname),
-                      );
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => IntroPage2(
-                            chosenWiggle: chosenWiggle,
-                            userData: widget.userData,
-                            wiggles: widget.wiggles,
-                          ),
+                  ),
+                  onPressed: () {
+                    DatabaseService().uploadBondData(
+                      userData: widget.userData,
+                      myAnon: true,
+                      wiggle: chosenWiggle,
+                      friendAnon: true,
+                      chatRoomID: getChatRoomID(
+                          widget.userData.nickname, chosenWiggle.nickname),
+                    );
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => IntroPage2(
+                          chosenWiggle: chosenWiggle,
+                          userData: widget.userData,
+                          wiggles: widget.wiggles,
                         ),
-                      );
-                    },
-                  )
-                ],
-              ),
+                      ),
+                    );
+                  },
+                )
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

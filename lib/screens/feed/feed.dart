@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/screens/feed/uploadImage.dart';
-import 'package:Wiggle2/screens/home/conversationScreen.dart';
-import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:Wiggle2/screens/home/home.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Feed extends StatefulWidget {
@@ -155,13 +151,6 @@ class _FeedState extends State<Feed> {
           UserData userData = snapshot.data;
           return Scaffold(
             appBar: AppBar(
-              // leading: IconButton(
-              //     icon: Icon(LineAwesomeIcons.home),
-              //     onPressed: () {
-              //       Navigator.of(context).pushAndRemoveUntil(
-              //           FadeRoute(page: Wrapper()),
-              //           ModalRoute.withName('Wrapper'));
-              //     }),
               title: Text("F E E D",
                   textAlign: TextAlign.right,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
@@ -181,31 +170,6 @@ class _FeedState extends State<Feed> {
   }
 }
 
-// displayUploadScreen(context) {
-//   return Container(
-//       color: Colors.blueGrey,
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: <Widget>[
-//           Icon(Icons.add_photo_alternate, color: Colors.red, size: 200),
-//           Padding(
-//               padding: EdgeInsets.only(top: 20),
-//               child: RaisedButton(
-//                 color: Colors.red,
-//                 shape: RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.circular(9),
-//                 ),
-//                 child: Text(
-//                   "Upload Image",
-//                   style: TextStyle(color: Colors.white, fontSize: 20),
-//                 ),
-//                 onPressed: () => takeImage(context),
-//               ))
-//         ],
-//       ));
-// }
-
 class FeedTile extends StatelessWidget {
   final Wiggle wiggle;
   final List<Wiggle> wiggles;
@@ -222,29 +186,6 @@ class FeedTile extends StatelessWidget {
     this.url,
   });
 
-  // Widget getLatestTime() {
-  //   DatabaseService().getConversationMessages(chatRoomId).then((val) {
-  //     chatMessagesStream = val;
-  //   });
-  //   return StreamBuilder(
-  //     stream: chatMessagesStream,
-  //     builder: (context, snapshot) {
-  //       if (snapshot.hasData) {
-  //         if (snapshot.data.documents.length - 1 < 0) {
-  //           return Text('');
-  //         } else {
-  //           return Text(f
-  //               .format(snapshot.data
-  //                   .documents[snapshot.data.documents.length - 1].data["time"]
-  //                   .toDate())
-  //               .toString());
-  //         }
-  //       } else {
-  //         return Container();
-  //       }
-  //     },
-  //   );
-  // }
   createPostHead(context) {
     return Container(
       height: 50,

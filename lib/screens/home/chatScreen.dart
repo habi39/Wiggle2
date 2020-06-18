@@ -1,14 +1,23 @@
+import 'dart:io';
+
+import 'package:Wiggle2/screens/authenticate/intro/introPage1.dart';
+import 'package:Wiggle2/shared/loading.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:Wiggle2/screens/home/searchScreen.dart';
 import 'package:Wiggle2/shared/constants.dart';
 import 'package:Wiggle2/screens/authenticate/helper.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/screens/home/conversationScreen.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
+
+import 'notificationsPage.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -25,6 +34,129 @@ String email2;
 class _ChatsScreenState extends State<ChatScreen> {
   //snapshots returns a stream
   Stream chatsScreenStream;
+
+  createAlertDialog() {
+    final user = Provider.of<User>(context);
+    final wiggles = Provider.of<List<Wiggle>>(context) ?? [];
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return StreamBuilder<UserData>(
+              stream: DatabaseService(uid: user.uid).userData,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  UserData userData = snapshot.data;
+                  if (userData != null) {
+                    return AlertDialog(
+                      title: Text('Meet a Friend'),
+                      content: const Text('Who will you meet today?'),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text('Leggoooo'),
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => IntroPage1(
+                                    userData: userData, wiggles: wiggles),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    );
+                  }
+                } else {
+                  Loading();
+                }
+              });
+        });
+  }
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  AndroidInitializationSettings androidInitializationSettings;
+  IOSInitializationSettings iosInitializationSettings;
+  InitializationSettings initializationSettings;
+
+  void initializing() async {
+    androidInitializationSettings =
+        AndroidInitializationSettings('mipmap/ic_launcher');
+    iosInitializationSettings = IOSInitializationSettings(
+        onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+    initializationSettings = InitializationSettings(
+        androidInitializationSettings, iosInitializationSettings);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelectNotification);
+  }
+
+  void _showNotifications() async {
+    await notification();
+  }
+
+  void _showNotificationsAfterSecond() async {
+    await notificationAfterSec();
+  }
+
+  Future<void> notification() async {
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+            'Channel ID', 'Channel title', 'channel body',
+            priority: Priority.High,
+            importance: Importance.Max,
+            ticker: 'test');
+
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+
+    NotificationDetails notificationDetails =
+        NotificationDetails(androidNotificationDetails, iosNotificationDetails);
+    await flutterLocalNotificationsPlugin.show(
+        0, 'Hello there', 'please subscribe my channel', notificationDetails);
+    createAlertDialog();
+  }
+
+  Future<void> notificationAfterSec() async {
+    // var timeDelayed = DateTime.now().add(Duration(seconds: 5));
+    var time = new Time(21, 30, 0);
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+            'second channel ID', 'second Channel title', 'second channel body',
+            priority: Priority.High,
+            importance: Importance.Max,
+            ticker: 'test');
+
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+
+    NotificationDetails notificationDetails =
+        NotificationDetails(androidNotificationDetails, iosNotificationDetails);
+    // await flutterLocalNotificationsPlugin.schedule(1, 'Hello there',
+    //     'please subscribe my channel', timeDelayed, notificationDetails);
+    await flutterLocalNotificationsPlugin.showDailyAtTime(
+        1, "Hello Mag", "yozza", time, notificationDetails);
+  }
+
+  Future onSelectNotification(String payLoad) {
+    if (payLoad != null) {
+      print(payLoad);
+      createAlertDialog();
+    }
+    // we can set navigator to navigate another screen
+  }
+
+  Future onDidReceiveLocalNotification(
+      int id, String title, String body, String payload) async {
+    return CupertinoAlertDialog(
+      title: Text(title),
+      content: Text(body),
+      actions: <Widget>[
+        CupertinoDialogAction(
+            isDefaultAction: true,
+            onPressed: () {
+              print("");
+            },
+            child: Text("Okay")),
+      ],
+    );
+  }
 
   Widget chatRoomList(List<Wiggle> wiggles) {
     return StreamBuilder(
@@ -65,6 +197,7 @@ class _ChatsScreenState extends State<ChatScreen> {
   @override
   void initState() {
     getUserInfo();
+    initializing();
     super.initState();
   }
 
@@ -85,6 +218,9 @@ class _ChatsScreenState extends State<ChatScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(LineAwesomeIcons.napster),
+            onPressed: _showNotifications),
         centerTitle: true,
         elevation: 0,
         title: Text("C H A T",
@@ -196,7 +332,7 @@ class chatScreenTile extends StatelessWidget {
               );
             },
             child: Container(
-              margin: EdgeInsets.only(top: 5, bottom: 5, right: 10, left:10),
+              margin: EdgeInsets.only(top: 5, bottom: 5, right: 10, left: 10),
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               decoration: BoxDecoration(
                 color: Colors.white,
