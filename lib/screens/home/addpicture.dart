@@ -30,16 +30,17 @@ class Addpicture extends StatefulWidget {
 
 class _AddpictureState extends State<Addpicture> {
   File _image;
-
+ String x;
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       _image = image;
     });
   }
-
+bool loading = false;
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -78,7 +79,28 @@ class _AddpictureState extends State<Addpicture> {
             },
           ),
           GestureDetector(
-            onTap: () async {},
+            onTap: () async {
+              setState(() {
+                      loading = true;
+                    });
+                    StorageReference firebaseStorageReference =
+                        FirebaseStorage.instance.ref().child(_image.path);
+
+                    StorageUploadTask uploadTask =
+                        firebaseStorageReference.putFile(_image);
+                    StorageTaskSnapshot taskSnapshot =
+                        await uploadTask.onComplete;
+                    x = (await taskSnapshot.ref.getDownloadURL()).toString();
+
+                    dynamic result =
+                        DatabaseService(uid: user.uid).uploadPhotos(x);
+
+                    if (result != null) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          FadeRoute(page: Wrapper()),
+                          ModalRoute.withName('Wrapper'));
+                    }
+            },
             child: Container(
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width / 2,
