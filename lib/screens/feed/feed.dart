@@ -26,7 +26,6 @@ class _FeedState extends State<Feed> {
   final timelineReference = Firestore.instance.collection('posts');
   ScrollController scrollController = new ScrollController();
   Wiggle currentWiggle;
-  File file;
 
   retrieveTimeline() async {
     DatabaseService().getPosts().then((val) {
@@ -91,9 +90,6 @@ class _FeedState extends State<Feed> {
   pickImageFromGallery(context, userData) async {
     Navigator.pop(context);
     File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
-    // setState(() {
-    //   file = imageFile;
-    // });
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -106,9 +102,7 @@ class _FeedState extends State<Feed> {
     Navigator.pop(context);
     File imageFile = await ImagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 680, maxWidth: 970);
-    // setState(() {
-    //   file = imageFile;
-    // });
+
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -338,15 +332,15 @@ class FeedTile extends StatelessWidget {
           UserData userData = snapshot.data;
           return GestureDetector(
             onTap: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                  FadeRoute(
-                    page: ConversationScreen(
-                      wiggles: wiggles,
-                      wiggle: wiggle,
-                      userData: userData,
-                    ),
-                  ),
-                  ModalRoute.withName('ConversationScreen'));
+              // Navigator.of(context).pushAndRemoveUntil(
+              //     FadeRoute(
+              //       page: ConversationScreen(
+              //         wiggles: wiggles,
+              //         wiggle: wiggle,
+              //         userData: userData,
+              //       ),
+              //     ),
+              //     ModalRoute.withName('ConversationScreen'));
             },
             child: Padding(
               padding: EdgeInsets.only(bottom: 12),

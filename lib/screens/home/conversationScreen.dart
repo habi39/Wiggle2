@@ -136,14 +136,15 @@ class _ConversationScreenState extends State<ConversationScreen> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
               resizeToAvoidBottomPadding: true,
-              backgroundColor: Color.fromRGBO(3, 9, 23, 1),
+              // backgroundColor: Color.fromRGBO(3, 9, 23, 1),
               appBar: AppBar(
                 titleSpacing: 50,
                 leading: IconButton(
                     icon: Icon(LineAwesomeIcons.home),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
-                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+                          FadeRoute(page: Wrapper()),
+                          ModalRoute.withName('Wrapper'));
                     }),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -194,16 +195,14 @@ class _ConversationScreenState extends State<ConversationScreen> {
                     icon: Icon(Icons.gamepad),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
-                            FadeRoute(
-                              page: CompatibilityStart(
+                          FadeRoute(
+                            page: CompatibilityStart(
                                 friendAnon: false,
-                              userData: widget.userData,
-                              wiggle: widget.wiggle,
-                              wiggles: widget.wiggles
-                              ),
-                            ),
-                            ModalRoute.withName('CompatibilityStart'));
-                      
+                                userData: widget.userData,
+                                wiggle: widget.wiggle,
+                                wiggles: widget.wiggles),
+                          ),
+                          ModalRoute.withName('CompatibilityStart'));
                     },
                   ),
                 ],
@@ -239,7 +238,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 16),
+                        Spacer(),
                         GestureDetector(
                           onTap: () {
                             sendMessage();
