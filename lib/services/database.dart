@@ -408,7 +408,7 @@ class DatabaseService {
   getPosts() async {
     return Firestore.instance
         .collection("posts")
-        .orderBy("timestamp", descending: false)
+        .orderBy("timestamp", descending: true)
         .snapshots();
   }
 

@@ -1,3 +1,4 @@
+import 'package:Wiggle2/screens/feed/feed.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -34,7 +35,7 @@ class _HomeState extends State<Home> {
 
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   final tabs = [
-    Gameslist(),
+    Feed(),
     ChatScreen(),
     NotificationPage(),
     Myprofile(),
@@ -265,7 +266,7 @@ class _HomeState extends State<Home> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: BottomAppBar(
-              color:  Color(0xFF373737),
+              color: Color(0xFF373737),
               shape: CircularNotchedRectangle(),
               notchMargin: 10,
               child: Container(
@@ -345,7 +346,7 @@ class _HomeState extends State<Home> {
             key: _scaffoldkey,
             body: tabs[_currentIndex],
             floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.blueGrey,
+              // backgroundColor: Colors.pink[200],
               child: ClipOval(
                 child: Image.asset(
                   'assets/images/ghosty2.png',
