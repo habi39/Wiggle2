@@ -268,120 +268,123 @@ class _MyprofileState extends State<Myprofile> {
                     ],
                   ),
                   Stack(children: <Widget>[
-                  DraggableScrollableSheet(
-                      minChildSize: 0.1,
-                      initialChildSize: 0.38,
-                      maxChildSize: 1,
-                      builder: (context, scrollController) {
-                        return SingleChildScrollView(
-                            controller: scrollController,
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF505050),
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                constraints: BoxConstraints(
-                                    minHeight:
-                                        MediaQuery.of(context).size.height),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Container(
-                                          child: Column(children: <Widget>[
-                                        Text('About Me',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
+                  GestureDetector(
+                    onTap: (){print('hi');},
+                                      child: DraggableScrollableSheet(
+                        minChildSize: 0.1,
+                        initialChildSize: 0.38,
+                        maxChildSize: 1,
+                        builder: (context, scrollController) {
+                          return SingleChildScrollView(
+                              controller: scrollController,
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF505050),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  constraints: BoxConstraints(
+                                      minHeight:
+                                          MediaQuery.of(context).size.height),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: <Widget>[
                                         SizedBox(
-                                          height: kSpacingUnit.w,
+                                          height: 10,
                                         ),
-                                        Text(userData.bio,
-                                            //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
-                                            //"Greyscale, also known as, is a dreaded and usually fatal disease that can leave flesh stiff and dead, and the skin cracked and flaking, and stone-like to the touch. Those that manage to survive a bout with the illness will be immune from ever contracting it again, but the flesh damaged by the ravages of the disease will never heal, and they will be scarred for life. Princess Shireen Baratheon caught greyscale as an infant and survived, but the ordeal left half of her face disfigured by the disease.[2]",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Text('My Community',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Text(
-                                            "Kent Ridge Hall, " +
-                                                userData.block +
-                                                " block",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Text('My Social Media Profile',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
-                                        Text("Instagram: @THETINYBIN ",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Text('My Course',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
-                                        Text("Computer Science ",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Text('My Spotify Playlist',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
-                                        Text("Mac Ayres, Daniel Caesar",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Text('Living In',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
-                                        Text(
-                                            "Kent Ridge Hall, " +
-                                                userData.block +
-                                                " block",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                      ]))
-                                    ])));
-                      }),
+                                        Container(
+                                            child: Column(children: <Widget>[
+                                          Text('About Me',
+                                              style: kTitleTextStyle.copyWith(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.grey[300])),
+                                          SizedBox(
+                                            height: kSpacingUnit.w,
+                                          ),
+                                          Text(userData.bio,
+                                              //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
+                                              //"Greyscale, also known as, is a dreaded and usually fatal disease that can leave flesh stiff and dead, and the skin cracked and flaking, and stone-like to the touch. Those that manage to survive a bout with the illness will be immune from ever contracting it again, but the flesh damaged by the ravages of the disease will never heal, and they will be scarred for life. Princess Shireen Baratheon caught greyscale as an infant and survived, but the ordeal left half of her face disfigured by the disease.[2]",
+                                              style: kCaptionTextStyle.copyWith(
+                                                fontSize: 15,
+                                              )),
+                                          SizedBox(
+                                            height: kSpacingUnit.w,
+                                          ),
+                                          Text('My Community',
+                                              style: kTitleTextStyle.copyWith(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.grey[300])),
+                                          SizedBox(
+                                            height: kSpacingUnit.w,
+                                          ),
+                                          Text(
+                                              "Kent Ridge Hall, " +
+                                                  userData.block +
+                                                  " block",
+                                              style: kCaptionTextStyle.copyWith(
+                                                fontSize: 15,
+                                              )),
+                                          SizedBox(
+                                            height: kSpacingUnit.w,
+                                          ),
+                                          Text('My Social Media Profile',
+                                              style: kTitleTextStyle.copyWith(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.grey[300])),
+                                          Text("Instagram: @THETINYBIN ",
+                                              style: kCaptionTextStyle.copyWith(
+                                                fontSize: 15,
+                                              )),
+                                          SizedBox(
+                                            height: kSpacingUnit.w,
+                                          ),
+                                          Text('My Course',
+                                              style: kTitleTextStyle.copyWith(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.grey[300])),
+                                          Text("Computer Science ",
+                                              style: kCaptionTextStyle.copyWith(
+                                                fontSize: 15,
+                                              )),
+                                          SizedBox(
+                                            height: kSpacingUnit.w,
+                                          ),
+                                          Text('My Spotify Playlist',
+                                              style: kTitleTextStyle.copyWith(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.grey[300])),
+                                          Text("Mac Ayres, Daniel Caesar",
+                                              style: kCaptionTextStyle.copyWith(
+                                                fontSize: 15,
+                                              )),
+                                          SizedBox(
+                                            height: kSpacingUnit.w,
+                                          ),
+                                          Text('Living In',
+                                              style: kTitleTextStyle.copyWith(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.grey[300])),
+                                          Text(
+                                              "Kent Ridge Hall, " +
+                                                  userData.block +
+                                                  " block",
+                                              style: kCaptionTextStyle.copyWith(
+                                                fontSize: 15,
+                                              )),
+                                          SizedBox(
+                                            height: kSpacingUnit.w,
+                                          ),
+                                        ]))
+                                      ])));
+                        }),
+                  ),
                       DraggableScrollableSheet(
                       minChildSize: 0.1,
                       initialChildSize: 0.28,
