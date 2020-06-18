@@ -207,6 +207,7 @@ class _HomeState extends State<Home> {
                             radius: 19,
                             backgroundColor: Colors.transparent,
                             child: ClipOval(
+                            
                               child: Image.asset(
                                 'assets/images/ghosty2.png',
                                 fit: BoxFit.fill,
@@ -228,7 +229,7 @@ class _HomeState extends State<Home> {
             key: _scaffoldkey,
             body: tabs[_currentIndex],
             floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.black,
+              backgroundColor: Colors.transparent,
               child: ClipOval(
                 child: Image.asset('assets/images/ghosty2.png',
                     fit: BoxFit.fill, color: Colors.amber),
