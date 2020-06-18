@@ -26,6 +26,7 @@ class _MyprofileState extends State<Myprofile> {
   int countTotalFollowers = 0;
   int countTotalFollowings = 0;
   var personalEmail;
+  Stream photoStream;
 
   getAllFollowings() async {
     QuerySnapshot querySnapshot = await DatabaseService()
@@ -136,7 +137,15 @@ class _MyprofileState extends State<Myprofile> {
             personalEmail = userData.email;
             return Scaffold(
               appBar: AppBar(
-                titleSpacing: 50,
+                leading: IconButton(
+                  icon: Icon(LineAwesomeIcons.plus_circle),
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      FadeRoute(page: Addpicture()),
+                      ModalRoute.withName('Addpicture'),
+                    );
+                  },
+                ),
                 elevation: 0,
                 actions: <Widget>[
                   IconButton(
@@ -285,7 +294,7 @@ class _MyprofileState extends State<Myprofile> {
                                           fontWeight: FontWeight.w300,
                                           color: Color(0xFFFFC107))),
                                   SizedBox(
-                                    height: kSpacingUnit.w,
+                                    height: 5,
                                   ),
                                   Text(userData.bio,
                                       //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
@@ -378,97 +387,104 @@ class _MyprofileState extends State<Myprofile> {
                                 ],
                               ),
                             ),
-                            // StreamBuilder(
-                            //     stream: photoStream,
-                            //     builder: (context, snapshot) {
-                            //       return snapshot.hasData
-                            //           ? ListView.builder()
-                            //           : Container();
-                            //     }),
-
-                            SingleChildScrollView(
-                              physics: BouncingScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(
-                                    vertical: 20, horizontal: 20),
-                                child: FittedBox(
-                                  fit: BoxFit.fill,
-                                  alignment: Alignment.topCenter,
-                                  child: Row(
-                                    children: <Widget>[
-                                      Container(
-                                          width: 150,
-                                          margin: EdgeInsets.only(right: 20),
+                            StreamBuilder(
+                                stream:
+                                    DatabaseService(uid: user.uid).getphotos(),
+                                builder: (context, snapshot) {
+                                  return snapshot.hasData
+                                      ? Container(
                                           height: MediaQuery.of(context)
                                                       .size
                                                       .height *
                                                   0.30 -
                                               50,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20.0)),
-                                            child: Image.network(
-                                                  userData.dp,
-                                                  fit: BoxFit.fill,
-                                                ) ??
-                                                Image.asset(
-                                                    'assets/images/profile1.png',
-                                                    fit: BoxFit.fill),
-                                          )),
-                                      Container(
-                                          width: 150,
-                                          margin: EdgeInsets.only(right: 20),
-                                          height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.30 -
-                                              50,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20.0)),
-                                            child: Image.network(
-                                                  userData.dp,
-                                                  fit: BoxFit.fill,
-                                                ) ??
-                                                Image.asset(
-                                                    'assets/images/profile1.png',
-                                                    fit: BoxFit.fill),
-                                          )),
-                                      Container(
-                                          width: 150,
-                                          margin: EdgeInsets.only(right: 20),
-                                          height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.30 -
-                                              50,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20.0)),
-                                            child: Image.network(
-                                                  userData.dp,
-                                                  fit: BoxFit.fill,
-                                                ) ??
-                                                Image.asset(
-                                                    'assets/images/profile1.png',
-                                                    fit: BoxFit.fill),
-                                          )),
-                                      IconButton(
-                                        icon: Icon(Icons.add_circle),
-                                        onPressed: () {
-                                          Navigator.of(context)
-                                              .pushAndRemoveUntil(
-                                            FadeRoute(page: Addpicture()),
-                                            ModalRoute.withName('Addpicture'),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                                          child: ListView.builder(
+                                              physics: ClampingScrollPhysics(),
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: snapshot
+                                                  .data.documents.length,
+                                              itemBuilder: (context, index) {
+                                                return Container(
+                                                    width: 150,
+                                                    margin: EdgeInsets.only(
+                                                        right: 20),
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                    .size
+                                                                    .height *
+                                                                0.30 -
+                                                            50,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  20.0)),
+                                                      child: Image.network(
+                                                            snapshot
+                                                                .data
+                                                                .documents[
+                                                                    index]
+                                                                .data['photo'],
+                                                            fit: BoxFit.fill,
+                                                          ) ??
+                                                          Image.asset(
+                                                              'assets/images/profile1.png',
+                                                              fit: BoxFit.fill),
+                                                    ));
+                                              })
+                                        )
+                                      : Loading();
+                                }),
+                                // GestureDetector(
+                                //           onTap: () {
+                                //             Navigator.of(context)
+                                //                 .pushAndRemoveUntil(
+                                //               FadeRoute(page: Addpicture()),
+                                //               ModalRoute.withName('Addpicture'),
+                                //             );
+                                //           },
+                                //           child: Container(
+                                //             width: 150,
+                                //             margin: EdgeInsets.only(right: 20),
+                                //             height: MediaQuery.of(context)
+                                //                         .size
+                                //                         .height *
+                                //                     0.30 -
+                                //                 50,
+                                //             decoration: BoxDecoration(
+                                //                 color: Colors.orange.shade400,
+                                //                 borderRadius: BorderRadius.all(
+                                //                     Radius.circular(20.0))),
+                                //             child: Padding(
+                                //               padding:
+                                //                   const EdgeInsets.all(12.0),
+                                //               child: Column(
+                                //                 crossAxisAlignment:
+                                //                     CrossAxisAlignment.start,
+                                //                 children: <Widget>[
+                                //                   Text(
+                                //                     "Most\nFavorites",
+                                //                     style: TextStyle(
+                                //                         fontSize: 25,
+                                //                         color: Colors.white,
+                                //                         fontWeight:
+                                //                             FontWeight.bold),
+                                //                   ),
+                                //                   SizedBox(
+                                //                     height: 10,
+                                //                   ),
+                                //                   Text(
+                                //                     "20 Items",
+                                //                     style: TextStyle(
+                                //                         fontSize: 16,
+                                //                         color: Colors.white),
+                                //                   ),
+                                //                 ],
+                                //               ),
+                                //             ),
+                                //           ),
+                                //         )
                           ]))
                         ])))
               ]),

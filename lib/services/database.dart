@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
+import 'package:Wiggle2/shared/constants.dart';
 
 class DatabaseService {
   final String uid;
@@ -35,7 +36,6 @@ class DatabaseService {
   final compatibilityReference = Firestore.instance.collection('compatibility');
   final bondReference = Firestore.instance.collection('Bond');
   final susReference = Firestore.instance.collection('Sus ChatRoom');
-  final postReference = Firestore.instance.collection('posts');
 
   Future updateGame(String gameRoomID, List player1, List player2) async {
     return gameReference.document(gameRoomID).setData({
@@ -198,14 +198,17 @@ class DatabaseService {
             "isAnonymous": isAnonymous
           });
   }
-
-  Future uploadPhotos(String photo) async {
-    return await wiggleCollection
-        .document(uid)
-        .collection('photos')
-        .document()
-        .setData({'photo': photo});
+  Future uploadPhotos(String photo)async {
+      return await wiggleCollection.document(uid).collection('photos').document().setData({
+       'photo':photo
+      });
   }
+
+  Stream<QuerySnapshot> getphotos(){
+    return wiggleCollection.document(uid).collection('photos').snapshots();
+  }
+
+
 
   Future uploadUserData(
       String email,
