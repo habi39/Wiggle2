@@ -126,6 +126,8 @@ class _MyprofileState extends State<Myprofile> {
     getAllFollowers();
     getAllFollowings();
 
+    
+
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
@@ -133,375 +135,385 @@ class _MyprofileState extends State<Myprofile> {
           if (userData != null) {
             personalEmail = userData.email;
             return Scaffold(
-              body: Stack(
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        child: Container(
-                          child: Column(
-                            children: <Widget>[
-                              SizedBox(height: kSpacingUnit.w * 5),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  SizedBox(height: kSpacingUnit.w * 5),
-                                  FlatButton(
-                                    onPressed: () {},
-                                    child: Icon(
-                                      LineAwesomeIcons.sun,
-                                      size: ScreenUtil()
-                                          .setSp(kSpacingUnit.w * 2.5),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      children: <Widget>[
-                                        SizedBox(height: kSpacingUnit.w * 5),
-                                        CircleAvatar(
-                                          backgroundColor: Colors.white,
-                                          radius: 60,
-                                          child: ClipOval(
-                                            child: new SizedBox(
-                                              width: 180,
-                                              height: 180,
-                                              child: Image.network(
-                                                    userData.dp,
-                                                    fit: BoxFit.fill,
-                                                  ) ??
-                                                  Image.asset(
-                                                      'assets/images/profile1.png',
-                                                      fit: BoxFit.fill),
+              appBar: AppBar(
+                titleSpacing: 50,
+                elevation: 0,
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      LineAwesomeIcons.alternate_sign_out,
+                    ),
+                    onPressed: () async {
+                      await _auth.signOut();
+                    },
+                  ),
+                ],
+              ),
+              body: Stack(children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Container(
+                      child: Container(),
+                    ),
+                  ],
+                ),
+                SingleChildScrollView(
+                    child: Container(
+                        decoration: BoxDecoration(
+                          //color: Color(0xFF505050),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        constraints: BoxConstraints(
+                            minHeight: MediaQuery.of(context).size.height),
+                        child: Column(children: <Widget>[
+                          Container(
+                              child: Column(children: <Widget>[
+                            Column(
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Column(
+                                        children: <Widget>[
+                                          CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            radius: 55,
+                                            child: ClipOval(
+                                              child: new SizedBox(
+                                                width: 180,
+                                                height: 180,
+                                                child: Image.network(
+                                                      userData.dp,
+                                                      fit: BoxFit.fill,
+                                                    ) ??
+                                                    Image.asset(
+                                                        'assets/images/profile1.png',
+                                                        fit: BoxFit.fill),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(height: 20),
-                                        Text(userData.name,
-                                            textScaleFactor: 1.1,
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w800,
-                                                color: Colors.grey[300])),
-                                      ],
-                                    ),
-                                  ),
-                                  FlatButton(
-                                    onPressed: () async {
-                                      await _auth.signOut();
-                                    },
-                                    child: Icon(
-                                      LineAwesomeIcons.alternate_sign_out,
-                                      size: ScreenUtil()
-                                          .setSp(kSpacingUnit.w * 2.5),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 10),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    top: 3, bottom: 3, left: 30, right: 30),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFF373737),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(15),
-                                    )),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  //crossAxisAlignment: CrossAxisAlignment.baseline,
-                                  children: <Widget>[
-                                    FlatButton(
-                                        padding: EdgeInsets.only(
-                                            left: 25, right: 25),
-                                        child: createColumns(
-                                            'Followers', countTotalFollowers),
-                                        onPressed: () => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    FollowersList(
-                                                        wiggles: wiggles,
-                                                        userData: userData)))),
-                                    FlatButton(
-                                        padding: EdgeInsets.only(
-                                            left: 25, right: 25),
-                                        child: createColumns(
-                                            'Following', countTotalFollowings),
-                                        onPressed: () => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    FollowingList(
-                                                        wiggles: wiggles,
-                                                        userData: userData)))),
-                                    FlatButton(
-                                      padding:
-                                          EdgeInsets.only(left: 25, right: 25),
-                                      child: createColumns('Gamescore', 0),
-                                      onPressed: () {},
+                                          SizedBox(height: 15),
+                                          Text(userData.name,
+                                              style: kTitleTextStyle.copyWith(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.grey[300])),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
-                              Container(
-                                  child: Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        createButton(userData),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              )),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Stack(children: <Widget>[
-                  GestureDetector(
-                    onTap: (){print('hi');},
-                                      child: DraggableScrollableSheet(
-                        minChildSize: 0.1,
-                        initialChildSize: 0.38,
-                        maxChildSize: 1,
-                        builder: (context, scrollController) {
-                          return SingleChildScrollView(
-                              controller: scrollController,
-                              child: Container(
+                                SizedBox(height: 10),
+                                Container(
+                                  padding: EdgeInsets.only(
+                                      top: 3, bottom: 3, left: 30, right: 30),
                                   decoration: BoxDecoration(
-                                    color: Color(0xFF505050),
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  constraints: BoxConstraints(
-                                      minHeight:
-                                          MediaQuery.of(context).size.height),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: <Widget>[
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Container(
-                                            child: Column(children: <Widget>[
-                                          Text('About Me',
-                                              style: kTitleTextStyle.copyWith(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.grey[300])),
-                                          SizedBox(
-                                            height: kSpacingUnit.w,
-                                          ),
-                                          Text(userData.bio,
-                                              //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
-                                              //"Greyscale, also known as, is a dreaded and usually fatal disease that can leave flesh stiff and dead, and the skin cracked and flaking, and stone-like to the touch. Those that manage to survive a bout with the illness will be immune from ever contracting it again, but the flesh damaged by the ravages of the disease will never heal, and they will be scarred for life. Princess Shireen Baratheon caught greyscale as an infant and survived, but the ordeal left half of her face disfigured by the disease.[2]",
-                                              style: kCaptionTextStyle.copyWith(
-                                                fontSize: 15,
-                                              )),
-                                          SizedBox(
-                                            height: kSpacingUnit.w,
-                                          ),
-                                          Text('My Community',
-                                              style: kTitleTextStyle.copyWith(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.grey[300])),
-                                          SizedBox(
-                                            height: kSpacingUnit.w,
-                                          ),
-                                          Text(
-                                              "Kent Ridge Hall, " +
-                                                  userData.block +
-                                                  " block",
-                                              style: kCaptionTextStyle.copyWith(
-                                                fontSize: 15,
-                                              )),
-                                          SizedBox(
-                                            height: kSpacingUnit.w,
-                                          ),
-                                          Text('My Social Media Profile',
-                                              style: kTitleTextStyle.copyWith(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.grey[300])),
-                                          Text("Instagram: @THETINYBIN ",
-                                              style: kCaptionTextStyle.copyWith(
-                                                fontSize: 15,
-                                              )),
-                                          SizedBox(
-                                            height: kSpacingUnit.w,
-                                          ),
-                                          Text('My Course',
-                                              style: kTitleTextStyle.copyWith(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.grey[300])),
-                                          Text("Computer Science ",
-                                              style: kCaptionTextStyle.copyWith(
-                                                fontSize: 15,
-                                              )),
-                                          SizedBox(
-                                            height: kSpacingUnit.w,
-                                          ),
-                                          Text('My Spotify Playlist',
-                                              style: kTitleTextStyle.copyWith(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.grey[300])),
-                                          Text("Mac Ayres, Daniel Caesar",
-                                              style: kCaptionTextStyle.copyWith(
-                                                fontSize: 15,
-                                              )),
-                                          SizedBox(
-                                            height: kSpacingUnit.w,
-                                          ),
-                                          Text('Living In',
-                                              style: kTitleTextStyle.copyWith(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.grey[300])),
-                                          Text(
-                                              "Kent Ridge Hall, " +
-                                                  userData.block +
-                                                  " block",
-                                              style: kCaptionTextStyle.copyWith(
-                                                fontSize: 15,
-                                              )),
-                                          SizedBox(
-                                            height: kSpacingUnit.w,
-                                          ),
-                                        ]))
-                                      ])));
-                        }),
-                  ),
-                      DraggableScrollableSheet(
-                      minChildSize: 0.1,
-                      initialChildSize: 0.28,
-                      maxChildSize: 1,
-                      builder: (context, scrollController) {
-                        return SingleChildScrollView(
-                            controller: scrollController,
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  color: Color(0xff3d3f50),
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                constraints: BoxConstraints(
-                                    minHeight:
-                                        MediaQuery.of(context).size.height),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                      color: Color(0xFF373737),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(15),
+                                      )),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    //crossAxisAlignment: CrossAxisAlignment.baseline,
                                     children: <Widget>[
-                                      SizedBox(
-                                        height: 10,
+                                      FlatButton(
+                                          padding: EdgeInsets.only(
+                                              left: 25, right: 25),
+                                          child: createColumns(
+                                              'Followers', countTotalFollowers),
+                                          onPressed: () => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      FollowersList(
+                                                          wiggles: wiggles,
+                                                          userData:
+                                                              userData)))),
+                                      FlatButton(
+                                          padding: EdgeInsets.only(
+                                              left: 25, right: 25),
+                                          child: createColumns('Following',
+                                              countTotalFollowings),
+                                          onPressed: () => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      FollowingList(
+                                                          wiggles: wiggles,
+                                                          userData:
+                                                              userData)))),
+                                      FlatButton(
+                                        padding: EdgeInsets.only(
+                                            left: 25, right: 25),
+                                        child: createColumns('Gamescore', 0),
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                    child: Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          createButton(userData),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                )),
+                              ],
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(15),
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text('A B O U T    M E',
+                                      style: kTitleTextStyle.copyWith(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xFFFFC107))),
+                                  SizedBox(
+                                    height: kSpacingUnit.w,
+                                  ),
+                                  Text(userData.bio,
+                                      //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
+                                      //"Greyscale, also known as, is a dreaded and usually fatal disease that can leave flesh stiff and dead, and the skin cracked and flaking, and stone-like to the touch. Those that manage to survive a bout with the illness will be immune from ever contracting it again, but the flesh damaged by the ravages of the disease will never heal, and they will be scarred for life. Princess Shireen Baratheon caught greyscale as an infant and survived, but the ordeal left half of her face disfigured by the disease.[2]",
+                                      style: kCaptionTextStyle.copyWith(
+                                        fontSize: 15,
+                                      )),
+                                  SizedBox(
+                                    height: kSpacingUnit.w,
+                                  ),
+                                  Text('C O M M U N I T Y',
+                                      style: kTitleTextStyle.copyWith(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xFFFFC107))),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                      "Kent Ridge Hall, " +
+                                          userData.block +
+                                          " block",
+                                      style: kCaptionTextStyle.copyWith(
+                                        fontSize: 15,
+                                      )),
+                                  SizedBox(height: 15),
+                                  Text('S O C I A L   M E D I A ',
+                                      style: kTitleTextStyle.copyWith(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xFFFFC107))),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text("Instagram: @THETINYBIN ",
+                                      style: kCaptionTextStyle.copyWith(
+                                        fontSize: 15,
+                                      )),
+                                  SizedBox(
+                                    height: kSpacingUnit.w,
+                                  ),
+                                  Text('C O U R S E',
+                                      style: kTitleTextStyle.copyWith(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xFFFFC107))),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text("Computer Science ",
+                                      style: kCaptionTextStyle.copyWith(
+                                        fontSize: 15,
+                                      )),
+                                  SizedBox(
+                                    height: kSpacingUnit.w,
+                                  ),
+                                  Text('P L A Y L I S T',
+                                      style: kTitleTextStyle.copyWith(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xFFFFC107))),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text("Mac Ayres, Daniel Caesar",
+                                      style: kCaptionTextStyle.copyWith(
+                                        fontSize: 15,
+                                      )),
+                                  SizedBox(
+                                    height: kSpacingUnit.w,
+                                  ),
+                                  Text('L I V I N G   I N',
+                                      style: kTitleTextStyle.copyWith(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xFFFFC107))),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                      "Kent Ridge Hall, " +
+                                          userData.block +
+                                          " block",
+                                      style: kCaptionTextStyle.copyWith(
+                                        fontSize: 15,
+                                      )),
+                                  SizedBox(
+                                    height: kSpacingUnit.w,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SingleChildScrollView(
+                              physics: BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 20, horizontal: 20),
+                                child: FittedBox(
+                                  fit: BoxFit.fill,
+                                  alignment: Alignment.topCenter,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Container(
+                                        width: 150,
+                                        margin: EdgeInsets.only(right: 20),
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                    0.30 -
+                                                50,
+                                        decoration: BoxDecoration(
+                                            color: Colors.orange.shade400,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20.0))),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Text(
+                                                "Picture 1",
+                                                style: TextStyle(
+                                                    fontSize: 25,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "Caption",
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                       Container(
-                                          child: Column(children: <Widget>[
-                                        Text('About Me',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
+                                        width: 150,
+                                        margin: EdgeInsets.only(right: 20),
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                    0.30 -
+                                                50,
+                                        decoration: BoxDecoration(
+                                            color: Colors.blue.shade400,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20.0))),
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                  "Picture 2",
+                                                  style: TextStyle(
+                                                      fontSize: 25,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                  "caption",
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Colors.white),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                        Text(userData.bio,
-                                            //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
-                                            //"Greyscale, also known as, is a dreaded and usually fatal disease that can leave flesh stiff and dead, and the skin cracked and flaking, and stone-like to the touch. Those that manage to survive a bout with the illness will be immune from ever contracting it again, but the flesh damaged by the ravages of the disease will never heal, and they will be scarred for life. Princess Shireen Baratheon caught greyscale as an infant and survived, but the ordeal left half of her face disfigured by the disease.[2]",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
+                                      ),
+                                      Container(
+                                        width: 150,
+                                        margin: EdgeInsets.only(right: 20),
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                    0.30 -
+                                                50,
+                                        decoration: BoxDecoration(
+                                            color:
+                                                Colors.lightBlueAccent.shade400,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20.0))),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Text(
+                                                "Picture 3",
+                                                style: TextStyle(
+                                                    fontSize: 25,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "Caption",
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        Text('My Community',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Text(
-                                            "Kent Ridge Hall, " +
-                                                userData.block +
-                                                " block",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Text('My Social Media Profile',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
-                                        Text("Instagram: @THETINYBIN ",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Text('My Course',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
-                                        Text("Computer Science ",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Text('My Spotify Playlist',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
-                                        Text("Mac Ayres, Daniel Caesar",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Text('Living In',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.grey[300])),
-                                        Text(
-                                            "Kent Ridge Hall, " +
-                                                userData.block +
-                                                " block",
-                                            style: kCaptionTextStyle.copyWith(
-                                              fontSize: 15,
-                                            )),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                      ]))
-                                    ])));
-                      })
-                ],
-                  )]
-              ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ]))
+                        ])))
+              ]),
             );
           } else {
             return Loading();
