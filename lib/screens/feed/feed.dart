@@ -5,12 +5,16 @@ import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/screens/feed/uploadImage.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/shared/constants.dart';
+import 'package:Wiggle2/shared/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'commentsPage.dart';
 
 class Feed extends StatefulWidget {
   @override
@@ -46,6 +50,7 @@ class _FeedState extends State<Feed> {
                   Timestamp timestamp =
                       snapshot.data.documents[index]['timestamp'];
                   String url = snapshot.data.documents[index]['url'];
+                  String postId = snapshot.data.documents[index]['postId'];
 
                   print(email);
                   for (int i = 0; i < wiggles.length; i++) {
@@ -60,6 +65,7 @@ class _FeedState extends State<Feed> {
                     description: description,
                     timestamp: timestamp,
                     url: url,
+                    postId: postId,
                   );
                 })
             : Container();
@@ -177,6 +183,8 @@ class FeedTile extends StatelessWidget {
   final Timestamp timestamp;
   final String description;
   final String url;
+  final String postId;
+  bool check;
 
   FeedTile({
     this.wiggles,
@@ -184,9 +192,10 @@ class FeedTile extends StatelessWidget {
     this.timestamp,
     this.description,
     this.url,
+    this.postId,
   });
 
-  createPostHead(context) {
+  createPostHead(context, UserData userData) {
     return Container(
       height: 50,
       width: MediaQuery.of(context).size.width,
@@ -213,10 +222,44 @@ class FeedTile extends StatelessWidget {
           Text(
             '${wiggle.name}',
             style: kTitleTextStyle,
-          )
+          ),
+          Spacer(),
+          check
+              ? IconButton(
+                  icon: Icon(Icons.more_horiz),
+                  onPressed: () => createAlertDialog(context),
+                )
+              : Text('')
         ],
       ),
     );
+  }
+
+  createAlertDialog(context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Are you sure you want to delete post?'),
+            actions: <Widget>[
+              FlatButton(
+                  child: Text('Yes'),
+                  onPressed: () {
+                    DatabaseService()
+                        .postReference
+                        .document(postId)
+                        .get()
+                        .then((doc) {
+                      if (doc.exists) {
+                        doc.reference.delete();
+
+                        Navigator.pop(context);
+                      }
+                    });
+                  }),
+            ],
+          );
+        });
   }
 
   createPostPicture() {
@@ -229,7 +272,7 @@ class FeedTile extends StatelessWidget {
     );
   }
 
-  createPostFooter() {
+  createPostFooter(context) {
     return Row(
       children: <Widget>[
         SizedBox(
@@ -248,13 +291,25 @@ class FeedTile extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 2),
+        SizedBox(width: 5),
         Text(
           '${wiggle.name}',
           style: kTitleTextStyle,
         ),
         SizedBox(width: 5),
-        Text('$description'),
+        description.length <= 18
+            ? Text('$description')
+            : FlatButton(
+                child: Text('more...'),
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      FadeRoute(
+                        page: CommentsPage(
+                            wiggle: wiggle, description: description),
+                      ),
+                      ModalRoute.withName('CommentsPage'));
+                },
+              ),
         Spacer(),
         Padding(
           padding: EdgeInsets.only(right: 10),
@@ -271,6 +326,7 @@ class FeedTile extends StatelessWidget {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           UserData userData = snapshot.data;
+          check = userData.email == wiggle.email;
           return GestureDetector(
             onTap: () {
               // Navigator.of(context).pushAndRemoveUntil(
@@ -288,12 +344,12 @@ class FeedTile extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  createPostHead(context),
+                  createPostHead(context, userData),
                   createPostPicture(),
                   SizedBox(
                     height: 10,
                   ),
-                  createPostFooter(),
+                  createPostFooter(context),
                 ],
               ),
             ),

@@ -105,7 +105,6 @@ class _CompatibilityStartState extends State<CompatibilityStart> {
           Expanded(
             child: Container(
               child: RaisedButton(
-                //send invite
                 color: Colors.blue,
                 child: Text('Play'),
                 onPressed: () {

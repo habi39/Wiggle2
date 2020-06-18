@@ -35,6 +35,7 @@ class DatabaseService {
   final compatibilityReference = Firestore.instance.collection('compatibility');
   final bondReference = Firestore.instance.collection('Bond');
   final susReference = Firestore.instance.collection('Sus ChatRoom');
+  final postReference = Firestore.instance.collection('posts');
 
   Future updateGame(String gameRoomID, List player1, List player2) async {
     return gameReference.document(gameRoomID).setData({
@@ -197,13 +198,14 @@ class DatabaseService {
             "isAnonymous": isAnonymous
           });
   }
-  Future uploadPhotos(String photo)async {
-      return await wiggleCollection.document(uid).collection('photos').document().setData({
-       'photo':photo
-      });
+
+  Future uploadPhotos(String photo) async {
+    return await wiggleCollection
+        .document(uid)
+        .collection('photos')
+        .document()
+        .setData({'photo': photo});
   }
-
-
 
   Future uploadUserData(
       String email,

@@ -239,7 +239,14 @@ class _TriviaState extends State<Trivia> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Do I know you?'),
+        title: Text(
+          'Do I know you?',
+          style: TextStyle(
+            fontWeight: FontWeight.w300,
+            fontSize: 24,
+            color: Colors.white,
+          ),
+        ),
         elevation: 0.0,
       ),
       body: Column(
@@ -248,7 +255,15 @@ class _TriviaState extends State<Trivia> {
           Container(child: currentCard ?? questionTemplate(0, questions)),
           Container(
             child: RaisedButton(
-              child: Text('Change Card'),
+              color: Colors.amber,
+              child: Text(
+                'Change Card',
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              ),
               onPressed: () {
                 generateRandomCard();
               },
@@ -257,7 +272,15 @@ class _TriviaState extends State<Trivia> {
           SizedBox(height: 8),
           Container(
             child: RaisedButton(
-              child: Text('Answer'),
+              color: Colors.amber,
+              child: Text(
+                'Answer',
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              ),
               onPressed: () {
                 print(widget.wiggle);
                 answerQuestion();

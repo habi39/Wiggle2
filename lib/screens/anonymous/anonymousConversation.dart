@@ -140,13 +140,13 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
               resizeToAvoidBottomPadding: true,
-              backgroundColor: Color.fromRGBO(3, 9, 23, 1),
               appBar: AppBar(
                 leading: IconButton(
                     icon: Icon(LineAwesomeIcons.home),
                     onPressed: () {
-                     Navigator.of(context).pushAndRemoveUntil(
-                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+                      Navigator.of(context).pushAndRemoveUntil(
+                          FadeRoute(page: Wrapper()),
+                          ModalRoute.withName('Wrapper'));
                     }),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -196,10 +196,6 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
                                     ),
                             ),
                             ModalRoute.withName('void'));
-
-                        
-                          
-                        
                       },
                     ),
                   ],
@@ -209,16 +205,14 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
                     icon: Icon(Icons.gamepad),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
-                            FadeRoute(
-                              page: CompatibilityStart(
+                          FadeRoute(
+                            page: CompatibilityStart(
                                 friendAnon: widget.friendAnon,
-                              userData: widget.userData,
-                              wiggle: widget.wiggle,
-                              wiggles: widget.wiggles
-                              ),
-                            ),
-                            ModalRoute.withName('CompatibilityStart'));
-                      
+                                userData: widget.userData,
+                                wiggle: widget.wiggle,
+                                wiggles: widget.wiggles),
+                          ),
+                          ModalRoute.withName('CompatibilityStart'));
                     },
                   ),
                 ],

@@ -179,8 +179,15 @@ class _AnswerScreenState extends State<AnswerScreen> {
               ),
             ),
             FlatButton(
-              color: Colors.white,
-              child: Text('Submit'),
+              color: Colors.amber,
+              child: Text(
+                'Submit',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              ),
               onPressed: () {
                 // print(widget.userData.name);
                 // print(widget.wiggle);
