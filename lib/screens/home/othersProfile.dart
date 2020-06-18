@@ -466,7 +466,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                 ),
                                 SizedBox(height: 10),
                                 Text(
-                                  widget.wiggle.name,
+                                  widget.wiggle.id,
                                   style: kTitleTextStyle.copyWith(
                                       fontSize: 25,
                                       fontWeight: FontWeight.w700,
