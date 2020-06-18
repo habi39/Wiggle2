@@ -103,7 +103,7 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
 
   saveReceivercloud(Wiggle wiggle) async {
     QuerySnapshot query =
-        await DatabaseService().getReceivertoken(wiggle.email);
+        await DatabaseService(uid:wiggle.id).getReceivertoken(wiggle.email);
     String val = query.documents[0].data['token'].toString();
     DatabaseService().cloudReference.document().setData({
       'type': 'anonmessage',

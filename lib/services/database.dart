@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/shared/constants.dart';
+import 'dart:io';
 
 class DatabaseService {
   final String uid;
@@ -43,6 +44,19 @@ class DatabaseService {
       'player1': player1,
       'player2': player2,
     });
+  }
+
+  uploadtoken(String fcmToken) async {
+    await Firestore.instance
+          .collection('users')
+          .document(uid)
+          .collection('tokens')
+          .document(uid)
+          .setData({
+        'token': fcmToken,
+        'createdAt': FieldValue.serverTimestamp(),
+        'platform': Platform.operatingSystem
+      });
   }
 
   Future updateTrivia(

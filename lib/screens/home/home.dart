@@ -68,32 +68,23 @@ class _HomeState extends State<Home> {
     _scaffoldkey.currentState.showSnackBar(snackBar);
   }
 
-  _saveDeviceToken() async {
+  _saveDeviceToken(String uid) async {
     String fcmToken = await _fcm.getToken();
 
     if (Platform.operatingSystem == 'android') {
-      await Firestore.instance
-          .collection('users')
-          .document(Constants.myEmail)
-          .collection('tokens')
-          .document(Constants.myEmail)
-          .setData({
-        'token': fcmToken,
-        'createdAt': FieldValue.serverTimestamp(),
-        'platform': Platform.operatingSystem
-      });
+      DatabaseService(uid: uid).uploadtoken(fcmToken);
+     
     } else if (Platform.operatingSystem == 'ios') {
       print('hehe ios' + fcmToken);
-      //becuase tokens is only used for push notification, it cant be used for
-      //ios, hence theres always error with this, can be seen when u close app without loggin out,
-      //and then going back to the app again
+      DatabaseService(uid: uid).uploadtoken(fcmToken);
+      
     }
   }
 
   @override
   void initState() {
     super.initState();
-    _saveDeviceToken();
+    
     _fcm.configure(
       onMessage: (Map<String, dynamic> message) async {
         showSnackBar(message);
@@ -121,6 +112,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+    _saveDeviceToken(user.uid);
     ScreenUtil.setScreenOrientation('portrait');
     //this StreamProvider provides the list of user for WiggleList();
     return anonymous

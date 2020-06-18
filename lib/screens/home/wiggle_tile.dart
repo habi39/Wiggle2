@@ -28,7 +28,7 @@ class _WiggleTileState extends State<WiggleTile> {
 
   saveReceivercloudforrequest(userData) async {
     QuerySnapshot query =
-        await DatabaseService().getReceivertoken(widget.wiggle.email);
+        await DatabaseService(uid: widget.wiggle.id).getReceivertoken(widget.wiggle.email);
     String val = query.documents[0].data['token'].toString();
     databaseserver.cloudReference.document().setData({
       'type': 'compatibility',

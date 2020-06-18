@@ -233,7 +233,7 @@ class _OthersProfileState extends State<OthersProfile> {
 
   saveReceivercloudforfollow(UserData userData) async {
     QuerySnapshot query =
-        await DatabaseService().getReceivertoken(widget.wiggle.email);
+        await DatabaseService(uid: widget.wiggle.id).getReceivertoken(widget.wiggle.email);
     String val = query.documents[0].data['token'].toString();
     databaseserver.cloudReference.document().setData({
       'type': 'follow',
@@ -248,7 +248,7 @@ class _OthersProfileState extends State<OthersProfile> {
 
   saveReceivercloudforrequest(UserData userData) async {
     QuerySnapshot query =
-        await DatabaseService().getReceivertoken(widget.wiggle.email);
+        await DatabaseService(uid:widget.wiggle.id).getReceivertoken(widget.wiggle.email);
     String val = query.documents[0].data['token'].toString();
     databaseserver.cloudReference.document().setData({
       'type': 'request',
