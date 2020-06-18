@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
       behavior: SnackBarBehavior.fixed,
       content: Text(message['notification']['body']),
       action: SnackBarAction(
-        label: message['notification']['body'],
+        label: 'Wiggle!',
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
