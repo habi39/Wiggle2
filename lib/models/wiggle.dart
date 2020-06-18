@@ -12,6 +12,7 @@ class Wiggle {
   final String anonBio;
   final String anonInterest;
   final String anonDp;
+  final String uid;
 
   Wiggle(
       {this.name,
@@ -26,5 +27,6 @@ class Wiggle {
       this.isAnonymous,
       this.anonBio,
       this.anonInterest,
-      this.anonDp});
+      this.anonDp,
+      this.uid});
 }

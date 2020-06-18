@@ -27,7 +27,7 @@ class _CommentsPageState extends State<CommentsPage> {
             icon: Icon(LineAwesomeIcons.home),
             onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(
-                  FadeRoute(page: Feed()), ModalRoute.withName('Feed'));
+                  FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
             }),
       ),
       body: Padding(
