@@ -58,18 +58,13 @@ class _MyprofileState extends State<Myprofile> {
       children: <Widget>[
         Text(
           count.toString(),
-          style: TextStyle(
-              fontSize: 20.0,
-              
-              fontWeight: FontWeight.w200),
+          style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w600),
         ),
         Container(
           margin: EdgeInsets.only(top: 5.0),
           child: Text(
             title,
-            style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w200),
+            style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w200),
           ),
         )
       ],
@@ -96,13 +91,15 @@ class _MyprofileState extends State<Myprofile> {
       child: FlatButton(
         onPressed: performFunction,
         child: Container(
-          width: MediaQuery.of(context).size.width/2.5,
+          width: MediaQuery.of(context).size.width / 2.5,
           height: 26.0,
-          child: Text(title, style: kCaptionTextStyle),
+          child: Text(title,
+              style: kCaptionTextStyle.copyWith(
+                  fontWeight: FontWeight.w200, fontSize: 12)),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: Color(0xFF373737),
-            borderRadius: BorderRadius.circular(4.0),
+            borderRadius: BorderRadius.circular(10.0),
           ),
         ),
       ),
@@ -110,15 +107,14 @@ class _MyprofileState extends State<Myprofile> {
   }
 
   editUserPassword() {
-     Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page:EditAccount() ), ModalRoute.withName('EditAccount'));
-  
+    Navigator.of(context).pushAndRemoveUntil(
+        FadeRoute(page: EditAccount()), ModalRoute.withName('EditAccount'));
   }
 
   editUserProfile() {
     Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page:EditProfileScreen() ), ModalRoute.withName('EditProfileScreen'));
-   
+        FadeRoute(page: EditProfileScreen()),
+        ModalRoute.withName('EditProfileScreen'));
   }
 
   final AuthService _auth = AuthService();
@@ -163,10 +159,10 @@ class _MyprofileState extends State<Myprofile> {
                                   Expanded(
                                     child: Column(
                                       children: <Widget>[
-                                        SizedBox(height: kSpacingUnit.w * 3),
+                                        SizedBox(height: kSpacingUnit.w * 5),
                                         CircleAvatar(
                                           backgroundColor: Colors.white,
-                                          radius: 50,
+                                          radius: 60,
                                           child: ClipOval(
                                             child: new SizedBox(
                                               width: 180,
@@ -181,11 +177,12 @@ class _MyprofileState extends State<Myprofile> {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(height: 10),
+                                        SizedBox(height: 20),
                                         Text(userData.name,
+                                            textScaleFactor: 1.1,
                                             style: kTitleTextStyle.copyWith(
                                                 fontSize: 20,
-                                                fontWeight: FontWeight.w100,
+                                                fontWeight: FontWeight.w800,
                                                 color: Colors.grey[300])),
                                       ],
                                     ),
@@ -201,6 +198,54 @@ class _MyprofileState extends State<Myprofile> {
                                     ),
                                   ),
                                 ],
+                              ),
+                              SizedBox(height: 10),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    top: 3, bottom: 3, left: 30, right: 30),
+                                decoration: BoxDecoration(
+                                    color: Color(0xFF373737),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(15),
+                                    )),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  //crossAxisAlignment: CrossAxisAlignment.baseline,
+                                  children: <Widget>[
+                                    FlatButton(
+                                        padding: EdgeInsets.only(
+                                            left: 25, right: 25),
+                                        child: createColumns(
+                                            'Followers', countTotalFollowers),
+                                        onPressed: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    FollowersList(
+                                                        wiggles: wiggles,
+                                                        userData: userData)))),
+                                    FlatButton(
+                                        padding: EdgeInsets.only(
+                                            left: 25, right: 25),
+                                        child: createColumns(
+                                            'Following', countTotalFollowings),
+                                        onPressed: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    FollowingList(
+                                                        wiggles: wiggles,
+                                                        userData: userData)))),
+                                    FlatButton(
+                                      padding:
+                                          EdgeInsets.only(left: 25, right: 25),
+                                      child: createColumns('Gamescore', 0),
+                                      onPressed: () {},
+                                    ),
+                                  ],
+                                ),
                               ),
                               Container(
                                   child: Row(
@@ -223,14 +268,17 @@ class _MyprofileState extends State<Myprofile> {
                     ],
                   ),
                   DraggableScrollableSheet(
-                      minChildSize: 0.1,
-                      initialChildSize: 0.65,
-                      maxChildSize: 0.70,
+                      minChildSize: 0.5,
+                      initialChildSize: 0.55,
+                      maxChildSize: 0.6,
                       builder: (context, scrollController) {
                         return SingleChildScrollView(
                             controller: scrollController,
                             child: Container(
-                                color: Color(0xFF212121),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF505050),
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
                                 constraints: BoxConstraints(
                                     minHeight:
                                         MediaQuery.of(context).size.height),
@@ -239,44 +287,6 @@ class _MyprofileState extends State<Myprofile> {
                                         CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: <Widget>[
-                                      Container(
-                                        padding: EdgeInsets.all(15),
-                                        color: Color(0xFF373737),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: <Widget>[
-                                            FlatButton(
-                                                child: createColumns(
-                                                    'Followers',
-                                                    countTotalFollowers),
-                                                onPressed: () => Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            FollowersList(
-                                                                wiggles:
-                                                                    wiggles,
-                                                                userData:
-                                                                    userData)))),
-                                            FlatButton(
-                                                child: createColumns(
-                                                    'Following',
-                                                    countTotalFollowings),
-                                                onPressed: () => Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            FollowingList(
-                                                                wiggles:
-                                                                    wiggles,
-                                                                userData:
-                                                                    userData)))),
-                                            // createColumns('Gamescore', 0),
-                                          ],
-                                        ),
-                                      ),
                                       SizedBox(
                                         height: 10,
                                       ),
