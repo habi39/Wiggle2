@@ -425,7 +425,7 @@ class _HomeState extends State<Home> {
                             });
                           },
                           child: Icon(
-                            Icons.chat,
+                            Icons.portrait,
                             color:
                                 _currentIndex == 3 ? Colors.white : Colors.grey,
                           ),
