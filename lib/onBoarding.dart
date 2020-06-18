@@ -1,3 +1,4 @@
+import 'package:Wiggle2/screens/home/home.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -6,7 +7,6 @@ import 'screens/wrapper/wrapper.dart';
 
 class Onboarding extends StatelessWidget {
   final pageDecoration = PageDecoration(
-    
     titleTextStyle:
         PageDecoration().titleTextStyle.copyWith(color: Colors.white),
     bodyTextStyle: PageDecoration().bodyTextStyle.copyWith(color: Colors.white),
@@ -25,7 +25,6 @@ class Onboarding extends StatelessWidget {
         // ),
 
         decoration: PageDecoration(
-          
           titleTextStyle:
               PageDecoration().titleTextStyle.copyWith(color: Colors.white),
           bodyTextStyle:
@@ -48,7 +47,6 @@ class Onboarding extends StatelessWidget {
         //   ),
         // ),
         decoration: PageDecoration(
-         
           titleTextStyle:
               PageDecoration().titleTextStyle.copyWith(color: Colors.white),
           bodyTextStyle:
@@ -65,7 +63,6 @@ class Onboarding extends StatelessWidget {
         //   style: TextStyle(color: Colors.black),
         // ),
         decoration: PageDecoration(
-         
           titleTextStyle:
               PageDecoration().titleTextStyle.copyWith(color: Colors.white),
           bodyTextStyle:
@@ -91,18 +88,15 @@ class Onboarding extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
       ),
-      body: 
-      
-      IntroductionScreen(
+      body: IntroductionScreen(
         // globalBackgroundColor: Colors.white,
-
+        showSkipButton: true,
+        skip: Text("Skip"),
         pages: getPages(),
         done: Text(
           "Let's Wiggle",
           style: TextStyle(color: Colors.white),
         ),
-
-        // showSkipButton: true,
         onDone: () {
           Navigator.pushReplacement(
             context,
