@@ -6,6 +6,12 @@ class Constants {
   static String myEmail = "";
   static String nickname = "";
 }
+class Photo{
+  final String photo;
+
+  Photo(this.photo);
+
+}
 
 const textInputDecoration = InputDecoration(
   fillColor: Colors.blueGrey,

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
+import 'package:Wiggle2/shared/constants.dart';
 
 class DatabaseService {
   final String uid;
@@ -201,6 +202,10 @@ class DatabaseService {
       return await wiggleCollection.document(uid).collection('photos').document().setData({
        'photo':photo
       });
+  }
+
+  Stream<QuerySnapshot> getphotos(){
+    return wiggleCollection.document(uid).collection('photos').snapshots();
   }
 
 
