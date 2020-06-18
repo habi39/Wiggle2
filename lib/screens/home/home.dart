@@ -70,15 +70,7 @@ class _HomeState extends State<Home> {
 
   _saveDeviceToken(String uid) async {
     String fcmToken = await _fcm.getToken();
-
-    if (Platform.operatingSystem == 'android') {
-      DatabaseService(uid: uid).uploadtoken(fcmToken);
-     
-    } else if (Platform.operatingSystem == 'ios') {
-      print('hehe ios' + fcmToken);
-      DatabaseService(uid: uid).uploadtoken(fcmToken);
-      
-    }
+DatabaseService(uid: uid).uploadtoken(fcmToken);
   }
 
   @override
