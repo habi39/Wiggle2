@@ -165,10 +165,9 @@ class _CompatibilityState extends State<Compatibility>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
         title: Text(
-          "Compatibility Game",
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          "Q U I Z",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100),
         ),
       ),
       body: AnimatedBuilder(
@@ -196,14 +195,6 @@ class _CompatibilityState extends State<Compatibility>
                             aspectRatio: 1.0,
                             child: Stack(
                               children: <Widget>[
-                                // Positioned.fill(
-                                //   child: CustomPaint(
-                                //       painter: CustomTimerPainter(
-                                //     animation: controller,
-                                //     backgroundColor: Colors.white,
-                                //     color: themeData.indicatorColor,
-                                //   ),),
-                                // ),
                                 Align(
                                   alignment: FractionalOffset.center,
                                   child: Column(
@@ -246,7 +237,7 @@ class _CompatibilityState extends State<Compatibility>
                                             child: Container(
                                               height: 80,
                                               width: 150,
-                                              color: Colors.red,
+                                              color: Colors.purple[300],
                                               alignment: Alignment.center,
                                               child: AutoSizeText(
                                                 currentCompatibilityCard
@@ -272,7 +263,7 @@ class _CompatibilityState extends State<Compatibility>
                                             child: Container(
                                               height: 80,
                                               width: 150,
-                                              color: Colors.blue,
+                                              color: Colors.blueAccent,
                                               alignment: Alignment.center,
                                               child: AutoSizeText(
                                                 currentCompatibilityCard
