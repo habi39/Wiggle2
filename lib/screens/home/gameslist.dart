@@ -79,21 +79,21 @@ class _GameslistState extends State<Gameslist> {
                           children: <Widget>[
                             Expanded(
                               child: Container(
-                                child: RaisedButton(
-                                  child: Text('Feed'),
-                                  color: Colors.purple,
-                                  onPressed: () {
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                      FadeRoute(
-                                        page: Feed(
-                                            userData: userData,
-                                            wiggles: wiggles),
-                                      ),
-                                      ModalRoute.withName('Feed'),
-                                    );
-                                  },
-                                ),
-                              ),
+                                  // child: RaisedButton(
+                                  //   child: Text('Feed'),
+                                  //   color: Colors.purple,
+                                  //   onPressed: () {
+                                  //     Navigator.of(context).pushAndRemoveUntil(
+                                  //       FadeRoute(
+                                  //         page: Feed(
+                                  //             userData: userData,
+                                  //             wiggles: wiggles),
+                                  //       ),
+                                  //       ModalRoute.withName('Feed'),
+                                  //     );
+                                  //   },
+                                  // ),
+                                  ),
                             ),
                             Expanded(
                               child: Container(
@@ -104,9 +104,7 @@ class _GameslistState extends State<Gameslist> {
                                   onPressed: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder:
-                                            (context) => 
-                                                BirdGame().widget,
+                                        builder: (context) => BirdGame().widget,
                                       ),
                                     );
                                   },

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/screens/feed/uploadImage.dart';
@@ -7,17 +9,14 @@ import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:Wiggle2/screens/home/home.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class Feed extends StatefulWidget {
-  final UserData userData;
-  final List<Wiggle> wiggles;
-
-  Feed({this.userData, this.wiggles});
-
   @override
   _FeedState createState() => _FeedState();
 }
@@ -27,6 +26,7 @@ class _FeedState extends State<Feed> {
   final timelineReference = Firestore.instance.collection('posts');
   ScrollController scrollController = new ScrollController();
   Wiggle currentWiggle;
+  File file;
 
   retrieveTimeline() async {
     DatabaseService().getPosts().then((val) {
@@ -36,7 +36,7 @@ class _FeedState extends State<Feed> {
     });
   }
 
-  Widget feedList() {
+  Widget feedList(List<Wiggle> wiggles) {
     return StreamBuilder(
       stream: postsStream,
       builder: (context, snapshot) {
@@ -53,15 +53,15 @@ class _FeedState extends State<Feed> {
                   String url = snapshot.data.documents[index]['url'];
 
                   print(email);
-                  for (int i = 0; i < widget.wiggles.length; i++) {
-                    if (widget.wiggles[i].email == email) {
-                      currentWiggle = widget.wiggles[i];
+                  for (int i = 0; i < wiggles.length; i++) {
+                    if (wiggles[i].email == email) {
+                      currentWiggle = wiggles[i];
                     }
                   }
 
                   return FeedTile(
                     wiggle: currentWiggle,
-                    wiggles: widget.wiggles,
+                    wiggles: wiggles,
                     description: description,
                     timestamp: timestamp,
                     url: url,
@@ -88,49 +88,129 @@ class _FeedState extends State<Feed> {
     );
   }
 
-  // createTimeLine() {
-  //   // print(posts);
-  //   if (posts == null) {
-  //     return circularProgress();
-  //   } else {
-  //     return posts.forEach((element) {});
-  //   }
-  // }
+  pickImageFromGallery(context, userData) async {
+    Navigator.pop(context);
+    File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // setState(() {
+    //   file = imageFile;
+    // });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => UploadImage(file: imageFile, userData: userData),
+      ),
+    );
+  }
+
+  captureImageWithCamera(context, userData) async {
+    Navigator.pop(context);
+    File imageFile = await ImagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 680, maxWidth: 970);
+    // setState(() {
+    //   file = imageFile;
+    // });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => UploadImage(file: imageFile, userData: userData),
+      ),
+    );
+  }
+
+  takeImage(nContext, userData) {
+    return showDialog(
+        context: nContext,
+        builder: (context) {
+          return SimpleDialog(
+            title: Text("New Post"),
+            children: <Widget>[
+              SimpleDialogOption(
+                child: Text(
+                  "Capture Image with Camera",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => captureImageWithCamera(nContext, userData),
+              ),
+              SimpleDialogOption(
+                child: Text(
+                  "Select Image from Gallery",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => pickImageFromGallery(nContext, userData),
+              ),
+              SimpleDialogOption(
+                child: Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, height: 869, width: 414, allowFontScaling: true);
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-              icon: Icon(LineAwesomeIcons.home),
-              onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
-              }),
-        title: Text("F E E D",
-            textAlign: TextAlign.right,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.image),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        UploadImage(userData: widget.userData),
-                  ),
-                );
-              }),
-        ],
-      ),
-      body: feedList(),
-    );
-    // RefreshIndicator(
-    //     child: createTimeLine(), onRefresh: () => retrieveTimeline()));
+    final wiggles = Provider.of<List<Wiggle>>(context) ?? [];
+    final user = Provider.of<User>(context);
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: user.uid).userData,
+        builder: (context, snapshot) {
+          UserData userData = snapshot.data;
+          return Scaffold(
+            appBar: AppBar(
+              // leading: IconButton(
+              //     icon: Icon(LineAwesomeIcons.home),
+              //     onPressed: () {
+              //       Navigator.of(context).pushAndRemoveUntil(
+              //           FadeRoute(page: Wrapper()),
+              //           ModalRoute.withName('Wrapper'));
+              //     }),
+              title: Text("F E E D",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
+              actions: <Widget>[
+                IconButton(
+                    icon: Icon(Icons.image),
+                    onPressed: () {
+                      takeImage(context, userData);
+                    }),
+              ],
+            ),
+            body: feedList(wiggles),
+          );
+          // RefreshIndicator(
+          //     child: createTimeLine(), onRefresh: () => retrieveTimeline()));
+        });
   }
 }
+
+// displayUploadScreen(context) {
+//   return Container(
+//       color: Colors.blueGrey,
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: <Widget>[
+//           Icon(Icons.add_photo_alternate, color: Colors.red, size: 200),
+//           Padding(
+//               padding: EdgeInsets.only(top: 20),
+//               child: RaisedButton(
+//                 color: Colors.red,
+//                 shape: RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.circular(9),
+//                 ),
+//                 child: Text(
+//                   "Upload Image",
+//                   style: TextStyle(color: Colors.white, fontSize: 20),
+//                 ),
+//                 onPressed: () => takeImage(context),
+//               ))
+//         ],
+//       ));
+// }
 
 class FeedTile extends StatelessWidget {
   final Wiggle wiggle;
@@ -175,11 +255,12 @@ class FeedTile extends StatelessWidget {
     return Container(
       height: 50,
       width: MediaQuery.of(context).size.width,
-      
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          SizedBox(width: 10,),
+          SizedBox(
+            width: 10,
+          ),
           CircleAvatar(
             radius: 18,
             child: ClipOval(
@@ -194,7 +275,10 @@ class FeedTile extends StatelessWidget {
             ),
           ),
           SizedBox(width: 5),
-          Text('${wiggle.name}',style: kTitleTextStyle,)
+          Text(
+            '${wiggle.name}',
+            style: kTitleTextStyle,
+          )
         ],
       ),
     );
@@ -213,7 +297,9 @@ class FeedTile extends StatelessWidget {
   createPostFooter() {
     return Row(
       children: <Widget>[
-        SizedBox(width: 10,),
+        SizedBox(
+          width: 10,
+        ),
         CircleAvatar(
           radius: 18,
           child: ClipOval(
@@ -230,10 +316,15 @@ class FeedTile extends StatelessWidget {
         SizedBox(width: 2),
         Text(
           '${wiggle.name}',
-         style: kTitleTextStyle,
+          style: kTitleTextStyle,
         ),
         SizedBox(width: 5),
-        Text('$description')
+        Text('$description'),
+        Spacer(),
+        Padding(
+          padding: EdgeInsets.only(right: 10),
+          child: Text('${f.format(timestamp.toDate())}'),
+        )
       ],
     );
   }
@@ -248,12 +339,14 @@ class FeedTile extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: ConversationScreen(
+                  FadeRoute(
+                    page: ConversationScreen(
                       wiggles: wiggles,
                       wiggle: wiggle,
                       userData: userData,
-                    ),), ModalRoute.withName('ConversationScreen'));
-            
+                    ),
+                  ),
+                  ModalRoute.withName('ConversationScreen'));
             },
             child: Padding(
               padding: EdgeInsets.only(bottom: 12),
@@ -262,59 +355,14 @@ class FeedTile extends StatelessWidget {
                 children: <Widget>[
                   createPostHead(context),
                   createPostPicture(),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   createPostFooter(),
                 ],
               ),
             ),
           );
-
-          //     Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //       children: <Widget>[
-          //         Row(
-          //           children: <Widget>[
-          //             Container(
-          //               height: 40,
-          //               width: 40,
-          //               alignment: Alignment.center,
-          //               decoration: BoxDecoration(
-          //                   color: Colors.blue,
-          //                   borderRadius: BorderRadius.circular(30)),
-          //               child: ClipOval(
-          //                 child: SizedBox(
-          //                   width: 180,
-          //                   height: 180,
-          //                   child: Image.network(
-          //                         wiggle.dp,
-          //                         fit: BoxFit.fill,
-          //                       ) ??
-          //                       Image.asset('assets/images/profile1.png',
-          //                           fit: BoxFit.fill),
-          //                 ),
-          //               ),
-          //             ),
-          //             SizedBox(width: 8),
-          //             Column(
-          //               crossAxisAlignment: CrossAxisAlignment.start,
-          //               children: <Widget>[
-          //                 Text(
-          //                   wiggle.name,
-          //                   style: TextStyle(color: Colors.black),
-          //                 ),
-          //               ],
-          //             )
-          //           ],
-          //         ),
-          //         Row(
-          //           children: <Widget>[
-          //             // getLatestTime(),
-          //           ],
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // );
         });
   }
 }
