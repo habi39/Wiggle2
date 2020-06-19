@@ -49,8 +49,9 @@ class _CompatibilityState extends State<Compatibility>
     CompatibilityCard(
         'Are you homosexual or homophobic', 'Homosexual', 'Homophobic'),
     CompatibilityCard('Who would you wiggle?', 'Habi', 'Hanzo'),
-    CompatibilityCard('Drink?', 'Milk', 'Beer'),
-    CompatibilityCard('Color?', 'Blue', 'Red'),
+    CompatibilityCard(
+        'What do you look for in your SO?', 'Looks', 'Personality'),
+    CompatibilityCard('What do you look for in your SO?', 'Boobs', 'Butt'),
     CompatibilityCard('Day?', 'Sunny', 'Rainy'),
     CompatibilityCard('Hi?', 'ha', 'hu'),
     CompatibilityCard('hi?', 'jo', 'la'),

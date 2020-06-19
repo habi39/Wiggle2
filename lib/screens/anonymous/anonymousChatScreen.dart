@@ -394,8 +394,10 @@ class ChatScreenTile extends StatelessWidget {
                 width: 180,
                 height: 180,
                 child: friendAnon
-                    ? Image.asset('assets/images/profile1.png',
-                        fit: BoxFit.fill)
+                    ? currentWiggle.anonDp == ''
+                        ? Image.asset('assets/images/profile1.png',
+                            fit: BoxFit.fill)
+                        : Image.network(currentWiggle.anonDp, fit: BoxFit.fill)
                     : Image.network(
                         currentWiggle.dp,
                         fit: BoxFit.fill,

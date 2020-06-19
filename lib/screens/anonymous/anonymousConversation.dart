@@ -103,7 +103,7 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
 
   saveReceivercloud(Wiggle wiggle) async {
     QuerySnapshot query =
-        await DatabaseService(uid:wiggle.id).getReceivertoken(wiggle.email);
+        await DatabaseService(uid: wiggle.id).getReceivertoken(wiggle.email);
     String val = query.documents[0].data['token'].toString();
     DatabaseService().cloudReference.document().setData({
       'type': 'anonmessage',
@@ -160,14 +160,15 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
                           width: 180,
                           height: 180,
                           child: widget.friendAnon
-                              ? Image.asset('assets/images/profile1.png',
-                                  fit: BoxFit.fill)
+                              ? widget.wiggle.anonDp == ''
+                                  ? Image.asset('assets/images/profile1.png',
+                                      fit: BoxFit.fill)
+                                  : Image.network(widget.wiggle.anonDp,
+                                      fit: BoxFit.fill)
                               : Image.network(
-                                    widget.wiggle.dp,
-                                    fit: BoxFit.fill,
-                                  ) ??
-                                  Image.asset('assets/images/profile1.png',
-                                      fit: BoxFit.fill),
+                                  widget.wiggle.dp,
+                                  fit: BoxFit.fill,
+                                ),
                         ),
                       ),
                     ),
