@@ -83,9 +83,9 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
         friendAnon: false,
         chatRoomID: chatRoomID);
     DatabaseService().createAnonymousChatRoom(chatRoomID, chatRoomMap);
-     Navigator.of(context).pushAndRemoveUntil(
+    Navigator.of(context).pushAndRemoveUntil(
       FadeRoute(
-        page:  AnonymousConversation(
+        page: AnonymousConversation(
           friendAnon: false,
           wiggles: widget.wiggles,
           wiggle: wiggle,
@@ -102,15 +102,15 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
       return RaisedButton(
         onPressed: () {
           Navigator.of(context).pushAndRemoveUntil(
-          FadeRoute(
-            page: OthersProfile(
-              wiggles: widget.wiggles,
-              wiggle: wiggle,
-              userData: userData,
+            FadeRoute(
+              page: OthersProfile(
+                wiggles: widget.wiggles,
+                wiggle: wiggle,
+                userData: userData,
+              ),
             ),
-          ),
-          ModalRoute.withName('OthersProfile'),
-        );
+            ModalRoute.withName('OthersProfile'),
+          );
         },
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         color: Color(0xFF555555),
@@ -224,14 +224,13 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              alignment: Alignment.topCenter,
               icon: Icon(LineAwesomeIcons.home),
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+                    FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
               }),
           centerTitle: true,
-           title: Text("S E A R C H",
+          title: Text("S E A R C H",
               textAlign: TextAlign.right,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
         ),
