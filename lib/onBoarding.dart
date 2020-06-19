@@ -147,7 +147,7 @@ class _OnboardingState extends State<Onboarding> {
 
   Future<void> notificationAfterSec() async {
     // var timeDelayed = DateTime.now().add(Duration(seconds: 5));
-    var time = Time(17, 00, 0);
+    var time = Time(21, 00, 0);
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
             'second channel ID', 'second Channel title', 'second channel body',
