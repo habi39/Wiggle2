@@ -97,7 +97,7 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
                     );
                   }
                 } else {
-                  Loading();
+                  return Loading();
                 }
               });
         });
