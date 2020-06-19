@@ -1,5 +1,6 @@
 import 'package:Wiggle2/screens/home/home.dart';
 import 'package:Wiggle2/screens/wrapper/wrapper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -19,11 +20,55 @@ class AnonOthersProfile extends StatefulWidget {
   AnonOthersProfile({this.wiggle});
 
   @override
-  _OthersProfileState createState() => _OthersProfileState();
+  _AnonOthersProfileState createState() => _AnonOthersProfileState();
 }
 
-class _OthersProfileState extends State<AnonOthersProfile> {
+class _AnonOthersProfileState extends State<AnonOthersProfile> {
   final AuthService _auth = AuthService();
+  int fame;
+  bool liked = false;
+  bool disliked = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    fame = widget.wiggle.fame;
+    getlikers();
+    getdislikers();
+    super.initState();
+  }
+
+  getlikers() {
+    DatabaseService(uid: widget.wiggle.id)
+        .wiggleCollection
+        .document(widget.wiggle.id)
+        .collection('likes')
+        .document(Constants.myEmail)
+        .get()
+        .then((value) {
+      if (value.exists) {
+        setState(() {
+          liked = true;
+        });
+      }
+    });
+  }
+
+  getdislikers() {
+    DatabaseService(uid: widget.wiggle.id)
+        .wiggleCollection
+        .document(widget.wiggle.id)
+        .collection('dislikes')
+        .document(Constants.myEmail)
+        .get()
+        .then((value) {
+      if (value.exists) {
+        setState(() {
+          disliked = true;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context) ?? User();
@@ -35,254 +80,7 @@ class _OthersProfileState extends State<AnonOthersProfile> {
         builder: (context, snapshot) {
           UserData userData = snapshot.data;
           if (userData != null) {
-            return userData.email == widget.wiggle.email
-                ? Scaffold(
-                    body: Stack(children: <Widget>[
-                    Column(children: <Widget>[
-                      SizedBox(height: kSpacingUnit.w * 5),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            SizedBox(height: kSpacingUnit.w * 3),
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Icon(
-                                LineAwesomeIcons.arrow_left,
-                                size: ScreenUtil().setSp(kSpacingUnit.w * 2.5),
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    height: kSpacingUnit.w * 10,
-                                    width: kSpacingUnit.w * 10,
-                                    margin: EdgeInsets.only(
-                                        top: kSpacingUnit.w * 3),
-                                    child: Stack(
-                                      children: <Widget>[
-                                        CircleAvatar(
-                                          radius: kSpacingUnit.w * 5,
-                                          child: ClipOval(
-                                            child: new SizedBox(
-                                              width: 180,
-                                              height: 180,
-                                              child: Image.network(
-                                                    userData.anonDp,
-                                                    fit: BoxFit.cover,
-                                                  ) ??
-                                                  Image.asset(
-                                                      'assets/images/profile1.png',
-                                                      fit: BoxFit.cover),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: kSpacingUnit.w * 2),
-                                  Text(userData.nickname,
-                                      style: kTitleTextStyle),
-                                  SizedBox(height: kSpacingUnit.w * 0.5),
-                                  Text('Anonymous', style: kCaptionTextStyle),
-                                  SizedBox(height: kSpacingUnit.w * 2.5),
-                                  Container(
-                                    height: kSpacingUnit.w * 5.5,
-                                    // margin: EdgeInsets.symmetric(
-                                    //   horizontal: kSpacingUnit.w,
-                                    // ).copyWith(
-                                    //   bottom: kSpacingUnit.w * 2,
-                                    // ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          kSpacingUnit.w * 3),
-                                      color: Theme.of(context).backgroundColor,
-                                    ),
-                                    child: FlatButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: EditAnonProfile()), ModalRoute.withName('EditAnonProfile'));
-                                          
-                                        },
-                                        child: Row(
-                                          children: <Widget>[
-                                            SizedBox(
-                                                width: kSpacingUnit.w * 0.5),
-                                            Icon(LineAwesomeIcons.cog,
-                                                size: kSpacingUnit.w * 2.5),
-                                            SizedBox(width: kSpacingUnit.w * 1),
-                                            Text(
-                                              'Edit Anonymous Profile',
-                                              style: kTitleTextStyle.copyWith(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500),
-                                            )
-                                          ],
-                                        )),
-                                  )
-                                ],
-                              ),
-                            ),
-                            FlatButton(
-                              onPressed: () async {
-                                await _auth.signOut();
-                              },
-                              child: Icon(
-                                LineAwesomeIcons.alternate_sign_out,
-                                size: ScreenUtil().setSp(kSpacingUnit.w * 2.5),
-                              ),
-                            ),
-                            SizedBox(height: kSpacingUnit.w * 3),
-                          ])
-                    ]),
-                    DraggableScrollableSheet(
-                        minChildSize: 0.1,
-                        initialChildSize: 0.50,
-                        maxChildSize: 0.65,
-                        builder: (context, scrollController) {
-                          return SingleChildScrollView(
-                              controller: scrollController,
-                              child: Container(
-                                  color: Color(0xFF373739),
-                                  constraints: BoxConstraints(
-                                      minHeight:
-                                          MediaQuery.of(context).size.height),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: <Widget>[
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 32, right: 32, top: 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: <Widget>[
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              SizedBox(
-                                                height: 70,
-                                                width: 70,
-                                                child: ClipOval(
-                                                  child: Image.network(
-                                                        userData.anonDp,
-                                                        fit: BoxFit.fill,
-                                                      ) ??
-                                                      Image.asset(
-                                                          'assets/images/profile1.png',
-                                                          fit: BoxFit.fill),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 16,
-                                              ),
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Text(userData.nickname,
-                                                        style: kTitleTextStyle
-                                                            .copyWith(
-                                                          fontSize: 30,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                        )),
-                                                    Text(userData.nickname,
-                                                        style: kCaptionTextStyle
-                                                            .copyWith(
-                                                                fontSize: 15)),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: kSpacingUnit.w,
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.all(15),
-                                          color: Color(0xEE454545),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              Column(
-                                                children: <Widget>[
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: <Widget>[
-                                                      Icon(
-                                                        LineAwesomeIcons.heart,
-                                                        color: Colors.red,
-                                                        size: 30,
-                                                      ),
-                                                      SizedBox(
-                                                        width: kSpacingUnit.w,
-                                                      ),
-                                                      Text('1000',
-                                                          style: kTitleTextStyle
-                                                              .copyWith(
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700))
-                                                    ],
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Container(
-                                            child: Column(children: <Widget>[
-                                          Text('About Me',
-                                              style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                              )),
-                                          SizedBox(
-                                            height: kSpacingUnit.w,
-                                          ),
-                                          Text(userData.anonBio,
-                                              style: kCaptionTextStyle.copyWith(
-                                                fontSize: 15,
-                                              )),
-                                          SizedBox(
-                                            height: kSpacingUnit.w,
-                                          ),
-                                          Text('Interesting Facts',
-                                              style: kTitleTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w700,
-                                              )),
-                                          SizedBox(
-                                            height: kSpacingUnit.w,
-                                          ),
-                                          Text(userData.anonInterest,
-                                              style: kCaptionTextStyle.copyWith(
-                                                fontSize: 15,
-                                              ))
-                                        ]))
-                                      ])));
-                        })
-                  ]))
-                : Scaffold(
+            return Scaffold(
                     body: Stack(children: <Widget>[
                     Column(children: <Widget>[
                       SizedBox(height: kSpacingUnit.w * 5),
@@ -294,8 +92,8 @@ class _OthersProfileState extends State<AnonOthersProfile> {
                             FlatButton(
                               onPressed: () {
                                 Navigator.of(context).pushAndRemoveUntil(
-                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
-                      
+                                    FadeRoute(page: Wrapper()),
+                                    ModalRoute.withName('Wrapper'));
                               },
                               child: Icon(
                                 LineAwesomeIcons.home,
@@ -466,21 +264,183 @@ class _OthersProfileState extends State<AnonOthersProfile> {
                                                         CrossAxisAlignment
                                                             .center,
                                                     children: <Widget>[
+                                                      IconButton(
+                                                        icon: Icon(
+                                                            LineAwesomeIcons
+                                                                .chevron_circle_down,
+                                                            color: disliked
+                                                                ? Colors.red
+                                                                : Colors.white),
+                                                        onPressed: liked
+                                                            ? () {}
+                                                            : disliked
+                                                                ? () {
+                                                                    setState(
+                                                                        () {
+                                                                      disliked =
+                                                                          false;
+                                                                      DatabaseService(uid: widget.wiggle.id)
+                                                                          .wiggleCollection
+                                                                          .document(widget
+                                                                              .wiggle
+                                                                              .id)
+                                                                          .collection(
+                                                                              'dislikes')
+                                                                          .document(userData
+                                                                              .email)
+                                                                          .get()
+                                                                          .then(
+                                                                              (value) {
+                                                                        if (value
+                                                                            .exists) {
+                                                                          value
+                                                                              .reference
+                                                                              .delete();
+                                                                        }
+                                                                      });
+                                                                      DatabaseService(uid: widget.wiggle.id).increaseFame(
+                                                                          fame,
+                                                                          userData
+                                                                              .email);
+                                                                      fame =
+                                                                          fame +
+                                                                              1;
+                                                                    });
+                                                                  }
+                                                                : () {
+                                                                    setState(
+                                                                        () {
+                                                                      liked =
+                                                                          false;
+                                                                      disliked =
+                                                                          true;
+                                                                      DatabaseService(uid: widget.wiggle.id)
+                                                                          .wiggleCollection
+                                                                          .document(widget
+                                                                              .wiggle
+                                                                              .id)
+                                                                          .collection(
+                                                                              'likes')
+                                                                          .document(userData
+                                                                              .email)
+                                                                          .get()
+                                                                          .then(
+                                                                              (value) {
+                                                                        if (value
+                                                                            .exists) {
+                                                                          value
+                                                                              .reference
+                                                                              .delete();
+                                                                        }
+                                                                      });
+                                                                      DatabaseService(
+                                                                        uid: widget
+                                                                            .wiggle
+                                                                            .id,
+                                                                      ).decreaseFame(
+                                                                          fame,
+                                                                          userData
+                                                                              .email);
+                                                                      fame -= 1;
+                                                                    });
+                                                                  },
+                                                      ),
                                                       Icon(
-                                                        LineAwesomeIcons.heart,
-                                                        color: Colors.red,
+                                                        LineAwesomeIcons.star_1,
+                                                        color: Color(0xFFFFC107),
                                                         size: 30,
                                                       ),
                                                       SizedBox(
                                                         width: kSpacingUnit.w,
                                                       ),
-                                                      Text('1000',
+                                                      Text(fame.toString(),
                                                           style: kTitleTextStyle
                                                               .copyWith(
-                                                                  fontSize: 14,
+                                                                  fontSize: 20,
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .w700))
+                                                                          .w700)),
+                                                      IconButton(
+                                                        icon: Icon(
+                                                            LineAwesomeIcons
+                                                                .chevron_circle_up,
+                                                            color: liked
+                                                                ? Colors.red
+                                                                : Colors.white),
+                                                        onPressed: disliked
+                                                            ? () {}
+                                                            : liked
+                                                                ? () {
+                                                                    setState(
+                                                                        () {
+                                                                      liked =
+                                                                          false;
+                                                                      DatabaseService(uid: widget.wiggle.id)
+                                                                          .wiggleCollection
+                                                                          .document(widget
+                                                                              .wiggle
+                                                                              .id)
+                                                                          .collection(
+                                                                              'likes')
+                                                                          .document(userData
+                                                                              .email)
+                                                                          .get()
+                                                                          .then(
+                                                                              (value) {
+                                                                        if (value
+                                                                            .exists) {
+                                                                          value
+                                                                              .reference
+                                                                              .delete();
+                                                                        }
+                                                                      });
+                                                                      DatabaseService(
+                                                                        uid: widget
+                                                                            .wiggle
+                                                                            .id,
+                                                                      ).decreaseFame(
+                                                                          fame,
+                                                                          userData
+                                                                              .email);
+                                                                      fame -= 1;
+                                                                    });
+                                                                  }
+                                                                : () {
+                                                                    setState(
+                                                                        () {
+                                                                      liked =
+                                                                          true;
+                                                                      disliked =
+                                                                          false;
+                                                                      DatabaseService(uid: widget.wiggle.id)
+                                                                          .wiggleCollection
+                                                                          .document(widget
+                                                                              .wiggle
+                                                                              .id)
+                                                                          .collection(
+                                                                              'dislikes')
+                                                                          .document(userData
+                                                                              .email)
+                                                                          .get()
+                                                                          .then(
+                                                                              (value) {
+                                                                        if (value
+                                                                            .exists) {
+                                                                          value
+                                                                              .reference
+                                                                              .delete();
+                                                                        }
+                                                                      });
+                                                                      DatabaseService(uid: widget.wiggle.id).increaseFame(
+                                                                          fame,
+                                                                          userData
+                                                                              .email);
+                                                                      fame =
+                                                                          fame +
+                                                                              1;
+                                                                    });
+                                                                  },
+                                                      ),
                                                     ],
                                                   ),
                                                 ],

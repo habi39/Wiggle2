@@ -48,15 +48,15 @@ class DatabaseService {
 
   uploadtoken(String fcmToken) async {
     await Firestore.instance
-          .collection('users')
-          .document(uid)
-          .collection('tokens')
-          .document(uid)
-          .setData({
-        'token': fcmToken,
-        'createdAt': FieldValue.serverTimestamp(),
-        'platform': Platform.operatingSystem
-      });
+        .collection('users')
+        .document(uid)
+        .collection('tokens')
+        .document(uid)
+        .setData({
+      'token': fcmToken,
+      'createdAt': FieldValue.serverTimestamp(),
+      'platform': Platform.operatingSystem
+    });
   }
 
   Future updateTrivia(
@@ -249,7 +249,8 @@ class DatabaseService {
       'anonBio': '',
       'anonInterest': '',
       'anonDp': '',
-      'id':uid
+      'id': uid,
+      'fame': 0
     });
   }
 
@@ -265,6 +266,28 @@ class DatabaseService {
         {'anonBio': anonBio, 'anonInterest': anonInterest, 'anonDp': anonDp});
   }
 
+  Future increaseFame(int initialvalue, String raterEmail) async {
+    await wiggleCollection
+        .document(uid)
+        .collection('likes')
+        .document(raterEmail)
+        .setData({'like': raterEmail});
+    return await wiggleCollection
+        .document(uid)
+        .updateData({'fame': initialvalue + 1});
+  }
+
+  Future decreaseFame(int initialvalue, String raterEmail) async {
+    await wiggleCollection
+        .document(uid)
+        .collection('dislikes')
+        .document(raterEmail)
+        .setData({'dislike': raterEmail});
+    return await wiggleCollection
+        .document(uid)
+        .updateData({'fame': initialvalue - 1});
+  }
+
   Future updateUserData(
       String email,
       String name,
@@ -274,7 +297,7 @@ class DatabaseService {
       String bio,
       String dp,
       bool isAnonymous) async {
-    return await wiggleCollection.document(uid).setData({
+    return await wiggleCollection.document(uid).updateData({
       "email": email,
       "name": name,
       "nickname": nickname,
@@ -283,9 +306,6 @@ class DatabaseService {
       "bio": bio,
       "dp": dp,
       "isAnonymous": isAnonymous,
-      'anonBio': '',
-      'anonInterest': '',
-      'anonDp': '',
       'id': uid
     });
   }
@@ -294,7 +314,7 @@ class DatabaseService {
   List<Wiggle> _wiggleListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Wiggle(
-          id: doc.data['id']??'',
+          id: doc.data['id'] ?? '',
           email: doc.data['email'] ?? '',
           dp: doc.data['dp'] ?? '',
           name: doc.data['name'] ?? '',
@@ -306,7 +326,8 @@ class DatabaseService {
           isAnonymous: doc.data['isAnonymous'] ?? false,
           anonBio: doc.data['anonBio'] ?? '',
           anonInterest: doc.data['anonInterest'] ?? '',
-          anonDp: doc.data['anonDp'] ?? '');
+          anonDp: doc.data['anonDp'] ?? '',
+          fame: doc.data['fame'] ?? 0);
     }).toList();
   }
 
@@ -323,7 +344,8 @@ class DatabaseService {
         isAnonymous: snapshot.data['isAnonymous'],
         anonBio: snapshot.data['anonBio'] ?? '',
         anonInterest: snapshot.data['anonInterest'] ?? '',
-        anonDp: snapshot.data['anonDp'] ?? '');
+        anonDp: snapshot.data['anonDp'] ?? '',
+        fame: snapshot.data['fame'] ?? 0);
   }
 
   //get wiggle stream

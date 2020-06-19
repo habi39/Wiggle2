@@ -221,10 +221,10 @@ class _MyanonprofileState extends State<Myanonprofile> {
                                                 SizedBox(
                                                   width: kSpacingUnit.w,
                                                 ),
-                                                Text('1000',
+                                                Text(userData.fame.toString(),
                                                     style: kTitleTextStyle
                                                         .copyWith(
-                                                            fontSize: 14,
+                                                            fontSize: 20,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w700))

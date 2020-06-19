@@ -19,6 +19,7 @@ class UserData {
   String anonBio;
   String anonInterest;
   String anonDp;
+  int fame;
 
   UserData(
       {this.email,
@@ -31,7 +32,8 @@ class UserData {
       this.isAnonymous,
       this.anonBio,
       this.anonInterest,
-      this.anonDp});
+      this.anonDp,
+      this.fame});
 
   UserData.fromMap(Map<String, dynamic> data) {
     email = data['email'];
@@ -45,6 +47,7 @@ class UserData {
     anonBio = data['anonBio'];
     anonInterest = data['anonInterest'];
     anonDp = data['anonDp'];
+    fame = data['fame'];
   }
   getUserData(ProfileNotifier profileNotifier) async {
     QuerySnapshot snapshot =
