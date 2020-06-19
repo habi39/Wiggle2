@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           //         TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
           //   ),
           // ),
-          home: Onboarding(),
+          home: Wrapper(),
           // Wrapper(),
         ),
       ),

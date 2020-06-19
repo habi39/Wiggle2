@@ -1,3 +1,4 @@
+import 'package:Wiggle2/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'package:Wiggle2/services/auth.dart';
 import 'package:Wiggle2/shared/loading.dart';
@@ -7,6 +8,7 @@ import 'helper.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:Wiggle2/models/widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:Wiggle2/shared/constants.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -60,7 +62,12 @@ class _RegisterState extends State<Register> {
       if (_image != null) {
         uploadPic().then((value) => setState(() {
               loading = false;
+              
             }));
+            Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Onboarding()), ModalRoute.withName('Onboarding'));
+      
+          
       } else {
         _auth
             .registerWithEmailAndPassword(
@@ -75,7 +82,11 @@ class _RegisterState extends State<Register> {
                 false)
             .then((value) => setState(() {
                   loading = false;
+                  
                 }));
+                Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Onboarding()), ModalRoute.withName('Onboarding'));
+                
       }
     }
   }
