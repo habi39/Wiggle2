@@ -223,9 +223,9 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
           if (userData != null) {
             return Scaffold(
               appBar: AppBar(
-                // leading: IconButton(
-                //     icon: Icon(LineAwesomeIcons.napster),
-                //     onPressed: _showNotificationsAfterSecond),
+                leading: IconButton(
+                    icon: Icon(LineAwesomeIcons.napster),
+                    onPressed: _showNotifications),
                 elevation: 0,
                 centerTitle: true,
                 title: Row(

@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:Wiggle2/screens/home/home.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 import '../../../games/trivia/trivia.dart';
 import '../../../models/user.dart';
@@ -88,13 +89,25 @@ class _IntroPage2State extends State<IntroPage2> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "${widget.chosenWiggle.nickname}, 22",
-                                        style: TextStyle(
+                                      Row(
+                                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          Text(
+                                            "${widget.chosenWiggle.nickname}, 22",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 18,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          Icon(LineAwesomeIcons.star_1,color: Color(0xFFFFC107),),
+                                          Text('Fame: ' + widget.chosenWiggle.fame.toString(),style:TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 18,
                                           color: Colors.black,
-                                        ),
+                                        ),)
+                                        ],
                                       ),
                                       SizedBox(
                                         height: 10,
@@ -107,6 +120,7 @@ class _IntroPage2State extends State<IntroPage2> {
                                           color: Colors.black,
                                         ),
                                       ),
+                                       
                                     ],
                                   ),
                                 ),
