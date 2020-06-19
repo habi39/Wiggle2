@@ -146,8 +146,8 @@ class _OnboardingState extends State<Onboarding> {
   }
 
   Future<void> notificationAfterSec() async {
-    var timeDelayed = DateTime.now().add(Duration(seconds: 5));
-    //var time = new Time(21, 30, 0);
+    // var timeDelayed = DateTime.now().add(Duration(seconds: 5));
+    var time = Time(17, 00, 0);
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
             'second channel ID', 'second Channel title', 'second channel body',
@@ -159,10 +159,10 @@ class _OnboardingState extends State<Onboarding> {
 
     NotificationDetails notificationDetails =
         NotificationDetails(androidNotificationDetails, iosNotificationDetails);
-    await flutterLocalNotificationsPlugin.schedule(1, 'Hello there',
-        'please subscribe my channel', timeDelayed, notificationDetails);
-    // await flutterLocalNotificationsPlugin.showDailyAtTime(
-    //     1, "Hello Mag", "yozza", time, notificationDetails);
+    // await flutterLocalNotificationsPlugin.schedule(1, 'Hello there',
+    //     'please subscribe my channel', timeDelayed, notificationDetails);
+    await flutterLocalNotificationsPlugin.showDailyAtTime(
+        1, "Hello Mag", "yozza", time, notificationDetails);
   }
 
   Future onSelectNotification(String payLoad) {
@@ -206,6 +206,7 @@ class _OnboardingState extends State<Onboarding> {
         ),
         onDone: () {
           _showNotifications();
+          _showNotificationsAfterSecond();
 
           Navigator.pushReplacement(
             context,
