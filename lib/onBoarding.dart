@@ -84,33 +84,21 @@ class _OnboardingState extends State<Onboarding> {
     ];
   }
 
- createAlertDialog() {
+  createAlertDialog() {
     final user = Provider.of<User>(context);
     final wiggles = Provider.of<List<Wiggle>>(context) ?? [];
     return showDialog(
         context: context,
         builder: (context) {
-          return StreamBuilder<UserData>(
-              stream: DatabaseService(uid: user.uid).userData,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  UserData userData = snapshot.data;
-                  if (userData != null) {
-                    return CustomDialog(
-                      title: 'Meet a Friend',
-                      description: 'Who will you meet today?',
-            
-                    );
-                  }
-                } else {
-                  Loading();
-                }
-              });
+          return CustomDialog(
+            title: 'Meet a Friend',
+            description: 'Who will you meet today?',
+          );
         });
   }
+
   @override
   void initState() {
-
     initializing();
     super.initState();
   }
@@ -158,7 +146,7 @@ class _OnboardingState extends State<Onboarding> {
   }
 
   Future<void> notificationAfterSec() async {
-     var timeDelayed = DateTime.now().add(Duration(seconds: 5));
+    var timeDelayed = DateTime.now().add(Duration(seconds: 5));
     //var time = new Time(21, 30, 0);
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
@@ -200,6 +188,7 @@ class _OnboardingState extends State<Onboarding> {
       ],
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -230,51 +219,95 @@ class _OnboardingState extends State<Onboarding> {
   }
 }
 
-class CustomDialog extends StatelessWidget{
+class CustomDialog extends StatelessWidget {
   final String title, description, buttonText;
   final Image image;
 
-  CustomDialog({this.title,this.description,this.buttonText,this.image});
+  CustomDialog({this.title, this.description, this.buttonText, this.image});
 
-@override
-Widget build(BuildContext context){
-  return Dialog(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    elevation: 0,
-    backgroundColor: Colors.transparent,
-    child:dialogContent(context),
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: dialogContent(context),
+    );
+  }
 
-
-
-  );
-}
-dialogContent(BuildContext context){
-  return Stack(children: <Widget>[
-    Container(padding: EdgeInsets.only(top:100,bottom:16,left:14,right:14),
-    margin: EdgeInsets.only(top:50),
-    decoration: BoxDecoration(
-      color: Color(0xFF505050),
-      shape: BoxShape.rectangle,
-      borderRadius: BorderRadius.circular(17),
-      boxShadow: [BoxShadow(color: Colors.black26,blurRadius: 10,offset: Offset(0,10),)]
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(title, style: TextStyle(fontSize:20,fontWeight:FontWeight.w600,color: Color(0xFFFFC107))),
-        
-          Text(description, style: TextStyle(fontSize:12,fontWeight:FontWeight.w100,color: Color(0xFFFFC107))),
-          Align(alignment: Alignment.bottomRight,
-          child: FlatButton(onPressed: (){}, child: Text('LETZ GEDDIT',style: TextStyle(color:Color(0xFFFFC107),fontWeight: FontWeight.w500),),),),
-          
-        ],
-      )
-    ),
-    Positioned(top: 0, left:0, right:0,child:CircleAvatar(backgroundColor: Colors.blueGrey,radius: 60,
-    backgroundImage: AssetImage('assets/images/WTaB.gif'),
-    ))
-    
-  ],);
-}
-
+  dialogContent(BuildContext context) {
+    final user = Provider.of<User>(context);
+    final wiggles = Provider.of<List<Wiggle>>(context) ?? [];
+    return StreamBuilder<Object>(
+        stream: DatabaseService(uid: user.uid).userData,
+        builder: (context, snapshot) {
+          UserData userData = snapshot.data;
+          if (userData != null) {
+            return Stack(
+              children: <Widget>[
+                Container(
+                    padding: EdgeInsets.only(
+                        top: 100, bottom: 16, left: 14, right: 14),
+                    margin: EdgeInsets.only(top: 50),
+                    decoration: BoxDecoration(
+                        color: Color(0xFF505050),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(17),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 10,
+                            offset: Offset(0, 10),
+                          )
+                        ]),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(title,
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFFFC107))),
+                        Text(description,
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w100,
+                                color: Color(0xFFFFC107))),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => IntroPage1(
+                                      userData: userData, wiggles: wiggles),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'LETZ GEDDIT',
+                              style: TextStyle(
+                                  color: Color(0xFFFFC107),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+                Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.blueGrey,
+                      radius: 60,
+                      backgroundImage: AssetImage('assets/images/WTaB.gif'),
+                    ))
+              ],
+            );
+          } else {
+            return Loading();
+          }
+        });
+  }
 }
