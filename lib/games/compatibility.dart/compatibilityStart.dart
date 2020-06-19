@@ -1,3 +1,4 @@
+import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:random_string/random_string.dart';
@@ -5,7 +6,7 @@ import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:Wiggle2/screens/home/home.dart';
+
 import 'compatibilityIntroPage.dart';
 import 'compatibilityStatus.dart';
 import 'package:Wiggle2/shared/constants.dart';
@@ -74,7 +75,7 @@ class _CompatibilityStartState extends State<CompatibilityStart> {
             icon: Icon(LineAwesomeIcons.home),
             onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(
-                  FadeRoute(page: Home()), ModalRoute.withName('Home'));
+                  FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
             }),
         title: Text("C O M P A T I B I L I T Y",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
