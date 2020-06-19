@@ -147,7 +147,7 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
 
   Future<void> notificationAfterSec() async {
     var timeDelayed = DateTime.now().add(Duration(seconds: 5));
-    //var time = new Time(21, 30, 0);
+    // var time = new Time(16, 15, 0);
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
             'second channel ID', 'second Channel title', 'second channel body',
@@ -163,7 +163,7 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
         'please subscribe my channel', timeDelayed, notificationDetails);
     // await flutterLocalNotificationsPlugin.showDailyAtTime(
     //     1, "Hello Mag", "yozza", time, notificationDetails);
-    print('hree)');
+    print('hree');
   }
 
   Future onSelectNotification(String payLoad) {
@@ -223,11 +223,9 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
           if (userData != null) {
             return Scaffold(
               appBar: AppBar(
-                leading: IconButton(
-                    icon: Icon(LineAwesomeIcons.napster),
-                    onPressed: () {
-                      _showNotificationsAfterSecond();
-                    }),
+                // leading: IconButton(
+                //     icon: Icon(LineAwesomeIcons.napster),
+                //     onPressed: _showNotificationsAfterSecond),
                 elevation: 0,
                 centerTitle: true,
                 title: Row(
