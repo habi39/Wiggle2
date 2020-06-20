@@ -53,6 +53,7 @@ class _AnonymousConversationState extends State<AnonymousConversation> {
                 itemCount: snapshot.data.documents.length,
                 itemBuilder: (context, index) {
                   return MessageTile(
+                      roomId: widget.chatRoomId,
                       type: snapshot.data.documents[index].data["type"],
                       message: snapshot.data.documents[index].data["message"],
                       isSendByMe:
@@ -285,8 +286,10 @@ class MessageTile extends StatelessWidget {
   final bool isSendByMe;
   final String time;
   final String type;
+  final String roomId;
 
-  MessageTile({this.message, this.isSendByMe, this.time, this.type});
+  MessageTile(
+      {this.message, this.isSendByMe, this.time, this.type, this.roomId});
 
   //delete msg
   //edit msg
@@ -295,6 +298,17 @@ class MessageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
+      onDoubleTap: () => DatabaseService()
+          .anonChatReference
+          .document(roomId)
+          .collection('chats')
+          .where("message", isEqualTo: message)
+          .getDocuments()
+          .then((doc) {
+        if (doc.documents[0].exists) {
+          doc.documents[0].reference.delete();
+        }
+      }),
       child: Container(
         padding: EdgeInsets.only(
             top: 8,

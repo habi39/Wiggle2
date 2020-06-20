@@ -27,6 +27,7 @@ class DatabaseService {
   final CollectionReference wiggleCollection =
       Firestore.instance.collection('users');
   final chatReference = Firestore.instance.collection('ChatRoom');
+  final anonChatReference = Firestore.instance.collection('Anonymous ChatRoom');
   final cloudReference = Firestore.instance.collection('cloud');
   final feedReference = Firestore.instance.collection('feed');
   final followersReference = Firestore.instance.collection('followers');
