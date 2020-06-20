@@ -156,7 +156,7 @@ class _OthersProfileState extends State<OthersProfile> {
       padding: EdgeInsets.only(top: 0.5),
       child: FlatButton(
         highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+        splashColor: Colors.transparent,
         onPressed: () => sentrequest
             ? acceptedrequest
                 ? controlUnfollowUser(userData)
@@ -232,8 +232,8 @@ class _OthersProfileState extends State<OthersProfile> {
   }
 
   saveReceivercloudforfollow(UserData userData) async {
-    QuerySnapshot query =
-        await DatabaseService(uid: widget.wiggle.id).getReceivertoken(widget.wiggle.email);
+    QuerySnapshot query = await DatabaseService(uid: widget.wiggle.id)
+        .getReceivertoken(widget.wiggle.email);
     String val = query.documents[0].data['token'].toString();
     databaseserver.cloudReference.document().setData({
       'type': 'follow',
@@ -247,8 +247,8 @@ class _OthersProfileState extends State<OthersProfile> {
   }
 
   saveReceivercloudforrequest(UserData userData) async {
-    QuerySnapshot query =
-        await DatabaseService(uid:widget.wiggle.id).getReceivertoken(widget.wiggle.email);
+    QuerySnapshot query = await DatabaseService(uid: widget.wiggle.id)
+        .getReceivertoken(widget.wiggle.email);
     String val = query.documents[0].data['token'].toString();
     databaseserver.cloudReference.document().setData({
       'type': 'request',
@@ -393,7 +393,7 @@ class _OthersProfileState extends State<OthersProfile> {
       padding: EdgeInsets.only(top: 0.5),
       child: FlatButton(
         highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+        splashColor: Colors.transparent,
         onPressed: performFunction,
         child: Container(
           width: MediaQuery.of(context).size.width / 2.5,
@@ -435,7 +435,7 @@ class _OthersProfileState extends State<OthersProfile> {
               appBar: AppBar(
                 leading: IconButton(
                   highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                  splashColor: Colors.transparent,
                   icon: Icon(LineAwesomeIcons.home),
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
@@ -445,17 +445,6 @@ class _OthersProfileState extends State<OthersProfile> {
                   },
                 ),
                 elevation: 0,
-                actions: <Widget>[
-                  IconButton(
-                  
-                    highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
-                    icon: Icon(
-                      LineAwesomeIcons.alternate_sign_out,
-                    ),
-                    onPressed: () async {},
-                  ),
-                ],
               ),
               body: Stack(children: <Widget>[
                 Column(
@@ -530,8 +519,8 @@ class _OthersProfileState extends State<OthersProfile> {
                                     //crossAxisAlignment: CrossAxisAlignment.baseline,
                                     children: <Widget>[
                                       FlatButton(
-                                        highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
                                               left: 23, right: 23),
                                           child: createColumns(
@@ -551,8 +540,8 @@ class _OthersProfileState extends State<OthersProfile> {
                                                                       .wiggle)))
                                               : () => print('tried pressing')),
                                       FlatButton(
-                                        highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
                                               left: 23, right: 23),
                                           child: createColumns('Following',
@@ -573,7 +562,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                               : () => print('tried pressing')),
                                       FlatButton(
                                         highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                                        splashColor: Colors.transparent,
                                         padding: EdgeInsets.only(
                                             left: 23, right: 23),
                                         child: createColumns('Gamescore', 0),
@@ -711,13 +700,16 @@ class _OthersProfileState extends State<OthersProfile> {
                                     ),
                                   )
                                 : Container(
-                                  padding: EdgeInsets.all(20),
-                                  child: Text('FOLLOW ' + widget.wiggle.name +' TO  VIEW THEIR PROFILE',
-                                            style: kTitleTextStyle.copyWith(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w300,
-                                                color: Color(0xFFFFC107))),
-                                ),
+                                    padding: EdgeInsets.all(20),
+                                    child: Text(
+                                        'FOLLOW ' +
+                                            widget.wiggle.name +
+                                            ' TO  VIEW THEIR PROFILE',
+                                        style: kTitleTextStyle.copyWith(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w300,
+                                            color: Color(0xFFFFC107))),
+                                  ),
                             (widget.userData.email == widget.wiggle.email ||
                                     following)
                                 ? StreamBuilder(

@@ -51,6 +51,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 itemCount: snapshot.data.documents.length,
                 itemBuilder: (context, index) {
                   return MessageTile(
+                      roomId: widget.chatRoomId,
                       type: snapshot.data.documents[index].data["type"],
                       message: snapshot.data.documents[index].data["message"],
                       isSendByMe:
@@ -100,7 +101,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
 
   saveReceivercloud(Wiggle wiggle) async {
     QuerySnapshot query =
-        await DatabaseService(uid:wiggle.id).getReceivertoken(wiggle.email);
+        await DatabaseService(uid: wiggle.id).getReceivertoken(wiggle.email);
     String val = query.documents[0].data['token'].toString();
     DatabaseService().cloudReference.document().setData({
       'type': 'message',
@@ -140,8 +141,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
               appBar: AppBar(
                 titleSpacing: 50,
                 leading: IconButton(
-                  highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
                     icon: Icon(LineAwesomeIcons.home),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
@@ -177,7 +178,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                     ),
                     InkWell(
                       highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                      splashColor: Colors.transparent,
                       child: Text(widget.wiggle.name,
                           style: kCaptionTextStyle.copyWith(fontSize: 20)),
                       onTap: () {
@@ -197,7 +198,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 actions: <Widget>[
                   IconButton(
                     highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                    splashColor: Colors.transparent,
                     icon: Icon(Icons.gamepad),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
@@ -280,8 +281,10 @@ class MessageTile extends StatelessWidget {
   final bool isSendByMe;
   final String time;
   final String type;
+  final String roomId;
 
-  MessageTile({this.message, this.isSendByMe, this.time, this.type});
+  MessageTile(
+      {this.message, this.isSendByMe, this.time, this.type, this.roomId});
 
   //delete msg
   //edit msg
@@ -290,6 +293,17 @@ class MessageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
+      onDoubleTap: () => DatabaseService()
+          .chatReference
+          .document(roomId)
+          .collection('chats')
+          .where("message", isEqualTo: message)
+          .getDocuments()
+          .then((doc) {
+        if (doc.documents[0].exists) {
+          doc.documents[0].reference.delete();
+        }
+      }),
       child: Container(
         padding: EdgeInsets.only(
             top: 8,

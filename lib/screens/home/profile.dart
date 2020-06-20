@@ -410,41 +410,48 @@ class _MyprofileState extends State<Myprofile> {
                                                       .height *
                                                   0.30 -
                                               50,
-                                          child: ListView.builder(
-                                              physics: ClampingScrollPhysics(),
-                                              shrinkWrap: true,
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: snapshot
-                                                  .data.documents.length,
-                                              itemBuilder: (context, index) {
-                                                return Container(
-                                                    width: 150,
-                                                    margin: EdgeInsets.only(
-                                                        right: 20),
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                    .size
-                                                                    .height *
-                                                                0.30 -
-                                                            50,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  20.0)),
-                                                      child: Image.network(
-                                                            snapshot
-                                                                .data
-                                                                .documents[
-                                                                    index]
-                                                                .data['photo'],
-                                                            fit: BoxFit.fill,
-                                                          ) ??
-                                                          Image.asset(
-                                                              'assets/images/profile1.png',
-                                                              fit: BoxFit.fill),
-                                                    ));
-                                              }))
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0),
+                                            child: ListView.builder(
+                                                physics:
+                                                    ClampingScrollPhysics(),
+                                                shrinkWrap: true,
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: snapshot
+                                                    .data.documents.length,
+                                                itemBuilder: (context, index) {
+                                                  return Container(
+                                                      width: 150,
+                                                      margin: EdgeInsets.only(
+                                                          right: 20),
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .height *
+                                                                  0.30 -
+                                                              50,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    20.0)),
+                                                        child: Image.network(
+                                                              snapshot
+                                                                  .data
+                                                                  .documents[
+                                                                      index]
+                                                                  .data['photo'],
+                                                              fit: BoxFit.fill,
+                                                            ) ??
+                                                            Image.asset(
+                                                                'assets/images/profile1.png',
+                                                                fit: BoxFit
+                                                                    .fill),
+                                                      ));
+                                                }),
+                                          ))
                                       : Loading();
                                 }),
                             // GestureDetector(

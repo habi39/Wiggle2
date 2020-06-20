@@ -26,6 +26,7 @@ class DatabaseService {
   //collection reference
   final CollectionReference wiggleCollection =
       Firestore.instance.collection('users');
+  final chatReference = Firestore.instance.collection('ChatRoom');
   final cloudReference = Firestore.instance.collection('cloud');
   final feedReference = Firestore.instance.collection('feed');
   final followersReference = Firestore.instance.collection('followers');
@@ -36,7 +37,6 @@ class DatabaseService {
   final femaleReference = Firestore.instance.collection('female');
   final compatibilityReference = Firestore.instance.collection('compatibility');
   final bondReference = Firestore.instance.collection('Bond');
-  final susReference = Firestore.instance.collection('Sus ChatRoom');
   final postReference = Firestore.instance.collection('posts');
 
   Future updateGame(String gameRoomID, List player1, List player2) async {
