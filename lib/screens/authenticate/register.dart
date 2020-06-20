@@ -60,13 +60,7 @@ class _RegisterState extends State<Register> {
       }
 
       if (_image != null) {
-        uploadPic().then((value) => setState(() {
-              loading = false;
-              
-            }));
-            Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: Onboarding()), ModalRoute.withName('Onboarding'));
-      
+        uploadPic();
           
       } else {
         _auth
@@ -79,15 +73,10 @@ class _RegisterState extends State<Register> {
                 selectedBlockType,
                 bio,
                 'https://firebasestorage.googleapis.com/v0/b/wiggle2-1d590.appspot.com/o/data%2Fuser%2F0%2Fcom.example.Wiggle2%2Fcache%2Fimage_picker8049276365349124154.png?alt=media&token=e2066efa-287f-45e9-9df6-6604a1838567',
-                false)
-            .then((value) => setState(() {
-                  loading = false;
-                  
-                }));
-                Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: Onboarding()), ModalRoute.withName('Onboarding'));
-                
+                false);         
       }
+      Navigator.of(context).pushAndRemoveUntil(
+                    FadeRoute(page: Onboarding()), ModalRoute.withName('Onboarding'));
     }
   }
 

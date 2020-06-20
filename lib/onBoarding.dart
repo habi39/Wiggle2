@@ -235,7 +235,7 @@ class CustomDialog extends StatelessWidget {
   }
 
   dialogContent(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final user = Provider.of<User>(context) ?? User();
     final wiggles = Provider.of<List<Wiggle>>(context) ?? [];
     return StreamBuilder<Object>(
         stream: DatabaseService(uid: user.uid).userData,
