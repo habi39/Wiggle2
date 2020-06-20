@@ -377,7 +377,7 @@ class _AnonOthersProfileState extends State<AnonOthersProfile> {
                                                 SizedBox(
                                                   width: kSpacingUnit.w,
                                                 ),
-                                                Text(fame==null? 0:fame.toString(),
+                                                Text(fame==null? 0.toString():'$fame',
                                                     style: kTitleTextStyle
                                                         .copyWith(
                                                             fontSize: 20,
