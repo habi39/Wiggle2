@@ -70,13 +70,13 @@ class _HomeState extends State<Home> {
 
   _saveDeviceToken(String uid) async {
     String fcmToken = await _fcm.getToken();
-DatabaseService(uid: uid).uploadtoken(fcmToken);
+    DatabaseService(uid: uid).uploadtoken(fcmToken);
   }
 
   @override
   void initState() {
     super.initState();
-    
+
     _fcm.configure(
       onMessage: (Map<String, dynamic> message) async {
         showSnackBar(message);
@@ -147,8 +147,9 @@ DatabaseService(uid: uid).uploadtoken(fcmToken);
                           },
                           child: Icon(
                             Icons.menu,
-                            color:
-                                _currentIndex == 0 ? Colors.amber : Colors.white,
+                            color: _currentIndex == 0
+                                ? Colors.amber
+                                : Colors.white,
                           ),
                         ),
                         MaterialButton(
@@ -162,8 +163,9 @@ DatabaseService(uid: uid).uploadtoken(fcmToken);
                           },
                           child: Icon(
                             Icons.chat,
-                            color:
-                                _currentIndex == 1 ? Colors.amber : Colors.white,
+                            color: _currentIndex == 1
+                                ? Colors.amber
+                                : Colors.white,
                           ),
                         )
                       ],
@@ -183,8 +185,9 @@ DatabaseService(uid: uid).uploadtoken(fcmToken);
                           },
                           child: Icon(
                             Icons.new_releases,
-                            color:
-                                _currentIndex == 2 ? Colors.amber : Colors.white,
+                            color: _currentIndex == 2
+                                ? Colors.amber
+                                : Colors.white,
                           ),
                         ),
                         MaterialButton(
@@ -221,8 +224,7 @@ DatabaseService(uid: uid).uploadtoken(fcmToken);
             key: _scaffoldkey,
             body: tabs[_currentIndex],
             floatingActionButton: FloatingActionButton(
-              
-                          splashColor: Colors.transparent,
+              splashColor: Colors.transparent,
               backgroundColor: Colors.transparent,
               child: ClipOval(
                 child: Image.asset('assets/images/ghosty2.png',
@@ -260,8 +262,9 @@ DatabaseService(uid: uid).uploadtoken(fcmToken);
                           },
                           child: Icon(
                             Icons.menu,
-                            color:
-                                _currentIndex == 0 ? Colors.white : Colors.grey,
+                            color: _currentIndex == 0
+                                ? Colors.amber
+                                : Colors.white,
                           ),
                         ),
                         MaterialButton(
@@ -275,8 +278,9 @@ DatabaseService(uid: uid).uploadtoken(fcmToken);
                           },
                           child: Icon(
                             Icons.chat,
-                            color:
-                                _currentIndex == 1 ? Colors.white : Colors.grey,
+                            color: _currentIndex == 1
+                                ? Colors.amber
+                                : Colors.white,
                           ),
                         )
                       ],
@@ -296,8 +300,9 @@ DatabaseService(uid: uid).uploadtoken(fcmToken);
                           },
                           child: Icon(
                             Icons.new_releases,
-                            color:
-                                _currentIndex == 2 ? Colors.white : Colors.grey,
+                            color: _currentIndex == 2
+                                ? Colors.amber
+                                : Colors.white,
                           ),
                         ),
                         MaterialButton(
@@ -311,8 +316,9 @@ DatabaseService(uid: uid).uploadtoken(fcmToken);
                           },
                           child: Icon(
                             Icons.portrait,
-                            color:
-                                _currentIndex == 3 ? Colors.white : Colors.grey,
+                            color: _currentIndex == 3
+                                ? Colors.amber
+                                : Colors.white,
                           ),
                         )
                       ],

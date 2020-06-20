@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/screens/feed/uploadImage.dart';
+import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/shared/constants.dart';
 import 'package:Wiggle2/shared/loading.dart';
@@ -92,12 +93,18 @@ class _FeedState extends State<Feed> {
   pickImageFromGallery(context, userData) async {
     Navigator.pop(context);
     File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => UploadImage(file: imageFile, userData: userData),
-      ),
-    );
+    if (imageFile == null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          FadeRoute(page: Feed()), ModalRoute.withName('Feed'));
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              UploadImage(file: imageFile, userData: userData),
+        ),
+      );
+    }
   }
 
   captureImageWithCamera(context, userData) async {
@@ -105,12 +112,18 @@ class _FeedState extends State<Feed> {
     File imageFile = await ImagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 680, maxWidth: 970);
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => UploadImage(file: imageFile, userData: userData),
-      ),
-    );
+    if (imageFile == null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          FadeRoute(page: Feed()), ModalRoute.withName('Feed'));
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              UploadImage(file: imageFile, userData: userData),
+        ),
+      );
+    }
   }
 
   takeImage(nContext, userData) {
@@ -162,8 +175,8 @@ class _FeedState extends State<Feed> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
               actions: <Widget>[
                 IconButton(
-                  highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
                     icon: Icon(Icons.image),
                     onPressed: () {
                       takeImage(context, userData);

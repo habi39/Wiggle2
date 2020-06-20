@@ -51,7 +51,7 @@ class _CompatibilityState extends State<Compatibility>
     CompatibilityCard('Who would you wiggle?', 'Habi', 'Hanzo'),
     CompatibilityCard(
         'What do you look for in your SO?', 'Looks', 'Personality'),
-    CompatibilityCard('What do you look for in your SO?', 'Boobs', 'Butt'),
+    CompatibilityCard('What do you look for in your SO', 'Boobs', 'Butt'),
     CompatibilityCard('Day?', 'Sunny', 'Rainy'),
     CompatibilityCard('Hi?', 'ha', 'hu'),
     CompatibilityCard('hi?', 'jo', 'la'),

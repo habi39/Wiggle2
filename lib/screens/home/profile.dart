@@ -93,7 +93,7 @@ class _MyprofileState extends State<Myprofile> {
       padding: EdgeInsets.only(top: 0.5),
       child: FlatButton(
         highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+        splashColor: Colors.transparent,
         onPressed: performFunction,
         child: Container(
           width: MediaQuery.of(context).size.width / 2.5,
@@ -141,7 +141,7 @@ class _MyprofileState extends State<Myprofile> {
               appBar: AppBar(
                 leading: IconButton(
                   highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                  splashColor: Colors.transparent,
                   icon: Icon(LineAwesomeIcons.plus_circle),
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
@@ -154,7 +154,7 @@ class _MyprofileState extends State<Myprofile> {
                 actions: <Widget>[
                   IconButton(
                     highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                    splashColor: Colors.transparent,
                     icon: Icon(
                       LineAwesomeIcons.alternate_sign_out,
                     ),
@@ -237,8 +237,8 @@ class _MyprofileState extends State<Myprofile> {
                                     //crossAxisAlignment: CrossAxisAlignment.baseline,
                                     children: <Widget>[
                                       FlatButton(
-                                        highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
                                               left: 23, right: 23),
                                           child: createColumns(
@@ -252,8 +252,8 @@ class _MyprofileState extends State<Myprofile> {
                                                           userData:
                                                               userData)))),
                                       FlatButton(
-                                        highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
                                               left: 23, right: 23),
                                           child: createColumns('Following',
@@ -268,7 +268,7 @@ class _MyprofileState extends State<Myprofile> {
                                                               userData)))),
                                       FlatButton(
                                         highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+                                        splashColor: Colors.transparent,
                                         padding: EdgeInsets.only(
                                             left: 23, right: 23),
                                         child: createColumns('Gamescore', 0),
@@ -444,59 +444,58 @@ class _MyprofileState extends State<Myprofile> {
                                                               'assets/images/profile1.png',
                                                               fit: BoxFit.fill),
                                                     ));
-                                              })
-                                        )
+                                              }))
                                       : Loading();
                                 }),
-                                // GestureDetector(
-                                //           onTap: () {
-                                //             Navigator.of(context)
-                                //                 .pushAndRemoveUntil(
-                                //               FadeRoute(page: Addpicture()),
-                                //               ModalRoute.withName('Addpicture'),
-                                //             );
-                                //           },
-                                //           child: Container(
-                                //             width: 150,
-                                //             margin: EdgeInsets.only(right: 20),
-                                //             height: MediaQuery.of(context)
-                                //                         .size
-                                //                         .height *
-                                //                     0.30 -
-                                //                 50,
-                                //             decoration: BoxDecoration(
-                                //                 color: Colors.orange.shade400,
-                                //                 borderRadius: BorderRadius.all(
-                                //                     Radius.circular(20.0))),
-                                //             child: Padding(
-                                //               padding:
-                                //                   const EdgeInsets.all(12.0),
-                                //               child: Column(
-                                //                 crossAxisAlignment:
-                                //                     CrossAxisAlignment.start,
-                                //                 children: <Widget>[
-                                //                   Text(
-                                //                     "Most\nFavorites",
-                                //                     style: TextStyle(
-                                //                         fontSize: 25,
-                                //                         color: Colors.white,
-                                //                         fontWeight:
-                                //                             FontWeight.bold),
-                                //                   ),
-                                //                   SizedBox(
-                                //                     height: 10,
-                                //                   ),
-                                //                   Text(
-                                //                     "20 Items",
-                                //                     style: TextStyle(
-                                //                         fontSize: 16,
-                                //                         color: Colors.white),
-                                //                   ),
-                                //                 ],
-                                //               ),
-                                //             ),
-                                //           ),
-                                //         )
+                            // GestureDetector(
+                            //           onTap: () {
+                            //             Navigator.of(context)
+                            //                 .pushAndRemoveUntil(
+                            //               FadeRoute(page: Addpicture()),
+                            //               ModalRoute.withName('Addpicture'),
+                            //             );
+                            //           },
+                            //           child: Container(
+                            //             width: 150,
+                            //             margin: EdgeInsets.only(right: 20),
+                            //             height: MediaQuery.of(context)
+                            //                         .size
+                            //                         .height *
+                            //                     0.30 -
+                            //                 50,
+                            //             decoration: BoxDecoration(
+                            //                 color: Colors.orange.shade400,
+                            //                 borderRadius: BorderRadius.all(
+                            //                     Radius.circular(20.0))),
+                            //             child: Padding(
+                            //               padding:
+                            //                   const EdgeInsets.all(12.0),
+                            //               child: Column(
+                            //                 crossAxisAlignment:
+                            //                     CrossAxisAlignment.start,
+                            //                 children: <Widget>[
+                            //                   Text(
+                            //                     "Most\nFavorites",
+                            //                     style: TextStyle(
+                            //                         fontSize: 25,
+                            //                         color: Colors.white,
+                            //                         fontWeight:
+                            //                             FontWeight.bold),
+                            //                   ),
+                            //                   SizedBox(
+                            //                     height: 10,
+                            //                   ),
+                            //                   Text(
+                            //                     "20 Items",
+                            //                     style: TextStyle(
+                            //                         fontSize: 16,
+                            //                         color: Colors.white),
+                            //                   ),
+                            //                 ],
+                            //               ),
+                            //             ),
+                            //           ),
+                            //         )
                           ]))
                         ])))
               ]),

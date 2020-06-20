@@ -107,9 +107,10 @@ class _FollowersListState extends State<FollowersList> {
     getAllFollowers();
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blueGrey,
-          title: Text("Followers List",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+          title: Text(
+            "Followers List",
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w100),
+          ),
           elevation: 0.0,
         ),
         body: followersList(wiggles: widget.wiggles));

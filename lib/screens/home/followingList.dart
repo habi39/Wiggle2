@@ -107,9 +107,10 @@ class _FollowingListState extends State<FollowingList> {
     getAllFollowings();
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blueGrey,
-          title: Text("Following List",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+          title: Text(
+            "Following List",
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w100),
+          ),
           elevation: 0.0,
         ),
         body: followingList(wiggles: widget.wiggles));
