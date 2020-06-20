@@ -95,7 +95,7 @@ class _FeedState extends State<Feed> {
     File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (imageFile == null) {
       Navigator.of(context).pushAndRemoveUntil(
-          FadeRoute(page: Feed()), ModalRoute.withName('Feed'));
+          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
     } else {
       Navigator.push(
         context,
@@ -114,7 +114,7 @@ class _FeedState extends State<Feed> {
 
     if (imageFile == null) {
       Navigator.of(context).pushAndRemoveUntil(
-          FadeRoute(page: Feed()), ModalRoute.withName('Feed'));
+          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
     } else {
       Navigator.push(
         context,
