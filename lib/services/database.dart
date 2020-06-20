@@ -267,23 +267,24 @@ class DatabaseService {
         {'anonBio': anonBio, 'anonInterest': anonInterest, 'anonDp': anonDp});
   }
 
-  Future increaseFame(int initialvalue, String raterEmail) async {
-    await wiggleCollection
+  Future increaseFame(int initialvalue, String raterEmail,bool isAdditional) async {
+  if(isAdditional){
+   await wiggleCollection
         .document(uid)
         .collection('likes')
         .document(raterEmail)
-        .setData({'like': raterEmail});
+        .setData({'like': raterEmail});}
     return await wiggleCollection
         .document(uid)
         .updateData({'fame': initialvalue + 1});
   }
 
-  Future decreaseFame(int initialvalue, String raterEmail) async {
-    await wiggleCollection
+  Future decreaseFame(int initialvalue, String raterEmail, bool isAdditional) async {
+    if (isAdditional){await wiggleCollection
         .document(uid)
         .collection('dislikes')
         .document(raterEmail)
-        .setData({'dislike': raterEmail});
+        .setData({'dislike': raterEmail});}
     return await wiggleCollection
         .document(uid)
         .updateData({'fame': initialvalue - 1});

@@ -85,8 +85,6 @@ class _OnboardingState extends State<Onboarding> {
   }
 
   createAlertDialog() {
-    final user = Provider.of<User>(context);
-    final wiggles = Provider.of<List<Wiggle>>(context) ?? [];
     return showDialog(
         context: context,
         builder: (context) {
