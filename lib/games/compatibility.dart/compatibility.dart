@@ -236,8 +236,8 @@ class _CompatibilityState extends State<Compatibility>
                                               });
                                             },
                                             child: Container(
-                                              height: 80,
-                                              width: 150,
+                                              height: 70,
+                                              width: 130,
                                               color: Colors.purple[300],
                                               alignment: Alignment.center,
                                               child: AutoSizeText(
@@ -262,8 +262,8 @@ class _CompatibilityState extends State<Compatibility>
                                               });
                                             },
                                             child: Container(
-                                              height: 80,
-                                              width: 150,
+                                              height: 70,
+                                              width: 130,
                                               color: Colors.blueAccent,
                                               alignment: Alignment.center,
                                               child: AutoSizeText(

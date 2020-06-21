@@ -22,7 +22,7 @@ class UploadImage extends StatefulWidget {
 
 class _UploadImageState extends State<UploadImage>
     with AutomaticKeepAliveClientMixin<UploadImage> {
-  // File file;
+  File file;
   TextEditingController descriptionTextEditingController =
       TextEditingController();
   bool uploading = false;
@@ -41,13 +41,13 @@ class _UploadImageState extends State<UploadImage>
   compressPhoto() async {
     final directory = await getTemporaryDirectory();
     final path = directory.path;
-    ImD.Image mImageFile = ImD.decodeImage(widget.file.readAsBytesSync());
+    ImD.Image mImageFile = ImD.decodeImage(file.readAsBytesSync());
     final compressedImage = File('$path/img_$postId.jpg')
       ..writeAsBytesSync(
         ImD.encodeJpg(mImageFile, quality: 60),
       );
     setState(() {
-      widget.file = compressedImage;
+      file = compressedImage;
     });
   }
 
@@ -67,12 +67,12 @@ class _UploadImageState extends State<UploadImage>
 
     await compressPhoto();
 
-    String downloadUrl = await uploadPhoto(widget.file);
+    String downloadUrl = await uploadPhoto(file);
     savePostInfoToFirestore(downloadUrl, descriptionTextEditingController.text);
 
     descriptionTextEditingController.clear();
     setState(() {
-      widget.file = null;
+      file = null;
       uploading = false;
       postId = Uuid().v4();
     });
@@ -113,7 +113,7 @@ class _UploadImageState extends State<UploadImage>
           uploading ? linearProgress() : Text(''),
           FlatButton(
             highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+            splashColor: Colors.transparent,
             onPressed: uploading ? null : () => controlUploadAndSave(),
             child: Text(
               "Share",
@@ -136,7 +136,7 @@ class _UploadImageState extends State<UploadImage>
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: FileImage(widget.file), fit: BoxFit.cover),
+                        image: FileImage(file), fit: BoxFit.cover),
                   ),
                 ),
               ),
@@ -175,6 +175,12 @@ class _UploadImageState extends State<UploadImage>
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    file = widget.file;
+    super.initState();
   }
 
   @override

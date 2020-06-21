@@ -94,8 +94,9 @@ class _FeedState extends State<Feed> {
     Navigator.pop(context);
     File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (imageFile == null) {
-      Navigator.of(context).pushAndRemoveUntil(
-          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+      // Navigator.of(context);
+      // .pushAndRemoveUntil(
+      //     FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
     } else {
       Navigator.push(
         context,
@@ -113,8 +114,8 @@ class _FeedState extends State<Feed> {
         source: ImageSource.camera, maxHeight: 680, maxWidth: 970);
 
     if (imageFile == null) {
-      Navigator.of(context).pushAndRemoveUntil(
-          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+      // Navigator.of(context).pushAndRemoveUntil(
+      //     FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
     } else {
       Navigator.push(
         context,
