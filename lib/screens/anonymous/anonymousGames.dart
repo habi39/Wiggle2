@@ -1,3 +1,4 @@
+import 'package:Wiggle2/screens/forum/forum.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Wiggle2/games/smashbros/main.dart';
@@ -29,7 +30,6 @@ class _AnonymousGamesState extends State<AnonymousGames> {
           UserData userData = snapshot.data;
           return Scaffold(
             appBar: AppBar(
-             
               title: Text("A N O N Y M O U S   G A M E S",
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.w100)),
               actions: <Widget>[
@@ -68,6 +68,29 @@ class _AnonymousGamesState extends State<AnonymousGames> {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) => HomePage(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                child: RaisedButton(
+                                  child: Text('Forum',
+                                      style: TextStyle(color: Colors.white)),
+                                  color: Colors.red,
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => Forum(),
                                       ),
                                     );
                                   },

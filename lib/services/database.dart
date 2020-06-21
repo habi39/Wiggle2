@@ -40,6 +40,16 @@ class DatabaseService {
   final bondReference = Firestore.instance.collection('Bond');
   final postReference = Firestore.instance.collection('posts');
 
+  Future<void> addData(blogData) async {
+    Firestore.instance.collection("blogs").add(blogData).catchError((e) {
+      print(e);
+    });
+  }
+
+  getData() async {
+    return await Firestore.instance.collection("blogs").snapshots();
+  }
+
   Future updateGame(String gameRoomID, List player1, List player2) async {
     return gameReference.document(gameRoomID).setData({
       'player1': player1,
@@ -267,24 +277,29 @@ class DatabaseService {
         {'anonBio': anonBio, 'anonInterest': anonInterest, 'anonDp': anonDp});
   }
 
-  Future increaseFame(int initialvalue, String raterEmail,bool isAdditional) async {
-  if(isAdditional){
-   await wiggleCollection
-        .document(uid)
-        .collection('likes')
-        .document(raterEmail)
-        .setData({'like': raterEmail});}
+  Future increaseFame(
+      int initialvalue, String raterEmail, bool isAdditional) async {
+    if (isAdditional) {
+      await wiggleCollection
+          .document(uid)
+          .collection('likes')
+          .document(raterEmail)
+          .setData({'like': raterEmail});
+    }
     return await wiggleCollection
         .document(uid)
         .updateData({'fame': initialvalue + 1});
   }
 
-  Future decreaseFame(int initialvalue, String raterEmail, bool isAdditional) async {
-    if (isAdditional){await wiggleCollection
-        .document(uid)
-        .collection('dislikes')
-        .document(raterEmail)
-        .setData({'dislike': raterEmail});}
+  Future decreaseFame(
+      int initialvalue, String raterEmail, bool isAdditional) async {
+    if (isAdditional) {
+      await wiggleCollection
+          .document(uid)
+          .collection('dislikes')
+          .document(raterEmail)
+          .setData({'dislike': raterEmail});
+    }
     return await wiggleCollection
         .document(uid)
         .updateData({'fame': initialvalue - 1});
