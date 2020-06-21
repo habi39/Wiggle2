@@ -158,7 +158,6 @@ class _SearchScreenState extends State<SearchScreen> {
     Wiggle currentwiggle;
 
     final user = Provider.of<User>(context);
-    ScrollController scrollController = new ScrollController();
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
@@ -169,7 +168,6 @@ class _SearchScreenState extends State<SearchScreen> {
             return searchSnapshot != null
                 ? ListView.builder(
                     itemCount: searchSnapshot.documents.length,
-                    controller: scrollController,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       name = searchSnapshot.documents[index].data['name'];
@@ -226,46 +224,48 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         body: isLoading
             ? Container(child: Center(child: CircularProgressIndicator()))
-            : Container(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      color: Color(0xFF373737),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextField(
-                              controller: searchTextEditingController,
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
-                                  hintText: "search username...",
-                                  hintStyle: TextStyle(color: Colors.white54),
-                                  border: InputBorder.none),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              initiateSearch();
-                            },
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(40),
+            : SingleChildScrollView(
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        color: Color(0xFF373737),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextField(
+                                controller: searchTextEditingController,
+                                style: TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
+                                    hintText: "search username...",
+                                    hintStyle: TextStyle(color: Colors.white54),
+                                    border: InputBorder.none),
                               ),
-                              padding: EdgeInsets.all(12),
-                              child:
-                                  Image.asset("assets/images/search_white.png"),
                             ),
-                          ),
-                        ],
+                            GestureDetector(
+                              onTap: () {
+                                initiateSearch();
+                              },
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(40),
+                                ),
+                                padding: EdgeInsets.all(12),
+                                child: Image.asset(
+                                    "assets/images/search_white.png"),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    searchList(widget.wiggles),
-                  ],
+                      searchList(widget.wiggles),
+                    ],
+                  ),
                 ),
               ),
       ),

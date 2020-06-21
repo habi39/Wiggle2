@@ -236,46 +236,48 @@ class _AnonymousSearchState extends State<AnonymousSearch> {
         ),
         body: isLoading
             ? Container(child: Center(child: CircularProgressIndicator()))
-            : Container(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      color: Color(0xFF373737),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextField(
-                              controller: searchTextEditingController,
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
-                                  hintText: "search username...",
-                                  hintStyle: TextStyle(color: Colors.white54),
-                                  border: InputBorder.none),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              initiateSearch();
-                            },
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(40),
+            : SingleChildScrollView(
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        color: Color(0xFF373737),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextField(
+                                controller: searchTextEditingController,
+                                style: TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
+                                    hintText: "search username...",
+                                    hintStyle: TextStyle(color: Colors.white54),
+                                    border: InputBorder.none),
                               ),
-                              padding: EdgeInsets.all(12),
-                              child:
-                                  Image.asset("assets/images/search_white.png"),
                             ),
-                          ),
-                        ],
+                            GestureDetector(
+                              onTap: () {
+                                initiateSearch();
+                              },
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(40),
+                                ),
+                                padding: EdgeInsets.all(12),
+                                child: Image.asset(
+                                    "assets/images/search_white.png"),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    searchList(widget.wiggles),
-                  ],
+                      searchList(widget.wiggles),
+                    ],
+                  ),
                 ),
               ),
       ),
