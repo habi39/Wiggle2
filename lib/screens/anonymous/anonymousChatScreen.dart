@@ -1,4 +1,5 @@
 import 'package:Wiggle2/screens/authenticate/intro/introPage1.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,6 +35,8 @@ String nickname;
 
 class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
   Stream chatsScreenStream;
+
+  int noOfTiles;
 
   Widget chatRoomList(
     List<Wiggle> wiggles,
@@ -209,6 +212,10 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
         // print(val);
       });
     });
+    DatabaseService().getNoOfAnonChatRooms(Constants.myEmail).then((val) {
+      print(val.documents.length);
+      noOfTiles = val.documents.length;
+    });
   }
 
   @override
@@ -250,10 +257,30 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
                   ),
                 ],
               ),
-              body: chatRoomList(
-                wiggles,
-                //  userData.nickname
-              ),
+              body: noOfTiles == 0
+                  ? Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          AutoSizeText(
+                            '* Slide into DMs by clicking the + sign and be anonymous while doing so',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w300),
+                          ),
+                          SizedBox(height: 15),
+                          AutoSizeText(
+                            '** Meet a new friend daily at 9.00pm and both of you will be anonymous',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w300),
+                          ),
+                        ],
+                      ),
+                    )
+                  : chatRoomList(
+                      wiggles,
+                      //  userData.nickname
+                    ),
             );
           } else {
             return Loading();

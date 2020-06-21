@@ -158,6 +158,7 @@ class _SearchScreenState extends State<SearchScreen> {
     Wiggle currentwiggle;
 
     final user = Provider.of<User>(context);
+    ScrollController scrollController = new ScrollController();
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
@@ -168,6 +169,7 @@ class _SearchScreenState extends State<SearchScreen> {
             return searchSnapshot != null
                 ? ListView.builder(
                     itemCount: searchSnapshot.documents.length,
+                    controller: scrollController,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       name = searchSnapshot.documents[index].data['name'];
@@ -216,7 +218,7 @@ class _SearchScreenState extends State<SearchScreen> {
               icon: Icon(LineAwesomeIcons.home),
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+                    FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
               }),
           title: Text("S E A R C H",
               textAlign: TextAlign.right,

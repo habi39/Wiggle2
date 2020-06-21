@@ -34,6 +34,7 @@ String email2;
 class _ChatsScreenState extends State<ChatScreen> {
   //snapshots returns a stream
   Stream chatsScreenStream;
+  int noOfTiles;
 
   Widget chatRoomList(List<Wiggle> wiggles) {
     return StreamBuilder(
@@ -86,6 +87,10 @@ class _ChatsScreenState extends State<ChatScreen> {
         chatsScreenStream = val;
       });
     });
+    DatabaseService().getNoOfChatRooms(Constants.myEmail).then((val) {
+      print(val.documents.length);
+      noOfTiles = val.documents.length;
+    });
   }
 
   @override
@@ -101,7 +106,7 @@ class _ChatsScreenState extends State<ChatScreen> {
         actions: <Widget>[
           IconButton(
             highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
+            splashColor: Colors.transparent,
             icon: Icon(Icons.add),
             onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(
@@ -112,7 +117,14 @@ class _ChatsScreenState extends State<ChatScreen> {
           ),
         ],
       ),
-      body: chatRoomList(wiggles),
+      body: noOfTiles == 0
+          ? Center(
+              child: Text(
+                'Talk to a friend by clicking the + icon',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+              ),
+            )
+          : chatRoomList(wiggles),
     );
   }
 }

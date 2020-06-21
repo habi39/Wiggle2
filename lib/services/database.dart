@@ -569,6 +569,20 @@ class DatabaseService {
         .snapshots();
   }
 
+  getNoOfChatRooms(String email) async {
+    return Firestore.instance
+        .collection("ChatRoom")
+        .where("users", arrayContains: email)
+        .getDocuments();
+  }
+
+  getNoOfAnonChatRooms(String email) async {
+    return Firestore.instance
+        .collection("Anonymous ChatRoom")
+        .where("users", arrayContains: email)
+        .getDocuments();
+  }
+
   getAnonymousChatRooms(String userName) async {
     return Firestore.instance
         .collection("Anonymous ChatRoom")
