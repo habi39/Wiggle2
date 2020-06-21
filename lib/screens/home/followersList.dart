@@ -1,8 +1,11 @@
+import 'package:Wiggle2/screens/wrapper/wrapper.dart';
+import 'package:Wiggle2/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/services/database.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class FollowersList extends StatefulWidget {
   final UserData userData;
@@ -107,9 +110,20 @@ class _FollowersListState extends State<FollowersList> {
     getAllFollowers();
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  icon: Icon(LineAwesomeIcons.home),
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      FadeRoute(page: Wrapper()),
+                      ModalRoute.withName('Wrapper'),
+                    );
+                  },
+                ),
           title: Text(
-            "Followers List",
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w100),
+            "F O L L O W E R S",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w100),
           ),
           elevation: 0.0,
         ),

@@ -226,20 +226,21 @@ class _MyprofileState extends State<Myprofile> {
                                     //crossAxisAlignment: CrossAxisAlignment.baseline,
                                     children: <Widget>[
                                       FlatButton(
-                                          highlightColor: Colors.transparent,
-                                          splashColor: Colors.transparent,
-                                          padding: EdgeInsets.only(
-                                              left: 23, right: 23),
-                                          child: createColumns(
-                                              'Followers', countTotalFollowers),
-                                          onPressed: () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      FollowersList(
-                                                          wiggles: wiggles,
-                                                          userData:
-                                                              userData)))),
+                                        highlightColor: Colors.transparent,
+                                        splashColor: Colors.transparent,
+                                        padding: EdgeInsets.only(
+                                            left: 23, right: 23),
+                                        child: createColumns(
+                                            'Followers', countTotalFollowers),
+                                        onPressed: () => Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                          FadeRoute(
+                                              page: FollowersList(
+                                                  wiggles: wiggles,
+                                                  userData: userData)),
+                                          ModalRoute.withName('FollowersList'),
+                                        ),
+                                      ),
                                       FlatButton(
                                           highlightColor: Colors.transparent,
                                           splashColor: Colors.transparent,
@@ -247,14 +248,16 @@ class _MyprofileState extends State<Myprofile> {
                                               left: 23, right: 23),
                                           child: createColumns('Following',
                                               countTotalFollowings),
-                                          onPressed: () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      FollowingList(
-                                                          wiggles: wiggles,
-                                                          userData:
-                                                              userData)))),
+                                          onPressed: () => 
+                                          Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                          FadeRoute(
+                                              page: FollowingList(
+                                                  wiggles: wiggles,
+                                                  userData: userData)),
+                                          ModalRoute.withName('FollowingList'),
+                                        ),
+                                      ),
                                       FlatButton(
                                         highlightColor: Colors.transparent,
                                         splashColor: Colors.transparent,

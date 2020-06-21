@@ -528,16 +528,14 @@ class _OthersProfileState extends State<OthersProfile> {
                                           onPressed: (widget.userData.email ==
                                                       widget.wiggle.email ||
                                                   following)
-                                              ? () => Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          FollowersList(
-                                                              wiggles: widget
-                                                                  .wiggles,
-                                                              otherWiggle:
-                                                                  widget
-                                                                      .wiggle)))
+                                              ? () => Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                          FadeRoute(
+                                              page: FollowersList(
+                                                  wiggles: wiggles,
+                                                  userData: userData)),
+                                          ModalRoute.withName('FollowersList'),
+                                        )
                                               : () => print('tried pressing')),
                                       FlatButton(
                                           highlightColor: Colors.transparent,
@@ -549,16 +547,14 @@ class _OthersProfileState extends State<OthersProfile> {
                                           onPressed: (widget.userData.email ==
                                                       widget.wiggle.email ||
                                                   following)
-                                              ? () => Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          FollowingList(
-                                                              wiggles: widget
-                                                                  .wiggles,
-                                                              otherWiggle:
-                                                                  widget
-                                                                      .wiggle)))
+                                              ? () => Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                          FadeRoute(
+                                              page: FollowingList(
+                                                  wiggles: wiggles,
+                                                  userData: userData)),
+                                          ModalRoute.withName('FollowingList'),
+                                        )
                                               : () => print('tried pressing')),
                                       FlatButton(
                                         highlightColor: Colors.transparent,
