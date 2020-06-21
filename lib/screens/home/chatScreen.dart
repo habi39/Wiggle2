@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 import 'package:intl/intl.dart';
 import 'package:Wiggle2/screens/home/searchScreen.dart';
 import 'package:Wiggle2/shared/constants.dart';
@@ -204,8 +206,17 @@ class chatScreenTile extends StatelessWidget {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           UserData userData = snapshot.data;
-          return GestureDetector(
-            onTap: () {
+          return FocusedMenuHolder(
+            menuWidth: MediaQuery.of(context).size.width * 0.5,
+            menuBoxDecoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20),
+                topLeft: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+            ),
+            onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(
                 FadeRoute(
                   page: ConversationScreen(
@@ -218,6 +229,37 @@ class chatScreenTile extends StatelessWidget {
                 ModalRoute.withName('ConversationScreen'),
               );
             },
+            menuItems: <FocusedMenuItem>[
+              FocusedMenuItem(
+                  title: Text(
+                    "Delete Chat",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  trailingIcon: Icon(Icons.delete),
+                  onPressed: () {
+                    DatabaseService()
+                        .chatReference
+                        .document(chatRoomId)
+                        .collection('chats')
+                        .getDocuments()
+                        .then((doc) {
+                      if (doc.documents[0].exists) {
+                        doc.documents[0].reference.delete();
+                      }
+                    });
+
+                    DatabaseService()
+                        .chatReference
+                        .document(chatRoomId)
+                        .get()
+                        .then((doc) {
+                      if (doc.exists) {
+                        doc.reference.delete();
+                      }
+                    });
+                  },
+                  backgroundColor: Colors.redAccent)
+            ],
             child: Container(
               margin: EdgeInsets.only(top: 5, bottom: 5, right: 10, left: 10),
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),

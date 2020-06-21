@@ -2,6 +2,8 @@ import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:Wiggle2/games/compatibility.dart/compatibilityStart.dart';
@@ -291,19 +293,31 @@ class MessageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      onDoubleTap: () => DatabaseService()
-          .chatReference
-          .document(roomId)
-          .collection('chats')
-          .where("message", isEqualTo: message)
-          .getDocuments()
-          .then((doc) {
-        if (doc.documents[0].exists) {
-          doc.documents[0].reference.delete();
-        }
-      }),
+    return FocusedMenuHolder(
+      menuWidth:  MediaQuery.of(context).size.width*0.5,
+      onPressed: () => FocusScope.of(context).unfocus(),
+      menuItems: <FocusedMenuItem>[
+        FocusedMenuItem(
+            title: Text(
+              "Delete Message",
+              style: TextStyle(color: Colors.black),
+            ),
+            trailingIcon: Icon(Icons.delete),
+            onPressed: () {
+              DatabaseService()
+                  .chatReference
+                  .document(roomId)
+                  .collection('chats')
+                  .where("message", isEqualTo: message)
+                  .getDocuments()
+                  .then((doc) {
+                if (doc.documents[0].exists) {
+                  doc.documents[0].reference.delete();
+                }
+              });
+            },
+            backgroundColor: Colors.redAccent)
+      ],
       child: Container(
         padding: EdgeInsets.only(
             top: 8,
