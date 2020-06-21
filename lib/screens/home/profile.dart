@@ -139,17 +139,6 @@ class _MyprofileState extends State<Myprofile> {
             personalEmail = userData.email;
             return Scaffold(
               appBar: AppBar(
-                leading: IconButton(
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  icon: Icon(LineAwesomeIcons.plus_circle),
-                  onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      FadeRoute(page: Addpicture()),
-                      ModalRoute.withName('Addpicture'),
-                    );
-                  },
-                ),
                 elevation: 0,
                 actions: <Widget>[
                   IconButton(
@@ -404,20 +393,45 @@ class _MyprofileState extends State<Myprofile> {
                                     DatabaseService(uid: user.uid).getphotos(),
                                 builder: (context, snapshot) {
                                   return snapshot.hasData
-                                      ? Container(
-                                          height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.30 -
-                                              50,
-                                          child: ListView.builder(
-                                              physics: ClampingScrollPhysics(),
-                                              shrinkWrap: true,
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: snapshot
-                                                  .data.documents.length,
-                                              itemBuilder: (context, index) {
-                                                return Container(
+                                      ? Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5.0),
+                                          child: Container(
+                                            height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.30 -
+                                                50,
+                                            child: ListView.builder(
+                                                physics:
+                                                    ClampingScrollPhysics(),
+                                                shrinkWrap: true,
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: snapshot
+                                                        .data.documents.length +
+                                                    1,
+                                                itemBuilder: (context, index) {
+                                                  if (index ==
+                                                      snapshot.data.documents
+                                                          .length) {
+                                                    return IconButton(
+                                                      icon: Icon(
+                                                          LineAwesomeIcons
+                                                              .plus_circle),
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pushAndRemoveUntil(
+                                                          FadeRoute(
+                                                              page:
+                                                                  Addpicture()),
+                                                          ModalRoute.withName(
+                                                              'Addpicture'),
+                                                        );
+                                                      },
+                                                    );
+                                                  }
+                                                  return Container(
                                                     width: 150,
                                                     margin: EdgeInsets.only(
                                                         right: 15),
@@ -443,8 +457,11 @@ class _MyprofileState extends State<Myprofile> {
                                                           Image.asset(
                                                               'assets/images/profile1.png',
                                                               fit: BoxFit.fill),
-                                                    ));
-                                              }))
+                                                    ),
+                                                  );
+                                                }),
+                                          ),
+                                        )
                                       : Loading();
                                 }),
                             // GestureDetector(
