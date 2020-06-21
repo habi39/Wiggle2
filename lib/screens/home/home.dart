@@ -1,4 +1,5 @@
 import 'package:Wiggle2/screens/feed/feed.dart';
+import 'package:Wiggle2/screens/forum/forum.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -41,7 +42,7 @@ class _HomeState extends State<Home> {
     Myprofile(),
   ];
   final anonymoustabs = [
-    AnonymousGames(),
+    Forum(),
     AnonymousChatScreen(),
     NotificationPage(),
     Myanonprofile(),

@@ -1,12 +1,18 @@
 import 'dart:io';
 
+import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/services/database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
 
 class CreatePage extends StatefulWidget {
+  final UserData userData;
+
+  CreatePage({this.userData});
+
   @override
   _CreatePageState createState() => _CreatePageState();
 }
@@ -42,13 +48,23 @@ class _CreatePageState extends State<CreatePage> {
       var downloadUrl = await (await task.onComplete).ref.getDownloadURL();
       print("this is url $downloadUrl");
 
-      Map<String, String> blogMap = {
+      if (desc.isNotEmpty) {
+        Map<String, dynamic> messageMap = {
+          "message": desc,
+          "author": widget.userData.nickname,
+          "time": Timestamp.now(),
+        };
+        DatabaseService().addForumMessages(desc, messageMap);
+      }
+
+      Map<String, dynamic> blogMap = {
         "imgUrl": downloadUrl,
-        "authorName": authorName,
+        "authorName": widget.userData.nickname,
         "title": title,
-        "desc": desc
+        "desc": desc,
+        "time": Timestamp.now(),
       };
-      DatabaseService().addData(blogMap).then((result) {
+      DatabaseService().addData(blogMap, desc).then((result) {
         Navigator.pop(context);
       });
     } else {}
@@ -121,12 +137,12 @@ class _CreatePageState extends State<CreatePage> {
                     margin: EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       children: <Widget>[
-                        TextField(
-                          decoration: InputDecoration(hintText: "Author Name"),
-                          onChanged: (val) {
-                            authorName = val;
-                          },
-                        ),
+                        // TextField(
+                        //   decoration: InputDecoration(hintText: "Author Name"),
+                        //   onChanged: (val) {
+                        //     authorName = val;
+                        //   },
+                        // ),
                         TextField(
                           decoration: InputDecoration(hintText: "Title"),
                           onChanged: (val) {

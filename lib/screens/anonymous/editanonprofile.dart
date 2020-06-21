@@ -16,7 +16,6 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../services/database.dart';
 import 'package:Wiggle2/screens/home/home.dart';
 
-
 class EditAnonProfile extends StatefulWidget {
   @override
   _EditAnonProfileState createState() => _EditAnonProfileState();
@@ -69,9 +68,8 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
       dynamic result = DatabaseService(uid: user.uid)
           .updateAnonData(anonBio, anonInterest, y);
     }
- Navigator.of(context).pushAndRemoveUntil(
-                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
-   
+    Navigator.of(context).pushAndRemoveUntil(
+        FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
 
     Helper.saveUserLoggedInSharedPreference(true);
   }
@@ -91,11 +89,13 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
                 centerTitle: true,
                 elevation: 0,
                 leading: IconButton(
-              icon: Icon(LineAwesomeIcons.home),
-              onPressed: () {
-               Navigator.of(context).pushAndRemoveUntil(
-                          FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
-              })),
+                    icon: Icon(LineAwesomeIcons.home),
+                    onPressed: () {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          FadeRoute(page: Wrapper()),
+                          ModalRoute.withName('Wrapper'));
+                    }),
+              ),
               body: StreamBuilder<UserData>(
                   stream: DatabaseService(uid: user.uid).userData,
                   builder: (context, snapshot) {

@@ -39,15 +39,40 @@ class DatabaseService {
   final compatibilityReference = Firestore.instance.collection('compatibility');
   final bondReference = Firestore.instance.collection('Bond');
   final postReference = Firestore.instance.collection('posts');
+  final blogReference = Firestore.instance.collection('blogs');
 
-  Future<void> addData(blogData) async {
-    Firestore.instance.collection("blogs").add(blogData).catchError((e) {
+  Future<void> addData(blogData, String description) async {
+    Firestore.instance
+        .collection("blogs")
+        .document('$description')
+        .setData(blogData)
+        .catchError((e) {
       print(e);
     });
   }
 
   getData() async {
     return await Firestore.instance.collection("blogs").snapshots();
+  }
+
+  addForumMessages(String desc, messageMap) async {
+    blogReference
+        .document(desc)
+        .collection("blogs")
+        .document(messageMap['time'].toString())
+        .setData(messageMap)
+        .catchError((e) {
+      print(e.toString());
+    });
+  }
+
+  getForumMessages(String desc) async {
+    return Firestore.instance
+        .collection("blogs")
+        .document(desc)
+        .collection("blogs")
+        .orderBy("time", descending: false)
+        .snapshots();
   }
 
   Future updateGame(String gameRoomID, List player1, List player2) async {
@@ -411,19 +436,6 @@ class DatabaseService {
   addConversationMessages(String chatRoomId, messageMap) async {
     Firestore.instance
         .collection("ChatRoom")
-        .document(chatRoomId)
-        .collection("chats")
-        .document(messageMap['time'].toString())
-        .setData(messageMap)
-        // .add(messageMap)
-        .catchError((e) {
-      print(e.toString());
-    });
-  }
-
-  addSusConversationMessages(String chatRoomId, messageMap) async {
-    Firestore.instance
-        .collection("Sus ChatRoom")
         .document(chatRoomId)
         .collection("chats")
         .document(messageMap['time'].toString())
