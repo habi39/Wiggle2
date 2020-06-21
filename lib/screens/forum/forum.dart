@@ -100,6 +100,8 @@ class _ForumState extends State<Forum> {
               //   ),
               // ),
             );
+          } else {
+            return Loading();
           }
         });
   }
