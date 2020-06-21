@@ -102,7 +102,7 @@ class _ForumState extends State<Forum> {
               // ),
             );
           } else {
-            Loading();
+            return Loading();
           }
         });
   }
