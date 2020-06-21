@@ -1,3 +1,4 @@
+import 'package:Wiggle2/models/user.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,8 +9,9 @@ class Comments extends StatefulWidget {
   final String title;
   final String description;
   final String authorName;
+  final UserData userData;
 
-  Comments({this.title, this.description, this.authorName});
+  Comments({this.title, this.description, this.authorName, this.userData});
 
   @override
   _CommentsState createState() => _CommentsState();
@@ -52,7 +54,7 @@ class _CommentsState extends State<Comments> {
     if (message.isNotEmpty) {
       Map<String, dynamic> messageMap = {
         "message": message,
-        "author": widget.authorName,
+        "author": widget.userData.nickname,
         "time": Timestamp.now(),
       };
       DatabaseService().addForumMessages(widget.description, messageMap);

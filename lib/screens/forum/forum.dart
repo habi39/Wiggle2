@@ -17,7 +17,7 @@ class Forum extends StatefulWidget {
 class _ForumState extends State<Forum> {
   Stream blogsStream;
 
-  Widget BlogsList() {
+  Widget BlogsList(UserData userData) {
     return StreamBuilder(
         stream: blogsStream,
         builder: (context, snapshot) {
@@ -28,6 +28,7 @@ class _ForumState extends State<Forum> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return BlogsTile(
+                    userData: userData,
                     authorName:
                         snapshot.data.documents[index].data['authorName'],
                     title: snapshot.data.documents[index].data["title"],
@@ -54,7 +55,7 @@ class _ForumState extends State<Forum> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context) ?? User();
-    final wiggles = Provider.of<List<Wiggle>>(context) ?? [];
+    // final wiggles = Provider.of<List<Wiggle>>(context) ?? [];
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
@@ -83,7 +84,7 @@ class _ForumState extends State<Forum> {
                 ],
                 // backgroundColor: Colors.transparent,
               ),
-              body: BlogsList(),
+              body: BlogsList(userData),
               // floatingActionButton: Container(
               //   // padding: EdgeInsets.symmetric(vertical: 20),
               //   child: Row(
@@ -100,6 +101,8 @@ class _ForumState extends State<Forum> {
               //   ),
               // ),
             );
+          } else {
+            Loading();
           }
         });
   }
@@ -107,11 +110,13 @@ class _ForumState extends State<Forum> {
 
 class BlogsTile extends StatelessWidget {
   String imgUrl, title, description, authorName;
+  UserData userData;
   BlogsTile(
-      {@required this.imgUrl,
-      @required this.title,
-      @required this.description,
-      @required this.authorName});
+      {this.imgUrl,
+      this.title,
+      this.description,
+      this.authorName,
+      this.userData});
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +124,10 @@ class BlogsTile extends StatelessWidget {
       onTap: () => Navigator.of(context).push(
         FadeRoute(
           page: Comments(
-              authorName: authorName, description: description, title: title),
+              userData: userData,
+              authorName: authorName,
+              description: description,
+              title: title),
         ),
       ),
       child: Container(
