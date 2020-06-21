@@ -1,4 +1,5 @@
 import 'package:Wiggle2/services/database.dart';
+import 'package:Wiggle2/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 import 'createPage.dart';
@@ -19,6 +20,7 @@ class _ForumState extends State<Forum> {
                 StreamBuilder(
                   stream: blogsStream,
                   builder: (context, snapshot) {
+                    if(snapshot.hasData){
                     return ListView.builder(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         itemCount: snapshot.data.documents.length,
@@ -34,7 +36,10 @@ class _ForumState extends State<Forum> {
                                 snapshot.data.documents[index].data['imgUrl'],
                           );
                         });
-                  },
+                  }else {
+                    return Loading();
+                  }
+                  }
                 )
               ],
             )
