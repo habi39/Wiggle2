@@ -72,7 +72,7 @@ class _UploadImageState extends State<UploadImage>
 
     descriptionTextEditingController.clear();
     setState(() {
-      file = null;
+      // file = null;
       uploading = false;
       postId = Uuid().v4();
     });
@@ -91,16 +91,6 @@ class _UploadImageState extends State<UploadImage>
     });
   }
 
-  linearProgress() {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.only(top: 12),
-      child: LinearProgressIndicator(
-        valueColor: AlwaysStoppedAnimation(Colors.redAccent),
-      ),
-    );
-  }
-
   displayUploadFormScreen() {
     return Scaffold(
       appBar: AppBar(
@@ -110,11 +100,11 @@ class _UploadImageState extends State<UploadImage>
               color: Colors.red, fontSize: 24, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[
-          uploading ? linearProgress() : Text(''),
+          // uploading ? linearProgress() : Text(''),
           FlatButton(
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
-            onPressed: uploading ? null : () => controlUploadAndSave(),
+            onPressed: () => controlUploadAndSave(),
             child: Text(
               "Share",
               style: TextStyle(
@@ -125,55 +115,60 @@ class _UploadImageState extends State<UploadImage>
           )
         ],
       ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            height: 230,
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: Center(
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: FileImage(file), fit: BoxFit.cover),
+      body: uploading
+          ? Container(
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(),
+            )
+          : ListView(
+              children: <Widget>[
+                Container(
+                  height: 230,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: Center(
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: FileImage(file), fit: BoxFit.cover),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 12),
-          ),
-          ListTile(
-            leading: CircleAvatar(
-              radius: 27,
-              child: ClipOval(
-                child: SizedBox(
-                  width: 180,
-                  height: 180,
-                  child: Image.network(
-                    widget.userData.dp,
-                    fit: BoxFit.cover,
-                  ),
+                Padding(
+                  padding: EdgeInsets.only(top: 12),
                 ),
-              ),
+                ListTile(
+                  leading: CircleAvatar(
+                    radius: 27,
+                    child: ClipOval(
+                      child: SizedBox(
+                        width: 180,
+                        height: 180,
+                        child: Image.network(
+                          widget.userData.dp,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  title: Container(
+                    child: TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      controller: descriptionTextEditingController,
+                      decoration: textFieldInputDecoration(
+                          ' Say something about your image'),
+                      // decoration: InputDecoration(
+                      //   hintText: 'Say something about your image',
+                      //   hintStyle: TextStyle(color: Colors.grey),
+                      //   border: InputBorder.none,
+                    ),
+                  ),
+                )
+              ],
             ),
-            title: Container(
-              child: TextFormField(
-                style: TextStyle(color: Colors.white),
-                controller: descriptionTextEditingController,
-                decoration:
-                    textFieldInputDecoration(' Say something about your image'),
-                // decoration: InputDecoration(
-                //   hintText: 'Say something about your image',
-                //   hintStyle: TextStyle(color: Colors.grey),
-                //   border: InputBorder.none,
-              ),
-            ),
-          )
-        ],
-      ),
     );
   }
 
