@@ -237,7 +237,6 @@ class _NotificationsItemState extends State<NotificationsItem> {
                     ],
                   ),
                 ),
-               
                 widget.type == 'request'
                     ? accepted || declined
                         ? accepted
@@ -253,7 +252,7 @@ class _NotificationsItemState extends State<NotificationsItem> {
                                 onTap: () {
                                   print('pressed');
                                 })
-                        : Column(
+                        : Row(
                             children: <Widget>[
                               InkWell(
                                   child: Text('Accept',
@@ -273,10 +272,12 @@ class _NotificationsItemState extends State<NotificationsItem> {
                                         widget.userID,
                                         widget.senderEmail);
                                   }),
-                                  SizedBox(height: 10,),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 13,
+                              ),
                               InkWell(
-                                  child: Text('Decline',
-                                      style: TextStyle(fontSize: 10)),
+                                child: Text('Decline',
+                                    style: TextStyle(fontSize: 10)),
                                 onTap: () {
                                   widget.databaseService.feedReference
                                       .document(widget.ownerID)
@@ -297,97 +298,7 @@ class _NotificationsItemState extends State<NotificationsItem> {
                               ),
                             ],
                           )
-                    : widget.type == 'tictactoe'
-                        ? accepted || declined
-                            ? accepted
-                                ? FlatButton(
-                                    child: Container(
-                                        height: 10.0,
-                                        width: 50.0,
-                                        child: Text('Accepted',
-                                            style: TextStyle(fontSize: 10.0))),
-                                    onPressed: () {
-                                      print('pressed');
-                                    })
-                                : FlatButton(
-                                    child: Container(
-                                        height: 10.0,
-                                        width: 50.0,
-                                        child: Text('Declined',
-                                            style: TextStyle(fontSize: 10.0))),
-                                    onPressed: () {
-                                      print('pressed');
-                                    })
-                            : Column(
-                                children: <Widget>[
-                                  FlatButton(
-                                      color: Colors.red,
-                                      child: Container(
-                                          height: 10.0,
-                                          width: 32.0,
-                                          child: Text('Accept',
-                                              style:
-                                                  TextStyle(fontSize: 10.0))),
-                                      onPressed: () {
-                                        //Make GAME ROOM HERE
-                                        DatabaseService().updateGame(
-                                            getGameRoomID(widget.ownerID,
-                                                widget.senderEmail),
-                                            [],
-                                            []);
-                                        widget.databaseService.feedReference
-                                            .document(widget.ownerID)
-                                            .collection('feed')
-                                            .document(widget.notifID)
-                                            .setData({
-                                          'type': 'tictactoe',
-                                          'ownerID': widget.ownerID,
-                                          'ownerName': widget.ownerName,
-                                          'timestamp': DateTime.now(),
-                                          'userDp': widget.userDp,
-                                          'userID': widget.userID,
-                                          'status': 'accepted',
-                                          'senderEmail': widget.senderEmail,
-                                          'notifID': widget.notifID
-                                        });
-                                        if (this.mounted) {
-                                          setState(() {
-                                            accepted = true;
-                                          });
-                                        }
-                                      }),
-                                  FlatButton(
-                                    child: Container(
-                                        height: 10.0,
-                                        width: 35.0,
-                                        child: Text('Decline',
-                                            style: TextStyle(fontSize: 10.0))),
-                                    onPressed: () {
-                                      widget.databaseService.feedReference
-                                          .document(widget.ownerID)
-                                          .collection('feed')
-                                          .document(widget.notifID)
-                                          .setData({
-                                        'type': 'tictactoe',
-                                        'ownerID': widget.ownerID,
-                                        'ownerName': widget.ownerName,
-                                        'timestamp': DateTime.now(),
-                                        'userDp': widget.userDp,
-                                        'userID': widget.userID,
-                                        'status': 'declined',
-                                        'senderEmail': widget.senderEmail,
-                                        'notifID': widget.notifID
-                                      });
-                                      if (this.mounted) {
-                                        setState(() {
-                                          declined = true;
-                                        });
-                                      }
-                                    },
-                                  ),
-                                ],
-                              )
-                        : Container(),
+                    : Container(),
               ],
             ),
           ),

@@ -12,7 +12,7 @@ import 'followersList.dart';
 import 'followingList.dart';
 import '../../shared/constants.dart';
 import '../../models/user.dart';
-import 'package:Wiggle2/screens/home/home.dart';
+
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -439,8 +439,8 @@ class _OthersProfileState extends State<OthersProfile> {
                   icon: Icon(LineAwesomeIcons.home),
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
-                      FadeRoute(page: Home()),
-                      ModalRoute.withName('Home'),
+                      FadeRoute(page: Wrapper()),
+                      ModalRoute.withName('Wrapper'),
                     );
                   },
                 ),
