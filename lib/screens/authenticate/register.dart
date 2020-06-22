@@ -57,7 +57,7 @@ class _RegisterState extends State<Register> {
         x = (await taskSnapshot.ref.getDownloadURL()).toString();
 
         await _auth.registerWithEmailAndPassword(email, password, name,
-            nickname, selectedGenderType, selectedBlockType, bio, x, false);
+            nickname, selectedGenderType, selectedBlockType, bio, x, false,media,playlist,selectedcourse,home);
       }
 
       if (_image != null) {
@@ -72,7 +72,8 @@ class _RegisterState extends State<Register> {
             selectedBlockType,
             bio,
             'https://firebasestorage.googleapis.com/v0/b/wiggle2-1d590.appspot.com/o/data%2Fuser%2F0%2Fcom.example.Wiggle2%2Fcache%2Fimage_picker8049276365349124154.png?alt=media&token=e2066efa-287f-45e9-9df6-6604a1838567',
-            false);
+            false,
+            media,playlist,selectedcourse,home);
       }
       Navigator.of(context).pushAndRemoveUntil(
           FadeRoute(page: Onboarding()), ModalRoute.withName('Onboarding'));
@@ -403,7 +404,7 @@ class _RegisterState extends State<Register> {
                                       FontAwesomeIcons.laptop,
                                       color: Colors.amber,
                                     ),
-                                    SizedBox(width: 3),
+                                    SizedBox(width: 4),
                                     Expanded(
                                       child: TextFormField(
                                           validator: (val) {

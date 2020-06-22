@@ -62,7 +62,11 @@ class AuthService {
       String block,
       String bio,
       String dp,
-      bool isAnonymous) async {
+      bool isAnonymous,
+      String media,
+      String playlist,
+      String course,
+      String accoms) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -70,7 +74,7 @@ class AuthService {
 
       //create document for each user in registration
       await DatabaseService(uid: user.uid).uploadUserData(
-          email, name, nickname, gender, block, bio, dp, isAnonymous);
+          email, name, nickname, gender, block, bio, dp, isAnonymous,media,playlist,course,accoms);
       await DatabaseService(uid: user.uid).uploadWhoData(
           email: email,
           name: name,

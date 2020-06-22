@@ -270,7 +270,12 @@ class DatabaseService {
       String block,
       String bio,
       String dp,
-      bool isAnonymous) async {
+      bool isAnonymous,
+      String media,
+      String playlist,
+      String course,
+      String accoms
+      ) async {
     followersReference.document(email).collection('userFollowing');
     followingReference.document(email).collection('userFollowers');
     return await wiggleCollection.document(uid).setData({
@@ -287,10 +292,10 @@ class DatabaseService {
       'anonDp': '',
       'id': uid,
       'fame': 0,
-      'media': '',
-      'course': '',
-      'playlist': '',
-      'accoms': ''
+      'media': media,
+      'course': course,
+      'playlist': playlist,
+      'accoms': accoms,
     });
   }
 
@@ -370,7 +375,11 @@ class DatabaseService {
       String block,
       String bio,
       String dp,
-      bool isAnonymous) async {
+      bool isAnonymous,
+      String media,
+      String playlist,
+      String course,
+      String accoms,) async {
     return await wiggleCollection.document(uid).updateData({
       "email": email,
       "name": name,
@@ -380,7 +389,11 @@ class DatabaseService {
       "bio": bio,
       "dp": dp,
       "isAnonymous": isAnonymous,
-      'id': uid
+      'id': uid,
+      'media': media,
+      'course': course,
+      'playlist': playlist,
+      'accoms': accoms,
     });
   }
 

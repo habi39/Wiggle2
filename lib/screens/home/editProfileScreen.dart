@@ -56,7 +56,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       x = (await taskSnapshot.ref.getDownloadURL()).toString();
 
       dynamic result = DatabaseService(uid: user.uid).updateUserData(email,
-          name, nickname, selectedGenderType, selectedBlockType, bio, x, false);
+          name, nickname, selectedGenderType, selectedBlockType, bio, x, false,media,playlist,selectedcourse,home);
     }
 
     if (_image != null) {
@@ -67,7 +67,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     } else {
       print(y);
       dynamic result = DatabaseService(uid: user.uid).updateUserData(email,
-          name, nickname, selectedGenderType, selectedBlockType, bio, y, false);
+          name, nickname, selectedGenderType, selectedBlockType, bio, y, false,media,playlist,selectedcourse,home);
       DatabaseService(uid: user.uid).uploadWhoData(
           email: email,
           name: name,
@@ -91,9 +91,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String error = '';
   String name = '';
   String bio = '';
-  String selectedGenderType;
+  String selectedGenderType,selectedcourse,home;
   String selectedBlockType;
   String nickname = '';
+  List<String> _courses = <String>['Computer Science', 'Business Analytics','Business','Arts and Social Sciences','Mechanical Engineering'];
+  List<String> _homeArea = <String>['Woodlands','Serangoon','Yishun','Sambawang','Clementi','Bishan','Ang Mo Kio'];
+  String media;
+  String playlist;
 
   @override
   Widget build(BuildContext context) {
@@ -361,6 +365,141 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         ),
                                       ],
                                     ),
+                                    SizedBox(height: 8),
+                                
+                                Row(
+                                  children: <Widget>[
+                                    
+                                    Icon(
+                                      FontAwesomeIcons.book,
+                                      size: 25.0,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(width: 20.0),
+                                    Expanded(
+                                        child: DropdownButtonFormField(
+                                          value: userData.course,
+                                          
+                                      validator: (val) {
+                                        return val == null
+                                            ? 'Please provide a valid Course'
+                                            : null;
+                                      },
+                                      items: _courses
+                                          .map((value) => DropdownMenuItem(
+                                                child: Text(
+                                                  value,
+                                                  style: TextStyle(
+                                                      color: Colors.amber),
+                                                ),
+                                                value: value,
+                                              ))
+                                          .toList(),
+                                      onChanged: (selectecourse) {
+                                        setState(() {
+                                          selectedcourse = selectecourse;
+                                        });
+                                      },
+                                      
+                                      isExpanded: false,
+                                      decoration: textFieldInputDecoration('Choose Course'),
+                                     
+                                    )),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      FontAwesomeIcons.laptop,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Expanded(
+                                      child: TextFormField(
+                                        initialValue:
+                                                      userData.media,
+                                          validator: (val) {
+                                            return val.isEmpty
+                                                ? 'Please provide your social media handles'
+                                                : null;
+                                          },
+                                          onChanged: (val) {
+                                            setState(() => media = val);
+                                          },
+                                          style: TextStyle(color: Colors.amber),
+                                          decoration: textFieldInputDecoration(
+                                              '  Instagram Handle')),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      FontAwesomeIcons.music,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Expanded(
+                                      child: TextFormField(
+                                        initialValue:
+                                                      userData.playlist,
+                                          validator: (val) {
+                                            return val.isEmpty
+                                                ? 'Please provide your favourite artist'
+                                                : null;
+                                          },
+                                          onChanged: (val) {
+                                            setState(() => playlist = val);
+                                          },
+                                          style: TextStyle(color: Colors.amber),
+                                          decoration: textFieldInputDecoration(
+                                              '  Favourite Artist')),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: <Widget>[
+                                    
+                                    Icon(
+                                      FontAwesomeIcons.home,
+                                      size: 25.0,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(width: 20.0),
+                                    Expanded(
+                                        child: DropdownButtonFormField(
+                                          value: userData.accoms,
+                                      validator: (val) {
+                                        return val == null
+                                            ? 'Please provide a valid Course'
+                                            : null;
+                                      },
+                                      items: _homeArea
+                                          .map((value) => DropdownMenuItem(
+                                            
+                                                child: Text(
+                                                  value,
+                                                  style: TextStyle(
+                                                      color: Colors.amber),
+                                                ),
+                                               value: value
+                                              ))
+                                          .toList(),
+                                      onChanged: (selectedhome) {
+                                        setState(() {
+                                          home = selectedhome;
+                                        });
+                                      },
+                                       
+                                      isExpanded: false,
+                                      decoration: textFieldInputDecoration('I Stay Around...'),
+                                     
+                                    )),
+                                  ],
+                                ),
                                     SizedBox(height: 18),
                                     GestureDetector(
                                       onTap: () async {
@@ -389,6 +528,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           }
                                           if (_image == null) {
                                             y = userData.dp;
+                                          }
+                                          if (media == null){
+                                            media =userData.media;
+                                          }
+                                          if (playlist == null){
+                                            playlist = userData.playlist;
+                                          }
+                                          if (selectedcourse == null){
+                                            selectedcourse = userData.course;
+                                          }
+                                          if (home ==null){
+                                            home = userData.accoms;
                                           }
                                           dynamic result =
                                               await updateUser(context);
