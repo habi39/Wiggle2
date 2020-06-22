@@ -48,15 +48,15 @@ class _CompatibilityState extends State<Compatibility>
     CompatibilityCard('question', 'answer1', 'answer2'),
     CompatibilityCard(
         'Are you homosexual or homophobic', 'Homosexual', 'Homophobic'),
-    CompatibilityCard('Who would you wiggle?', 'Habi', 'Hanzo'),
+    CompatibilityCard('Who would you wiggle?', 'Wiggle', 'Wiggle'),
     CompatibilityCard(
         'What do you look for in your SO?', 'Looks', 'Personality'),
-    CompatibilityCard('What do you look for in your SO', 'Boobs', 'Butt'),
+    // CompatibilityCard('What do you look for in your SO', 'Boobs', 'Butt'),
     CompatibilityCard('Day?', 'Sunny', 'Rainy'),
-    CompatibilityCard('Hi?', 'ha', 'hu'),
-    CompatibilityCard('hi?', 'jo', 'la'),
-    CompatibilityCard('sa?', '12', '32'),
-    CompatibilityCard('ds?', 'as', 'sd'),
+    CompatibilityCard('Do you prefer the apple or pear?', 'Apple', 'Pear'),
+    CompatibilityCard('Trump or Obama?', 'Trump', 'Obama'),
+    CompatibilityCard('Favorite Parent', 'Mummy', 'Daddy'),
+    // CompatibilityCard('ds?', 'as', 'sd'),
   ];
   List<int> indexes = [];
 
