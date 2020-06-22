@@ -94,219 +94,180 @@ class _RegisterState extends State<Register> {
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
-              body: SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height - 50,
-                  alignment: Alignment.center,
+              body: Stack(
+                              children:<Widget>[SingleChildScrollView(
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              SizedBox(height: 3),
-                              Row(children: <Widget>[
-                                Icon(
-                                  Icons.alternate_email,
-                                  color: Colors.amber,
-                                ),
-                                SizedBox(width: 3),
-                                Expanded(
-                                  child: TextFormField(
-                                      validator: (val) {
-                                        return RegExp(
-                                                    r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
-                                                .hasMatch(val)
-                                            ? null
-                                            : "Please provide a valid Email";
-                                      },
-                                      onChanged: (val) {
-                                        setState(() => email = val);
-                                      },
-                                      style: TextStyle(color: Colors.amber),
-                                      decoration:
-                                          textFieldInputDecoration(' Email')),
-                                ),
-                              ]),
-                              Row(children: <Widget>[
-                                Icon(
-                                  Icons.lock,
-                                  color: Colors.amber,
-                                ),
-                                SizedBox(width: 3),
-                                Expanded(
-                                  child: TextFormField(
-                                      obscureText: true,
-                                      validator: (val) {
-                                        return val.isEmpty || val.length <= 6
-                                            ? 'Please provide a valid password'
-                                            : null;
-                                      },
-                                      onChanged: (val) {
-                                        setState(() => password = val);
-                                      },
-                                      style: TextStyle(color: Colors.amber),
-                                      decoration: textFieldInputDecoration(
-                                          ' Password')),
-                                ),
-                              ]),
-                              SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  SizedBox(width: 50),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 60,
-                                      child: ClipOval(
-                                        child: new SizedBox(
-                                          width: 180,
-                                          height: 180,
-                                          child: (_image != null)
-                                              ? Image.file(
-                                                  _image,
-                                                  fit: BoxFit.fill,
-                                                )
-                                              : Image.asset(
-                                                  'assets/images/profile1.png',
-                                                  fit: BoxFit.fill,
-                                                ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 60),
-                                    child: IconButton(
-                                      color: Colors.amber,
-                                      icon: Icon(Icons.camera_alt, size: 30),
-                                      onPressed: () {
-                                        getImage();
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
+                    height: MediaQuery.of(context).size.height - 50,
+                    alignment: Alignment.center,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(height: 3),
+                                Row(children: <Widget>[
                                   Icon(
-                                    Icons.face,
+                                    Icons.alternate_email,
                                     color: Colors.amber,
                                   ),
                                   SizedBox(width: 3),
                                   Expanded(
                                     child: TextFormField(
                                         validator: (val) {
-                                          return val.isEmpty
-                                              ? 'Please provide your name'
-                                              : null;
+                                          return RegExp(
+                                                      r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
+                                                  .hasMatch(val)
+                                              ? null
+                                              : "Please provide a valid Email";
                                         },
                                         onChanged: (val) {
-                                          setState(() => name = val);
+                                          setState(() => email = val);
                                         },
                                         style: TextStyle(color: Colors.amber),
                                         decoration:
-                                            textFieldInputDecoration(' Name')),
+                                            textFieldInputDecoration(' Email')),
                                   ),
-                                ],
-                              ),
-                              Row(children: <Widget>[
-                                CircleAvatar(
-                                  backgroundColor: Colors.amber,
-                                  radius: 12.5,
-                                  child: ClipOval(
-                                    child: Image.asset(
-                                      'assets/images/ghosty2.png',
-                                      fit: BoxFit.fill,
-                                      color: Colors.black,
+                                ]),
+                                Row(children: <Widget>[
+                                  Icon(
+                                    Icons.lock,
+                                    color: Colors.amber,
+                                  ),
+                                  SizedBox(width: 3),
+                                  Expanded(
+                                    child: TextFormField(
+                                        obscureText: true,
+                                        validator: (val) {
+                                          return val.isEmpty || val.length <= 6
+                                              ? 'Please provide a valid password'
+                                              : null;
+                                        },
+                                        onChanged: (val) {
+                                          setState(() => password = val);
+                                        },
+                                        style: TextStyle(color: Colors.amber),
+                                        decoration: textFieldInputDecoration(
+                                            ' Password')),
+                                  ),
+                                ]),
+                                SizedBox(height: 20),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    SizedBox(width: 50),
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        radius: 60,
+                                        child: ClipOval(
+                                          child: new SizedBox(
+                                            width: 180,
+                                            height: 180,
+                                            child: (_image != null)
+                                                ? Image.file(
+                                                    _image,
+                                                    fit: BoxFit.fill,
+                                                  )
+                                                : Image.asset(
+                                                    'assets/images/profile1.png',
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 60),
+                                      child: IconButton(
+                                        color: Colors.amber,
+                                        icon: Icon(Icons.camera_alt, size: 30),
+                                        onPressed: () {
+                                          getImage();
+                                        },
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.face,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(width: 3),
+                                    Expanded(
+                                      child: TextFormField(
+                                          validator: (val) {
+                                            return val.isEmpty
+                                                ? 'Please provide your name'
+                                                : null;
+                                          },
+                                          onChanged: (val) {
+                                            setState(() => name = val);
+                                          },
+                                          style: TextStyle(color: Colors.amber),
+                                          decoration:
+                                              textFieldInputDecoration(' Name')),
+                                    ),
+                                  ],
+                                ),
+                                Row(children: <Widget>[
+                                  CircleAvatar(
+                                    backgroundColor: Colors.amber,
+                                    radius: 12.5,
+                                    child: ClipOval(
+                                      child: Image.asset(
+                                        'assets/images/ghosty2.png',
+                                        fit: BoxFit.fill,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(width: 3),
-                                Expanded(
-                                  child: TextFormField(
-                                      validator: (val) {
-                                        return val.isEmpty
-                                            ? 'Please provide a nickname'
-                                            : null;
-                                      },
-                                      onChanged: (val) {
-                                        setState(() => nickname = val);
-                                      },
-                                      style: TextStyle(color: Colors.amber),
-                                      decoration: textFieldInputDecoration(
-                                          ' Nickname to be used when anonymous')),
-                                ),
-                              ]),
-                              SizedBox(height: 8),
-                              Row(
-                                children: <Widget>[
-                                  Icon(
-                                    FontAwesomeIcons.male,
-                                    size: 25.0,
-                                    color: Colors.amber,
-                                  ),
-                                  Icon(
-                                    FontAwesomeIcons.female,
-                                    size: 25.0,
-                                    color: Colors.amber,
-                                  ),
-                                  SizedBox(width: 20.0),
+                                  SizedBox(width: 3),
                                   Expanded(
-                                      child: DropdownButtonFormField(
-                                    validator: (val) {
-                                      return val == null
-                                          ? 'Please provide a valid Gender'
-                                          : null;
-                                    },
-                                    items: _genderType
-                                        .map((value) => DropdownMenuItem(
-                                              child: Text(
-                                                value,
-                                                style: TextStyle(
-                                                    color: Colors.amber),
-                                              ),
-                                              value: value,
-                                            ))
-                                        .toList(),
-                                    onChanged: (selectedGender) {
-                                      setState(() {
-                                        selectedGenderType = selectedGender;
-                                      });
-                                    },
-                                    value: selectedGenderType,
-                                    isExpanded: false,
-                                    hint: Text(
-                                      'Choose Gender',
-                                      style: TextStyle(color: Colors.white),
+                                    child: TextFormField(
+                                        validator: (val) {
+                                          return val.isEmpty
+                                              ? 'Please provide a nickname'
+                                              : null;
+                                        },
+                                        onChanged: (val) {
+                                          setState(() => nickname = val);
+                                        },
+                                        style: TextStyle(color: Colors.amber),
+                                        decoration: textFieldInputDecoration(
+                                            ' Nickname to be used when anonymous')),
+                                  ),
+                                ]),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      FontAwesomeIcons.male,
+                                      size: 25.0,
+                                      color: Colors.amber,
                                     ),
-                                  )),
-                                ],
-                              ),
-                              SizedBox(height: 8),
-                              Row(
-                                children: <Widget>[
-                                  Icon(
-                                    FontAwesomeIcons.home,
-                                    size: 25.0,
-                                    color: Colors.amber,
-                                  ),
-                                  SizedBox(width: 45.0),
-                                  Expanded(
-                                    child: DropdownButtonFormField(
+                                    Icon(
+                                      FontAwesomeIcons.female,
+                                      size: 25.0,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(width: 20.0),
+                                    Expanded(
+                                        child: DropdownButtonFormField(
                                       validator: (val) {
                                         return val == null
-                                            ? 'Please provide a valid Block'
+                                            ? 'Please provide a valid Gender'
                                             : null;
                                       },
-                                      items: _blockType
+                                      items: _genderType
                                           .map((value) => DropdownMenuItem(
                                                 child: Text(
                                                   value,
@@ -316,88 +277,129 @@ class _RegisterState extends State<Register> {
                                                 value: value,
                                               ))
                                           .toList(),
-                                      onChanged: (selectedBlock) {
+                                      onChanged: (selectedGender) {
                                         setState(() {
-                                          selectedBlockType = selectedBlock;
+                                          selectedGenderType = selectedGender;
                                         });
                                       },
-                                      value: selectedBlockType,
+                                      value: selectedGenderType,
                                       isExpanded: false,
                                       hint: Text(
-                                        'Choose Block',
+                                        'Choose Gender',
                                         style: TextStyle(color: Colors.white),
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 8),
-                              Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.favorite,
-                                    color: Colors.amber,
-                                  ),
-                                  SizedBox(width: 3),
-                                  Expanded(
-                                    child: TextField(
-                                      
-                                      maxLines: 10,
-                                        onChanged: (val) {
-                                          setState(() => bio = val);
-                                        },
-                                        style: TextStyle(color: Colors.amber),
-                                        decoration:InputDecoration(hintText: ' Bio',focusedBorder: InputBorder.none,border: InputBorder.none)
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 18),
-                              GestureDetector(
-                                onTap: () {
-                                  signMeUp(context);
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.symmetric(vertical: 16),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(25),
-                                      color: Color(0xFFFFC107)),
-                                  child: Text('Create Account',
-                                      style:  TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
+                                    )),
+                                  ],
                                 ),
-                              ),
-                              SizedBox(height: 12),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("Already have an account? ",
-                                      style: simpleTextStyle()),
-                                  GestureDetector(
-                                    onTap: () {
-                                      widget.toggleView();
-                                    },
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 8),
-                                      child: Text("Sign In",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              decoration:
-                                                  TextDecoration.underline)),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      FontAwesomeIcons.home,
+                                      size: 25.0,
+                                      color: Colors.amber,
                                     ),
+                                    SizedBox(width: 45.0),
+                                    Expanded(
+                                      child: DropdownButtonFormField(
+                                        validator: (val) {
+                                          return val == null
+                                              ? 'Please provide a valid Block'
+                                              : null;
+                                        },
+                                        items: _blockType
+                                            .map((value) => DropdownMenuItem(
+                                                  child: Text(
+                                                    value,
+                                                    style: TextStyle(
+                                                        color: Colors.amber),
+                                                  ),
+                                                  value: value,
+                                                ))
+                                            .toList(),
+                                        onChanged: (selectedBlock) {
+                                          setState(() {
+                                            selectedBlockType = selectedBlock;
+                                          });
+                                        },
+                                        value: selectedBlockType,
+                                        isExpanded: false,
+                                        hint: Text(
+                                          'Choose Block',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.favorite,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(width: 3),
+                                    Expanded(
+                                      child: TextField(
+                                        
+                                        maxLines: 10,
+                                          onChanged: (val) {
+                                            setState(() => bio = val);
+                                          },
+                                          style: TextStyle(color: Colors.amber),
+                                          decoration:InputDecoration(hintText: ' Bio',focusedBorder: InputBorder.none,border: InputBorder.none)
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 18),
+                                GestureDetector(
+                                  onTap: () {
+                                    signMeUp(context);
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: MediaQuery.of(context).size.width,
+                                    padding: EdgeInsets.symmetric(vertical: 16),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(25),
+                                        color: Color(0xFFFFC107)),
+                                    child: Text('Create Account',
+                                        style:  TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
                                   ),
-                                ],
-                              ),
-                            ],
+                                ),
+                                SizedBox(height: 12),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Already have an account? ",
+                                        style: simpleTextStyle()),
+                                    GestureDetector(
+                                      onTap: () {
+                                        widget.toggleView();
+                                      },
+                                      child: Container(
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 8),
+                                        child: Text("Sign In",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                           decoration:
+                                                    TextDecoration.underline)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
+                              ]),
             ),
           );
   }

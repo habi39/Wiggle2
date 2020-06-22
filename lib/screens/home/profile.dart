@@ -155,14 +155,7 @@ class _MyprofileState extends State<Myprofile> {
                   ),
                 ],
               ),
-              body: Stack(children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Container(
-                      child: Container(),
-                    ),
-                  ],
-                ),
+              body: Stack(children: <Widget>[               
                 SingleChildScrollView(
                     child: Container(
                         decoration: BoxDecoration(
