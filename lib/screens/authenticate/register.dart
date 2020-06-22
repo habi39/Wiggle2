@@ -22,7 +22,7 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   final picker = ImagePicker();
   bool loading = false;
-  var selectedGenderType, selectedBlockType,selectedcourse;
+  var selectedGenderType, selectedBlockType,selectedcourse,home;
   File _image;
   var x;
   List<String> _genderType = <String>[
@@ -38,7 +38,7 @@ class _RegisterState extends State<Register> {
 
   List<String> _blockType = <String>['A', 'B', 'C', 'D', 'E',];
   List<String> _courses = <String>['Computer Science', 'Business Analytics','Business','Arts and Social Sciences','Mechanical Engineering'];
-
+  List<String> _homeArea = <String>['Woodlands','Serangoon','Yishun','Sambawang','Clementi','Bishan','Ang Mo Kio'];
   signMeUp(BuildContext context) {
     if (_formKey.currentState.validate()) {
       setState(() {
@@ -296,7 +296,7 @@ class _RegisterState extends State<Register> {
                                 Row(
                                   children: <Widget>[
                                     Icon(
-                                      FontAwesomeIcons.home,
+                                      FontAwesomeIcons.building,
                                       size: 25.0,
                                       color: Colors.amber,
                                     ),
@@ -325,7 +325,7 @@ class _RegisterState extends State<Register> {
                                         },
                                         value: selectedBlockType,
                                         isExpanded: false,
-                                         decoration: textFieldInputDecoration('Choose Gender'),
+                                         decoration: textFieldInputDecoration('Choose Block'),
                                       ),
                                     ),
                                   ],
@@ -442,6 +442,45 @@ class _RegisterState extends State<Register> {
                                           decoration: textFieldInputDecoration(
                                               '  Favourite Artist')),
                                     ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: <Widget>[
+                                    
+                                    Icon(
+                                      FontAwesomeIcons.home,
+                                      size: 25.0,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(width: 20.0),
+                                    Expanded(
+                                        child: DropdownButtonFormField(
+                                      validator: (val) {
+                                        return val == null
+                                            ? 'Please provide a valid Course'
+                                            : null;
+                                      },
+                                      items: _homeArea
+                                          .map((value) => DropdownMenuItem(
+                                                child: Text(
+                                                  value,
+                                                  style: TextStyle(
+                                                      color: Colors.amber),
+                                                ),
+                                                value: value,
+                                              ))
+                                          .toList(),
+                                      onChanged: (selectedhome) {
+                                        setState(() {
+                                          home = selectedhome;
+                                        });
+                                      },
+                                       value: home,
+                                      isExpanded: false,
+                                      decoration: textFieldInputDecoration('I Stay Around...'),
+                                     
+                                    )),
                                   ],
                                 ),
                                 SizedBox(height: 18),
