@@ -326,10 +326,11 @@ class DatabaseService {
 
   Future unlikepost(int initialvalue, String postId, String userEmail) async{
     await Firestore.instance
-        .collection("posts").document(postId).collection('likes').document(userEmail).setData({'liked': userEmail});
+        .collection("posts").document(postId).collection('likes').document(userEmail).delete();
+        
 
     return await Firestore.instance
-        .collection("posts").document(postId).updateData({'likes': initialvalue + 1});
+        .collection("posts").document(postId).updateData({'likes': initialvalue - 1});
   }
 
   Future decreaseFame(

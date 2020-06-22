@@ -221,6 +221,28 @@ class _FeedTileState extends State<FeedTile> {
   final f = new DateFormat('h:mm a');
 
   bool check;
+  bool liked = false;
+  @override
+  void initState() {
+    getlikes();
+    // TODO: implement initState
+    super.initState();
+  }
+  getlikes() {
+    DatabaseService()
+        .postReference
+        .document(widget.postId)
+        .collection('likes')
+        .document(Constants.myEmail)
+        .get()
+        .then((value) {
+      if (value.exists) {
+        setState(() {
+          liked = true;
+        });
+      }
+    });
+  }
 
   createPostHead(context, UserData userData) {
     return Container(
@@ -291,8 +313,10 @@ class _FeedTileState extends State<FeedTile> {
 
   createPostPicture(UserData userData){
     return GestureDetector(
-      onDoubleTap: (){
-        setState((){DatabaseService().likepost(widget.likes, widget.postId, userData.email);});
+      onDoubleTap: liked? (){}:(){
+        setState((){
+          liked=true;
+          DatabaseService().likepost(widget.likes, widget.postId, userData.email);});
         
       },
       child: Stack(
@@ -306,9 +330,17 @@ class _FeedTileState extends State<FeedTile> {
     return Column(
       children: <Widget>[
         Row(
-          children: <Widget>[ IconButton(padding: EdgeInsets.only(left:10),onPressed: (){
-            setState((){DatabaseService().likepost(widget.likes, widget.postId, userData.email);});
-          },icon: Icon(LineAwesomeIcons.heart),iconSize: 25),
+          children: <Widget>[ IconButton(padding: EdgeInsets.only(left:10),onPressed: liked? (){
+            setState((){
+              liked= false;
+              DatabaseService().unlikepost(widget.likes, widget.postId, userData.email);
+            });
+
+          }:(){
+            setState((){
+              liked=true;
+              DatabaseService().likepost(widget.likes, widget.postId, userData.email);});
+          },icon:liked? Icon(LineAwesomeIcons.heart_1):  Icon(LineAwesomeIcons.heart),iconSize: 25,color: liked? Colors.redAccent:Colors.white,),
           Text('${widget.likes}',)
           ],), 
         Row(
