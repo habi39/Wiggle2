@@ -155,7 +155,7 @@ class _MyprofileState extends State<Myprofile> {
                   ),
                 ],
               ),
-              body: Stack(children: <Widget>[               
+              body: Stack(children: <Widget>[
                 SingleChildScrollView(
                     child: Container(
                         decoration: BoxDecoration(
@@ -372,8 +372,7 @@ class _MyprofileState extends State<Myprofile> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text(
-                                      userData.accoms,
+                                  Text(userData.accoms,
                                       style: kCaptionTextStyle.copyWith(
                                         fontSize: 15,
                                       )),
@@ -410,20 +409,27 @@ class _MyprofileState extends State<Myprofile> {
                                                   if (index ==
                                                       snapshot.data.documents
                                                           .length) {
-                                                    return IconButton(
-                                                      icon: Icon(
-                                                          LineAwesomeIcons
-                                                              .plus_circle),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pushAndRemoveUntil(
-                                                          FadeRoute(
-                                                              page:
-                                                                  Addpicture()),
-                                                          ModalRoute.withName(
-                                                              'Addpicture'),
-                                                        );
-                                                      },
+                                                    return Column(
+                                                      children: <Widget>[
+                                                        Text(
+                                                            'Add a picture to your profile'),
+                                                        IconButton(
+                                                          icon: Icon(
+                                                              LineAwesomeIcons
+                                                                  .plus_circle),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pushAndRemoveUntil(
+                                                              FadeRoute(
+                                                                  page:
+                                                                      Addpicture()),
+                                                              ModalRoute.withName(
+                                                                  'Addpicture'),
+                                                            );
+                                                          },
+                                                        ),
+                                                      ],
                                                     );
                                                   }
                                                   return FocusedMenuHolder(
