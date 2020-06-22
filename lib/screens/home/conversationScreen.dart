@@ -293,39 +293,46 @@ class MessageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FocusedMenuHolder(
-      menuWidth:  MediaQuery.of(context).size.width*0.5,
-      onPressed: () => FocusScope.of(context).unfocus(),
-      menuItems: <FocusedMenuItem>[
-        FocusedMenuItem(
-            title: Text(
-              "Delete Message",
-              style: TextStyle(color: Colors.black),
-            ),
-            trailingIcon: Icon(Icons.delete),
-            onPressed: () {
-              DatabaseService()
-                  .chatReference
-                  .document(roomId)
-                  .collection('chats')
-                  .where("message", isEqualTo: message)
-                  .getDocuments()
-                  .then((doc) {
-                if (doc.documents[0].exists) {
-                  doc.documents[0].reference.delete();
-                }
-              });
-            },
-            backgroundColor: Colors.redAccent)
-      ],
-      child: Container(
-        padding: EdgeInsets.only(
-            top: 8,
-            bottom: 8,
-            left: isSendByMe ? 0 : 24,
-            right: isSendByMe ? 24 : 0),
-        alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
-        width: MediaQuery.of(context).size.width,
+    return Container(
+      padding: EdgeInsets.only(
+          top: 8,
+          bottom: 8,
+          left: isSendByMe ? 0 : 24,
+          right: isSendByMe ? 24 : 0),
+      alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
+      width: MediaQuery.of(context).size.width,
+      child: FocusedMenuHolder(
+        menuWidth: MediaQuery.of(context).size.width * 0.35,
+        onPressed: () => FocusScope.of(context).unfocus(),
+        menuBoxDecoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(23),
+          topRight: Radius.circular(23),
+          bottomLeft: Radius.circular(23),
+          bottomRight: Radius.circular(23),
+        )),
+        menuItems: <FocusedMenuItem>[
+          FocusedMenuItem(
+              title: Text(
+                "Delete Message",
+                style: TextStyle(color: Colors.black,fontSize: 12),
+              ),
+              trailingIcon: Icon(Icons.delete),
+              onPressed: () {
+                DatabaseService()
+                    .chatReference
+                    .document(roomId)
+                    .collection('chats')
+                    .where("message", isEqualTo: message)
+                    .getDocuments()
+                    .then((doc) {
+                  if (doc.documents[0].exists) {
+                    doc.documents[0].reference.delete();
+                  }
+                });
+              },
+              backgroundColor: Colors.redAccent)
+        ],
         child: Container(
           margin: isSendByMe
               ? EdgeInsets.only(left: 30)

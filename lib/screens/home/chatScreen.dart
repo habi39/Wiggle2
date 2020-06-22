@@ -207,7 +207,7 @@ class chatScreenTile extends StatelessWidget {
         builder: (context, snapshot) {
           UserData userData = snapshot.data;
           return FocusedMenuHolder(
-            menuWidth: MediaQuery.of(context).size.width * 0.5,
+            menuWidth: MediaQuery.of(context).size.width,
             menuBoxDecoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(20),
