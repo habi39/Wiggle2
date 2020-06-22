@@ -22,7 +22,7 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   final picker = ImagePicker();
   bool loading = false;
-  var selectedGenderType, selectedBlockType;
+  var selectedGenderType, selectedBlockType,selectedcourse;
   File _image;
   var x;
   List<String> _genderType = <String>[
@@ -36,7 +36,8 @@ class _RegisterState extends State<Register> {
     });
   }
 
-  List<String> _blockType = <String>['A', 'B', 'C', 'D', 'E'];
+  List<String> _blockType = <String>['A', 'B', 'C', 'D', 'E',];
+  List<String> _courses = <String>['Computer Science', 'Business Analytics','Business','Arts and Social Sciences','Mechanical Engineering'];
 
   signMeUp(BuildContext context) {
     if (_formKey.currentState.validate()) {
@@ -61,22 +62,20 @@ class _RegisterState extends State<Register> {
 
       if (_image != null) {
         uploadPic();
-          
       } else {
-        _auth
-            .registerWithEmailAndPassword(
-                email,
-                password,
-                name,
-                nickname,
-                selectedGenderType,
-                selectedBlockType,
-                bio,
-                'https://firebasestorage.googleapis.com/v0/b/wiggle2-1d590.appspot.com/o/data%2Fuser%2F0%2Fcom.example.Wiggle2%2Fcache%2Fimage_picker8049276365349124154.png?alt=media&token=e2066efa-287f-45e9-9df6-6604a1838567',
-                false);         
+        _auth.registerWithEmailAndPassword(
+            email,
+            password,
+            name,
+            nickname,
+            selectedGenderType,
+            selectedBlockType,
+            bio,
+            'https://firebasestorage.googleapis.com/v0/b/wiggle2-1d590.appspot.com/o/data%2Fuser%2F0%2Fcom.example.Wiggle2%2Fcache%2Fimage_picker8049276365349124154.png?alt=media&token=e2066efa-287f-45e9-9df6-6604a1838567',
+            false);
       }
       Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: Onboarding()), ModalRoute.withName('Onboarding'));
+          FadeRoute(page: Onboarding()), ModalRoute.withName('Onboarding'));
     }
   }
 
@@ -86,6 +85,9 @@ class _RegisterState extends State<Register> {
   String name = '';
   String bio = '';
   String nickname = '';
+  String media = '';
+  String playlist = '';
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -94,15 +96,13 @@ class _RegisterState extends State<Register> {
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
-              body: Stack(
-                              children:<Widget>[SingleChildScrollView(
+              body: Stack(children: <Widget>[
+                SingleChildScrollView(
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 50,
-                    alignment: Alignment.center,
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 25, vertical: 25),
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Form(
                             key: _formKey,
@@ -110,7 +110,7 @@ class _RegisterState extends State<Register> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                SizedBox(height: 3),
+                                SizedBox(height: 10),
                                 Row(children: <Widget>[
                                   Icon(
                                     Icons.alternate_email,
@@ -134,6 +134,7 @@ class _RegisterState extends State<Register> {
                                             textFieldInputDecoration(' Email')),
                                   ),
                                 ]),
+                                SizedBox(height: 10),
                                 Row(children: <Widget>[
                                   Icon(
                                     Icons.lock,
@@ -195,6 +196,7 @@ class _RegisterState extends State<Register> {
                                     )
                                   ],
                                 ),
+                                SizedBox(height: 10),
                                 Row(
                                   children: <Widget>[
                                     Icon(
@@ -213,11 +215,12 @@ class _RegisterState extends State<Register> {
                                             setState(() => name = val);
                                           },
                                           style: TextStyle(color: Colors.amber),
-                                          decoration:
-                                              textFieldInputDecoration(' Name')),
+                                          decoration: textFieldInputDecoration(
+                                              ' Name')),
                                     ),
                                   ],
                                 ),
+                                SizedBox(height: 10),
                                 Row(children: <Widget>[
                                   CircleAvatar(
                                     backgroundColor: Colors.amber,
@@ -284,10 +287,8 @@ class _RegisterState extends State<Register> {
                                       },
                                       value: selectedGenderType,
                                       isExpanded: false,
-                                      hint: Text(
-                                        'Choose Gender',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
+                                      decoration: textFieldInputDecoration('Choose Gender'),
+                                     
                                     )),
                                   ],
                                 ),
@@ -324,10 +325,7 @@ class _RegisterState extends State<Register> {
                                         },
                                         value: selectedBlockType,
                                         isExpanded: false,
-                                        hint: Text(
-                                          'Choose Block',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
+                                         decoration: textFieldInputDecoration('Choose Gender'),
                                       ),
                                     ),
                                   ],
@@ -342,14 +340,107 @@ class _RegisterState extends State<Register> {
                                     SizedBox(width: 3),
                                     Expanded(
                                       child: TextField(
-                                        
-                                        maxLines: 10,
+                                          maxLines: 5,
                                           onChanged: (val) {
                                             setState(() => bio = val);
                                           },
                                           style: TextStyle(color: Colors.amber),
-                                          decoration:InputDecoration(hintText: ' Bio',focusedBorder: InputBorder.none,border: InputBorder.none)
-                                      ),
+                                          decoration: InputDecoration(
+                                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent),borderRadius: BorderRadius.all(Radius.circular(30))),
+                                            focusedBorder:OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent),borderRadius: BorderRadius.all(Radius.circular(30))),
+                                              hintText: ' Bio',
+                                              filled: true,
+                                              fillColor: Color(0xFF373737),
+                                              border: InputBorder.none)),
+                                    ),
+                                    
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                
+                                Row(
+                                  children: <Widget>[
+                                    
+                                    Icon(
+                                      FontAwesomeIcons.book,
+                                      size: 25.0,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(width: 20.0),
+                                    Expanded(
+                                        child: DropdownButtonFormField(
+                                      validator: (val) {
+                                        return val == null
+                                            ? 'Please provide a valid Course'
+                                            : null;
+                                      },
+                                      items: _courses
+                                          .map((value) => DropdownMenuItem(
+                                                child: Text(
+                                                  value,
+                                                  style: TextStyle(
+                                                      color: Colors.amber),
+                                                ),
+                                                value: value,
+                                              ))
+                                          .toList(),
+                                      onChanged: (selectecourse) {
+                                        setState(() {
+                                          selectedcourse = selectecourse;
+                                        });
+                                      },
+                                       value: selectedcourse,
+                                      isExpanded: false,
+                                      decoration: textFieldInputDecoration('Choose Course'),
+                                     
+                                    )),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      FontAwesomeIcons.laptop,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(width: 3),
+                                    Expanded(
+                                      child: TextFormField(
+                                          validator: (val) {
+                                            return val.isEmpty
+                                                ? 'Please provide your social media handles'
+                                                : null;
+                                          },
+                                          onChanged: (val) {
+                                            setState(() => media = val);
+                                          },
+                                          style: TextStyle(color: Colors.amber),
+                                          decoration: textFieldInputDecoration(
+                                              '  Instagram Handle')),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      FontAwesomeIcons.music,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(width: 3),
+                                    Expanded(
+                                      child: TextFormField(
+                                          validator: (val) {
+                                            return val.isEmpty
+                                                ? 'Please provide your favourite artist'
+                                                : null;
+                                          },
+                                          onChanged: (val) {
+                                            setState(() => playlist = val);
+                                          },
+                                          style: TextStyle(color: Colors.amber),
+                                          decoration: textFieldInputDecoration(
+                                              '  Favourite Artist')),
                                     ),
                                   ],
                                 ),
@@ -366,7 +457,9 @@ class _RegisterState extends State<Register> {
                                         borderRadius: BorderRadius.circular(25),
                                         color: Color(0xFFFFC107)),
                                     child: Text('Create Account',
-                                        style:  TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w500)),
                                   ),
                                 ),
                                 SizedBox(height: 12),
@@ -385,7 +478,7 @@ class _RegisterState extends State<Register> {
                                         child: Text("Sign In",
                                             style: TextStyle(
                                                 color: Colors.white,
-                                           decoration:
+                                                decoration:
                                                     TextDecoration.underline)),
                                       ),
                                     ),
@@ -399,7 +492,7 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                 ),
-                              ]),
+              ]),
             ),
           );
   }
