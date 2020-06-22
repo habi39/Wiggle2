@@ -79,8 +79,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       });
     }
     Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
-    
+        FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
+
     Helper.saveUserEmailSharedPreference(email);
     Helper.saveUserNameSharedPreference(name);
 
@@ -88,7 +88,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   String email = '';
-  String password = '';
   String error = '';
   String name = '';
   String bio = '';
@@ -105,14 +104,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
               appBar: AppBar(
-              elevation: 0,
-              centerTitle: true,
-              leading: IconButton(
-              icon: Icon(LineAwesomeIcons.home),
-              onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
-              }),
+                elevation: 0,
+                centerTitle: true,
+                leading: IconButton(
+                    icon: Icon(LineAwesomeIcons.home),
+                    onPressed: () {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          FadeRoute(page: Wrapper()),
+                          ModalRoute.withName('Wrapper'));
+                    }),
                 title: Text("E D I T   P R O F I L E",
                     style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
@@ -132,8 +132,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               child: Container(
                                 padding: EdgeInsets.symmetric(horizontal: 25),
                                 child: Column(
-                                  mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Form(
                                       key: _formKey,
@@ -170,7 +169,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                 padding:
                                                     EdgeInsets.only(top: 60),
                                                 child: IconButton(
-                                                  color: Colors.cyan,
+                                                  color: Colors.amber,
                                                   icon: Icon(Icons.camera_alt,
                                                       size: 30),
                                                   onPressed: () {
@@ -184,7 +183,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             children: <Widget>[
                                               Icon(
                                                 Icons.face,
-                                                color: Colors.cyan,
+                                                color: Colors.amber,
                                               ),
                                               SizedBox(width: 3),
                                               Expanded(
@@ -199,7 +198,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     setState(() => name = val);
                                                   },
                                                   style: TextStyle(
-                                                      color: Colors.cyan),
+                                                      color: Colors.amber),
                                                   decoration:
                                                       textFieldInputDecoration(
                                                           ' Name'),
@@ -208,9 +207,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             ],
                                           ),
                                           Row(children: <Widget>[
-                                            Icon(
-                                              Icons.face,
-                                              color: Colors.cyan,
+                                            CircleAvatar(
+                                              backgroundColor: Colors.amber,
+                                              radius: 12.5,
+                                              child: ClipOval(
+                                                child: Image.asset(
+                                                  'assets/images/ghosty2.png',
+                                                  fit: BoxFit.fill,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
                                             ),
                                             SizedBox(width: 3),
                                             Expanded(
@@ -227,7 +233,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                         () => nickname = val);
                                                   },
                                                   style: TextStyle(
-                                                      color: Colors.cyan),
+                                                      color: Colors.amber),
                                                   decoration:
                                                       textFieldInputDecoration(
                                                           ' Nickname to be used when anonymous')),
@@ -242,12 +248,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         Icon(
                                           FontAwesomeIcons.male,
                                           size: 25.0,
-                                          color: Colors.cyan,
+                                          color: Colors.amber,
                                         ),
                                         Icon(
                                           FontAwesomeIcons.female,
                                           size: 25.0,
-                                          color: Colors.cyan,
+                                          color: Colors.amber,
                                         ),
                                         SizedBox(width: 20.0),
                                         Expanded(
@@ -263,7 +269,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     child: Text(
                                                       value,
                                                       style: TextStyle(
-                                                          color: Colors.cyan),
+                                                          color: Colors.amber),
                                                     ),
                                                     value: value,
                                                   ))
@@ -289,7 +295,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         Icon(
                                           FontAwesomeIcons.home,
                                           size: 25.0,
-                                          color: Colors.cyan,
+                                          color: Colors.amber,
                                         ),
                                         Icon(
                                           FontAwesomeIcons.home,
@@ -311,7 +317,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                       child: Text(
                                                         value,
                                                         style: TextStyle(
-                                                            color: Colors.cyan),
+                                                            color: Colors.amber),
                                                       ),
                                                       value: value,
                                                     ))
@@ -337,7 +343,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       children: <Widget>[
                                         Icon(
                                           Icons.favorite,
-                                          color: Colors.cyan,
+                                          color: Colors.amber,
                                         ),
                                         SizedBox(width: 3),
                                         Expanded(
@@ -348,7 +354,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                 setState(() => bio = val);
                                               },
                                               style:
-                                                  TextStyle(color: Colors.cyan),
+                                                  TextStyle(color: Colors.amber),
                                               decoration:
                                                   textFieldInputDecoration(
                                                       ' Bio')),
@@ -397,7 +403,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(25),
-                                            color: Colors.blueGrey),
+                                            color: Color(0xFF373737)),
                                         child: Text('Confirm',
                                             style: simpleTextStyle()),
                                       ),

@@ -13,6 +13,10 @@ class Wiggle {
   final String anonInterest;
   final String anonDp;
   final int fame;
+  final String media;
+  final String course;
+  final String playlist;
+  final String accoms;
 
   Wiggle(
       {this.name,
@@ -28,5 +32,9 @@ class Wiggle {
       this.anonBio,
       this.anonInterest,
       this.anonDp,
-      this.fame});
+      this.fame,
+      this.media,
+      this.course,
+      this.playlist,
+      this.accoms});
 }

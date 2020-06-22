@@ -286,7 +286,11 @@ class DatabaseService {
       'anonInterest': '',
       'anonDp': '',
       'id': uid,
-      'fame': 0
+      'fame': 0,
+      'media': '',
+      'course': '',
+      'playlist': '',
+      'accoms': ''
     });
   }
 
@@ -316,21 +320,32 @@ class DatabaseService {
         .updateData({'fame': initialvalue + 1});
   }
 
-  Future likepost(int initialvalue, String postId, String userEmail) async{
+  Future likepost(int initialvalue, String postId, String userEmail) async {
     await Firestore.instance
-        .collection("posts").document(postId).collection('likes').document(userEmail).setData({'liked': userEmail});
+        .collection("posts")
+        .document(postId)
+        .collection('likes')
+        .document(userEmail)
+        .setData({'liked': userEmail});
 
     return await Firestore.instance
-        .collection("posts").document(postId).updateData({'likes': initialvalue + 1});
+        .collection("posts")
+        .document(postId)
+        .updateData({'likes': initialvalue + 1});
   }
 
-  Future unlikepost(int initialvalue, String postId, String userEmail) async{
+  Future unlikepost(int initialvalue, String postId, String userEmail) async {
     await Firestore.instance
-        .collection("posts").document(postId).collection('likes').document(userEmail).delete();
-        
+        .collection("posts")
+        .document(postId)
+        .collection('likes')
+        .document(userEmail)
+        .delete();
 
     return await Firestore.instance
-        .collection("posts").document(postId).updateData({'likes': initialvalue - 1});
+        .collection("posts")
+        .document(postId)
+        .updateData({'likes': initialvalue - 1});
   }
 
   Future decreaseFame(
@@ -386,7 +401,11 @@ class DatabaseService {
           anonBio: doc.data['anonBio'] ?? '',
           anonInterest: doc.data['anonInterest'] ?? '',
           anonDp: doc.data['anonDp'] ?? '',
-          fame: doc.data['fame'] ?? 0);
+          fame: doc.data['fame'] ?? 0,
+          media: doc.data['media'] ?? '',
+          course: doc.data['course'] ?? '',
+          playlist: doc.data['playlist'] ?? '',
+          accoms: doc.data['accoms'] ?? '');
     }).toList();
   }
 
@@ -404,7 +423,11 @@ class DatabaseService {
         anonBio: snapshot.data['anonBio'] ?? '',
         anonInterest: snapshot.data['anonInterest'] ?? '',
         anonDp: snapshot.data['anonDp'] ?? '',
-        fame: snapshot.data['fame'] ?? 0);
+        fame: snapshot.data['fame'] ?? 0,
+         media: snapshot.data['media'] ?? '',
+          course: snapshot.data['course'] ?? '',
+          playlist: snapshot.data['playlist'] ?? '',
+          accoms: snapshot.data['accoms'] ?? '');
   }
 
   //get wiggle stream

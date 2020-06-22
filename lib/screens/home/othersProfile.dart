@@ -637,7 +637,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Text("Instagram: @THETINYBIN ",
+                                        Text(widget.wiggle.media,
                                             style: kCaptionTextStyle.copyWith(
                                               fontSize: 15,
                                             )),
@@ -652,7 +652,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Text("Computer Science ",
+                                        Text(widget.wiggle.course,
                                             style: kCaptionTextStyle.copyWith(
                                               fontSize: 15,
                                             )),
@@ -667,7 +667,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Text("Mac Ayres, Daniel Caesar",
+                                        Text(widget.wiggle.playlist,
                                             style: kCaptionTextStyle.copyWith(
                                               fontSize: 15,
                                             )),
@@ -683,9 +683,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                           height: 5,
                                         ),
                                         Text(
-                                            "Kent Ridge Hall, " +
-                                                widget.wiggle.block +
-                                                " block",
+                                           widget.wiggle.accoms,
                                             style: kCaptionTextStyle.copyWith(
                                               fontSize: 15,
                                             )),

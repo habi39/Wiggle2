@@ -334,7 +334,7 @@ class _MyprofileState extends State<Myprofile> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text("Instagram: @THETINYBIN ",
+                                  Text(userData.media,
                                       style: kCaptionTextStyle.copyWith(
                                         fontSize: 15,
                                       )),
@@ -349,7 +349,7 @@ class _MyprofileState extends State<Myprofile> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text("Computer Science ",
+                                  Text(userData.course,
                                       style: kCaptionTextStyle.copyWith(
                                         fontSize: 15,
                                       )),
@@ -364,7 +364,7 @@ class _MyprofileState extends State<Myprofile> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text("Mac Ayres, Daniel Caesar",
+                                  Text(userData.playlist,
                                       style: kCaptionTextStyle.copyWith(
                                         fontSize: 15,
                                       )),
@@ -380,9 +380,7 @@ class _MyprofileState extends State<Myprofile> {
                                     height: 5,
                                   ),
                                   Text(
-                                      "Kent Ridge Hall, " +
-                                          userData.block +
-                                          " block",
+                                      userData.accoms,
                                       style: kCaptionTextStyle.copyWith(
                                         fontSize: 15,
                                       )),

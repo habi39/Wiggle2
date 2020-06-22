@@ -20,6 +20,10 @@ class UserData {
   String anonInterest;
   String anonDp;
   int fame;
+  String media;
+  String course;
+  String playlist;
+  String accoms;
 
   UserData(
       {this.email,
@@ -33,7 +37,11 @@ class UserData {
       this.anonBio,
       this.anonInterest,
       this.anonDp,
-      this.fame});
+      this.fame,
+      this.media,
+      this.course,
+      this.playlist,
+      this.accoms});
 
   UserData.fromMap(Map<String, dynamic> data) {
     email = data['email'];
