@@ -471,11 +471,11 @@ class _AnonOthersProfileState extends State<AnonOthersProfile> {
                           SizedBox(
                             height: 15,
                           ),
-                          Text('D I S C U S S I O N S',
-                              style: kTitleTextStyle.copyWith(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w300,
-                                  color: Color(0xFFFFC107))),
+                          // Text('D I S C U S S I O N S',
+                          //     style: kTitleTextStyle.copyWith(
+                          //         fontSize: 18,
+                          //         fontWeight: FontWeight.w300,
+                          //         color: Color(0xFFFFC107))),
                                   SizedBox(
                             height: 5,
                           ),
