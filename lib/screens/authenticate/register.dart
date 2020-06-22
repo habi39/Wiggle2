@@ -341,12 +341,14 @@ class _RegisterState extends State<Register> {
                                   SizedBox(width: 3),
                                   Expanded(
                                     child: TextField(
+                                      
+                                      maxLines: 10,
                                         onChanged: (val) {
                                           setState(() => bio = val);
                                         },
                                         style: TextStyle(color: Colors.amber),
-                                        decoration:
-                                            textFieldInputDecoration(' Bio')),
+                                        decoration:InputDecoration(hintText: ' Bio',focusedBorder: InputBorder.none,border: InputBorder.none)
+                                    ),
                                   ),
                                 ],
                               ),
