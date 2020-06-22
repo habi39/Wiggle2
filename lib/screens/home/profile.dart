@@ -16,6 +16,8 @@ import '../../models/user.dart';
 import 'followingList.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 
 class Myprofile extends StatefulWidget {
   @override
@@ -242,14 +244,13 @@ class _MyprofileState extends State<Myprofile> {
                                         ),
                                       ),
                                       FlatButton(
-                                          highlightColor: Colors.transparent,
-                                          splashColor: Colors.transparent,
-                                          padding: EdgeInsets.only(
-                                              left: 23, right: 23),
-                                          child: createColumns('Following',
-                                              countTotalFollowings),
-                                          onPressed: () => 
-                                          Navigator.of(context)
+                                        highlightColor: Colors.transparent,
+                                        splashColor: Colors.transparent,
+                                        padding: EdgeInsets.only(
+                                            left: 23, right: 23),
+                                        child: createColumns(
+                                            'Following', countTotalFollowings),
+                                        onPressed: () => Navigator.of(context)
                                             .pushAndRemoveUntil(
                                           FadeRoute(
                                               page: FollowingList(
@@ -434,32 +435,77 @@ class _MyprofileState extends State<Myprofile> {
                                                       },
                                                     );
                                                   }
-                                                  return Container(
-                                                    width: 150,
-                                                    margin: EdgeInsets.only(
-                                                        right: 15),
-                                                    height:
+                                                  return FocusedMenuHolder(
+                                                    menuWidth:
                                                         MediaQuery.of(context)
-                                                                    .size
-                                                                    .height *
-                                                                0.30 -
-                                                            50,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  20.0)),
-                                                      child: Image.network(
-                                                            snapshot
-                                                                .data
-                                                                .documents[
-                                                                    index]
-                                                                .data['photo'],
-                                                            fit: BoxFit.fill,
-                                                          ) ??
-                                                          Image.asset(
-                                                              'assets/images/profile1.png',
-                                                              fit: BoxFit.fill),
+                                                                .size
+                                                                .width *
+                                                            0.36,
+                                                    onPressed: () {},
+                                                    menuItems: <
+                                                        FocusedMenuItem>[
+                                                      FocusedMenuItem(
+                                                          title: Text(
+                                                            "Delete Photo",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 12),
+                                                          ),
+                                                          trailingIcon: Icon(
+                                                              Icons.delete),
+                                                          onPressed: () {
+                                                            DatabaseService()
+                                                                .wiggleCollection
+                                                                .document(
+                                                                    user.uid)
+                                                                .collection(
+                                                                    'photos')
+                                                                .getDocuments()
+                                                                .then((doc) {
+                                                              if (doc
+                                                                  .documents[
+                                                                      index]
+                                                                  .exists) {
+                                                                doc
+                                                                    .documents[
+                                                                        index]
+                                                                    .reference
+                                                                    .delete();
+                                                              }
+                                                            });
+                                                          },
+                                                          backgroundColor:
+                                                              Colors.redAccent)
+                                                    ],
+                                                    child: Container(
+                                                      width: 150,
+                                                      margin: EdgeInsets.only(
+                                                          right: 15),
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .height *
+                                                                  0.30 -
+                                                              50,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    20.0)),
+                                                        child: Image.network(
+                                                              snapshot
+                                                                  .data
+                                                                  .documents[
+                                                                      index]
+                                                                  .data['photo'],
+                                                              fit: BoxFit.fill,
+                                                            ) ??
+                                                            Image.asset(
+                                                                'assets/images/profile1.png',
+                                                                fit: BoxFit
+                                                                    .fill),
+                                                      ),
                                                     ),
                                                   );
                                                 }),
@@ -467,55 +513,6 @@ class _MyprofileState extends State<Myprofile> {
                                         )
                                       : Loading();
                                 }),
-                            // GestureDetector(
-                            //           onTap: () {
-                            //             Navigator.of(context)
-                            //                 .pushAndRemoveUntil(
-                            //               FadeRoute(page: Addpicture()),
-                            //               ModalRoute.withName('Addpicture'),
-                            //             );
-                            //           },
-                            //           child: Container(
-                            //             width: 150,
-                            //             margin: EdgeInsets.only(right: 20),
-                            //             height: MediaQuery.of(context)
-                            //                         .size
-                            //                         .height *
-                            //                     0.30 -
-                            //                 50,
-                            //             decoration: BoxDecoration(
-                            //                 color: Colors.orange.shade400,
-                            //                 borderRadius: BorderRadius.all(
-                            //                     Radius.circular(20.0))),
-                            //             child: Padding(
-                            //               padding:
-                            //                   const EdgeInsets.all(12.0),
-                            //               child: Column(
-                            //                 crossAxisAlignment:
-                            //                     CrossAxisAlignment.start,
-                            //                 children: <Widget>[
-                            //                   Text(
-                            //                     "Most\nFavorites",
-                            //                     style: TextStyle(
-                            //                         fontSize: 25,
-                            //                         color: Colors.white,
-                            //                         fontWeight:
-                            //                             FontWeight.bold),
-                            //                   ),
-                            //                   SizedBox(
-                            //                     height: 10,
-                            //                   ),
-                            //                   Text(
-                            //                     "20 Items",
-                            //                     style: TextStyle(
-                            //                         fontSize: 16,
-                            //                         color: Colors.white),
-                            //                   ),
-                            //                 ],
-                            //               ),
-                            //             ),
-                            //           ),
-                            //         )
                           ]))
                         ])))
               ]),
