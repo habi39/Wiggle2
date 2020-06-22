@@ -258,10 +258,6 @@ class DatabaseService {
         .setData({'photo': photo});
   }
 
-  Future deletephoto(String photo) async{
-    return await wiggleCollection.document(uid).collection('photos').document(photo).delete();
-  }
-
   Stream<QuerySnapshot> getphotos() {
     return wiggleCollection.document(uid).collection('photos').snapshots();
   }
