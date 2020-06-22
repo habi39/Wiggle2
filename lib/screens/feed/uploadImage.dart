@@ -86,7 +86,7 @@ class _UploadImageState extends State<UploadImage>
       "timestamp": Timestamp.now(),
       "email": widget.userData.email,
       "description": description,
-      "likes": {},
+      "likes": 0,
       "url": url
     });
   }

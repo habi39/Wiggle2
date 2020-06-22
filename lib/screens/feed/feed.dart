@@ -52,6 +52,7 @@ class _FeedState extends State<Feed> {
                       snapshot.data.documents[index]['timestamp'];
                   String url = snapshot.data.documents[index]['url'];
                   String postId = snapshot.data.documents[index]['postId'];
+                  int likes = snapshot.data.documents[index]['likes'];
 
                   print(email);
                   for (int i = 0; i < wiggles.length; i++) {
@@ -67,6 +68,7 @@ class _FeedState extends State<Feed> {
                     timestamp: timestamp,
                     url: url,
                     postId: postId,
+                    likes: likes,
                   );
                 })
             : Container();
@@ -192,15 +194,14 @@ class _FeedState extends State<Feed> {
   }
 }
 
-class FeedTile extends StatelessWidget {
+class FeedTile extends StatefulWidget {
   final Wiggle wiggle;
   final List<Wiggle> wiggles;
-  final f = new DateFormat('h:mm a');
   final Timestamp timestamp;
   final String description;
   final String url;
   final String postId;
-  bool check;
+  final int likes;
 
   FeedTile({
     this.wiggles,
@@ -209,7 +210,17 @@ class FeedTile extends StatelessWidget {
     this.description,
     this.url,
     this.postId,
+    this.likes
   });
+
+  @override
+  _FeedTileState createState() => _FeedTileState();
+}
+
+class _FeedTileState extends State<FeedTile> {
+  final f = new DateFormat('h:mm a');
+
+  bool check;
 
   createPostHead(context, UserData userData) {
     return Container(
@@ -222,21 +233,21 @@ class FeedTile extends StatelessWidget {
             width: 10,
           ),
           CircleAvatar(
-            radius: 18,
+            radius: 15,
             child: ClipOval(
               child: SizedBox(
                 width: 180,
                 height: 180,
                 child: Image.network(
-                  wiggle.dp,
+                  widget.wiggle.dp,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-          SizedBox(width: 5),
+          SizedBox(width: 10),
           Text(
-            '${wiggle.name}',
+            '${widget.wiggle.name}',
             style: kTitleTextStyle,
           ),
           Spacer(),
@@ -263,7 +274,7 @@ class FeedTile extends StatelessWidget {
                   onPressed: () {
                     DatabaseService()
                         .postReference
-                        .document(postId)
+                        .document(widget.postId)
                         .get()
                         .then((doc) {
                       if (doc.exists) {
@@ -283,54 +294,62 @@ class FeedTile extends StatelessWidget {
       onDoubleTap: () => print('like'),
       child: Stack(
         alignment: Alignment.center,
-        children: <Widget>[Image.network(url)],
+        children: <Widget>[Image.network(widget.url)],
       ),
     );
   }
 
   createPostFooter(context) {
-    return Row(
+    return Column(
       children: <Widget>[
-        SizedBox(
-          width: 10,
-        ),
-        CircleAvatar(
-          radius: 18,
-          child: ClipOval(
-            child: SizedBox(
-              width: 180,
-              height: 180,
-              child: Image.network(
-                wiggle.dp,
-                fit: BoxFit.cover,
+        Row(
+          children: <Widget>[ IconButton(padding: EdgeInsets.only(left:10),onPressed: (){},icon: Icon(LineAwesomeIcons.heart),iconSize: 25),
+          Text('${widget.likes}',)
+          ],), 
+        Row(
+          children: <Widget>[
+            SizedBox(
+              width: 10,
+            ),
+            CircleAvatar(
+              radius: 15,
+              child: ClipOval(
+                child: SizedBox(
+                  width: 180,
+                  height: 180,
+                  child: Image.network(
+                    widget.wiggle.dp,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
-          ),
+            SizedBox(width: 5),
+            Text(
+              '${widget.wiggle.name}',
+              style: kTitleTextStyle.copyWith(fontSize: 14),
+            ),
+            SizedBox(width: 5),
+            widget.description.length <= 18
+                ? Text('${widget.description}',style: kCaptionTextStyle.copyWith(fontSize: 12),)
+                : FlatButton(
+                    child: Text('more...'),
+                    onPressed: () {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          FadeRoute(
+                            page: CommentsPage(
+                                wiggle: widget.wiggle, description: widget.description),
+                          ),
+                          ModalRoute.withName('CommentsPage'));
+                    },
+                  ),
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Text('${f.format(widget.timestamp.toDate())}'),
+            )
+          ],
         ),
-        SizedBox(width: 5),
-        Text(
-          '${wiggle.name}',
-          style: kTitleTextStyle,
-        ),
-        SizedBox(width: 5),
-        description.length <= 18
-            ? Text('$description')
-            : FlatButton(
-                child: Text('more...'),
-                onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      FadeRoute(
-                        page: CommentsPage(
-                            wiggle: wiggle, description: description),
-                      ),
-                      ModalRoute.withName('CommentsPage'));
-                },
-              ),
-        Spacer(),
-        Padding(
-          padding: EdgeInsets.only(right: 10),
-          child: Text('${f.format(timestamp.toDate())}'),
-        )
       ],
     );
   }
@@ -342,7 +361,7 @@ class FeedTile extends StatelessWidget {
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           UserData userData = snapshot.data;
-          check = Constants.myEmail == wiggle.email;
+          check = Constants.myEmail == widget.wiggle.email;
           return GestureDetector(
             onTap: () {
               // Navigator.of(context).pushAndRemoveUntil(
