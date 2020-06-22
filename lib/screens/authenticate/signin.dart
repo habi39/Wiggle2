@@ -167,10 +167,10 @@ class _SignInState extends State<SignIn> {
                             padding: EdgeInsets.symmetric(vertical: 16),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25),
-                                color: Colors.blueGrey),
+                                color: Color(0xFFFFC107)),
                             child: Text(
                               'Sign In',
-                              style: simpleTextStyle(),
+                              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
                             ),
                           ),
                         ),

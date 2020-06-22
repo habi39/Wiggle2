@@ -106,6 +106,8 @@ class _RegisterState extends State<Register> {
                         Form(
                           key: _formKey,
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               SizedBox(height: 3),
                               Row(children: <Widget>[
@@ -359,9 +361,9 @@ class _RegisterState extends State<Register> {
                                   padding: EdgeInsets.symmetric(vertical: 16),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(25),
-                                      color: Colors.blueGrey),
+                                      color: Color(0xFFFFC107)),
                                   child: Text('Create Account',
-                                      style: simpleTextStyle()),
+                                      style:  TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
                                 ),
                               ),
                               SizedBox(height: 12),
