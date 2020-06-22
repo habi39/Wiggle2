@@ -286,7 +286,7 @@ class _MyprofileState extends State<Myprofile> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text('A B O U T    M E',
+                                  Text('A B O U T  M E',
                                       style: kTitleTextStyle.copyWith(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w300,

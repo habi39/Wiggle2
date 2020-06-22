@@ -39,9 +39,13 @@ class _MyanonprofileState extends State<Myanonprofile> {
                     children: <Widget>[
                       SizedBox(height: kSpacingUnit.w * 3),
                       FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              FadeRoute(page: EditAnonProfile()),
+                              ModalRoute.withName('EditAnonProfile'));
+                        },
                         child: Icon(
-                          LineAwesomeIcons.sun,
+                          LineAwesomeIcons.cog,
                           size: ScreenUtil().setSp(kSpacingUnit.w * 2.5),
                         ),
                       ),
@@ -79,40 +83,42 @@ class _MyanonprofileState extends State<Myanonprofile> {
                             Text(userData.nickname, style: kTitleTextStyle),
                             SizedBox(height: kSpacingUnit.w * 0.5),
                             Text('Anonymous', style: kCaptionTextStyle),
-                            SizedBox(height: kSpacingUnit.w * 2.5),
+                            SizedBox(height: kSpacingUnit.w * 0.5),
                             Container(
-                              height: kSpacingUnit.w * 5.5,
-                              // margin: EdgeInsets.symmetric(
-                              //   horizontal: kSpacingUnit.w,
-                              // ).copyWith(
-                              //   bottom: kSpacingUnit.w * 2,
-                              // ),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(kSpacingUnit.w * 3),
-                                color: Theme.of(context).backgroundColor,
-                              ),
-                              child: FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pushAndRemoveUntil(
-                    FadeRoute(page: EditAnonProfile()), ModalRoute.withName('EditAnonProfile'));
-                                    
-                                  },
-                                  child: Row(
-                                    children: <Widget>[
-                                      SizedBox(width: kSpacingUnit.w * 0.5),
-                                      Icon(LineAwesomeIcons.cog,
-                                          size: kSpacingUnit.w * 2.5),
-                                      SizedBox(width: kSpacingUnit.w * 1),
-                                      Text(
-                                        'Edit Anonymous Profile',
-                                        style: kTitleTextStyle.copyWith(
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w500),
-                                      )
-                                    ],
-                                  )),
-                            )
+                                height: kSpacingUnit.w * 5.5,
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: kSpacingUnit.w,
+                                ).copyWith(
+                                  bottom: kSpacingUnit.w * 2,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.circular(kSpacingUnit.w * 3),
+                                  color: Theme.of(context).backgroundColor,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Icon(
+                                          LineAwesomeIcons.star_1,
+                                          color: Color(0xFFFFC107),
+                                          size: 20,
+                                        ),
+                                        SizedBox(
+                                          width: kSpacingUnit.w,
+                                        ),
+                                        Text(userData.fame.toString(),
+                                            style: kTitleTextStyle.copyWith(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w700))
+                                      ],
+                                    ),
+                                  ],
+                                )),
                           ],
                         ),
                       ),
@@ -126,152 +132,69 @@ class _MyanonprofileState extends State<Myanonprofile> {
                         ),
                       ),
                       SizedBox(height: kSpacingUnit.w * 3),
-                    ])
+                    ]),
+                Container(
+                    padding: EdgeInsets.all(15),
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('A B O U T  M E',
+                              style: kTitleTextStyle.copyWith(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                  color: Color(0xFFFFC107))),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                              userData.anonBio == ''
+                                  ? 'Add your information by clicking on the icon on the top left'
+                                  : userData.anonBio,
+                              //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
+                              //"Greyscale, also known as, is a dreaded and usually fatal disease that can leave flesh stiff and dead, and the skin cracked and flaking, and stone-like to the touch. Those that manage to survive a bout with the illness will be immune from ever contracting it again, but the flesh damaged by the ravages of the disease will never heal, and they will be scarred for life. Princess Shireen Baratheon caught greyscale as an infant and survived, but the ordeal left half of her face disfigured by the disease.[2]",
+                              style: userData.anonBio == ''? kCaptionTextStyle.copyWith(
+                                fontSize: 10, color: Colors.grey
+                              ):kCaptionTextStyle.copyWith(
+                                fontSize: 15,
+                              )),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text('I N T E R E S T I N G  F A C T S',
+                              style: kTitleTextStyle.copyWith(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                  color: Color(0xFFFFC107))),
+                                  SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                              userData.anonInterest == ''
+                                  ? 'Add your information by clicking on the icon on the top left'
+                                  : userData.anonBio,
+                              //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
+                              //"Greyscale, also known as, is a dreaded and usually fatal disease that can leave flesh stiff and dead, and the skin cracked and flaking, and stone-like to the touch. Those that manage to survive a bout with the illness will be immune from ever contracting it again, but the flesh damaged by the ravages of the disease will never heal, and they will be scarred for life. Princess Shireen Baratheon caught greyscale as an infant and survived, but the ordeal left half of her face disfigured by the disease.[2]",
+                              style: userData.anonBio == ''? kCaptionTextStyle.copyWith(
+                                fontSize: 10, color: Colors.grey
+                              ):kCaptionTextStyle.copyWith(
+                                fontSize: 15,
+                              )),
+                              
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text('D I S C U S S I O N S',
+                              style: kTitleTextStyle.copyWith(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                  color: Color(0xFFFFC107))),
+                                  SizedBox(
+                            height: 5,
+                          ),
+                        ]))
               ]),
-              DraggableScrollableSheet(
-                  minChildSize: 0.1,
-                  initialChildSize: 0.47,
-                  maxChildSize: 0.60,
-                  builder: (context, scrollController) {
-                    return SingleChildScrollView(
-                        controller: scrollController,
-                        child: Container(
-                            color: Color(0xFF373739),
-                            constraints: BoxConstraints(
-                                minHeight: MediaQuery.of(context).size.height),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: kSpacingUnit.w,
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                        left: 32, right: 32, top: 5),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        CircleAvatar(
-                                    radius: kSpacingUnit.w * 3.9,
-                                    child: ClipOval(
-                                      child: Container(
-                                        color: Colors.white,
-                                        width: 70,
-                                        height: 70,
-                                        child: userData.anonDp != ""
-                                            ? Image.network(
-                                                userData.anonDp,
-                                                fit: BoxFit.cover,
-                                              )
-                                            : Image.asset(
-                                                'assets/images/profile1.png',
-                                                fit: BoxFit.cover),
-                                      ),
-                                    ),
-                                  ),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text(userData.nickname,
-                                                  style:
-                                                      kTitleTextStyle.copyWith(
-                                                    fontSize: 30,
-                                                    fontWeight: FontWeight.w700,
-                                                  )),
-                                              Text(userData.nickname,
-                                                  style: kCaptionTextStyle
-                                                      .copyWith(fontSize: 15)),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: kSpacingUnit.w,
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(15),
-                                    color: Color(0xEE454545),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Column(
-                                          children: <Widget>[
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: <Widget>[
-                                                Icon(
-                                                  LineAwesomeIcons.heart,
-                                                  color: Colors.red,
-                                                  size: 30,
-                                                ),
-                                                SizedBox(
-                                                  width: kSpacingUnit.w,
-                                                ),
-                                                Text(userData.fame.toString(),
-                                                    style: kTitleTextStyle
-                                                        .copyWith(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w700))
-                                              ],
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                      child: Column(children: <Widget>[
-                                    Text('About Me',
-                                        style: kTitleTextStyle.copyWith(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700,
-                                        )),
-                                    SizedBox(
-                                      height: kSpacingUnit.w,
-                                    ),
-                                    Text(userData.anonBio,
-                                        //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
-                                        //"Greyscale, also known as, is a dreaded and usually fatal disease that can leave flesh stiff and dead, and the skin cracked and flaking, and stone-like to the touch. Those that manage to survive a bout with the illness will be immune from ever contracting it again, but the flesh damaged by the ravages of the disease will never heal, and they will be scarred for life. Princess Shireen Baratheon caught greyscale as an infant and survived, but the ordeal left half of her face disfigured by the disease.[2]",
-                                        style: kCaptionTextStyle.copyWith(
-                                          fontSize: 15,
-                                        )),
-                                    SizedBox(
-                                      height: kSpacingUnit.w,
-                                    ),
-                                    Text('Interesting Facts',
-                                        style: kTitleTextStyle.copyWith(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700,
-                                        )),
-                                    SizedBox(
-                                      height: kSpacingUnit.w,
-                                    ),
-                                    Text(userData.anonInterest,
-                                        style: kCaptionTextStyle.copyWith(
-                                          fontSize: 15,
-                                        ))
-                                  ]))
-                                ])));
-                  })
             ]));
           } else {
             return Loading();
