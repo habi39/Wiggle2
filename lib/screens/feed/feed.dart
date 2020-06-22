@@ -289,9 +289,12 @@ class _FeedTileState extends State<FeedTile> {
         });
   }
 
-  createPostPicture() {
+  createPostPicture(UserData userData){
     return GestureDetector(
-      onDoubleTap: () => print('like'),
+      onDoubleTap: (){
+        setState((){DatabaseService().likepost(widget.likes, widget.postId, userData.email);});
+        
+      },
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[Image.network(widget.url)],
@@ -299,11 +302,13 @@ class _FeedTileState extends State<FeedTile> {
     );
   }
 
-  createPostFooter(context) {
+  createPostFooter(context, UserData userData) {
     return Column(
       children: <Widget>[
         Row(
-          children: <Widget>[ IconButton(padding: EdgeInsets.only(left:10),onPressed: (){},icon: Icon(LineAwesomeIcons.heart),iconSize: 25),
+          children: <Widget>[ IconButton(padding: EdgeInsets.only(left:10),onPressed: (){
+            setState((){DatabaseService().likepost(widget.likes, widget.postId, userData.email);});
+          },icon: Icon(LineAwesomeIcons.heart),iconSize: 25),
           Text('${widget.likes}',)
           ],), 
         Row(
@@ -380,11 +385,11 @@ class _FeedTileState extends State<FeedTile> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   createPostHead(context, userData),
-                  createPostPicture(),
+                  createPostPicture(userData),
                   SizedBox(
                     height: 10,
                   ),
-                  createPostFooter(context),
+                  createPostFooter(context,userData),
                 ],
               ),
             ),
