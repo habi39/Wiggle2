@@ -508,7 +508,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                 Container(
                                   width: MediaQuery.of(context).size.width/1.17,
                                   padding: EdgeInsets.only(
-                                      top: 3, bottom: 3, left: 26, right: 26),
+                                      top: 3, bottom: 3,),
                                   decoration: BoxDecoration(
                                       color: Color(0xFF373737),
                                       borderRadius: BorderRadius.all(
