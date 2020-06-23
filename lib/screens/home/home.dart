@@ -1,28 +1,18 @@
 import 'package:Wiggle2/screens/feed/feed.dart';
 import 'package:Wiggle2/screens/forum/forum.dart';
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:Wiggle2/games/smashbros/smash_engine/screen_util.dart';
 import 'package:Wiggle2/screens/anonymous/anonprofile.dart';
 import 'package:Wiggle2/screens/anonymous/anonymousChatScreen.dart';
-import 'package:Wiggle2/screens/anonymous/anonymousGames.dart';
-import 'package:Wiggle2/screens/home/gameslist.dart';
 import 'package:Wiggle2/screens/home/notificationsPage.dart';
 import 'package:Wiggle2/screens/home/profile.dart';
 import 'package:Wiggle2/screens/home/chatScreen.dart';
-import 'package:Wiggle2/screens/authenticate/intro/introPage1.dart';
-import 'package:Wiggle2/shared/constants.dart';
-import 'package:Wiggle2/shared/loading.dart';
 import '../../models/user.dart';
-import '../../models/wiggle.dart';
 import 'package:provider/provider.dart';
 import 'package:Wiggle2/services/database.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'dart:io';
 
 class Home extends StatefulWidget {
   @override
@@ -51,10 +41,11 @@ class _HomeState extends State<Home> {
   final Firestore _db = Firestore.instance;
   final FirebaseMessaging _fcm = FirebaseMessaging();
   showSnackBar(Map<String, dynamic> message) {
-    final snackBar = SnackBar(
+    final snackBar = SnackBar( 
       behavior: SnackBarBehavior.fixed,
       content: Text(message['notification']['body']),
       action: SnackBarAction(
+        textColor: Colors.black,
         label: 'Wiggle!',
         onPressed: () => Navigator.push(
           context,
@@ -64,7 +55,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       duration: Duration(seconds: 3),
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.amber,
     );
     _scaffoldkey.currentState.showSnackBar(snackBar);
   }

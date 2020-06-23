@@ -118,7 +118,7 @@ class _CommentsState extends State<Comments> {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  
                   GestureDetector(
                     onTap: () {
                       sendMessage();
@@ -173,27 +173,26 @@ class CommentsTile extends StatelessWidget {
 
           Container(
         padding: EdgeInsets.all(6),
-        // width: MediaQuery.of(context).size.width,
+       // width: MediaQuery.of(context).size.width,
         child: Container(
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            // borderRadius: BorderRadius.only(
-            //   topLeft: Radius.circular(23),
-            //   topRight: Radius.circular(23),
-            //   bottomRight: Radius.circular(23),
-            // ),
-          ),
+          
           child: Container(
+            decoration: BoxDecoration(
+            color: Color(0xFF373737),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(23),
+              topRight: Radius.circular(23),
+              bottomRight: Radius.circular(23),
+              bottomLeft: Radius.circular(23)
+            ),
+          ),
+          padding: EdgeInsets.all(15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  child: Text(
-                    time,
-                    textAlign: TextAlign.end,
-                  ),
-                ),
+                
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
                       '$author: ',
@@ -204,7 +203,16 @@ class CommentsTile extends StatelessWidget {
                           fontFamily: 'OverpassRegular',
                           fontWeight: FontWeight.w300),
                     ),
-                    Text(
+                    Container(
+                  child: Text(
+                    time,
+                    textAlign: TextAlign.end,
+                  ),
+                ),
+                    
+                  ],
+                ),
+                Text(
                       message,
                       textAlign: TextAlign.start,
                       style: TextStyle(
@@ -213,8 +221,6 @@ class CommentsTile extends StatelessWidget {
                           fontFamily: 'OverpassRegular',
                           fontWeight: FontWeight.w300),
                     ),
-                  ],
-                )
               ],
             ),
           ),

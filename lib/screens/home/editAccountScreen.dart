@@ -70,7 +70,7 @@ class _EditAccountState extends State<EditAccount> {
                                           children: <Widget>[
                                             Icon(
                                               Icons.lock,
-                                              color: Colors.cyan,
+                                              color: Colors.amber,
                                             ),
                                             SizedBox(width: 3),
                                             Expanded(
@@ -86,7 +86,7 @@ class _EditAccountState extends State<EditAccount> {
                                                         oldpassword = val);
                                                   },
                                                   style: TextStyle(
-                                                      color: Colors.cyan),
+                                                      color: Colors.amber),
                                                   decoration:
                                                       textFieldInputDecoration(
                                                           ' Old Password')),
@@ -97,7 +97,7 @@ class _EditAccountState extends State<EditAccount> {
                                           children: <Widget>[
                                             Icon(
                                               Icons.lock,
-                                              color: Colors.cyan,
+                                              color: Colors.amber,
                                             ),
                                             SizedBox(width: 3),
                                             Expanded(
@@ -114,7 +114,7 @@ class _EditAccountState extends State<EditAccount> {
                                                       () => newpassword = val);
                                                 },
                                                 style: TextStyle(
-                                                    color: Colors.cyan),
+                                                    color: Colors.amber),
                                                 decoration:
                                                     textFieldInputDecoration(
                                                         ' New Password'),
@@ -126,7 +126,7 @@ class _EditAccountState extends State<EditAccount> {
                                           children: <Widget>[
                                             Icon(
                                               Icons.lock,
-                                              color: Colors.cyan,
+                                              color: Colors.amber,
                                             ),
                                             Expanded(
                                               child: TextFormField(
@@ -141,7 +141,7 @@ class _EditAccountState extends State<EditAccount> {
                                                       confirmpassword = val);
                                                 },
                                                 style: TextStyle(
-                                                    color: Colors.cyan),
+                                                    color: Colors.amber),
                                                 decoration:
                                                     textFieldInputDecoration(
                                                         ' Confirm Password'),
@@ -177,7 +177,7 @@ class _EditAccountState extends State<EditAccount> {
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(25),
-                                                color: Colors.blueGrey),
+                                                color: Color(0xFF373737)),
                                             child: Text('Confirm new password',
                                                 style: simpleTextStyle()),
                                           ),
