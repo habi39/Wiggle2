@@ -207,8 +207,9 @@ class _MyprofileState extends State<Myprofile> {
                                 ),
                                 SizedBox(height: 10),
                                 Container(
+                                  width: MediaQuery.of(context).size.width/1.17,
                                   padding: EdgeInsets.only(
-                                      top: 3, bottom: 3, left: 28, right: 28),
+                                      top: 3, bottom: 3, left: 26, right: 26),
                                   decoration: BoxDecoration(
                                       color: Color(0xFF373737),
                                       borderRadius: BorderRadius.all(
@@ -224,7 +225,7 @@ class _MyprofileState extends State<Myprofile> {
                                         highlightColor: Colors.transparent,
                                         splashColor: Colors.transparent,
                                         padding: EdgeInsets.only(
-                                            left: 23, right: 23),
+                                            left: 21, right: 21),
                                         child: createColumns(
                                             'Followers', countTotalFollowers),
                                         onPressed: () => Navigator.of(context)
@@ -240,7 +241,7 @@ class _MyprofileState extends State<Myprofile> {
                                         highlightColor: Colors.transparent,
                                         splashColor: Colors.transparent,
                                         padding: EdgeInsets.only(
-                                            left: 23, right: 23),
+                                            left: 21, right: 21),
                                         child: createColumns(
                                             'Following', countTotalFollowings),
                                         onPressed: () => Navigator.of(context)
@@ -256,8 +257,8 @@ class _MyprofileState extends State<Myprofile> {
                                         highlightColor: Colors.transparent,
                                         splashColor: Colors.transparent,
                                         padding: EdgeInsets.only(
-                                            left: 23, right: 23),
-                                        child: createColumns('Gamescore', 0),
+                                            left: 21, right: 21),
+                                        child: createColumns('Fame', userData.fame),
                                         onPressed: () {},
                                       ),
                                     ],
@@ -295,14 +296,11 @@ class _MyprofileState extends State<Myprofile> {
                                     height: 5,
                                   ),
                                   Text(userData.bio,
-                                      //' hiiiiiiGreyscale, also known as, is a dreaded and usually fatal dis',
-                                      //"Greyscale, also known as, is a dreaded and usually fatal disease that can leave flesh stiff and dead, and the skin cracked and flaking, and stone-like to the touch. Those that manage to survive a bout with the illness will be immune from ever contracting it again, but the flesh damaged by the ravages of the disease will never heal, and they will be scarred for life. Princess Shireen Baratheon caught greyscale as an infant and survived, but the ordeal left half of her face disfigured by the disease.[2]",
+                                      
                                       style: kCaptionTextStyle.copyWith(
                                         fontSize: 15,
                                       )),
-                                  SizedBox(
-                                    height: kSpacingUnit.w,
-                                  ),
+                                  
                                   Text('C O M M U N I T Y',
                                       style: kTitleTextStyle.copyWith(
                                           fontSize: 18,

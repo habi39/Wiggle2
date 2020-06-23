@@ -56,7 +56,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       x = (await taskSnapshot.ref.getDownloadURL()).toString();
 
       dynamic result = DatabaseService(uid: user.uid).updateUserData(email,
-          name, nickname, selectedGenderType, selectedBlockType, bio, x, false,media,playlist,selectedcourse,home);
+          name,  selectedGenderType, selectedBlockType, bio, x, false,media,playlist,selectedcourse,home);
     }
 
     if (_image != null) {
@@ -67,7 +67,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     } else {
       print(y);
       dynamic result = DatabaseService(uid: user.uid).updateUserData(email,
-          name, nickname, selectedGenderType, selectedBlockType, bio, y, false,media,playlist,selectedcourse,home);
+          name,  selectedGenderType, selectedBlockType, bio, y, false,media,playlist,selectedcourse,home);
       DatabaseService(uid: user.uid).uploadWhoData(
           email: email,
           name: name,
@@ -93,7 +93,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String bio = '';
   String selectedGenderType,selectedcourse,home;
   String selectedBlockType;
-  String nickname = '';
   List<String> _courses = <String>['Computer Science', 'Business Analytics','Business','Arts and Social Sciences','Mechanical Engineering'];
   List<String> _homeArea = <String>['Woodlands','Serangoon','Yishun','Sambawang','Clementi','Bishan','Ang Mo Kio'];
   String media;
@@ -210,39 +209,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               ),
                                             ],
                                           ),
-                                          Row(children: <Widget>[
-                                            CircleAvatar(
-                                              backgroundColor: Colors.amber,
-                                              radius: 12.5,
-                                              child: ClipOval(
-                                                child: Image.asset(
-                                                  'assets/images/ghosty2.png',
-                                                  fit: BoxFit.fill,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(width: 3),
-                                            Expanded(
-                                              child: TextFormField(
-                                                  initialValue:
-                                                      userData.nickname,
-                                                  validator: (val) {
-                                                    return val.isEmpty
-                                                        ? 'Please provide a nickname'
-                                                        : null;
-                                                  },
-                                                  onChanged: (val) {
-                                                    setState(
-                                                        () => nickname = val);
-                                                  },
-                                                  style: TextStyle(
-                                                      color: Colors.amber),
-                                                  decoration:
-                                                      textFieldInputDecoration(
-                                                          ' Nickname to be used when anonymous')),
-                                            ),
-                                          ]),
                                         ],
                                       ),
                                     ),
@@ -512,9 +478,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           }
                                           if (name == '') {
                                             name = userData.name;
-                                          }
-                                          if (nickname == '') {
-                                            nickname = userData.nickname;
                                           }
                                           if (bio == '') {
                                             bio = userData.bio;

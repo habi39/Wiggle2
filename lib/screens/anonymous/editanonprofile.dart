@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:Wiggle2/screens/home/profile.dart';
 import 'package:Wiggle2/services/auth.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/screens/authenticate/helper.dart';
@@ -14,7 +13,6 @@ import 'package:provider/provider.dart';
 import 'package:Wiggle2/shared/constants.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../services/database.dart';
-import 'package:Wiggle2/screens/home/home.dart';
 
 class EditAnonProfile extends StatefulWidget {
   @override
@@ -55,7 +53,7 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
       x = (await taskSnapshot.ref.getDownloadURL()).toString();
 
       dynamic result = DatabaseService(uid: user.uid)
-          .updateAnonData(anonBio, anonInterest, x);
+          .updateAnonData(anonBio, anonInterest, x,nickname);
     }
 
     if (_image != null) {
@@ -66,7 +64,7 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
     } else {
       print(y);
       dynamic result = DatabaseService(uid: user.uid)
-          .updateAnonData(anonBio, anonInterest, y);
+          .updateAnonData(anonBio, anonInterest, y,nickname);
     }
     Navigator.of(context).pushAndRemoveUntil(
         FadeRoute(page: Wrapper()), ModalRoute.withName('Wrapper'));
@@ -76,6 +74,7 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
 
   String anonInterest = '';
   String anonBio = '';
+  String nickname = '';
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +110,7 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
                               child: Container(
                                 padding: EdgeInsets.symmetric(horizontal: 25),
                                 child: Column(
-                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Form(
                                       key: _formKey,
@@ -156,7 +155,7 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
                                                 padding:
                                                     EdgeInsets.only(top: 60),
                                                 child: IconButton(
-                                                  color: Colors.cyan,
+                                                  color: Colors.amber,
                                                   icon: Icon(Icons.camera_alt,
                                                       size: 30),
                                                   onPressed: () {
@@ -166,11 +165,44 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
                                               )
                                             ],
                                           ),
+                                          Row(children: <Widget>[
+                                            CircleAvatar(
+                                              backgroundColor: Colors.amber,
+                                              radius: 12.5,
+                                              child: ClipOval(
+                                                child: Image.asset(
+                                                  'assets/images/ghosty2.png',
+                                                  fit: BoxFit.fill,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 3),
+                                            Expanded(
+                                              child: TextFormField(
+                                                  initialValue:
+                                                      userData.nickname,
+                                                  validator: (val) {
+                                                    return val.isEmpty
+                                                        ? 'Please provide a nickname'
+                                                        : null;
+                                                  },
+                                                  onChanged: (val) {
+                                                    setState(
+                                                        () => nickname = val);
+                                                  },
+                                                  style: TextStyle(
+                                                      color: Colors.amber),
+                                                  decoration:
+                                                      textFieldInputDecoration(
+                                                          ' Nickname to be used when anonymous')),
+                                            ),
+                                          ]),
                                           Row(
                                             children: <Widget>[
                                               Icon(
                                                 Icons.face,
-                                                color: Colors.cyan,
+                                                color: Colors.amber,
                                               ),
                                               SizedBox(width: 3),
                                               Expanded(
@@ -187,7 +219,7 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
                                                           () => anonBio = val);
                                                     },
                                                     style: TextStyle(
-                                                        color: Colors.cyan),
+                                                        color: Colors.amber),
                                                     decoration:
                                                         textFieldInputDecoration(
                                                             'About Me')),
@@ -199,7 +231,7 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
                                             children: <Widget>[
                                               Icon(
                                                 Icons.favorite,
-                                                color: Colors.cyan,
+                                                color: Colors.amber,
                                               ),
                                               SizedBox(width: 3),
                                               Expanded(
@@ -216,7 +248,7 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
                                                           anonInterest = val);
                                                     },
                                                     style: TextStyle(
-                                                        color: Colors.cyan),
+                                                        color: Colors.amber),
                                                     decoration:
                                                         textFieldInputDecoration(
                                                             'Interesting Facts')),
@@ -243,6 +275,10 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
                                             anonBio = userData.anonBio;
                                           }
 
+                                          if (nickname == '') {
+                                            nickname = userData.nickname;
+                                          }
+
                                           if (_image == null) {
                                             y = userData.anonDp;
                                           }
@@ -259,7 +295,7 @@ class _EditAnonProfileState extends State<EditAnonProfile> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(25),
-                                            color: Colors.blueGrey),
+                                            color: Color(0xFF373737)),
                                         child: Text('Confirm',
                                             style: simpleTextStyle()),
                                       ),

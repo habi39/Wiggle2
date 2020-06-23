@@ -306,9 +306,9 @@ class DatabaseService {
   }
 
   Future updateAnonData(
-      String anonBio, String anonInterest, String anonDp) async {
+      String anonBio, String anonInterest, String anonDp, String nickname) async {
     return await wiggleCollection.document(uid).updateData(
-        {'anonBio': anonBio, 'anonInterest': anonInterest, 'anonDp': anonDp});
+        {'anonBio': anonBio, 'anonInterest': anonInterest, 'anonDp': anonDp, 'nickname': nickname });
   }
 
   Future increaseFame(
@@ -370,7 +370,6 @@ class DatabaseService {
   Future updateUserData(
       String email,
       String name,
-      String nickname,
       String gender,
       String block,
       String bio,
@@ -383,7 +382,6 @@ class DatabaseService {
     return await wiggleCollection.document(uid).updateData({
       "email": email,
       "name": name,
-      "nickname": nickname,
       "gender": gender,
       "block": block,
       "bio": bio,

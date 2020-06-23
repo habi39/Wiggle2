@@ -506,8 +506,9 @@ class _OthersProfileState extends State<OthersProfile> {
                                 ),
                                 SizedBox(height: 10),
                                 Container(
+                                  width: MediaQuery.of(context).size.width/1.17,
                                   padding: EdgeInsets.only(
-                                      top: 3, bottom: 3, left: 28, right: 28),
+                                      top: 3, bottom: 3, left: 26, right: 26),
                                   decoration: BoxDecoration(
                                       color: Color(0xFF373737),
                                       borderRadius: BorderRadius.all(
@@ -523,7 +524,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                           highlightColor: Colors.transparent,
                                           splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
-                                              left: 23, right: 23),
+                                              left: 21, right: 21),
                                           child: createColumns(
                                               'Followers', countTotalFollowers),
                                           onPressed: (widget.userData.email ==
@@ -542,7 +543,7 @@ class _OthersProfileState extends State<OthersProfile> {
                                           highlightColor: Colors.transparent,
                                           splashColor: Colors.transparent,
                                           padding: EdgeInsets.only(
-                                              left: 23, right: 23),
+                                              left: 21, right: 21),
                                           child: createColumns('Following',
                                               countTotalFollowings),
                                           onPressed: (widget.userData.email ==
@@ -561,8 +562,8 @@ class _OthersProfileState extends State<OthersProfile> {
                                         highlightColor: Colors.transparent,
                                         splashColor: Colors.transparent,
                                         padding: EdgeInsets.only(
-                                            left: 23, right: 23),
-                                        child: createColumns('Gamescore', 0),
+                                            left: 21, right: 21),
+                                        child: createColumns('Fame', widget.wiggle.fame),
                                         onPressed: () {},
                                       ),
                                     ],
