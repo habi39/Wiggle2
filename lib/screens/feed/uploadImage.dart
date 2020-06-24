@@ -180,8 +180,11 @@ class _UploadImageState extends State<UploadImage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: displayUploadFormScreen(),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: displayUploadFormScreen(),
+      ),
     );
   }
 

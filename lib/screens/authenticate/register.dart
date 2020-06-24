@@ -22,23 +22,43 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   final picker = ImagePicker();
   bool loading = false;
-  var selectedGenderType, selectedBlockType,selectedcourse,home;
+  var selectedGenderType, selectedBlockType, selectedcourse, home;
   File _image;
   var x;
   List<String> _genderType = <String>[
     'Male',
     'Female',
   ];
-  Future getImage() async {
-    var image = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      _image = File(image.path);
-    });
-  }
+  // Future getImage() async {
+  //   var image = await picker.getImage(source: ImageSource.gallery);
+  //   setState(() {
+  //     _image = File(image.path);
+  //   });
+  // }
 
-  List<String> _blockType = <String>['A', 'B', 'C', 'D', 'E',];
-  List<String> _courses = <String>['Computer Science', 'Business Analytics','Business','Arts and Social Sciences','Mechanical Engineering'];
-  List<String> _homeArea = <String>['Woodlands','Serangoon','Yishun','Sambawang','Clementi','Bishan','Ang Mo Kio'];
+  List<String> _blockType = <String>[
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+  ];
+  List<String> _courses = <String>[
+    'Computer Science',
+    'Business Analytics',
+    'Business',
+    'Arts and Social Sciences',
+    'Mechanical Engineering'
+  ];
+  List<String> _homeArea = <String>[
+    'Woodlands',
+    'Serangoon',
+    'Yishun',
+    'Sambawang',
+    'Clementi',
+    'Bishan',
+    'Ang Mo Kio'
+  ];
   signMeUp(BuildContext context) {
     if (_formKey.currentState.validate()) {
       setState(() {
@@ -56,12 +76,25 @@ class _RegisterState extends State<Register> {
         StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
         x = (await taskSnapshot.ref.getDownloadURL()).toString();
 
-        await _auth.registerWithEmailAndPassword(email, password, name,
-            nickname, selectedGenderType, selectedBlockType, bio, x, false,media,playlist,selectedcourse,home);
+        await _auth.registerWithEmailAndPassword(
+            email,
+            password,
+            name,
+            nickname,
+            selectedGenderType,
+            selectedBlockType,
+            bio,
+            x,
+            false,
+            media,
+            playlist,
+            selectedcourse,
+            home);
       }
 
       if (_image != null) {
         uploadPic();
+        // takeImage(context);
       } else {
         _auth.registerWithEmailAndPassword(
             email,
@@ -73,11 +106,58 @@ class _RegisterState extends State<Register> {
             bio,
             'https://firebasestorage.googleapis.com/v0/b/wiggle2-1d590.appspot.com/o/data%2Fuser%2F0%2Fcom.example.Wiggle2%2Fcache%2Fimage_picker8049276365349124154.png?alt=media&token=e2066efa-287f-45e9-9df6-6604a1838567',
             false,
-            media,playlist,selectedcourse,home);
+            media,
+            playlist,
+            selectedcourse,
+            home);
       }
       Navigator.of(context).pushAndRemoveUntil(
           FadeRoute(page: Onboarding()), ModalRoute.withName('Onboarding'));
     }
+  }
+
+  pickImageFromGallery(context) async {
+    Navigator.pop(context);
+    _image = await ImagePicker.pickImage(source: ImageSource.gallery);
+  }
+
+  captureImageWithCamera(context) async {
+    Navigator.pop(context);
+    _image = await ImagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 680, maxWidth: 970);
+  }
+
+  takeImage(nContext) {
+    return showDialog(
+        context: nContext,
+        builder: (context) {
+          return SimpleDialog(
+            title: Text("New Post"),
+            children: <Widget>[
+              SimpleDialogOption(
+                child: Text(
+                  "Capture Image with Camera",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => captureImageWithCamera(nContext),
+              ),
+              SimpleDialogOption(
+                child: Text(
+                  "Select Image from Gallery",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => pickImageFromGallery(nContext),
+              ),
+              SimpleDialogOption(
+                child: Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          );
+        });
   }
 
   String email = '';
@@ -88,7 +168,6 @@ class _RegisterState extends State<Register> {
   String nickname = '';
   String media = '';
   String playlist = '';
- 
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +270,7 @@ class _RegisterState extends State<Register> {
                                         color: Colors.amber,
                                         icon: Icon(Icons.camera_alt, size: 30),
                                         onPressed: () {
-                                          getImage();
+                                          takeImage(context);
                                         },
                                       ),
                                     )
@@ -288,8 +367,8 @@ class _RegisterState extends State<Register> {
                                       },
                                       value: selectedGenderType,
                                       isExpanded: false,
-                                      decoration: textFieldInputDecoration('Choose Gender'),
-                                     
+                                      decoration: textFieldInputDecoration(
+                                          'Choose Gender'),
                                     )),
                                   ],
                                 ),
@@ -326,7 +405,8 @@ class _RegisterState extends State<Register> {
                                         },
                                         value: selectedBlockType,
                                         isExpanded: false,
-                                         decoration: textFieldInputDecoration('Choose Block'),
+                                        decoration: textFieldInputDecoration(
+                                            'Choose Block'),
                                       ),
                                     ),
                                   ],
@@ -347,21 +427,30 @@ class _RegisterState extends State<Register> {
                                           },
                                           style: TextStyle(color: Colors.amber),
                                           decoration: InputDecoration(
-                                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent),borderRadius: BorderRadius.all(Radius.circular(30))),
-                                            focusedBorder:OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent),borderRadius: BorderRadius.all(Radius.circular(30))),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(30))),
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(30))),
                                               hintText: ' Bio',
                                               filled: true,
                                               fillColor: Color(0xFF373737),
                                               border: InputBorder.none)),
                                     ),
-                                    
                                   ],
                                 ),
                                 SizedBox(height: 8),
-                                
                                 Row(
                                   children: <Widget>[
-                                    
                                     Icon(
                                       FontAwesomeIcons.book,
                                       size: 25.0,
@@ -390,10 +479,10 @@ class _RegisterState extends State<Register> {
                                           selectedcourse = selectecourse;
                                         });
                                       },
-                                       value: selectedcourse,
+                                      value: selectedcourse,
                                       isExpanded: false,
-                                      decoration: textFieldInputDecoration('Choose Course'),
-                                     
+                                      decoration: textFieldInputDecoration(
+                                          'Choose Course'),
                                     )),
                                   ],
                                 ),
@@ -448,7 +537,6 @@ class _RegisterState extends State<Register> {
                                 SizedBox(height: 8),
                                 Row(
                                   children: <Widget>[
-                                    
                                     Icon(
                                       FontAwesomeIcons.home,
                                       size: 25.0,
@@ -477,10 +565,10 @@ class _RegisterState extends State<Register> {
                                           home = selectedhome;
                                         });
                                       },
-                                       value: home,
+                                      value: home,
                                       isExpanded: false,
-                                      decoration: textFieldInputDecoration('I Stay Around...'),
-                                     
+                                      decoration: textFieldInputDecoration(
+                                          'I Stay Around...'),
                                     )),
                                   ],
                                 ),

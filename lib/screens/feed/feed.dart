@@ -203,15 +203,14 @@ class FeedTile extends StatefulWidget {
   final String postId;
   final int likes;
 
-  FeedTile({
-    this.wiggles,
-    this.wiggle,
-    this.timestamp,
-    this.description,
-    this.url,
-    this.postId,
-    this.likes
-  });
+  FeedTile(
+      {this.wiggles,
+      this.wiggle,
+      this.timestamp,
+      this.description,
+      this.url,
+      this.postId,
+      this.likes});
 
   @override
   _FeedTileState createState() => _FeedTileState();
@@ -228,6 +227,7 @@ class _FeedTileState extends State<FeedTile> {
     // TODO: implement initState
     super.initState();
   }
+
   getlikes() {
     DatabaseService()
         .postReference
@@ -311,14 +311,17 @@ class _FeedTileState extends State<FeedTile> {
         });
   }
 
-  createPostPicture(UserData userData){
+  createPostPicture(UserData userData) {
     return GestureDetector(
-      onDoubleTap: liked? (){}:(){
-        setState((){
-          liked=true;
-          DatabaseService().likepost(widget.likes, widget.postId, userData.email);});
-        
-      },
+      onDoubleTap: liked
+          ? () {}
+          : () {
+              setState(() {
+                liked = true;
+                DatabaseService()
+                    .likepost(widget.likes, widget.postId, userData.email);
+              });
+            },
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[Image.network(widget.url)],
@@ -330,19 +333,35 @@ class _FeedTileState extends State<FeedTile> {
     return Column(
       children: <Widget>[
         Row(
-          children: <Widget>[ IconButton(padding: EdgeInsets.only(left:10),onPressed: liked? (){
-            setState((){
-              liked= false;
-              DatabaseService().unlikepost(widget.likes, widget.postId, userData.email);
-            });
-
-          }:(){
-            setState((){
-              liked=true;
-              DatabaseService().likepost(widget.likes, widget.postId, userData.email);});
-          },icon:liked? Icon(LineAwesomeIcons.heart_1):  Icon(LineAwesomeIcons.heart),iconSize: 25,color: liked? Colors.redAccent:Colors.white,),
-          Text('${widget.likes}',)
-          ],), 
+          children: <Widget>[
+            IconButton(
+              padding: EdgeInsets.only(left: 10),
+              onPressed: liked
+                  ? () {
+                      setState(() {
+                        liked = false;
+                        DatabaseService().unlikepost(
+                            widget.likes, widget.postId, userData.email);
+                      });
+                    }
+                  : () {
+                      setState(() {
+                        liked = true;
+                        DatabaseService().likepost(
+                            widget.likes, widget.postId, userData.email);
+                      });
+                    },
+              icon: liked
+                  ? Icon(LineAwesomeIcons.heart_1)
+                  : Icon(LineAwesomeIcons.heart),
+              iconSize: 25,
+              color: liked ? Colors.redAccent : Colors.white,
+            ),
+            Text(
+              '${widget.likes}',
+            )
+          ],
+        ),
         Row(
           children: <Widget>[
             SizedBox(
@@ -368,14 +387,18 @@ class _FeedTileState extends State<FeedTile> {
             ),
             SizedBox(width: 5),
             widget.description.length <= 18
-                ? Text('${widget.description}',style: kCaptionTextStyle.copyWith(fontSize: 12),)
+                ? Text(
+                    '${widget.description}',
+                    style: kCaptionTextStyle.copyWith(fontSize: 12),
+                  )
                 : FlatButton(
                     child: Text('more...'),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
                           FadeRoute(
                             page: CommentsPage(
-                                wiggle: widget.wiggle, description: widget.description),
+                                wiggle: widget.wiggle,
+                                description: widget.description),
                           ),
                           ModalRoute.withName('CommentsPage'));
                     },
@@ -421,7 +444,7 @@ class _FeedTileState extends State<FeedTile> {
                   SizedBox(
                     height: 10,
                   ),
-                  createPostFooter(context,userData),
+                  createPostFooter(context, userData),
                 ],
               ),
             ),

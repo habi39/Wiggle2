@@ -23,12 +23,61 @@ class _CreatePageState extends State<CreatePage> {
   File selectedImage;
   bool _isLoading = false;
 
-  Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+  // Future getImage() async {
+  //   var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
+  //   setState(() {
+  //     selectedImage = image;
+  //   });
+  // }
+  pickImageFromGallery(context) async {
+    Navigator.pop(context);
+    var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
-      selectedImage = image;
+      selectedImage = _image;
     });
+  }
+
+  captureImageWithCamera(context) async {
+    Navigator.pop(context);
+    var _image = await ImagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 680, maxWidth: 970);
+    setState(() {
+      selectedImage = _image;
+    });
+  }
+
+  takeImage(nContext) {
+    return showDialog(
+        context: nContext,
+        builder: (context) {
+          return SimpleDialog(
+            title: Text("New Post"),
+            children: <Widget>[
+              SimpleDialogOption(
+                child: Text(
+                  "Capture Image with Camera",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => captureImageWithCamera(nContext),
+              ),
+              SimpleDialogOption(
+                child: Text(
+                  "Select Image from Gallery",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => pickImageFromGallery(nContext),
+              ),
+              SimpleDialogOption(
+                child: Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          );
+        });
   }
 
   uploadBlog() async {
@@ -72,95 +121,101 @@ class _CreatePageState extends State<CreatePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100),
-        ),
-        elevation: 0.0,
-        actions: <Widget>[
-          GestureDetector(
-            onTap: () {
-              uploadBlog();
-            },
-            child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.file_upload)),
-          )
-        ],
-      ),
-      body: _isLoading
-          ? Container(
-              alignment: Alignment.center,
-              child: CircularProgressIndicator(),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100),
+          ),
+          elevation: 0.0,
+          actions: <Widget>[
+            GestureDetector(
+              onTap: () {
+                uploadBlog();
+              },
+              child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Icon(Icons.file_upload)),
             )
-          : Container(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 10,
-                  ),
-                  GestureDetector(
-                      onTap: () {
-                        getImage();
-                      },
-                      child: selectedImage != null
-                          ? Container(
-                              margin: EdgeInsets.symmetric(horizontal: 16),
-                              height: 170,
-                              width: MediaQuery.of(context).size.width,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(6),
-                                child: Image.file(
-                                  selectedImage,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+          ],
+        ),
+        body: _isLoading
+            ? Container(
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                          onTap: () {
+                            takeImage(context);
+                          },
+                          child: selectedImage != null
+                              ? Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 16),
+                                  // height: 170,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(6),
+                                    child: Image.file(
+                                      selectedImage,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 16),
+                                  height: 170,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(6)),
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Icon(
+                                    Icons.add_a_photo,
+                                    color: Colors.black45,
+                                  ),
+                                )),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          children: <Widget>[
+                            // TextField(
+                            //   decoration: InputDecoration(hintText: "Author Name"),
+                            //   onChanged: (val) {
+                            //     authorName = val;
+                            //   },
+                            // ),
+                            TextField(
+                              decoration: InputDecoration(hintText: "Title"),
+                              onChanged: (val) {
+                                title = val;
+                              },
+                            ),
+                            TextField(
+                              decoration: InputDecoration(hintText: "Desc"),
+                              onChanged: (val) {
+                                desc = val;
+                              },
                             )
-                          : Container(
-                              margin: EdgeInsets.symmetric(horizontal: 16),
-                              height: 170,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(6)),
-                              width: MediaQuery.of(context).size.width,
-                              child: Icon(
-                                Icons.add_a_photo,
-                                color: Colors.black45,
-                              ),
-                            )),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      children: <Widget>[
-                        // TextField(
-                        //   decoration: InputDecoration(hintText: "Author Name"),
-                        //   onChanged: (val) {
-                        //     authorName = val;
-                        //   },
-                        // ),
-                        TextField(
-                          decoration: InputDecoration(hintText: "Title"),
-                          onChanged: (val) {
-                            title = val;
-                          },
+                          ],
                         ),
-                        TextField(
-                          decoration: InputDecoration(hintText: "Desc"),
-                          onChanged: (val) {
-                            desc = val;
-                          },
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                      ),
+                      SizedBox(height: 10)
+                    ],
+                  ),
+                ),
               ),
-            ),
+      ),
     );
   }
 }

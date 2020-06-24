@@ -52,7 +52,10 @@ class DatabaseService {
   }
 
   getData() async {
-    return await Firestore.instance.collection("blogs").snapshots();
+    return await Firestore.instance
+        .collection("blogs")
+        .orderBy('time', descending: true)
+        .snapshots();
   }
 
   addForumMessages(String desc, messageMap) async {
@@ -274,8 +277,7 @@ class DatabaseService {
       String media,
       String playlist,
       String course,
-      String accoms
-      ) async {
+      String accoms) async {
     followersReference.document(email).collection('userFollowing');
     followingReference.document(email).collection('userFollowers');
     return await wiggleCollection.document(uid).setData({
@@ -305,10 +307,14 @@ class DatabaseService {
         .updateData({"isAnonymous": isAnonymous});
   }
 
-  Future updateAnonData(
-      String anonBio, String anonInterest, String anonDp, String nickname) async {
-    return await wiggleCollection.document(uid).updateData(
-        {'anonBio': anonBio, 'anonInterest': anonInterest, 'anonDp': anonDp, 'nickname': nickname });
+  Future updateAnonData(String anonBio, String anonInterest, String anonDp,
+      String nickname) async {
+    return await wiggleCollection.document(uid).updateData({
+      'anonBio': anonBio,
+      'anonInterest': anonInterest,
+      'anonDp': anonDp,
+      'nickname': nickname
+    });
   }
 
   Future increaseFame(
@@ -368,17 +374,18 @@ class DatabaseService {
   }
 
   Future updateUserData(
-      String email,
-      String name,
-      String gender,
-      String block,
-      String bio,
-      String dp,
-      bool isAnonymous,
-      String media,
-      String playlist,
-      String course,
-      String accoms,) async {
+    String email,
+    String name,
+    String gender,
+    String block,
+    String bio,
+    String dp,
+    bool isAnonymous,
+    String media,
+    String playlist,
+    String course,
+    String accoms,
+  ) async {
     return await wiggleCollection.document(uid).updateData({
       "email": email,
       "name": name,
@@ -435,10 +442,10 @@ class DatabaseService {
         anonInterest: snapshot.data['anonInterest'] ?? '',
         anonDp: snapshot.data['anonDp'] ?? '',
         fame: snapshot.data['fame'] ?? 0,
-         media: snapshot.data['media'] ?? '',
-          course: snapshot.data['course'] ?? '',
-          playlist: snapshot.data['playlist'] ?? '',
-          accoms: snapshot.data['accoms'] ?? '');
+        media: snapshot.data['media'] ?? '',
+        course: snapshot.data['course'] ?? '',
+        playlist: snapshot.data['playlist'] ?? '',
+        accoms: snapshot.data['accoms'] ?? '');
   }
 
   //get wiggle stream
