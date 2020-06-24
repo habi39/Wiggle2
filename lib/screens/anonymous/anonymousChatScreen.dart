@@ -5,6 +5,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 import 'package:intl/intl.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -441,8 +443,17 @@ class ChatScreenTile extends StatelessWidget {
         builder: (context, snapshot) {
           UserData userData = snapshot.data;
 
-          return GestureDetector(
-            onTap: () {
+          return FocusedMenuHolder(
+            menuWidth: MediaQuery.of(context).size.width,
+            menuBoxDecoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20),
+                topLeft: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+            ),
+            onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(
                 FadeRoute(
                   page: AnonymousConversation(
@@ -456,37 +467,84 @@ class ChatScreenTile extends StatelessWidget {
                 ModalRoute.withName('AnonymousConversation'),
               );
             },
-            child: Container(
-              margin: EdgeInsets.only(top: 5, bottom: 5, right: 10, left: 10),
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  topLeft: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      getDp(),
-                      SizedBox(width: 8),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[getName(), getLatestMsg()],
-                      )
-                    ],
+            menuItems: <FocusedMenuItem>[
+              FocusedMenuItem(
+                  title: Text(
+                    "Delete Post",
+                    style: TextStyle(color: Colors.black),
                   ),
-                  Row(
-                    children: <Widget>[
-                      getLatestTime(),
-                    ],
-                  )
-                ],
+                  trailingIcon: Icon(Icons.delete),
+                  onPressed: () {
+                    // DatabaseService()
+                    //     .blogReference
+                    //     .document(description)
+                    //     .collection('chats')
+                    //     .getDocuments()
+                    //     .then((doc) {
+                    //   if (doc.documents[0].exists) {
+                    //     doc.documents[0].reference.delete();
+                    //   }
+                    // });
+
+                    DatabaseService()
+                        .anonChatReference
+                        .document(chatRoomId)
+                        .get()
+                        .then((doc) {
+                      if (doc.exists) {
+                        doc.reference.delete();
+                      }
+                    });
+                  },
+                  backgroundColor: Colors.redAccent)
+            ],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  FadeRoute(
+                    page: AnonymousConversation(
+                      friendAnon: friendAnon,
+                      wiggles: wiggles,
+                      wiggle: currentWiggle,
+                      chatRoomId: chatRoomId,
+                      userData: userData,
+                    ),
+                  ),
+                  ModalRoute.withName('AnonymousConversation'),
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.only(top: 5, bottom: 5, right: 10, left: 10),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        getDp(),
+                        SizedBox(width: 8),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[getName(), getLatestMsg()],
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        getLatestTime(),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           );

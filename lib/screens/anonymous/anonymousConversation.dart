@@ -1,6 +1,8 @@
 import 'package:Wiggle2/screens/wrapper/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:Wiggle2/games/compatibility.dart/compatibilityStart.dart';
@@ -291,75 +293,108 @@ class MessageTile extends StatelessWidget {
   MessageTile(
       {this.message, this.isSendByMe, this.time, this.type, this.roomId});
 
-  //delete msg
   //edit msg
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      onDoubleTap: () => DatabaseService()
-          .anonChatReference
-          .document(roomId)
-          .collection('chats')
-          .where("message", isEqualTo: message)
-          .getDocuments()
-          .then((doc) {
-        if (doc.documents[0].exists) {
-          doc.documents[0].reference.delete();
-        }
-      }),
-      child: Container(
-        padding: EdgeInsets.only(
-            top: 8,
-            bottom: 8,
-            left: isSendByMe ? 0 : 24,
-            right: isSendByMe ? 24 : 0),
-        alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
-        width: MediaQuery.of(context).size.width,
+    return FocusedMenuHolder(
+      menuWidth: MediaQuery.of(context).size.width,
+      menuBoxDecoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(20),
+          topLeft: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        ),
+      ),
+      onPressed: () {},
+      menuItems: <FocusedMenuItem>[
+        FocusedMenuItem(
+            title: Text(
+              "Delete Post",
+              style: TextStyle(color: Colors.black),
+            ),
+            trailingIcon: Icon(Icons.delete),
+            onPressed: () {
+              DatabaseService()
+                  .anonChatReference
+                  .document(roomId)
+                  .collection('chats')
+                  .where("message", isEqualTo: message)
+                  .getDocuments()
+                  .then((doc) {
+                if (doc.documents[0].exists) {
+                  doc.documents[0].reference.delete();
+                }
+              });
+            },
+            backgroundColor: Colors.redAccent)
+      ],
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        onDoubleTap: () => DatabaseService()
+            .anonChatReference
+            .document(roomId)
+            .collection('chats')
+            .where("message", isEqualTo: message)
+            .getDocuments()
+            .then((doc) {
+          if (doc.documents[0].exists) {
+            doc.documents[0].reference.delete();
+          }
+        }),
         child: Container(
-          margin: isSendByMe
-              ? EdgeInsets.only(left: 30)
-              : EdgeInsets.only(right: 30),
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-          decoration: BoxDecoration(
-            color: (type == 'message')
-                ? (isSendByMe ? Colors.blueGrey : Colors.indigoAccent)
-                : Colors.red,
-            borderRadius: isSendByMe
-                ? BorderRadius.only(
-                    topLeft: Radius.circular(23),
-                    topRight: Radius.circular(23),
-                    bottomLeft: Radius.circular(23),
-                  )
-                : BorderRadius.only(
-                    topLeft: Radius.circular(23),
-                    topRight: Radius.circular(23),
-                    bottomRight: Radius.circular(23),
-                  ),
-          ),
+          padding: EdgeInsets.only(
+              top: 8,
+              bottom: 8,
+              left: isSendByMe ? 0 : 24,
+              right: isSendByMe ? 24 : 0),
+          alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
+          width: MediaQuery.of(context).size.width,
           child: Container(
-            child: Column(
-              crossAxisAlignment: isSendByMe
-                  ? CrossAxisAlignment.end
-                  : CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    time,
-                    textAlign: TextAlign.end,
+            margin: isSendByMe
+                ? EdgeInsets.only(left: 30)
+                : EdgeInsets.only(right: 30),
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+            decoration: BoxDecoration(
+              color: (type == 'message')
+                  ? (isSendByMe ? Colors.blueGrey : Colors.indigoAccent)
+                  : Colors.red,
+              borderRadius: isSendByMe
+                  ? BorderRadius.only(
+                      topLeft: Radius.circular(23),
+                      topRight: Radius.circular(23),
+                      bottomLeft: Radius.circular(23),
+                    )
+                  : BorderRadius.only(
+                      topLeft: Radius.circular(23),
+                      topRight: Radius.circular(23),
+                      bottomRight: Radius.circular(23),
+                    ),
+            ),
+            child: Container(
+              child: Column(
+                crossAxisAlignment: isSendByMe
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    child: Text(
+                      time,
+                      textAlign: TextAlign.end,
+                    ),
                   ),
-                ),
-                Text(
-                  message,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'OverpassRegular',
-                      fontWeight: FontWeight.w300),
-                ),
-              ],
+                  Text(
+                    message,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontFamily: 'OverpassRegular',
+                        fontWeight: FontWeight.w300),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

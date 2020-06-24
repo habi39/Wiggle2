@@ -4,6 +4,8 @@ import 'package:Wiggle2/models/wiggle.dart';
 import 'package:Wiggle2/services/database.dart';
 import 'package:Wiggle2/shared/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 import 'package:provider/provider.dart';
 
 import 'comments.dart';
@@ -120,61 +122,117 @@ class BlogsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Navigator.of(context).push(
-        FadeRoute(
-          page: Comments(
-              userData: userData,
-              authorName: authorName,
-              description: description,
-              title: title),
+    return FocusedMenuHolder(
+      menuWidth: MediaQuery.of(context).size.width,
+      menuBoxDecoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(20),
+          topLeft: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
         ),
       ),
-      child: Container(
-        margin: EdgeInsets.only(bottom: 16),
-        height: 150,
-        child: Stack(
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: Image.network(
-                imgUrl,
+      onPressed: () {
+        Navigator.of(context).pushAndRemoveUntil(
+          FadeRoute(
+            page: Comments(
+                userData: userData,
+                authorName: authorName,
+                description: description,
+                title: title),
+          ),
+          ModalRoute.withName('Comments'),
+        );
+      },
+      menuItems: <FocusedMenuItem>[
+        FocusedMenuItem(
+            title: Text(
+              "Delete Post",
+              style: TextStyle(color: Colors.black),
+            ),
+            trailingIcon: Icon(Icons.delete),
+            onPressed: () {
+              // DatabaseService()
+              //     .blogReference
+              //     .document(description)
+              //     .collection('chats')
+              //     .getDocuments()
+              //     .then((doc) {
+              //   if (doc.documents[0].exists) {
+              //     doc.documents[0].reference.delete();
+              //   }
+              // });
+
+              DatabaseService()
+                  .blogReference
+                  .document(description)
+                  .get()
+                  .then((doc) {
+                if (doc.exists) {
+                  doc.reference.delete();
+                }
+              });
+            },
+            backgroundColor: Colors.redAccent)
+      ],
+      child: GestureDetector(
+        onTap: () => Navigator.of(context).push(
+          FadeRoute(
+            page: Comments(
+                userData: userData,
+                authorName: authorName,
+                description: description,
+                title: title),
+          ),
+        ),
+        child: Container(
+          margin: EdgeInsets.only(bottom: 16),
+          height: 150,
+          child: Stack(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Image.network(
+                  imgUrl,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                height: 170,
+                decoration: BoxDecoration(
+                    color: Colors.black45.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(6)),
+              ),
+              Container(
                 width: MediaQuery.of(context).size.width,
-                // fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-              height: 170,
-              decoration: BoxDecoration(
-                  color: Colors.black45.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(6)),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    description,
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Text(authorName)
-                ],
-              ),
-            )
-          ],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      description,
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text(authorName)
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
