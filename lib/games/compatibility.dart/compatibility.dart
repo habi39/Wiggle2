@@ -48,15 +48,38 @@ class _CompatibilityState extends State<Compatibility>
     CompatibilityCard('question', 'answer1', 'answer2'),
     CompatibilityCard(
         'Are you homosexual or homophobic', 'Homosexual', 'Homophobic'),
-    CompatibilityCard('Who would you wiggle?', 'Wiggle', 'Wiggle'),
+    CompatibilityCard('Who would you wiggle?', 'Mag', 'Habi'),
     CompatibilityCard(
         'What do you look for in your SO?', 'Looks', 'Personality'),
-    // CompatibilityCard('What do you look for in your SO', 'Boobs', 'Butt'),
-    CompatibilityCard('Day?', 'Sunny', 'Rainy'),
-    CompatibilityCard('Do you prefer the apple or pear?', 'Apple', 'Pear'),
+    CompatibilityCard('Been dumped?', 'Yessuuu', 'Nopee'),
+    CompatibilityCard('Been arrested?', 'defoo', 'ofc not'),
+    CompatibilityCard('Made out with a stranger?', 'Abuden', 'nahh eww'),
     CompatibilityCard('Trump or Obama?', 'Trump', 'Obama'),
     CompatibilityCard('Favorite Parent', 'Mummy', 'Daddy'),
-    // CompatibilityCard('ds?', 'as', 'sd'),
+    CompatibilityCard('Kissed a picture?', 'Yes', 'No'),
+    CompatibilityCard('Cried yourself to sleep?', 'yeahh', 'nahh'),
+    CompatibilityCard(
+        'Done something you told yourself you wouldn’t?', 'Yes', 'No'),
+    CompatibilityCard(
+        'Laughed until something you were drinking came out your nose?',
+        'Yes',
+        'No'),
+    CompatibilityCard('Gone skinny dipping in a pool?', 'Yes', 'No'),
+    CompatibilityCard('Blacked out from drinking?', 'Yes', 'No'),
+    CompatibilityCard('Played a prank on someone?', 'Yes', 'No'),
+    CompatibilityCard('Made out with anything not human?', 'Yes', 'No'),
+    CompatibilityCard('Cried over someone?', 'Yes', 'No'),
+    CompatibilityCard('Had/Have a dog?', 'Yes', 'No'),
+    CompatibilityCard(
+        'Had feelings for one of your best/good friends?', 'Yes', 'No'),
+    CompatibilityCard(
+        'Do you think that a man and a woman can be exclusively friends?',
+        'Yes',
+        'No'),
+    CompatibilityCard('Are you happy rn?', 'Yes', 'No'),
+    CompatibilityCard('Have you ever doubted your sexuality?', 'Yes', 'No'),
+    CompatibilityCard('Had/Have a dog?', 'Yes', 'No'),
+    CompatibilityCard('Had/Have a dog?', 'Yes', 'No'),
   ];
   List<int> indexes = [];
 
@@ -204,11 +227,16 @@ class _CompatibilityState extends State<Compatibility>
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
-                                      AutoSizeText(
-                                        currentCompatibilityCard.question,
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            color: Colors.white),
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(6, 0, 6, 0),
+                                        child: AutoSizeText(
+                                          currentCompatibilityCard.question,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              color: Colors.white),
+                                        ),
                                       ),
                                       Text(
                                         timerString,

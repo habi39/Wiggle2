@@ -74,10 +74,20 @@ class _CompatibilityIntroPageState extends State<CompatibilityIntroPage> {
           Container(
             height: 200,
             width: 300,
-            child: AutoSizeText(
-              'When you click the \'begin\' button, you will have 10 seconds to answer 5 questions, the questions will be sent to your chosen partner and we will await his/her score. A compatibility score will then be calculated.',
-              style: TextStyle(color: Colors.white, fontSize: 17),
-              textAlign: TextAlign.justify,
+            child: Column(
+              children: <Widget>[
+                AutoSizeText(
+                  '10 seconds 5 questions',
+                  style: TextStyle(color: Colors.white, fontSize: 17),
+                  textAlign: TextAlign.justify,
+                ),
+                SizedBox(height: 3),
+                AutoSizeText(
+                  'Questions will be sent to your chosen partner and we will await his/her score. A compatibility score will then be calculated.',
+                  style: TextStyle(color: Colors.white, fontSize: 17),
+                  textAlign: TextAlign.justify,
+                ),
+              ],
             ),
           ),
           SizedBox(height: 8),
