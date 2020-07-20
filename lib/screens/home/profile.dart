@@ -207,9 +207,9 @@ class _MyprofileState extends State<Myprofile> {
                                 ),
                                 SizedBox(height: 10),
                                 Container(
-                                  width: MediaQuery.of(context).size.width/1.17,
-                                  padding: EdgeInsets.only(
-                                      top: 3, bottom: 3),
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.17,
+                                  padding: EdgeInsets.only(top: 3, bottom: 3),
                                   decoration: BoxDecoration(
                                       color: Color(0xFF373737),
                                       borderRadius: BorderRadius.all(
@@ -258,7 +258,8 @@ class _MyprofileState extends State<Myprofile> {
                                         splashColor: Colors.transparent,
                                         padding: EdgeInsets.only(
                                             left: 21, right: 21),
-                                        child: createColumns('Fame', userData.fame),
+                                        child: createColumns(
+                                            'Fame', userData.fame),
                                         onPressed: () {},
                                       ),
                                     ],
@@ -295,12 +296,16 @@ class _MyprofileState extends State<Myprofile> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text(userData.bio,
-                                      
-                                      style: kCaptionTextStyle.copyWith(
-                                        fontSize: 15,
-                                      )),
-                                  
+                                  Text(
+                                      userData.bio == ''
+                                          ? 'Add your information by clicking on the icon on Edit Profile'
+                                          : userData.bio,
+                                      style: userData.bio == ''
+                                          ? kCaptionTextStyle.copyWith(
+                                              fontSize: 10, color: Colors.grey)
+                                          : kCaptionTextStyle.copyWith(
+                                              fontSize: 15,
+                                            )),
                                   Text('C O M M U N I T Y',
                                       style: kTitleTextStyle.copyWith(
                                           fontSize: 18,
@@ -325,8 +330,13 @@ class _MyprofileState extends State<Myprofile> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text(userData.media,
-                                      style: kCaptionTextStyle.copyWith(
+                                  Text(userData.media== ''
+                                          ? 'Add your information by clicking on the icon on Edit Profile'
+                                          :userData.media,
+                                      style: userData.media== ''
+                                          ? kCaptionTextStyle.copyWith(
+                                              fontSize: 10, color: Colors.grey)
+                                          :kCaptionTextStyle.copyWith(
                                         fontSize: 15,
                                       )),
                                   SizedBox(
@@ -340,8 +350,13 @@ class _MyprofileState extends State<Myprofile> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text(userData.course,
-                                      style: kCaptionTextStyle.copyWith(
+                                  Text(userData.course== ''
+                                          ? 'Add your information by clicking on the icon on Edit Profile'
+                                          :userData.course,
+                                      style: userData.course== ''
+                                          ?kCaptionTextStyle.copyWith(
+                                              fontSize: 10, color: Colors.grey)
+                                          :kCaptionTextStyle.copyWith(
                                         fontSize: 15,
                                       )),
                                   SizedBox(
@@ -355,8 +370,13 @@ class _MyprofileState extends State<Myprofile> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text(userData.playlist,
-                                      style: kCaptionTextStyle.copyWith(
+                                  Text(userData.playlist== ''
+                                          ? 'Add your information by clicking on the icon on Edit Profile'
+                                          :userData.playlist,
+                                      style: userData.playlist== ''
+                                          ?kCaptionTextStyle.copyWith(
+                                              fontSize: 10, color: Colors.grey)
+                                          :kCaptionTextStyle.copyWith(
                                         fontSize: 15,
                                       )),
                                   SizedBox(
@@ -370,8 +390,13 @@ class _MyprofileState extends State<Myprofile> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text(userData.accoms,
-                                      style: kCaptionTextStyle.copyWith(
+                                  Text(userData.accoms== ''
+                                          ? 'Add your information by clicking on the icon on Edit Profile'
+                                          :userData.accoms,
+                                      style:userData.accoms== ''
+                                          ?kCaptionTextStyle.copyWith(
+                                              fontSize: 10, color: Colors.grey)
+                                          : kCaptionTextStyle.copyWith(
                                         fontSize: 15,
                                       )),
                                   SizedBox(

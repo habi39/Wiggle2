@@ -228,7 +228,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         SizedBox(width: 20.0),
                                         Expanded(
                                             child: DropdownButtonFormField(
-                                          value: userData.gender,
+                                         value: userData.gender,
                                           validator: (val) {
                                             return val.isEmpty
                                                 ? 'Please provide a valid Gender'
@@ -344,7 +344,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     SizedBox(width: 20.0),
                                     Expanded(
                                         child: DropdownButtonFormField(
-                                          value: userData.course,
+                                         value: userData.course==""? null:userData.course,
                                           
                                       validator: (val) {
                                         return val == null
@@ -437,7 +437,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     SizedBox(width: 20.0),
                                     Expanded(
                                         child: DropdownButtonFormField(
-                                          value: userData.accoms,
+                                          value: userData.accoms ==""? null:userData.accoms ,
                                       validator: (val) {
                                         return val == null
                                             ? 'Please provide a valid Course'
