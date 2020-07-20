@@ -176,12 +176,13 @@ class _RegisterState extends State<Register> {
         : GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
+              appBar: AppBar(elevation:0),
               body: Stack(children: <Widget>[
                 SingleChildScrollView(
                   child: Container(
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+                          EdgeInsets.symmetric(horizontal: 25),
                       child: Column(
                         children: [
                           Form(
