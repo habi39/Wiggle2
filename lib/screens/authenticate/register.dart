@@ -301,6 +301,35 @@ class _RegisterState extends State<Register> {
                                     ),
                                   ],
                                 ),
+                                 SizedBox(height: 10),
+                                Row(children: <Widget>[
+                                  CircleAvatar(
+                                    backgroundColor: Colors.amber,
+                                    radius: 12.5,
+                                    child: ClipOval(
+                                      child: Image.asset(
+                                        'assets/images/ghosty2.png',
+                                        fit: BoxFit.fill,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 3),
+                                  Expanded(
+                                    child: TextFormField(
+                                        validator: (val) {
+                                          return val.isEmpty
+                                              ? 'Please provide a nickname'
+                                              : null;
+                                        },
+                                        onChanged: (val) {
+                                          setState(() => nickname = val);
+                                        },
+                                        style: TextStyle(color: Colors.amber),
+                                        decoration: textFieldInputDecoration(
+                                            ' Nickname to be used when anonymous')),
+                                  ),
+                                ]),
                                 SizedBox(height: 8),
                                 Row(
                                   children: <Widget>[

@@ -1,3 +1,4 @@
+import 'package:Wiggle2/screens/authenticate/intro/filterpage.dart';
 import 'package:Wiggle2/screens/home/home.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -160,7 +161,7 @@ class _OnboardingState extends State<Onboarding> {
     // await flutterLocalNotificationsPlugin.schedule(1, 'Hello there',
     //     'please subscribe my channel', timeDelayed, notificationDetails);
     await flutterLocalNotificationsPlugin.showDailyAtTime(
-        1, "Hello Mag", "yozza", time, notificationDetails);
+        1, "Wiggle", "Meet a new friend now!", time, notificationDetails);
   }
 
   Future onSelectNotification(String payLoad) {
@@ -278,7 +279,7 @@ class CustomDialog extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                  builder: (context) => IntroPage1(
+                                  builder: (context) => Filterpage(
                                       userData: userData, wiggles: wiggles),
                                 ),
                               );

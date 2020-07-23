@@ -72,12 +72,12 @@ class _IntroPage2State extends State<IntroPage2> {
                             bottom: MediaQuery.of(context).size.height * 0.1,
                             child: ClipRRect(
                               borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(25),
+                              
                                 bottomLeft: Radius.circular(25),
                               ),
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.8,
-                                height: 100,
+                                height: 120,
                                 decoration: BoxDecoration(
                                   color: Color(0xFFFFFFF).withOpacity(0.8),
                                 ),
@@ -93,7 +93,7 @@ class _IntroPage2State extends State<IntroPage2> {
                                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
                                           Text(
-                                            "${widget.chosenWiggle.nickname}, 22",
+                                            "${widget.chosenWiggle.nickname}",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 18,
@@ -113,7 +113,16 @@ class _IntroPage2State extends State<IntroPage2> {
                                         height: 10,
                                       ),
                                       Text(
-                                        "Computer Science",
+                                        "${widget.chosenWiggle.course}",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      
+                                      Text(
+                                        "${widget.chosenWiggle.anonBio}",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 18,

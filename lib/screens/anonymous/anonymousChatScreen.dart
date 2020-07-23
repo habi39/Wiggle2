@@ -168,7 +168,6 @@ class _AnonymousChatScreenState extends State<AnonymousChatScreen> {
         'please subscribe my channel', timeDelayed, notificationDetails);
     // await flutterLocalNotificationsPlugin.showDailyAtTime(
     //     1, "Hello Mag", "yozza", time, notificationDetails);
-    print('hree');
   }
 
   Future onSelectNotification(String payLoad) {

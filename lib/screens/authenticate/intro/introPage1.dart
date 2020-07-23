@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:Wiggle2/services/database.dart';
 import '../../../models/user.dart';
@@ -67,7 +66,7 @@ class _IntroPage1State extends State<IntroPage1> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Who will you meet today?",
+                  "We found you a friend!",
                   style: TextStyle(
                     fontWeight: FontWeight.w300,
                     fontSize: 24,
