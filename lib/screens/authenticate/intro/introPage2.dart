@@ -77,7 +77,7 @@ class _IntroPage2State extends State<IntroPage2> {
                               ),
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.8,
-                                height: 120,
+                                
                                 decoration: BoxDecoration(
                                   color: Color(0xFFFFFFF).withOpacity(0.8),
                                 ),
@@ -85,6 +85,7 @@ class _IntroPage2State extends State<IntroPage2> {
                                   margin: EdgeInsets.all(22),
                                   width:
                                       MediaQuery.of(context).size.width * 0.7,
+                                  
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -93,7 +94,7 @@ class _IntroPage2State extends State<IntroPage2> {
                                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
                                           Text(
-                                            "${widget.chosenWiggle.nickname}",
+                                            "${widget.chosenWiggle.nickname}, ${widget.chosenWiggle.gender}",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 18,
@@ -113,16 +114,18 @@ class _IntroPage2State extends State<IntroPage2> {
                                         height: 10,
                                       ),
                                       Text(
-                                        "${widget.chosenWiggle.course}",
+                                        "Course: ${widget.chosenWiggle.course}",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 18,
                                           color: Colors.black,
                                         ),
+                                      ),SizedBox(
+                                        height: 10,
                                       ),
                                       
                                       Text(
-                                        "${widget.chosenWiggle.anonBio}",
+                                        "Bio: ${widget.chosenWiggle.anonBio}",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 18,

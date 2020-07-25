@@ -14,6 +14,7 @@ import 'package:Wiggle2/shared/constants.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../services/database.dart';
 
+
 class EditAnonProfile extends StatefulWidget {
   @override
   _EditAnonProfileState createState() => _EditAnonProfileState();
