@@ -45,10 +45,10 @@ class _CompatibilityState extends State<Compatibility>
   AnimationController controller;
 
   List<CompatibilityCard> cards = [
-    CompatibilityCard('question', 'answer1', 'answer2'),
+    CompatibilityCard('What is 3x2+5-3x8', 'I dont know', '2'),
     CompatibilityCard(
-        'Are you homosexual or homophobic', 'Homosexual', 'Homophobic'),
-    CompatibilityCard('Who would you wiggle?', 'Mag', 'Habi'),
+        'Do you have gar friends?', 'Duhhh', 'Noppe'),
+    CompatibilityCard('Who would you wiggle?', 'Kanye', 'Eminem'),
     CompatibilityCard(
         'What do you look for in your SO?', 'Looks', 'Personality'),
     CompatibilityCard('Been dumped?', 'Yessuuu', 'Nopee'),
@@ -79,7 +79,7 @@ class _CompatibilityState extends State<Compatibility>
     CompatibilityCard('Are you happy rn?', 'Yes', 'No'),
     CompatibilityCard('Have you ever doubted your sexuality?', 'Yes', 'No'),
     CompatibilityCard('Had/Have a dog?', 'Yes', 'No'),
-    CompatibilityCard('Had/Have a dog?', 'Yes', 'No'),
+    
   ];
   List<int> indexes = [];
 

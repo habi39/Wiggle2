@@ -29,8 +29,8 @@ class _CompatibilityStartState extends State<CompatibilityStart> {
   bool requested = false;
 
   saveReceivercloudforrequest(userData) async {
-    QuerySnapshot query =
-        await DatabaseService(uid:widget.wiggle.id).getReceivertoken(widget.wiggle.email);
+    QuerySnapshot query = await DatabaseService(uid: widget.wiggle.id)
+        .getReceivertoken(widget.wiggle.email);
     String val = query.documents[0].data['token'].toString();
     databaseserver.cloudReference.document().setData({
       'type': 'compatibility',
@@ -80,48 +80,70 @@ class _CompatibilityStartState extends State<CompatibilityStart> {
         title: Text("C O M P A T I B I L I T Y",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
       ),
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Expanded(
-            child: Container(
-              child: RaisedButton(
-                color: Colors.red,
-                child: Text('Results'),
-                onPressed: () {
-                  sendrequest(widget.userData);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CompatibilityStatus(
-                        friendAnon: widget.friendAnon,
-                        wiggle: widget.wiggle,
-                        userData: widget.userData,
-                      ),
-                    ),
-                  );
-                },
-              ),
+          CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: 55,
+            child: SizedBox(
+              child:
+                  Image.asset('assets/images/compatible.png', fit: BoxFit.fill),
             ),
           ),
-          Expanded(
-            child: Container(
-              child: RaisedButton(
-                color: Colors.blue,
-                child: Text('Play'),
-                onPressed: () {
-                  sendrequest(widget.userData);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CompatibilityIntroPage(
-                        widget.friendAnon,
-                        widget.wiggle,
-                        widget.userData,
-                      ),
-                    ),
-                  );
-                },
+          SizedBox(height: 50),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      )),
+                  child: FlatButton(
+                    child: Text('Results'),
+                    onPressed: () {
+                      sendrequest(widget.userData);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => CompatibilityStatus(
+                            friendAnon: widget.friendAnon,
+                            wiggle: widget.wiggle,
+                            userData: widget.userData,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
-            ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      )),
+                  child: FlatButton(
+                    child: Text('Play'),
+                    onPressed: () {
+                      sendrequest(widget.userData);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => CompatibilityIntroPage(
+                            widget.friendAnon,
+                            widget.wiggle,
+                            widget.userData,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
