@@ -232,7 +232,7 @@ class _HomeState extends State<Home> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: BottomAppBar(
-              color: Color(0xFF373737),
+              color: Colors.white38,
               shape: CircularNotchedRectangle(),
               notchMargin: 10,
               child: Container(
