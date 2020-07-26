@@ -80,14 +80,14 @@ class _CompatibilityStartState extends State<CompatibilityStart> {
         title: Text("C O M P A T I B I L I T Y",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w100)),
       ),
-      body: Column(
+      body: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: Container(
               child: RaisedButton(
                 color: Colors.red,
-                child: Text('View'),
+                child: Text('Results'),
                 onPressed: () {
                   sendrequest(widget.userData);
                   Navigator.of(context).push(
